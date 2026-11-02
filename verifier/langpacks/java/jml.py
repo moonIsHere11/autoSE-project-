@@ -106,14 +106,11 @@ def touched(irp: ir.IrProgram, closure: list[str]) -> set[str]:
                 visit(sub)
         elif isinstance(x, ir.CondName):
             visit(x.parent)
-        elif isinstance(x, list):
-            for y in x:
-                visit(y)
-        elif isinstance(x, tuple):
+        elif isinstance(x, (list, tuple)):
             for y in x:
                 visit(y)
         elif hasattr(x, "__dataclass_fields__") and not isinstance(x, DataItem):
-            for k in x.__dataclass_fields__:  # type: ignore[attr-defined]
+            for k in x.__dataclass_fields__:
                 if k in ("loc", "item"):
                     continue
                 visit(getattr(x, k))
@@ -318,8 +315,8 @@ class SymEval:
                 names = [i.name for i in r.item.walk() if i.is_elementary and not i.is_filler] \
                     if r.item.is_group else [r.item.name]
                 for n in names:
-                    fm = self.fmap.get(n)
-                    if fm is None or fm.rf.kind != "num":
+                    init_fm = self.fmap.get(n)
+                    if init_fm is None or init_fm.rf.kind != "num":
                         raise ContractUnsupported(f"INITIALIZE of non-numeric {n}")
                     self.env[n] = "0L"
             return

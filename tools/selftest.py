@@ -74,6 +74,11 @@ def discover(lang: str, only: list[str] | None) -> list[ProgramEntry]:
     for d in sorted((REPO / "corpus").iterdir()):
         if not d.is_dir() or not (d / "cobol").is_dir() or not (d / lang).is_dir():
             continue
+        # skip skeletons with no sources yet (e.g. an empty cobol/ or target tree)
+        if not any(p.is_file() for p in (d / "cobol").rglob("*")) or \
+                not any(p.is_file() for p in (d / lang).rglob("*")):
+            print(f"[{lang}] {d.name}: skipped (no COBOL or {lang} source files)", flush=True)
+            continue
         if only and d.name not in only:
             continue
         man = d / f"manifest.{lang}.json"

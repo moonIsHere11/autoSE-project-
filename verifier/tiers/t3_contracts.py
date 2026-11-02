@@ -106,7 +106,7 @@ def run_t3(pl: Pipeline, pc: ProgramCtx) -> dict[str, TierResult]:
     shutil.copytree(pl.ws_target, src, ignore=shutil.ignore_patterns(BUILD_DIR, "*.class", ".git"))
     hints = _load_hints(pl.ws_target)
     per_file: dict[str, list[tuple[int, str]]] = {}
-    unit_methods = {res.units[p]: p for p in plans}
+    unit_methods = {str(res.units[p]): p for p in plans}
     for para, (c, loc, _cl) in plans.items():
         indent = re.match(r"\s*", _line(src / loc.file, loc.line)).group(0)  # type: ignore[union-attr]
         per_file.setdefault(loc.file, []).append((loc.line, c.jml(indent)))
@@ -158,8 +158,8 @@ def run_t3(pl: Pipeline, pc: ProgramCtx) -> dict[str, TierResult]:
                                        reason=f"ESC reports {v.reason}, but no concrete counterexample confirms it "
                                        "(T1u " + (t1u.status.value if t1u else "not available") + ")")
         else:
-            out[para] = TierResult(status=v.status, method=METHOD, reason=v.reason, details=details,
-                                   scope=scope if v.status == Status.PASS else None)
+            # ERROR / TIMEOUT / NOT_APPLICABLE: no positive result, so no scope is claimed
+            out[para] = TierResult(status=v.status, method=METHOD, reason=v.reason, details=details)
     return out
 
 
