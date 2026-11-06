@@ -1,0 +1,6 @@
+Given: (a=0, b=-1),
+        cobol_ref.ref_add_trunc : returns -1
+  misc_toys.llm_add_side_effect : raises SideEffectDetected('We\'ve blocked a file writing operation on "/tmp/s4_side_effect.txt". It\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use "--unblock=open:/tmp/s4_side_effect.txt:w:524865". (or some colon-delimited prefix)')
+Given: (a=0, b=0),
+        cobol_ref.ref_add_trunc : returns 0
+  misc_toys.llm_add_side_effect : raises SideEffectDetected('We\'ve blocked a file writing operation on "/tmp/s4_side_effect.txt". It\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use "--unblock=open:/tmp/s4_side_effect.txt:w:524865". (or some colon-delimited prefix)')

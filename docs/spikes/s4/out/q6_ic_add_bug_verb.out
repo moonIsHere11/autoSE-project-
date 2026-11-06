@@ -1,0 +1,28 @@
+
+[91mI was able to make your postcondition return False.[0m
+/w/contracts_toys.py:48:
+|# ---------------------------------------------------------------- FAIL cases
+|@icontract.require(lambda a: -P7 < a < P7)
+|@icontract.require(lambda b: -P7 < b < P7)
+>[93m@icontract.ensure(lambda result: -P7 < result < P7)
+[0m|@icontract.ensure(lambda a, b, result: result == _exact_add_trunc(a, b))
+|def add_bug_notrunc(a: int, b: int) -> int:
+|    return a + b
+
+false
+when calling add_bug_notrunc(-1, -9999999) (which returns -10000000)
+
+
+[91mI was able to make your postcondition return False.[0m
+/w/contracts_toys.py:49:
+|@icontract.require(lambda a: -P7 < a < P7)
+|@icontract.require(lambda b: -P7 < b < P7)
+|@icontract.ensure(lambda result: -P7 < result < P7)
+>[93m@icontract.ensure(lambda a, b, result: result == _exact_add_trunc(a, b))
+[0m|def add_bug_notrunc(a: int, b: int) -> int:
+|    return a + b
+|
+
+false
+when calling add_bug_notrunc(-9999999, -1) (which returns -10000000)
+

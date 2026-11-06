@@ -1,0 +1,57 @@
+Proving methods in Loops
+Starting proof of Loops.Loops() with prover z3-5.1.0
+Method assertions are validated [0.68 secs]
+Completed proof of Loops.Loops() with prover z3-5.1.0 - no warnings [0.88 secs]
+Starting proof of Loops.fiveTimes(int) with prover z3-5.1.0
+Method assertions are validated [1.09 secs]
+Completed proof of Loops.fiveTimes(int) with prover z3-5.1.0 - no warnings [1.15 secs]
+Starting proof of Loops.sumTo(int) with prover z3-5.1.0
+Method assertions are validated [1.03 secs]
+Completed proof of Loops.sumTo(int) with prover z3-5.1.0 - no warnings [1.06 secs]
+Starting proof of Loops.sumToBadInv(int) with prover z3-5.1.0
+Method assertions are INVALID
+src/Loops.java:40: verify: The prover cannot establish an assertion (Postcondition: src/Loops.java:31:) in method sumToBadInv
+        return s;
+        ^
+src/Loops.java:31: verify: Associated declaration: src/Loops.java:40:
+    //@ ensures \result == (long) n * (n + 1) / 2;
+        ^
+src/Loops.java:35: verify: The prover cannot establish an assertion (LoopInvariant) in method sumToBadInv
+        //@ maintaining s == (long) i * i / 2;
+            ^
+Completed proof of Loops.sumToBadInv(int) with prover z3-5.1.0 - with warnings [2.26 secs]
+Starting proof of Loops.sumToBadVariant(int) with prover z3-5.1.0
+Method assertions are INVALID
+src/Loops.java:50: verify: The prover cannot establish an assertion (LoopDecreases) in method sumToBadVariant
+        //@ decreases i;
+            ^
+Completed proof of Loops.sumToBadVariant(int) with prover z3-5.1.0 - with warnings [1.69 secs]
+Starting proof of Loops.sumToNoInv(int) with prover z3-5.1.0
+Method assertions are INVALID
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: overflow in long sum
+            s += i;
+              ^
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: underflow in long sum
+            s += i;
+              ^
+src/Loops.java:26: verify: The prover cannot establish an assertion (Postcondition: src/Loops.java:20:) in method sumToNoInv
+        return s;
+        ^
+src/Loops.java:20: verify: Associated declaration: src/Loops.java:26:
+    //@ ensures \result == (long) n * (n + 1) / 2;
+        ^
+Completed proof of Loops.sumToNoInv(int) with prover z3-5.1.0 - with warnings [1.53 secs]
+Completed proving methods in Loops [8.55 secs]
+Summary:
+  Valid:        3
+  Invalid:      3
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 6
+ Classes:       0 proved of 1
+ DURATION:          8.7 secs
+
+8 verification failures
+### exit=6 wall=12659ms

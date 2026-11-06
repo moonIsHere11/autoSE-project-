@@ -1,0 +1,27 @@
+{"file":"/tmp/in/probe.E.cob","analyze_ms":1883,"warm_min_ms":89,
+"data":[
+  {"line":7,"level":1,"name":"a-num","kind":"GROUP","pic":"9(3)v9","value":"value12.5"},
+  {"line":8,"level":1,"name":"b-num","kind":"GROUP","pic":"s9(4)","usage":"COMP_5","value":"value-7"},
+  {"line":9,"level":1,"name":"c-txt","kind":"GROUP","pic":"x(12)","value":"value\"a  b\"\";c,d. \""},
+  {"line":10,"level":1,"name":"d-txt","kind":"GROUP","pic":"x(4)","value":"valuex'41424344'"},
+  {"line":11,"level":1,"name":"e-pic","kind":"GROUP","pic":"9"},
+  {"line":12,"level":1,"name":"f-pic","kind":"GROUP","pic":"x(5)"},
+  {"line":13,"level":1,"name":"g-pic","kind":"GROUP","pic":"$$$,$$9.99-"},
+  {"line":14,"level":1,"name":"h-tab","kind":"GROUP","pic":"99","value":"value42"},
+  {"line":15,"level":1,"name":"i-hv","kind":"GROUP","pic":"x(3)","value":"valuehigh-values"},
+  {"line":16,"level":1,"name":"j-id-is-long","kind":"GROUP","pic":"9","value":"valuezero"},
+  null],
+"paragraphs":[
+  {"name":"p-main","line":19,"statements":[
+    {"type":"MOVE","line":20,"text":"move1toa-nume-pic"},
+    {"type":"MOVE","line":20,"text":"move'xy'tof-pic"},
+    {"type":"ADD","line":21,"text":"add12toa-num"},
+    {"type":"DISPLAY","line":22,"text":"displayc-txt' *> not a comment 'd-txt"},
+    {"type":"DISPLAY","line":23,"text":"display'line  with   spaces'"},
+    {"type":"COMPUTE","line":25,"text":"computeb-num=(a-num+1)*-2**2"},
+    {"type":"DISPLAY","line":26,"text":"displayj-id-is-longg-pich-tabi-hv"},
+    {"type":"IF","line":27,"text":"ifa-num>=1ande-picnot=0display\"ok\"end-if"},
+    {"type":"MOVE","line":28,"text":"moveall'ab'tof-pic"},
+    {"type":"DISPLAY","line":29,"text":"displayf-pic"},
+    {"type":"GO_BACK","line":30,"text":"goback"},null]},
+  null],"total_ms":2300}

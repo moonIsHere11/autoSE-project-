@@ -1,0 +1,30 @@
+Proving methods in Account
+Starting proof of Account.Account() with prover z3-5.1.0
+Method assertions are validated [0.71 secs]
+Completed proof of Account.Account() with prover z3-5.1.0 - no warnings [0.87 secs]
+Starting proof of Account.deposit(long) with prover z3-5.1.0
+Method assertions are validated [1.36 secs]
+Completed proof of Account.deposit(long) with prover z3-5.1.0 - no warnings [1.41 secs]
+Starting proof of Account.depositBad(long) with prover z3-5.1.0
+Method assertions are INVALID
+src/Account.java:29: verify: The prover cannot establish an assertion (Assignable: src/Account.java:23:) in method depositBad: audit
+        audit = amt;
+              ^
+src/Account.java:23: verify: Associated declaration: src/Account.java:29:
+    //@ assignable balance, count;
+        ^
+Completed proof of Account.depositBad(long) with prover z3-5.1.0 - with warnings [2.27 secs]
+Completed proving methods in Account [4.55 secs]
+Summary:
+  Valid:        2
+  Invalid:      1
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 3
+ Classes:       0 proved of 1
+ DURATION:          4.7 secs
+
+2 verification failures
+### exit=6 wall=7972ms

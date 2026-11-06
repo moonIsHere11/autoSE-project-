@@ -68,3 +68,49 @@ the final working directory would be polluted).
 produce exactly the same set of files with the same bytes (extra or missing files are failures of
 kind `MISSING_OR_EXTRA_OUTPUT`). Input files are part of that set, so unexpected in-place
 modification is caught too.
+
+### D9 — Gating details
+*Context:* "cheapest checks first, with gating"; T0 bundles a build and static checks.
+*Decision:* a T0a **build** failure gates T1–T3 (nothing can run). A T0b static ERROR (e.g. `double`
+for a decimal field) does **not** gate T1: running T1 costs seconds and yields concrete
+counterexamples for the repair loop. Any T0 or T1 FAIL/ERROR/TIMEOUT gates T2; T3 is gated only by T1
+FAIL (spec). Acceptance still requires T0 PASS.
+*Alternatives:* gate T1 on any T0 failure — rejected, it starves the repair loop of feedback.
+
+### D10 — Parser: hand-written (spike S5)
+*Context:* S5 compared ProLeap with a hand-written subset parser.
+*Decision:* hand-written Python lexer + recursive-descent parser over `cobc -E` output. ProLeap is
+not on Maven Central (build from a pinned commit), misnumbers lines after continuations/COPY, turns
+`D` lines into statements, and would need a ~600–900-line Java→JSON bridge.
+*Alternatives:* ProLeap — not clearly cheaper to integrate.
+
+### D11 — OpenJML launcher (spike S3)
+*Context:* inside Docker on WSL2 the stock `openjml` script believes it runs under WSL (kernel name
+contains "microsoft") and fails (`wslpath: command not found`).
+*Decision:* call the bundled JDK directly via the wrapper `docs/spikes/s3/openjml-linux`
+(`OPENJML_INSTALL=/opt/openjml`, `--patch-module=jdk.compiler=…/jSMTLIB.jar`); always use
+`-source 17` (not `--release 17`), `--check-feasibility=precondition`, a per-method `--timeout` and an
+outer wall-clock limit. The wrapper moves into `verifier/langpacks/java/` in M5.
+
+### D12 — CrossHair driver: assert-mode harness instead of `diffbehavior` (spike S4)
+*Context:* the spec names `crosshair diffbehavior` for Python T2b. S4 found silent false PASSes in
+`diffbehavior` (a state object without `__eq__` compares equal; guarded `str` inputs hid two bugs;
+no preconditions).
+*Decision:* generate one harness module per unit whose leading asserts restrict inputs to the PIC
+domain and whose final assert compares `(outcome, all fields)` of reference vs candidate; run
+`crosshair check --analysis_kind=asserts`. Results are still labelled `symbolic_search`, never proof,
+and every counterexample is replayed concretely. This changes no teammate-facing interface.
+*Alternatives:* `diffbehavior` as written in the spec — rejected: it violates "statuses are honest".
+
+### D13 — Completeness severity
+*Context:* T0b completeness ("every paragraph has a counterpart"). Idiomatic translations may inline
+paragraphs.
+*Decision:* a missing **program** counterpart is an ERROR. A missing paragraph counterpart is an
+ERROR only when the manifest maps the paragraph to a symbol that does not exist; with conventions only
+it is a WARNING, and that unit's unit-level tiers (T1u/T2b/T3) become NOT_APPLICABLE.
+
+### D14 — Input generation does not emit invalid numeric text by default
+*Context:* GnuCOBOL turns invalid ACCEPT text (`abc`, `1e3`) into 0 (spike S6). The spec asks for
+boundary, overlong and alphanumeric edge cases, not malformed numerics.
+*Decision:* the default strategies emit canonical numeric texts plus overlong forms (to provoke
+truncation); an `invalid_text` strategy exists but is off by default (`t1.invalid_text = false`).

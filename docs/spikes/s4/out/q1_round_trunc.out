@@ -1,0 +1,6 @@
+Given: (v=-50),
+     cobol_ref.ref_round_drop2 : returns -1
+  llm_variants.round_bug_trunc : returns 0
+Given: (v=50),
+     cobol_ref.ref_round_drop2 : returns 1
+  llm_variants.round_bug_trunc : returns 0

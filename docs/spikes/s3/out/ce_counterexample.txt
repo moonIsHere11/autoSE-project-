@@ -1,0 +1,24 @@
+src/Decimal.java:37: verify: The prover cannot establish an assertion (Postcondition: src/Decimal.java:31:) in method addTrunc5Buggy
+        return s;
+        ^
+src/Decimal.java:31: verify: Associated declaration: src/Decimal.java:37:
+    //@ ensures -100_000 < \result && \result < 100_000;
+        ^
+
+COUNTEREXAMPLE
+__JML_FeasCheck_ = 0
+_JML__tmp`1 = true
+_JML__tmp`0 = true
+b_1840_1840___9 = (- 1)
+`exception_1812_1812___6 = NULL
+a_0_0___4 = 0
+b_0_0___5 = 0
+s_1858_1858___12 = 0
+`result_1812_1812___10 = 0
+`terminationPosition_1812_1812___7 = 0
+Pre_1_1514_1461___22 = true
+a_1832_1832___8 = (- 99999)
+Decimal__heap___0_1812___11 = 1
+
+2 verification failures
+### exit=6 wall=6808ms

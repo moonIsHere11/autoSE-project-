@@ -1,0 +1,72 @@
+=== q4det_banker_1  rc=1  wall=23.47s
+$ crosshair diffbehavior cobol_ref.ref_round_drop2 llm_variants.round_bug_banker
+  | Given: (v=-50),
+  |       cobol_ref.ref_round_drop2 : returns -1
+  |   llm_variants.round_bug_banker : returns 0
+=== q4det_pymod_1  rc=1  wall=0.82s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_variants.add_bug_pymod
+  | Given: (a=0, b=-1),
+  |      cobol_ref.ref_add_trunc : returns -1
+  |   llm_variants.add_bug_pymod : returns 9999999
+=== q4det_hflag_1  rc=0  wall=1.63s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_bug_flag
+  | No differences found. (attempted 14 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q4det_hok_1  rc=0  wall=1.37s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_ok
+  | No differences found. (attempted 14 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q4det_banker_2  rc=1  wall=28.81s
+$ crosshair diffbehavior cobol_ref.ref_round_drop2 llm_variants.round_bug_banker
+  | Given: (v=-50),
+  |       cobol_ref.ref_round_drop2 : returns -1
+  |   llm_variants.round_bug_banker : returns 0
+=== q4det_pymod_2  rc=1  wall=249.65s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_variants.add_bug_pymod
+  | Given: (a=0, b=-1),
+  |      cobol_ref.ref_add_trunc : returns -1
+  |   llm_variants.add_bug_pymod : returns 9999999
+=== q4det_hflag_2  rc=0  wall=0.74s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_bug_flag
+  | No differences found. (attempted 14 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q4det_hok_2  rc=0  wall=0.77s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_ok
+  | No differences found. (attempted 14 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q4det_banker_3  rc=1  wall=717.26s
+$ crosshair diffbehavior cobol_ref.ref_round_drop2 llm_variants.round_bug_banker
+  | Given: (v=-50),
+  |       cobol_ref.ref_round_drop2 : returns -1
+  |   llm_variants.round_bug_banker : returns 0
+=== q4det_pymod_3  rc=1  wall=1.28s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_variants.add_bug_pymod
+  | Given: (a=0, b=-1),
+  |      cobol_ref.ref_add_trunc : returns -1
+  |   llm_variants.add_bug_pymod : returns 9999999
+=== q4det_hflag_3  rc=0  wall=1.15s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_bug_flag
+  | No differences found. (attempted 14 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q4det_hok_3  rc=0  wall=1.37s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_ok
+  | No differences found. (attempted 14 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+/w/inner.sh: line 132: o_such_fn: command not found
+=== q5b_check_syntax_err  rc=2  wall=0.54s
+$ crosshair check --analysis_kind=asserts llm_syntax_error.broken
+  stderr:
+  !   File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 258, in load_by_qualname
+  !     spec_exists = importlib.util.find_spec(cur_module_name) is not None
+  !                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  !   File "<frozen importlib.util>", line 92, in find_spec
+  !   File "/w/llm_syntax_error.py", line 2
+  !     return a +
+  !               ^
+  ! SyntaxError: invalid syntax
+=== q5b_diff_syntax_err  rc=2  wall=0.64s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_syntax_error.broken
+  stderr:
+  ! Unable to load "llm_syntax_error.broken": SyntaxError: invalid syntax (llm_syntax_error.py, line 2)
+/w/inner.sh: line 135: syntax error near unexpected token `;;'
+/w/inner.sh: line 135: `  ;;'

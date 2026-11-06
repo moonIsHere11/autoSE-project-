@@ -1,0 +1,71 @@
+=== q5b_check_no_such_fn  rc=1  wall=0.55s
+$ crosshair check --analysis_kind=asserts eq_harness.no_such_function
+  stderr:
+  !     yield load_by_qualname(specifier)
+  !           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  !   File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 271, in load_by_qualname
+  !     return walk_qualname(module, remaining)
+  !            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  !   File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 226, in walk_qualname
+  !     raise NotFound(f'Name "{lastpart}" not found on object "{obj}"')
+  ! crosshair.fnutil.NotFound: Name "no_such_function" not found on object "<module 'eq_harness' from '/w/eq_harness.py'>"
+=== q5b_check_syntax_err  rc=2  wall=0.46s
+$ crosshair check --analysis_kind=asserts llm_syntax_error.broken
+  stderr:
+  !   File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 258, in load_by_qualname
+  !     spec_exists = importlib.util.find_spec(cur_module_name) is not None
+  !                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  !   File "<frozen importlib.util>", line 92, in find_spec
+  !   File "/w/llm_syntax_error.py", line 2
+  !     return a +
+  !               ^
+  ! SyntaxError: invalid syntax
+=== q5b_diff_syntax_err  rc=2  wall=0.40s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_syntax_error.broken
+  stderr:
+  ! Unable to load "llm_syntax_error.broken": SyntaxError: invalid syntax (llm_syntax_error.py, line 2)
+=== q8_d_ok_pct30  rc=0  wall=34.10s
+$ crosshair diffbehavior globals_harness.d_ref globals_harness.d_llm_ok --per_condition_timeout 30 --exception_equivalence SAME_TYPE
+  | No differences found. (attempted 49 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q8_d_bug_pct30  rc=1  wall=32.96s
+$ crosshair diffbehavior globals_harness.d_ref globals_harness.d_llm_bug --per_condition_timeout 30 --exception_equivalence SAME_TYPE
+  | Given: (total=0, count=0, fi=0, amt=-1000),
+  |       globals_harness.d_ref : returns ('ok', -1000, 1, 'N')
+  |   globals_harness.d_llm_bug : returns ('ok', -1000, 1, 'P')
+=== q8_d_bug_round_pct30  rc=1  wall=37.34s
+$ crosshair diffbehavior globals_harness.d_ref globals_harness.d_llm_bug_round --per_condition_timeout 30 --exception_equivalence SAME_TYPE
+  | Given: (total=-11, count=0, fi=1, amt=-1090),
+  |             globals_harness.d_ref : returns ('ok', -1101, 1, 'N')
+  |   globals_harness.d_llm_bug_round : returns ('ok', -1100, 1, 'N')
+=== q8_eq_ok_pct30  rc=0  wall=30.69s
+$ crosshair check --analysis_kind=asserts --report_all --per_condition_timeout 30 globals_harness.eq_ok
+  | /w/globals_harness.py:56: info: Not confirmed.
+=== q8_eq_bug_pct30  rc=1  wall=7.94s
+$ crosshair check --analysis_kind=asserts --report_all --per_condition_timeout 30 globals_harness.eq_bug
+  | /w/globals_harness.py:63: error: AssertionError:  when calling eq_bug(-1, 0, 1, -9999999)
+=== q8_eq_bug_round_pct30  rc=1  wall=9.65s
+$ crosshair check --analysis_kind=asserts --report_all --per_condition_timeout 30 globals_harness.eq_bug_round
+  | /w/globals_harness.py:68: error: AssertionError:  when calling eq_bug_round(-18, 0, 1, 0)
+=== q9_round_dec_pct10_1  rc=0  wall=15.64s
+$ crosshair diffbehavior cobol_ref.ref_round_drop2 llm_variants.round_ok_decimal --per_condition_timeout 10
+  | No differences found. (attempted 11 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q9_h_ok_mui50_1  rc=0  wall=4.93s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_ok --max_uninteresting_iterations 50
+  | No differences found. (attempted 104 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q9_eq_dec_pct10_1  rc=0  wall=13.25s
+$ crosshair check --analysis_kind=asserts --report_all --per_condition_timeout 10 eq_harness.eq_round_decimal
+  | /w/eq_harness.py:17: info: Not confirmed.
+=== q9_round_dec_pct10_2  rc=0  wall=13.76s
+$ crosshair diffbehavior cobol_ref.ref_round_drop2 llm_variants.round_ok_decimal --per_condition_timeout 10
+  | No differences found. (attempted 11 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q9_h_ok_mui50_2  rc=0  wall=5.19s
+$ crosshair diffbehavior state_toys.h_ref state_toys.h_llm_ok --max_uninteresting_iterations 50
+  | No differences found. (attempted 104 iterations)
+  | Consider increasing the --max_uninteresting_iterations option.
+=== q9_eq_dec_pct10_2  rc=0  wall=13.06s
+$ crosshair check --analysis_kind=asserts --report_all --per_condition_timeout 10 eq_harness.eq_round_decimal
+  | /w/eq_harness.py:17: info: Not confirmed.

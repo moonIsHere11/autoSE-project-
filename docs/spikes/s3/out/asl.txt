@@ -1,0 +1,15 @@
+=================== 
+error: file not found: src/.java
+Usage: openjml <options> <source files>
+use --help for a list of possible options
+### exit=2 wall=573ms
+=================== 
+error: file not found: src/.java
+Usage: openjml <options> <source files>
+use --help for a list of possible options
+### exit=2 wall=536ms
+=================== 
+error: file not found: src/.java
+Usage: openjml <options> <source files>
+use --help for a list of possible options
+### exit=2 wall=515ms

@@ -1,0 +1,27 @@
+Proving methods in Hard
+Starting proof of Hard.Hard() with prover z3-5.1.0
+Method assertions are validated [0.66 secs]
+Completed proof of Hard.Hard() with prover z3-5.1.0 - no warnings [0.83 secs]
+Starting proof of Hard.fermat3(long,long,long) with prover z3-5.1.0
+Method assertions are INVALID
+src/Hard.java:6: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method fermat3: overflow in long sum
+        return a * a * a + b * b * b != c * c * c;
+                         ^
+src/Hard.java:5: verify: Validity is unknown - no model available method Hard.fermat3 -  (possible timeout): (error "line 801 column 18: model is not available")
+    public static boolean fermat3(long a, long b, long c) {
+                          ^
+Completed proof of Hard.fermat3(long,long,long) with prover z3-5.1.0 - with warnings [11.23 secs]
+Completed proving methods in Hard [12.06 secs]
+Summary:
+  Valid:        1
+  Invalid:      1
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 2
+ Classes:       0 proved of 1
+ DURATION:         12.2 secs
+
+2 verification failures
+### exit=6 wall=16437ms

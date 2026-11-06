@@ -1,0 +1,101 @@
+q1_add_abs: {'a': 0, 'b': -1} -> replay CONFIRMED: ('ok', -1) vs ('ok', 1)
+q1_add_notrunc: {'a': 0, 'b': -10000000} -> replay CONFIRMED: ('ok', 0) vs ('ok', -10000000); {'a': 0, 'b': 10000000} -> replay CONFIRMED: ('ok', 0) vs ('ok', 10000000)
+q1_add_ok: no counterexample
+q1_add_pymod: {'a': 0, 'b': -1} -> replay CONFIRMED: ('ok', -1) vs ('ok', 9999999)
+q1_round_banker: {'v': -50} -> replay CONFIRMED: ('ok', -1) vs ('ok', 0)
+q1_round_banker_int: {'v': -50} -> replay CONFIRMED: ('ok', -1) vs ('ok', 0); {'v': 50} -> replay CONFIRMED: ('ok', 1) vs ('ok', 0)
+q1_round_decimal: no counterexample
+q1_round_floor: {'v': -150} -> replay CONFIRMED: ('ok', -2) vs ('ok', -1)
+q1_round_ok: no counterexample
+q1_round_trunc: {'v': -50} -> replay CONFIRMED: ('ok', -1) vs ('ok', 0); {'v': 50} -> replay CONFIRMED: ('ok', 1) vs ('ok', 0)
+q2_ann_in_domain: {'a': 0, 'b': -20000000} -> replay CONFIRMED: ('ok', 0) vs ('ok', -10000000)
+q2_eq_asserts_bug: line 109: 'AssertionError: ' at eq_asserts_add_notrunc(-1, -9999999)
+q2_eq_asserts_ok: no errors
+q2_eq_icontract_bug: line 119: 'false' at eq_icontract_add_notrunc(-1, -9999999)
+q2_eq_icontract_ok: no errors
+q2_guard_in_domain: no counterexample
+q2_guard_notrunc: {'a': -1, 'b': -9999999} -> replay CONFIRMED: ('ok', 0) vs ('ok', -10000000)
+q2_guard_round_dec: no counterexample
+q2_icr_in_domain: {'a': 0, 'b': -20000000} -> replay NOT REPRODUCED: ('exc', 'ViolationError') vs ('exc', 'ViolationError')
+q2_ign_in_domain: no counterexample
+q2_ign_notrunc: {'a': -1, 'b': -9999999} -> replay CONFIRMED: ('ok', 0) vs ('ok', -10000000)
+q2_nodom_in_domain: {'a': 0, 'b': -20000000} -> replay CONFIRMED: ('ok', 0) vs ('ok', -10000000); {'a': 0, 'b': 20000000} -> replay CONFIRMED: ('ok', 0) vs ('ok', 10000000)
+q2_nodom_round_dec: no counterexample
+q3_dc_bug_count: UNPARSEABLE (ValueError): ws=WS(total=0, count=-1001, flag='\x00'), amt=-10000000; UNPARSEABLE (ValueError): ws=WS(total=0, count=-1001, flag=''), amt=-1
+q3_dc_bug_flag: UNPARSEABLE (ValueError): ws=WS(total=-1, count=0, flag=''), amt=-9999999; UNPARSEABLE (ValueError): ws=WS(total=0, count=0, flag=''), amt=-1
+q3_dc_ok: UNPARSEABLE (ValueError): ws=WS(total=0, count=-2, flag=''), amt=-10000000; UNPARSEABLE (ValueError): ws=WS(total=0, count=1000, flag=''), amt=-1; UNPARSEABLE (ValueError): ws=WS(total=0, count=-1001, flag=''), amt=0
+q3_h_bug_count: no counterexample
+q3_h_bug_flag: no counterexample
+q3_h_ok: no counterexample
+q3_plain_bug_count: no counterexample
+q3b_eq_bug_count: line 149: 'AssertionError: ' at eq_state_bug_count(-9999999, 999, 'P', -1)
+q3b_eq_bug_flag: line 157: 'AssertionError: ' at eq_state_bug_flag(-9999999, 0, 'P', -1)
+q3b_eq_ok: no errors
+q3b_h_bug_count_mui50: no counterexample
+q3b_h_bug_count_pct20: no counterexample
+q3b_h_bug_flag_mui50: no counterexample
+q3b_h_bug_flag_pct20: no counterexample
+q3b_h_ok_pct20: no counterexample
+q3b_hi_bug_count: {'total': 9999998, 'count': 999, 'fi': 1, 'amt': -9999999} -> replay CONFIRMED: ('ok', (None, -1, 0, 'N')) vs ('ok', (None, -1, 1000, 'N'))
+q3b_hi_bug_flag: {'total': -1, 'count': 0, 'fi': 1, 'amt': -9999999} -> replay CONFIRMED: ('ok', (None, 0, 1, 'P')) vs ('ok', (None, 0, 1, 'N'))
+q3b_hi_ok: no counterexample
+q3b_hi_ok_pct20: no counterexample
+q4_exc_all_typ: no counterexample
+q4_exc_default_msg: {'a': 0, 'b': 0} -> replay NOT REPRODUCED: ('exc', 'ZeroDivisionError') vs ('exc', 'ZeroDivisionError')
+q4_exc_same_type_msg: no counterexample
+q4_exc_same_type_typ: {'a': 0, 'b': 0} -> replay CONFIRMED: ('exc', 'ZeroDivisionError') vs ('exc', 'ValueError')
+q4_exc_type_msg: {'a': 0, 'b': 0} -> replay NOT REPRODUCED: ('exc', 'ZeroDivisionError') vs ('exc', 'ZeroDivisionError')
+q4_mui50_add_ok: no counterexample
+q4_pct10_add_ok: no counterexample
+q4_pct10_banker_int: {'v': -50} -> replay CONFIRMED: ('ok', -1) vs ('ok', 0); {'v': 50} -> replay CONFIRMED: ('ok', 1) vs ('ok', 0)
+q4_pct10_pp2_add_ok: no counterexample
+q4_slow_pct10: no counterexample
+q4det_banker_1: {'v': -50} -> replay CONFIRMED: ('ok', -1) vs ('ok', 0)
+q4det_banker_2: {'v': -50} -> replay CONFIRMED: ('ok', -1) vs ('ok', 0)
+q4det_banker_3: {'v': -50} -> replay CONFIRMED: ('ok', -1) vs ('ok', 0)
+q4det_hflag_1: no counterexample
+q4det_hflag_2: no counterexample
+q4det_hflag_3: no counterexample
+q4det_hok_1: no counterexample
+q4det_hok_2: no counterexample
+q4det_hok_3: no counterexample
+q4det_pymod_1: {'a': 0, 'b': -1} -> replay CONFIRMED: ('ok', -1) vs ('ok', 9999999)
+q4det_pymod_2: {'a': 0, 'b': -1} -> replay CONFIRMED: ('ok', -1) vs ('ok', 9999999)
+q4det_pymod_3: {'a': 0, 'b': -1} -> replay CONFIRMED: ('ok', -1) vs ('ok', 9999999)
+q5_no_such_fn: no Given: lines
+q5_no_such_module: no Given: lines
+q5_nondet: {'a': 1234567, 'b': -1234568} -> replay NOT REPRODUCED: ('ok', -1) vs ('ok', -1); {'a': 1234567, 'b': 0} -> replay CONFIRMED: ('ok', 1234567) vs ('ok', 0)
+q5_side_effect: {'a': 0, 'b': -1} -> replay NOT REPRODUCED: ('ok', -1) vs ('ok', -1); {'a': 0, 'b': 0} -> replay NOT REPRODUCED: ('ok', 0) vs ('ok', 0)
+q5_sig_mismatch: {'v': -50} -> replay CONFIRMED: ('exc', 'TypeError') vs ('ok', -1); {'a': 0, 'b': -1} -> replay CONFIRMED: ('ok', -1) vs ('exc', 'TypeError'); {'v': 50} -> replay CONFIRMED: ('exc', 'TypeError') vs ('ok', 1); {'a': 0, 'b': 0} -> replay CONFIRMED: ('ok', 0) vs ('exc', 'TypeError')
+q5_unannotated: no counterexample
+q5b_check_no_such_fn: no errors
+q5b_check_syntax_err: no errors
+q5b_diff_syntax_err: no Given: lines
+q6_as_bug: line 19: 'AssertionError: result out of PIC S9(7)' at add_bug(-9999999, -1)
+q6_as_ok: no errors
+q6_ic_add_bug: line 48: 'false' at add_bug_notrunc(-1, -9999999); line 49: 'false' at add_bug_notrunc(-9999999, -1)
+q6_ic_add_bug_verb: no errors
+q6_ic_add_ok: no errors
+q6_ic_module_all: line 36: 'false' at round_ok(-999999950,); line 48: 'false' at add_bug_notrunc(-1, -9999999); line 49: 'false' at add_bug_notrunc(-9999999, -1); line 55: 'false' at round_bug_banker(-999999950,); line 56: 'false' at round_bug_banker(-450,); line 65: 'ValueError: boom' at round_bug_raises(777,)
+q6_ic_round_banker: line 55: 'false' at round_bug_banker(-999999950,); line 56: 'false' at round_bug_banker(-450,)
+q6_ic_round_ok: line 36: 'false' at round_ok(-999999950,)
+q6_ic_round_raises: line 65: 'ValueError: boom' at round_bug_raises(777,)
+q7_eq_div_msg: no errors
+q7_eq_div_type: line 41: 'AssertionError: ' at eq_div_type(0, 0)
+q7_eq_module_all: line 24: 'AssertionError: ' at eq_round_banker(-50,); line 29: 'AssertionError: ' at eq_round_floor(-150,); line 41: 'AssertionError: ' at eq_div_type(0, 0)
+q7_eq_round_banker: line 24: 'AssertionError: ' at eq_round_banker(-50,)
+q7_eq_round_decimal: no errors
+q7_eq_round_decimal_p30: no errors
+q7_eq_round_floor: line 29: 'AssertionError: ' at eq_round_floor(-150,)
+q8_d_bug_pct30: {'total': 0, 'count': 0, 'fi': 0, 'amt': -1000} -> replay CONFIRMED: ('ok', ('ok', -1000, 1, 'N')) vs ('ok', ('ok', -1000, 1, 'P'))
+q8_d_bug_round_pct30: {'total': -11, 'count': 0, 'fi': 1, 'amt': -1090} -> replay CONFIRMED: ('ok', ('ok', -1101, 1, 'N')) vs ('ok', ('ok', -1100, 1, 'N'))
+q8_d_ok_pct30: no counterexample
+q8_eq_bug_pct30: line 63: 'AssertionError: ' at eq_bug(-1, 0, 1, -9999999)
+q8_eq_bug_round_pct30: line 68: 'AssertionError: ' at eq_bug_round(-18, 0, 1, 0)
+q8_eq_ok_pct30: no errors
+q9_eq_dec_pct10_1: no errors
+q9_eq_dec_pct10_2: no errors
+q9_h_ok_mui50_1: no counterexample
+q9_h_ok_mui50_2: no counterexample
+q9_round_dec_pct10_1: no counterexample
+q9_round_dec_pct10_2: no counterexample

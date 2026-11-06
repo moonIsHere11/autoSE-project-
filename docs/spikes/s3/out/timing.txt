@@ -1,0 +1,106 @@
+=================== all verified (expect exit 0)
+Proving methods in Decimal
+Skipping proof of Decimal.Decimal() (Skipping Decimal.Decimal because it does not match addTrunc5)
+Skipping proof of Decimal.addTrunc(long,long,long) (Skipping Decimal.addTrunc because it does not match addTrunc5)
+Starting proof of Decimal.addTrunc5(long,long) with prover z3-5.1.0
+Method assertions are validated [1.54 secs]
+Completed proof of Decimal.addTrunc5(long,long) with prover z3-5.1.0 - no warnings [1.89 secs]
+Skipping proof of Decimal.addTrunc5Buggy(long,long) (Skipping Decimal.addTrunc5Buggy because it does not match addTrunc5)
+Skipping proof of Decimal.addTruncBuggy(long,long,long) (Skipping Decimal.addTruncBuggy because it does not match addTrunc5)
+Completed proving methods in Decimal [1.90 secs]
+Summary:
+  Valid:        1
+  Invalid:      0
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      4
+ TOTAL METHODS: 5
+ Classes:       0 proved of 1
+ DURATION:          2.1 secs
+
+### exit=0 wall=11199ms
+=================== startup cost: no method matches
+### exit=0 wall=7269ms
+=================== startup cost: --check only (parse+typecheck JML, no proving)
+### exit=0 wall=7991ms
+=================== J17 features + vacuous precondition (default)
+Proving methods in J17
+Starting proof of J17.J17() with prover z3-5.1.0
+Method assertions are validated [0.93 secs]
+Completed proof of J17.J17() with prover z3-5.1.0 - no warnings [1.28 secs]
+Starting proof of J17.doubleIt(J17.Money) with prover z3-5.1.0
+Method assertions are validated [1.35 secs]
+Completed proof of J17.doubleIt(J17.Money) with prover z3-5.1.0 - no warnings [1.42 secs]
+Proving methods in J17.Money
+Completed proving methods in J17.Money [0.00 secs]
+Starting proof of J17.rate(int) with prover z3-5.1.0
+Method assertions are validated [0.92 secs]
+Completed proof of J17.rate(int) with prover z3-5.1.0 - no warnings [0.96 secs]
+Starting proof of J17.vacuous(long) with prover z3-5.1.0
+Method assertions are validated [0.66 secs]
+Completed proof of J17.vacuous(long) with prover z3-5.1.0 - no warnings [0.68 secs]
+Completed proving methods in J17 [4.34 secs]
+Summary:
+  Valid:        4
+  Invalid:      0
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 4
+ Classes:       2 proved of 2
+ DURATION:          4.6 secs
+
+### exit=0 wall=12569ms
+=================== J17 with --check-feasibility=precondition
+Proving methods in J17
+Skipping proof of J17.J17() (Skipping J17.J17 because it does not match vacuous)
+Skipping proof of J17.doubleIt(J17.Money) (Skipping J17.doubleIt because it does not match vacuous)
+Proving methods in J17.Money
+Completed proving methods in J17.Money [0.00 secs]
+Skipping proof of J17.rate(int) (Skipping J17.rate because it does not match vacuous)
+Starting proof of J17.vacuous(long) with prover z3-5.1.0
+Method assertions are validated [0.78 secs]
+src/J17.java:30:Feasibility check #1 - end of preconditions : infeasible [0.01 secs]
+src/J17.java:30: verify: Invariants+Preconditions appear to be contradictory in method J17.vacuous(long)
+    public static long vacuous(long a) {
+                       ^
+Completed proof of J17.vacuous(long) with prover z3-5.1.0 - INFEASIBLE [1.03 secs]
+Completed proving methods in J17 [1.08 secs]
+Summary:
+  Valid:        0
+  Invalid:      0
+  Infeasible:   1
+  Timeout:      0
+  Error:        0
+  Skipped:      3
+ TOTAL METHODS: 4
+ Classes:       1 proved of 2
+ DURATION:          1.2 secs
+
+1 verification failure
+### exit=6 wall=8082ms
+=================== batch: 4 files in one JVM
+        return s;
+        ^
+src/Loops.java:20: verify: Associated declaration: src/Loops.java:26:
+    //@ ensures \result == (long) n * (n + 1) / 2;
+        ^
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: overflow in long sum
+            s += i;
+              ^
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: underflow in long sum
+            s += i;
+              ^
+18 verification failures
+### exit=0 wall=35877ms
+=================== --release 17 (fails?)
+src/Account.java:1: error: package org.jmlspecs.lang does not exist
+// Toy 2: instance method mutating fields, with a frame (assignable) clause.
+^
+/opt/openjml/specs/java/lang/Object.jml:36: error: Exception while entering field from jml for binary: java.lang.Object.objectState
+    //@ model public final \datagroup objectState;
+=================== --verify-exit=0
+2 verification failures
+### exit=0 wall=11303ms

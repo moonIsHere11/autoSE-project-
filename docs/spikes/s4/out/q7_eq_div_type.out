@@ -1,0 +1,1 @@
+/w/eq_harness.py:41: error: AssertionError:  when calling eq_div_type(0, 0)

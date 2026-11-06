@@ -1,0 +1,94 @@
+=================== --prover=z3
+Completed proof of Decimal.Decimal() with prover z3 - no warnings [0.85 secs]
+Completed proof of Decimal.addTrunc(long,long,long) with prover z3 - no warnings [0.82 secs]
+Completed proof of Decimal.addTrunc5(long,long) with prover z3 - no warnings [1.15 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover z3
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover z3 - with warnings [1.57 secs]
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover z3 - with warnings [1.57 secs]
+  Valid:        3
+  Invalid:      2
+  Error:        0
+### exit=6 wall=11419ms
+=================== --prover=z3_4_3
+error: Specified executable does not exist: "/opt/openjml/Solvers-linux/z3_4_3"
+error: No executable is known for prover z3_4_3 - use --exec, or put the solver in the SMT_SOLVER_DIR folder
+Completed proof of Decimal.Decimal() with prover z3_4_3 - ERROR [0.17 secs]
+error: Specified executable does not exist: "/opt/openjml/Solvers-linux/z3_4_3"
+error: No executable is known for prover z3_4_3 - use --exec, or put the solver in the SMT_SOLVER_DIR folder
+Completed proof of Decimal.addTrunc(long,long,long) with prover z3_4_3 - ERROR [0.01 secs]
+error: Specified executable does not exist: "/opt/openjml/Solvers-linux/z3_4_3"
+error: No executable is known for prover z3_4_3 - use --exec, or put the solver in the SMT_SOLVER_DIR folder
+Completed proof of Decimal.addTrunc5(long,long) with prover z3_4_3 - ERROR [0.00 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover z3_4_3
+error: Specified executable does not exist: "/opt/openjml/Solvers-linux/z3_4_3"
+error: No executable is known for prover z3_4_3 - use --exec, or put the solver in the SMT_SOLVER_DIR folder
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover z3_4_3 - ERROR [0.00 secs]
+error: Specified executable does not exist: "/opt/openjml/Solvers-linux/z3_4_3"
+error: No executable is known for prover z3_4_3 - use --exec, or put the solver in the SMT_SOLVER_DIR folder
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover z3_4_3 - ERROR [0.00 secs]
+  Valid:        0
+  Invalid:      0
+  Error:        5
+10 errors
+### exit=1 wall=9224ms
+=================== --prover=z3 --exec=/usr/bin/z3
+Completed proof of Decimal.Decimal() with prover z3 - no warnings [0.92 secs]
+Completed proof of Decimal.addTrunc(long,long,long) with prover z3 - no warnings [0.84 secs]
+Completed proof of Decimal.addTrunc5(long,long) with prover z3 - no warnings [1.17 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover z3
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover z3 - with warnings [1.53 secs]
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover z3 - with warnings [1.30 secs]
+  Valid:        3
+  Invalid:      2
+  Error:        0
+### exit=6 wall=14696ms
+=================== --prover=z3 --exec=/opt/pyenv/bin/z3
+Completed proof of Decimal.Decimal() with prover z3 - no warnings [0.88 secs]
+Completed proof of Decimal.addTrunc(long,long,long) with prover z3 - no warnings [0.82 secs]
+Completed proof of Decimal.addTrunc5(long,long) with prover z3 - no warnings [1.10 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover z3
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover z3 - with warnings [1.50 secs]
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover z3 - with warnings [1.37 secs]
+  Valid:        3
+  Invalid:      2
+  Error:        0
+### exit=6 wall=9760ms
+=================== --prover=z3 --exec=/opt/openjml/Solvers-linux/z3-4.12.6
+Completed proof of Decimal.Decimal() with prover z3 - no warnings [0.93 secs]
+Completed proof of Decimal.addTrunc(long,long,long) with prover z3 - no warnings [0.77 secs]
+Completed proof of Decimal.addTrunc5(long,long) with prover z3 - no warnings [1.11 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover z3
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover z3 - with warnings [1.49 secs]
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover z3 - with warnings [1.26 secs]
+  Valid:        3
+  Invalid:      2
+  Error:        0
+### exit=6 wall=10588ms
+=================== --prover=cvc5
+Completed proof of Decimal.Decimal() with prover cvc5 - no warnings [0.80 secs]
+Completed proof of Decimal.addTrunc(long,long,long) with prover cvc5 - no warnings [1.02 secs]
+Completed proof of Decimal.addTrunc5(long,long) with prover cvc5 - no warnings [1.12 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover cvc5
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover cvc5 - with warnings [1.50 secs]
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover cvc5 - with warnings [5.17 secs]
+  Valid:        3
+  Invalid:      2
+  Error:        0
+### exit=6 wall=13764ms
+=================== --prover=yices2
+error: An error while executing a proof script for <init>: (error "quantifiers are not allowed in logic ALL")
+Completed proof of Decimal.Decimal() with prover yices2 - ERROR [0.32 secs]
+error: An error while executing a proof script for addTrunc: (error "quantifiers are not allowed in logic ALL")
+Completed proof of Decimal.addTrunc(long,long,long) with prover yices2 - ERROR [0.12 secs]
+error: An error while executing a proof script for addTrunc5: (error "quantifiers are not allowed in logic ALL")
+Completed proof of Decimal.addTrunc5(long,long) with prover yices2 - ERROR [0.13 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover yices2
+error: An error while executing a proof script for addTrunc5Buggy: (error "quantifiers are not allowed in logic ALL")
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover yices2 - ERROR [0.12 secs]
+error: An error while executing a proof script for addTruncBuggy: (error "quantifiers are not allowed in logic ALL")
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover yices2 - ERROR [0.10 secs]
+  Valid:        0
+  Invalid:      0
+  Error:        5
+5 errors
+### exit=1 wall=5506ms

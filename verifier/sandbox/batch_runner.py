@@ -16,6 +16,7 @@ Layout:  <inputs_root>/<case>/{case.json,stdin.txt,in/...}   (read-only)
 from __future__ import annotations
 
 import concurrent.futures
+import contextlib
 import hashlib
 import json
 import os
@@ -88,7 +89,7 @@ def _run_once(job: dict, case_id: str, case: dict, rep: int) -> dict:
     timed_out = False
     start = time.monotonic()
     with open(out_path, "wb") as out, open(err_path, "wb") as err:
-        stdin = open(stdin_path, "rb") if os.path.exists(stdin_path) else subprocess.DEVNULL
+        stdin = open(stdin_path, "rb") if os.path.exists(stdin_path) else subprocess.DEVNULL  # noqa: SIM115
         try:
             proc = subprocess.Popen(
                 argv, cwd=workdir, env=env, stdin=stdin, stdout=out, stderr=err,
@@ -98,10 +99,8 @@ def _run_once(job: dict, case_id: str, case: dict, rep: int) -> dict:
                 rc = proc.wait(timeout=job["timeout_s"])
             except subprocess.TimeoutExpired:
                 timed_out = True
-                try:
+                with contextlib.suppress(ProcessLookupError):
                     os.killpg(proc.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
                 rc = proc.wait()
         finally:
             if stdin is not subprocess.DEVNULL:

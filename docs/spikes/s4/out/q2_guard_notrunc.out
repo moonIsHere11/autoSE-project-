@@ -1,0 +1,3 @@
+Given: (a=-1, b=-9999999),
+          harness_dom.guard_ref_add : returns 0
+  harness_dom.guard_llm_add_notrunc : returns -10000000

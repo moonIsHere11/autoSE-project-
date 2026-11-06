@@ -1,0 +1,141 @@
+21.86 71.87 60.15 7/513 16831
+Proving methods in Decimal
+Starting proof of Decimal.Decimal() with prover z3
+Method assertions are validated [1.05 secs]
+src/Decimal.java:4:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Decimal.Decimal() with prover z3 - no warnings [1.40 secs]
+Starting proof of Decimal.addTrunc(long,long,long) with prover z3
+Method assertions are validated [1.07 secs]
+src/Decimal.java:11:Feasibility check #1 - end of preconditions : OK [0.05 secs]
+Completed proof of Decimal.addTrunc(long,long,long) with prover z3 - no warnings [1.19 secs]
+Starting proof of Decimal.addTrunc5(long,long) with prover z3
+Method assertions are validated [1.31 secs]
+src/Decimal.java:22:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Decimal.addTrunc5(long,long) with prover z3 - no warnings [1.38 secs]
+Starting proof of Decimal.addTrunc5Buggy(long,long) with prover z3
+Method assertions are INVALID
+src/Decimal.java:37: verify: The prover cannot establish an assertion (Postcondition: src/Decimal.java:31:) in method addTrunc5Buggy
+        return s;
+        ^
+src/Decimal.java:31: verify: Associated declaration: src/Decimal.java:37:
+    //@ ensures -100_000 < \result && \result < 100_000;
+        ^
+Completed proof of Decimal.addTrunc5Buggy(long,long) with prover z3 - with warnings [1.86 secs]
+Starting proof of Decimal.addTruncBuggy(long,long,long) with prover z3
+Method assertions are INVALID
+src/Decimal.java:47: verify: The prover cannot establish an assertion (Postcondition: src/Decimal.java:43:) in method addTruncBuggy
+        return r;
+        ^
+src/Decimal.java:43: verify: Associated declaration: src/Decimal.java:47:
+    //@ ensures \result == (a + b) % mod;
+        ^
+Completed proof of Decimal.addTruncBuggy(long,long,long) with prover z3 - with warnings [1.67 secs]
+Completed proving methods in Decimal [7.50 secs]
+Proving methods in Account
+Starting proof of Account.Account() with prover z3
+Method assertions are validated [0.79 secs]
+src/Account.java:3:Feasibility check #1 - end of preconditions : OK [0.02 secs]
+Completed proof of Account.Account() with prover z3 - no warnings [0.84 secs]
+Starting proof of Account.deposit(long) with prover z3
+Method assertions are validated [1.29 secs]
+src/Account.java:14:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Account.deposit(long) with prover z3 - no warnings [1.35 secs]
+Starting proof of Account.depositBad(long) with prover z3
+Method assertions are INVALID
+src/Account.java:29: verify: The prover cannot establish an assertion (Assignable: src/Account.java:23:) in method depositBad: audit
+        audit = amt;
+              ^
+src/Account.java:23: verify: Associated declaration: src/Account.java:29:
+    //@ assignable balance, count;
+        ^
+Completed proof of Account.depositBad(long) with prover z3 - with warnings [2.08 secs]
+Completed proving methods in Account [4.27 secs]
+Proving methods in Status
+Starting proof of Status.Status() with prover z3
+Method assertions are validated [0.61 secs]
+src/Status.java:7:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.Status() with prover z3 - no warnings [0.63 secs]
+Starting proof of Status.isOkCode(char) with prover z3
+Method assertions are validated [0.58 secs]
+src/Status.java:29:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.isOkCode(char) with prover z3 - no warnings [0.60 secs]
+Starting proof of Status.okBodyOnly(char) with prover z3
+Method assertions are validated [0.52 secs]
+src/Status.java:11:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.okBodyOnly(char) with prover z3 - no warnings [0.54 secs]
+Starting proof of Status.setStatusA(char) with prover z3
+Method assertions are INVALID
+src/Status.java:34: verify: The prover cannot establish an assertion (Postcondition: src/Status.java:33:) in method setStatusA
+    public void setStatusA(char in) {
+                ^
+src/Status.java:33: verify: Associated declaration: src/Status.java:34:
+    //@ ensures okBodyOnly(in) ==> status == in;
+        ^
+Completed proof of Status.setStatusA(char) with prover z3 - with warnings [1.56 secs]
+Starting proof of Status.setStatusB(char) with prover z3
+Method assertions are validated [1.35 secs]
+src/Status.java:42:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.setStatusB(char) with prover z3 - no warnings [1.38 secs]
+Starting proof of Status.setStatusBuggy(char) with prover z3
+Method assertions are INVALID
+src/Status.java:65: verify: The prover cannot establish an assertion (Postcondition: src/Status.java:63:) in method setStatusBuggy
+    public void setStatusBuggy(char in) {
+                ^
+src/Status.java:63: verify: Associated declaration: src/Status.java:65:
+    //@ ensures statusOk88(in) ==> status == in;
+        ^
+Completed proof of Status.setStatusBuggy(char) with prover z3 - with warnings [1.86 secs]
+Starting proof of Status.setStatusC(char) with prover z3
+Method assertions are validated [1.10 secs]
+src/Status.java:49:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.setStatusC(char) with prover z3 - no warnings [1.14 secs]
+Starting proof of Status.setStatusD(char) with prover z3
+Method assertions are validated [1.44 secs]
+src/Status.java:57:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.setStatusD(char) with prover z3 - no warnings [1.48 secs]
+Starting proof of Status.statusEnd88(char) with prover z3
+Method assertions are validated [0.39 secs]
+src/Status.java:20:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.statusEnd88(char) with prover z3 - no warnings [0.42 secs]
+Starting proof of Status.statusOk88(char) with prover z3
+Method assertions are validated [0.40 secs]
+src/Status.java:16:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of Status.statusOk88(char) with prover z3 - no warnings [0.43 secs]
+Completed proving methods in Status [10.06 secs]
+Proving methods in J17
+Starting proof of J17.J17() with prover z3
+Method assertions are validated [0.70 secs]
+src/J17.java:3:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of J17.J17() with prover z3 - no warnings [0.73 secs]
+Starting proof of J17.doubleIt(J17.Money) with prover z3
+Method assertions are validated [1.20 secs]
+src/J17.java:23:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of J17.doubleIt(J17.Money) with prover z3 - no warnings [1.25 secs]
+Proving methods in J17.Money
+Completed proving methods in J17.Money [0.00 secs]
+Starting proof of J17.rate(int) with prover z3
+Method assertions are validated [0.90 secs]
+src/J17.java:11:Feasibility check #1 - end of preconditions : OK [0.01 secs]
+Completed proof of J17.rate(int) with prover z3 - no warnings [0.94 secs]
+Starting proof of J17.vacuous(long) with prover z3
+Method assertions are validated [0.60 secs]
+src/J17.java:30:Feasibility check #1 - end of preconditions : infeasible [0.01 secs]
+src/J17.java:30: verify: Invariants+Preconditions appear to be contradictory in method J17.vacuous(long)
+    public static long vacuous(long a) {
+                       ^
+Completed proof of J17.vacuous(long) with prover z3 - INFEASIBLE [0.63 secs]
+Completed proving methods in J17 [3.55 secs]
+Summary:
+  Valid:        16
+  Invalid:      5
+  Infeasible:   1
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 22
+ Classes:       1 proved of 5
+ DURATION:         25.8 secs
+
+11 verification failures
+### exit=6 wall=36905ms
+15.15 63.94 57.98 4/466 17483

@@ -1,0 +1,6 @@
+Given: (a=0, b=-10000000),
+       cobol_ref.ref_add_trunc : returns 0
+  llm_variants.add_bug_notrunc : returns -10000000
+Given: (a=0, b=10000000),
+       cobol_ref.ref_add_trunc : returns 0
+  llm_variants.add_bug_notrunc : returns 10000000

@@ -1,0 +1,22 @@
+src/Decimal.java:37: verify: The prover cannot establish an assertion (Postcondition: src/Decimal.java:31:) in method addTrunc5Buggy
+        return s;
+        ^
+src/Decimal.java:31: verify: Associated declaration: src/Decimal.java:37:
+    //@ ensures -100_000 < \result && \result < 100_000;
+        ^
+
+TRACE of Decimal.addTrunc5Buggy(long,long)
+src/Decimal.java:1: 	requires true; 
+src/Decimal.java:30: 	requires -100000 < a && a < 100000 && -100000 < b && b < 100000; 
+src/Decimal.java:35: 	long s = a + b
+src/Decimal.java:35: 	ArithmeticOperationRange assertion: _JML__tmp`14 || (!(0L < _JML__tmp`11 && 0L < _JML__tmp`12) || _JML__tmp`11 <= 9223372036854775807L - _JML__tmp`12)
+src/Decimal.java:35: 	ArithmeticOperationRange assertion: _JML__tmp`16 || (!(_JML__tmp`11 < 0L && _JML__tmp`12 < 0L) || -9223372036854775808L - _JML__tmp`12 <= _JML__tmp`11)
+src/Decimal.java:36: 	if (s >= 100000) ...
+				Condition = false
+src/Decimal.java:37: 	return s;
+src/Decimal.java:31: 	ensures -100000 < \result && \result < 100000; 
+src/Decimal.java:37: Invalid assertion (Postcondition)
+: src/Decimal.java:31: Associated location
+
+2 verification failures
+### exit=6 wall=6686ms

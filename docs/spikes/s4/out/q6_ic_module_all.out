@@ -1,0 +1,9 @@
+/w/contracts_toys.py:24: info: Confirmed over all paths.
+/w/contracts_toys.py:25: info: Confirmed over all paths.
+/w/contracts_toys.py:36: error: false when calling round_ok(-999999950) (which returns -10000000)
+/w/contracts_toys.py:37: info: Confirmed over all paths.
+/w/contracts_toys.py:48: error: false when calling add_bug_notrunc(-1, -9999999) (which returns -10000000)
+/w/contracts_toys.py:49: error: false when calling add_bug_notrunc(-9999999, -1) (which returns -10000000)
+/w/contracts_toys.py:55: error: false when calling round_bug_banker(-999999950) (which returns -10000000)
+/w/contracts_toys.py:56: error: false when calling round_bug_banker(-450) (which returns -4)
+/w/contracts_toys.py:65: error: ValueError: boom when calling round_bug_raises(777)

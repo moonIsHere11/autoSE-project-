@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/opt/pyenv/bin/crosshair", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/pyenv/lib/python3.12/site-packages/crosshair/main.py", line 983, in main
+    sys.exit(unwalled_main(parsed_args))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/lib/python3.12/site-packages/crosshair/main.py", line 924, in unwalled_main
+    return check(args, options, sys.stdout, sys.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/lib/python3.12/site-packages/crosshair/main.py", line 871, in check
+    entities = checked_load(args.target, stderr)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/lib/python3.12/site-packages/crosshair/main.py", line 663, in checked_load
+    return list(load_files_or_qualnames(target))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 371, in load_files_or_qualnames
+    yield load_by_qualname(specifier)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 271, in load_by_qualname
+    return walk_qualname(module, remaining)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 226, in walk_qualname
+    raise NotFound(f'Name "{lastpart}" not found on object "{obj}"')
+crosshair.fnutil.NotFound: Name "no_such_function" not found on object "<module 'eq_harness' from '/w/eq_harness.py'>"

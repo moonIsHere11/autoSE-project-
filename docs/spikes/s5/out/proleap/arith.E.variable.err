@@ -1,0 +1,15 @@
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+Exception in thread "main" io.proleap.cobol.asg.exception.CobolParserException: syntax error in line 6:7 mismatched input 'ENTIFICATION' expecting {<EOF>, ID, IDENTIFICATION}
+	at io.proleap.cobol.asg.runner.ThrowingErrorListener.syntaxError(ThrowingErrorListener.java:22)
+	at org.antlr.v4.runtime.ProxyErrorListener.syntaxError(ProxyErrorListener.java:41)
+	at org.antlr.v4.runtime.Parser.notifyErrorListeners(Parser.java:544)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.reportInputMismatch(DefaultErrorStrategy.java:327)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.reportError(DefaultErrorStrategy.java:139)
+	at io.proleap.cobol.CobolParser.startRule(CobolParser.java:751)
+	at io.proleap.cobol.asg.runner.impl.CobolParserRunnerImpl.parsePreprocessInput(CobolParserRunnerImpl.java:227)
+	at io.proleap.cobol.asg.runner.impl.CobolParserRunnerImpl.parseFile(CobolParserRunnerImpl.java:199)
+	at io.proleap.cobol.asg.runner.impl.CobolParserRunnerImpl.analyzeFile(CobolParserRunnerImpl.java:97)
+	at io.proleap.cobol.asg.runner.impl.CobolParserRunnerImpl.analyzeFile(CobolParserRunnerImpl.java:106)
+	at ProLeapDump.main(ProLeapDump.java:45)

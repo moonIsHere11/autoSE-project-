@@ -1,0 +1,31 @@
+*** Begin Not Deterministic Debug ***
+Previous iteration: 4
+Previous SMT expression: 0 == If(a_2 + b_3 < 0, -(a_2 + b_3), a_2 + b_3)%10000000
+Current SMT expression: If(a_2 + b_3 < 0, -(a_2 + b_3), a_2 + b_3)%10000000 ==
+If(a_2 + b_3 < 0, -(a_2 + b_3), a_2 + b_3)%10000000
+Current stack tail:
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/libimpl/builtinslib.py:1285
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:212
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1571
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1506
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1582
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:260
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:136
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/main.py:705
+Previous stack tail:
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/libimpl/builtinslib.py:1285
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:212
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1571
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1506
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1582
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:260
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:136
+  /opt/pyenv/lib/python3.12/site-packages/crosshair/main.py:705
+Reason: SMT expression changed
+*** End Not Deterministic Debug ***
+Given: (a=1234567, b=-1234568),
+   cobol_ref.ref_add_trunc : returns -1
+  misc_toys.llm_add_nondet : returns 0
+Given: (a=1234567, b=0),
+   cobol_ref.ref_add_trunc : returns 1234567
+  misc_toys.llm_add_nondet : returns 0

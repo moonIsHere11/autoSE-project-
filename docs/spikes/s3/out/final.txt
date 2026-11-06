@@ -1,0 +1,65 @@
+=================== one-liner, no wrapper, with env
+### exit=0
+=================== one-liner, no wrapper, NO env
+error: Could not find the internal system specifications: /w/null/specs
+warning: Could not locate the internal specifications files - you may need to add the jmlspecs.jar explicitly on the command-line using --specs-path.
+1 error
+1 warning
+### exit=1
+=================== which solver binary: SMT_SOLVER_DIR=/tmp (default prover)
+error: Specified executable does not exist: "/tmp/z3-5.1.0"
+error: No executable is known for prover z3-5.1.0 - use --exec, or put the solver in the SMT_SOLVER_DIR folder
+2 errors
+=================== which solver binary: SMT_SOLVER_DIR=/tmp --prover=z3
+error: Specified executable does not exist: "/tmp/z3-4.16.0"
+error: No executable is known for prover z3 - use --exec, or put the solver in the SMT_SOLVER_DIR folder
+2 errors
+=================== docker overhead
+docker run true: 662ms
+openjml 21.0.28
+docker+openjml --version: 2328ms
+=================== batch summary
+        return s;
+        ^
+src/Loops.java:20: verify: Associated declaration: src/Loops.java:26:
+    //@ ensures \result == (long) n * (n + 1) / 2;
+        ^
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: overflow in long sum
+            s += i;
+              ^
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: underflow in long sum
+            s += i;
+              ^
+18 verification failures
+### exit=6 wall=294786ms
+=================== LoopInvariantBeforeLoop
+Proving methods in LoopEntry
+Starting proof of LoopEntry.LoopEntry() with prover z3-5.1.0
+Method assertions are validated [1.44 secs]
+Completed proof of LoopEntry.LoopEntry() with prover z3-5.1.0 - no warnings [1.92 secs]
+Starting proof of LoopEntry.countNoInv(int) with prover z3-5.1.0
+Method assertions are INVALID
+src/LoopEntry.java:22: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method countNoInv: overflow in int sum
+            k++;
+             ^
+Completed proof of LoopEntry.countNoInv(int) with prover z3-5.1.0 - with warnings [702.18 secs]
+Starting proof of LoopEntry.fiveTimesBadEntry(int) with prover z3-5.1.0
+Method assertions are INVALID
+src/LoopEntry.java:8: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fiveTimesBadEntry
+        //@ loop_invariant 0 <= i && i <= n && s == 5L * i + 1;
+            ^
+Completed proof of LoopEntry.fiveTimesBadEntry(int) with prover z3-5.1.0 - with warnings [2.04 secs]
+Completed proving methods in LoopEntry [706.16 secs]
+Summary:
+  Valid:        1
+  Invalid:      2
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 3
+ Classes:       0 proved of 1
+ DURATION:        706.4 secs
+
+2 verification failures
+### exit=6 wall=715420ms

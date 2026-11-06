@@ -1,0 +1,1 @@
+/w/asserts_toys.py:19: error: AssertionError: result out of PIC S9(7) when calling add_bug(-9999999, -1)

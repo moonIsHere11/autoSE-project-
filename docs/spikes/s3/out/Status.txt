@@ -1,0 +1,53 @@
+Proving methods in Status
+Starting proof of Status.Status() with prover z3-5.1.0
+Method assertions are validated [0.65 secs]
+Completed proof of Status.Status() with prover z3-5.1.0 - no warnings [0.82 secs]
+Starting proof of Status.isOkCode(char) with prover z3-5.1.0
+Method assertions are validated [0.54 secs]
+Completed proof of Status.isOkCode(char) with prover z3-5.1.0 - no warnings [0.55 secs]
+Starting proof of Status.okBodyOnly(char) with prover z3-5.1.0
+Method assertions are validated [0.49 secs]
+Completed proof of Status.okBodyOnly(char) with prover z3-5.1.0 - no warnings [0.50 secs]
+Starting proof of Status.setStatusA(char) with prover z3-5.1.0
+Method assertions are INVALID
+src/Status.java:34: verify: The prover cannot establish an assertion (Postcondition: src/Status.java:33:) in method setStatusA
+    public void setStatusA(char in) {
+                ^
+src/Status.java:33: verify: Associated declaration: src/Status.java:34:
+    //@ ensures okBodyOnly(in) ==> status == in;
+        ^
+Completed proof of Status.setStatusA(char) with prover z3-5.1.0 - with warnings [1.35 secs]
+Starting proof of Status.setStatusB(char) with prover z3-5.1.0
+Method assertions are validated [1.09 secs]
+Completed proof of Status.setStatusB(char) with prover z3-5.1.0 - no warnings [1.12 secs]
+Starting proof of Status.setStatusBuggy(char) with prover z3-5.1.0
+Method assertions are INVALID
+src/Status.java:65: verify: The prover cannot establish an assertion (Postcondition: src/Status.java:63:) in method setStatusBuggy
+    public void setStatusBuggy(char in) {
+                ^
+src/Status.java:63: verify: Associated declaration: src/Status.java:65:
+    //@ ensures statusOk88(in) ==> status == in;
+        ^
+Completed proof of Status.setStatusBuggy(char) with prover z3-5.1.0 - with warnings [1.56 secs]
+Starting proof of Status.setStatusC(char) with prover z3-5.1.0
+Method assertions are validated [0.92 secs]
+Completed proof of Status.setStatusC(char) with prover z3-5.1.0 - no warnings [0.93 secs]
+Starting proof of Status.setStatusD(char) with prover z3-5.1.0
+Method assertions are validated [1.18 secs]
+Completed proof of Status.setStatusD(char) with prover z3-5.1.0 - no warnings [1.20 secs]
+Skipping proof of Status.statusEnd88(char) (because the method has no body)
+Skipping proof of Status.statusOk88(char) (because the method has no body)
+Completed proving methods in Status [8.04 secs]
+Summary:
+  Valid:        6
+  Invalid:      2
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      2
+ TOTAL METHODS: 10
+ Classes:       0 proved of 1
+ DURATION:          8.2 secs
+
+4 verification failures
+### exit=6 wall=12420ms

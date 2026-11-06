@@ -1,0 +1,10 @@
+src/Bad.java:3: error: illegal start of expression
+    //@ ensures \result == a +;
+                              ^
+src/Bad.java:3: warning: Inserting missing semicolon at the end of a ensures statement
+    //@ ensures \result == a +;
+                               ^
+Operation not performed because of parse or type errors
+1 error
+1 warning
+### exit=1 wall=1478ms

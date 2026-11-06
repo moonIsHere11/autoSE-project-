@@ -1,0 +1,6 @@
+Given: (ws=WS(total=-1, count=0, flag=''), amt=-9999999),
+           state_toys.ref_para : after execution ws=WS(total=0, count=1, flag='P')
+  state_toys.llm_para_bug_flag : after execution ws=WS(total=0, count=1, flag='N')
+Given: (ws=WS(total=0, count=0, flag=''), amt=-1),
+           state_toys.ref_para : after execution ws=WS(total=-1, count=1, flag='N')
+  state_toys.llm_para_bug_flag : after execution ws=WS(total=-1, count=1, flag='P')

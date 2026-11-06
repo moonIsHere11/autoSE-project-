@@ -1,0 +1,5 @@
+/w/eq_harness.py:17: info: Not confirmed.
+/w/eq_harness.py:24: error: AssertionError:  when calling eq_round_banker(-50)
+/w/eq_harness.py:29: error: AssertionError:  when calling eq_round_floor(-150)
+/w/eq_harness.py:32: info: Confirmed over all paths.
+/w/eq_harness.py:41: error: AssertionError:  when calling eq_div_type(0, 0)

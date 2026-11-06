@@ -1,0 +1,79 @@
+68.38 94.12 65.41 4/451 14918
+=================== Calls
+src/Calls.java:14: warning: Method trunc5Inline(long) has no assignable clause, so it is implicitly 'assignable \everything', making its caller likely impossible to verify
+    /*@ inline @*/ static long trunc5Inline(long x) { return x % 100_000; }
+                               ^
+src/Calls.java:26: warning: Associated declaration: src/Calls.java:14:
+    public static long addViaInline(long a, long b) { return trunc5Inline(a + b); }
+                                                                         ^
+Proving methods in Calls
+Starting proof of Calls.Calls() with prover z3-5.1.0
+Method assertions are validated [0.68 secs]
+Completed proof of Calls.Calls() with prover z3-5.1.0 - no warnings [0.98 secs]
+Starting proof of Calls.addViaInline(long,long) with prover z3-5.1.0
+Method assertions are validated [0.74 secs]
+Completed proof of Calls.addViaInline(long,long) with prover z3-5.1.0 - no warnings [0.77 secs]
+Starting proof of Calls.addViaNoSpec(long,long) with prover z3-5.1.0
+Method assertions are INVALID
+src/Calls.java:18: verify: The prover cannot establish an assertion (Postcondition: src/Calls.java:17:) in method addViaNoSpec
+    public static long addViaNoSpec(long a, long b) { return trunc5NoSpec(a + b); }
+                                                      ^
+src/Calls.java:17: verify: Associated declaration: src/Calls.java:18:
+    //@ ensures \result == (a + b) % 100_000;
+        ^
+Completed proof of Calls.addViaNoSpec(long,long) with prover z3-5.1.0 - with warnings [1.24 secs]
+Starting proof of Calls.addViaSpec(long,long) with prover z3-5.1.0
+Method assertions are validated [0.92 secs]
+Completed proof of Calls.addViaSpec(long,long) with prover z3-5.1.0 - no warnings [0.95 secs]
+Starting proof of Calls.trunc5Inline(long) with prover z3-5.1.0
+Method assertions are validated [0.48 secs]
+Completed proof of Calls.trunc5Inline(long) with prover z3-5.1.0 - no warnings [0.50 secs]
+Starting proof of Calls.trunc5NoSpec(long) with prover z3-5.1.0
+Method assertions are validated [0.47 secs]
+Completed proof of Calls.trunc5NoSpec(long) with prover z3-5.1.0 - no warnings [0.49 secs]
+Starting proof of Calls.trunc5Spec(long) with prover z3-5.1.0
+Method assertions are validated [0.54 secs]
+Completed proof of Calls.trunc5Spec(long) with prover z3-5.1.0 - no warnings [0.56 secs]
+Completed proving methods in Calls [5.47 secs]
+Summary:
+  Valid:        6
+  Invalid:      1
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 7
+ Classes:       0 proved of 1
+ DURATION:          5.6 secs
+
+2 warnings
+2 verification failures
+### exit=6 wall=12967ms
+=================== countNoInv, --timeout=30
+Proving methods in LoopEntry
+Skipping proof of LoopEntry.LoopEntry() (Skipping LoopEntry.LoopEntry because it does not match countNoInv)
+Starting proof of LoopEntry.countNoInv(int) with prover z3-5.1.0
+Method assertions are INVALID
+src/LoopEntry.java:22: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method countNoInv: overflow in int sum
+            k++;
+             ^
+Completed proof of LoopEntry.countNoInv(int) with prover z3-5.1.0 - with warnings [1.54 secs]
+Skipping proof of LoopEntry.fiveTimesBadEntry(int) (Skipping LoopEntry.fiveTimesBadEntry because it does not match countNoInv)
+Completed proving methods in LoopEntry [1.59 secs]
+Summary:
+  Valid:        0
+  Invalid:      1
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      2
+ TOTAL METHODS: 3
+ Classes:       0 proved of 1
+ DURATION:          1.7 secs
+
+1 verification failure
+### exit=6 wall=7555ms
+=================== startup cost again: no method matches
+
+### exit=0 wall=11080ms
+42.71 84.77 63.33 13/519 16094

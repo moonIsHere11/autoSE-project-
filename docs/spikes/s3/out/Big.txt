@@ -1,0 +1,103 @@
+src/Big.java:23: warning: A non-pure method is being called where it is not permitted: java.math.BigDecimal.add(java.math.BigDecimal)
+    //@ ensures \result.equals(b.add(a));
+                                    ^
+src/Big.java:37: warning: A non-pure method is being called where it is not permitted: java.math.BigDecimal.add(java.math.BigDecimal)
+    //@ ensures \result.equals(a.add(b));
+                                    ^
+src/Big.java:18: warning: Use a static_initializer clause to specify the values of static final fields: java.math.BigDecimal.ZERO (translating Big.addZero(java.math.BigDecimal))
+        return a.add(BigDecimal.ZERO);
+                               ^
+Proving methods in Big
+Starting proof of Big.Big() with prover z3-5.1.0
+Method assertions are validated [0.98 secs]
+Completed proof of Big.Big() with prover z3-5.1.0 - no warnings [1.38 secs]
+Starting proof of Big.add(java.math.BigDecimal,java.math.BigDecimal) with prover z3-5.1.0
+Method assertions are validated [2.30 secs]
+Completed proof of Big.add(java.math.BigDecimal,java.math.BigDecimal) with prover z3-5.1.0 - no warnings [2.44 secs]
+Starting proof of Big.addBuggy(java.math.BigDecimal,java.math.BigDecimal) with prover z3-5.1.0
+Method assertions are INVALID
+src/Big.java:37: verify: The prover cannot establish an assertion (UndefinedCalledMethodPrecondition: /opt/openjml/specs/java/lang/Object.jml:107:) in method addBuggy
+    //@ ensures \result.equals(a.add(b));
+                              ^
+/opt/openjml/specs/java/lang/Object.jml:107: verify: Associated declaration: src/Big.java:37:
+      @     requires obj == null;
+            ^
+src/Big.java:39: verify: Associated method exit
+        return a.subtract(b);
+        ^
+/opt/openjml/specs/java/lang/Object.jml:97: verify: Precondition conjunct is false: this == obj
+      @     requires this == obj;
+                          ^
+/opt/openjml/specs/java/lang/Object.jml:102: verify: Precondition conjunct is false: \typeof(this) == \type(Object)
+      @     requires obj != null && \typeof(this) == \type(Object);
+                                                  ^
+/opt/openjml/specs/java/lang/Object.jml:107: verify: Precondition conjunct is false: obj == null
+      @     requires obj == null;
+                         ^
+Completed proof of Big.addBuggy(java.math.BigDecimal,java.math.BigDecimal) with prover z3-5.1.0 - with warnings [4.56 secs]
+Starting proof of Big.addComm(java.math.BigDecimal,java.math.BigDecimal) with prover z3-5.1.0
+Method assertions are INVALID
+src/Big.java:23: verify: The prover cannot establish an assertion (UndefinedCalledMethodPrecondition: /opt/openjml/specs/java/lang/Object.jml:107:) in method addComm
+    //@ ensures \result.equals(b.add(a));
+                              ^
+/opt/openjml/specs/java/lang/Object.jml:107: verify: Associated declaration: src/Big.java:23:
+      @     requires obj == null;
+            ^
+src/Big.java:25: verify: Associated method exit
+        return a.add(b);
+        ^
+/opt/openjml/specs/java/lang/Object.jml:97: verify: Precondition conjunct is false: this == obj
+      @     requires this == obj;
+                          ^
+/opt/openjml/specs/java/lang/Object.jml:102: verify: Precondition conjunct is false: \typeof(this) == \type(Object)
+      @     requires obj != null && \typeof(this) == \type(Object);
+                                                  ^
+/opt/openjml/specs/java/lang/Object.jml:107: verify: Precondition conjunct is false: obj == null
+      @     requires obj == null;
+                         ^
+Completed proof of Big.addComm(java.math.BigDecimal,java.math.BigDecimal) with prover z3-5.1.0 - with warnings [4.93 secs]
+Starting proof of Big.addZero(java.math.BigDecimal) with prover z3-5.1.0
+Method assertions are INVALID
+src/Big.java:16: verify: The prover cannot establish an assertion (UndefinedCalledMethodPrecondition: /opt/openjml/specs/java/lang/Comparable.jml:78:) in method addZero
+    //@ ensures \result.compareTo(a) == 0;
+                                 ^
+/opt/openjml/specs/java/lang/Comparable.jml:78: verify: Associated declaration: src/Big.java:16:
+      @      //-RAC@ requires \typeof(o) <:= \typeof(this);
+                     ^
+src/Big.java:18: verify: Associated method exit
+        return a.add(BigDecimal.ZERO);
+        ^
+/opt/openjml/specs/java/lang/Comparable.jml:78: verify: Precondition conjunct is false: \typeof(o) <:= \typeof(this)
+      @      //-RAC@ requires \typeof(o) <:= \typeof(this);
+                                         ^
+src/Big.java:18: verify: The prover cannot establish an assertion (Postcondition: src/Big.java:16:) in method addZero
+        return a.add(BigDecimal.ZERO);
+        ^
+src/Big.java:16: verify: Associated declaration: src/Big.java:18:
+    //@ ensures \result.compareTo(a) == 0;
+        ^
+Completed proof of Big.addZero(java.math.BigDecimal) with prover z3-5.1.0 - with warnings [5.07 secs]
+Starting proof of Big.round2(java.math.BigDecimal) with prover z3-5.1.0
+Method assertions are INVALID
+src/Big.java:32: verify: The prover cannot establish an assertion (Postcondition: src/Big.java:30:) in method round2
+        return a.setScale(2, RoundingMode.HALF_UP);
+        ^
+src/Big.java:30: verify: Associated declaration: src/Big.java:32:
+    //@ ensures \result != null && \result.scale() == 2;
+        ^
+Completed proof of Big.round2(java.math.BigDecimal) with prover z3-5.1.0 - with warnings [3.43 secs]
+Completed proving methods in Big [21.82 secs]
+Summary:
+  Valid:        2
+  Invalid:      4
+  Infeasible:   0
+  Timeout:      0
+  Error:        0
+  Skipped:      0
+ TOTAL METHODS: 6
+ Classes:       0 proved of 1
+ DURATION:         22.3 secs
+
+3 warnings
+20 verification failures
+### exit=6 wall=27227ms

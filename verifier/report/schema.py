@@ -9,7 +9,7 @@ Principles encoded here:
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -17,7 +17,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 SCHEMA_VERSION = "1.0"
 
 
-class Status(str, Enum):
+class Status(StrEnum):
     PASS = "PASS"
     FAIL = "FAIL"
     ERROR = "ERROR"

@@ -1,0 +1,2 @@
+/w/contracts_toys.py:48: error: false when calling add_bug_notrunc(-1, -9999999) (which returns -10000000)
+/w/contracts_toys.py:49: error: false when calling add_bug_notrunc(-9999999, -1) (which returns -10000000)

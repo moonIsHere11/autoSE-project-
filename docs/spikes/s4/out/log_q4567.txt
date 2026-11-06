@@ -1,0 +1,189 @@
+=== q4_exc_default_msg  rc=1  wall=0.99s
+$ crosshair diffbehavior misc_toys.ref_div misc_toys.llm_div_msg
+  | Given: (a=0, b=0),
+  |       misc_toys.ref_div : raises ZeroDivisionError()
+  |   misc_toys.llm_div_msg : raises ZeroDivisionError('SIZE ERROR on DIVIDE')
+=== q4_exc_type_msg  rc=1  wall=0.88s
+$ crosshair diffbehavior misc_toys.ref_div misc_toys.llm_div_msg --exception_equivalence TYPE_AND_MESSAGE
+  | Given: (a=0, b=0),
+  |       misc_toys.ref_div : raises ZeroDivisionError()
+  |   misc_toys.llm_div_msg : raises ZeroDivisionError('SIZE ERROR on DIVIDE')
+=== q4_exc_same_type_msg  rc=0  wall=0.83s
+$ crosshair diffbehavior misc_toys.ref_div misc_toys.llm_div_msg --exception_equivalence SAME_TYPE
+  | No differences found. (attempted 6 iterations)
+  | All paths exhausted, functions are likely the same!
+=== q4_exc_same_type_typ  rc=1  wall=0.86s
+$ crosshair diffbehavior misc_toys.ref_div misc_toys.llm_div_type --exception_equivalence SAME_TYPE
+  | Given: (a=0, b=0),
+  |        misc_toys.ref_div : raises ZeroDivisionError()
+  |   misc_toys.llm_div_type : raises ValueError('SIZE ERROR on DIVIDE')
+=== q4_exc_all_typ  rc=0  wall=0.78s
+$ crosshair diffbehavior misc_toys.ref_div misc_toys.llm_div_type --exception_equivalence ALL
+  | No differences found. (attempted 6 iterations)
+  | All paths exhausted, functions are likely the same!
+=== q4_mui50_add_ok  rc=0  wall=0.83s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_variants.add_ok --max_uninteresting_iterations 50
+  | No differences found. (attempted 4 iterations)
+  | All paths exhausted, functions are likely the same!
+=== q4_pct10_add_ok  rc=0  wall=0.65s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_variants.add_ok --per_condition_timeout 10
+  | No differences found. (attempted 4 iterations)
+  | All paths exhausted, functions are likely the same!
+=== q4_pct10_pp2_add_ok  rc=0  wall=0.71s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_variants.add_ok --per_condition_timeout 10 --per_path_timeout 2
+  | No differences found. (attempted 4 iterations)
+  | All paths exhausted, functions are likely the same!
+=== q4_pct10_banker_int  rc=1  wall=1.11s
+$ crosshair diffbehavior cobol_ref.ref_round_drop2 llm_variants.round_bug_banker_int --per_condition_timeout 10
+  | Given: (v=-50),
+  |           cobol_ref.ref_round_drop2 : returns -1
+  |   llm_variants.round_bug_banker_int : returns 0
+  | Given: (v=50),
+  |           cobol_ref.ref_round_drop2 : returns 1
+  |   llm_variants.round_bug_banker_int : returns 0
+=== q4_slow_pct10  rc=0  wall=7.89s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc misc_toys.llm_add_slow --per_condition_timeout 10
+  | No differences found. (attempted 200 iterations)
+  | All paths exhausted, functions are likely the same!
+=== q5_no_such_fn  rc=1  wall=0.67s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc llm_variants.no_such_function
+  stderr:
+  !     yield load_by_qualname(specifier)
+  !           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  !   File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 271, in load_by_qualname
+  !     return walk_qualname(module, remaining)
+  !            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  !   File "/opt/pyenv/lib/python3.12/site-packages/crosshair/fnutil.py", line 226, in walk_qualname
+  !     raise NotFound(f'Name "{lastpart}" not found on object "{obj}"')
+  ! crosshair.fnutil.NotFound: Name "no_such_function" not found on object "<module 'llm_variants' from '/w/llm_variants.py'>"
+=== q5_no_such_module  rc=2  wall=0.60s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc nosuchmodule.f
+  stderr:
+  ! Unable to load "nosuchmodule.f": NotFound: Module 'nosuchmodule' was not found
+=== q5_unannotated  rc=0  wall=1.22s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc misc_toys.unannotated
+  | No differences found. (attempted 16 iterations)
+  | All paths exhausted, functions are likely the same!
+=== q5_side_effect  rc=1  wall=0.77s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc misc_toys.llm_add_side_effect
+  | Given: (a=0, b=-1),
+  |         cobol_ref.ref_add_trunc : returns -1
+  |   misc_toys.llm_add_side_effect : raises SideEffectDetected('We\'ve blocked a file writing operation on "/tmp/s4_side_effect.txt". It\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use "--unblock=open:/tmp/s4_side_effect.txt:w:524865". (or some colon-delimited prefix)')
+  | Given: (a=0, b=0),
+  |         cobol_ref.ref_add_trunc : returns 0
+  |   misc_toys.llm_add_side_effect : raises SideEffectDetected('We\'ve blocked a file writing operation on "/tmp/s4_side_effect.txt". It\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use "--unblock=open:/tmp/s4_side_effect.txt:w:524865". (or some colon-delimited prefix)')
+=== q5_nondet  rc=2  wall=1.23s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc misc_toys.llm_add_nondet
+  | *** Begin Not Deterministic Debug ***
+  | Previous iteration: 4
+  | Previous SMT expression: 0 == If(a_2 + b_3 < 0, -(a_2 + b_3), a_2 + b_3)%10000000
+  | Current SMT expression: If(a_2 + b_3 < 0, -(a_2 + b_3), a_2 + b_3)%10000000 ==
+  | If(a_2 + b_3 < 0, -(a_2 + b_3), a_2 + b_3)%10000000
+  | Current stack tail:
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/libimpl/builtinslib.py:1285
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:212
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1571
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1506
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1582
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:260
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:136
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/main.py:705
+  | Previous stack tail:
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/libimpl/builtinslib.py:1285
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/diff_behavior.py:212
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1571
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1506
+  |   /opt/pyenv/lib/python3.12/site-packages/crosshair/core.py:1582
+  stderr:
+  ! Repeated executions are not behaving deterministically.
+  ! Re-run in verbose mode for debugging information.
+=== q5_sig_mismatch  rc=1  wall=0.87s
+$ crosshair diffbehavior cobol_ref.ref_add_trunc cobol_ref.ref_round_drop2
+  | Given: (v=-50),
+  |     cobol_ref.ref_add_trunc : raises TypeError("ref_add_trunc() missing 1 required positional argument: 'b'")
+  |   cobol_ref.ref_round_drop2 : returns -1
+  | Given: (a=0, b=-1),
+  |     cobol_ref.ref_add_trunc : returns -1
+  |   cobol_ref.ref_round_drop2 : raises TypeError('ref_round_drop2() takes 1 positional argument but 2 were given')
+  | Given: (v=50),
+  |     cobol_ref.ref_add_trunc : raises TypeError("ref_add_trunc() missing 1 required positional argument: 'b'")
+  |   cobol_ref.ref_round_drop2 : returns 1
+  | Given: (a=0, b=0),
+  |     cobol_ref.ref_add_trunc : returns 0
+  |   cobol_ref.ref_round_drop2 : raises TypeError('ref_round_drop2() takes 1 positional argument but 2 were given')
+=== q6_ic_add_ok  rc=0  wall=0.99s
+$ crosshair check --analysis_kind=icontract contracts_toys.add_ok
+=== q6_ic_round_ok  rc=1  wall=0.93s
+$ crosshair check --analysis_kind=icontract contracts_toys.round_ok
+  | /w/contracts_toys.py:36: error: false when calling round_ok(-999999950) (which returns -10000000)
+=== q6_ic_add_bug  rc=1  wall=0.95s
+$ crosshair check --analysis_kind=icontract contracts_toys.add_bug_notrunc
+  | /w/contracts_toys.py:48: error: false when calling add_bug_notrunc(-1, -9999999) (which returns -10000000)
+  | /w/contracts_toys.py:49: error: false when calling add_bug_notrunc(-9999999, -1) (which returns -10000000)
+=== q6_ic_round_banker  rc=1  wall=0.99s
+$ crosshair check --analysis_kind=icontract contracts_toys.round_bug_banker
+  | /w/contracts_toys.py:55: error: false when calling round_bug_banker(-999999950) (which returns -10000000)
+  | /w/contracts_toys.py:56: error: false when calling round_bug_banker(-450) (which returns -4)
+=== q6_ic_round_raises  rc=1  wall=1.04s
+$ crosshair check --analysis_kind=icontract contracts_toys.round_bug_raises
+  | /w/contracts_toys.py:65: error: ValueError: boom when calling round_bug_raises(777)
+=== q6_ic_module_all  rc=1  wall=2.49s
+$ crosshair check --analysis_kind=icontract --report_all contracts_toys
+  | /w/contracts_toys.py:24: info: Confirmed over all paths.
+  | /w/contracts_toys.py:25: info: Confirmed over all paths.
+  | /w/contracts_toys.py:36: error: false when calling round_ok(-999999950) (which returns -10000000)
+  | /w/contracts_toys.py:37: info: Confirmed over all paths.
+  | /w/contracts_toys.py:48: error: false when calling add_bug_notrunc(-1, -9999999) (which returns -10000000)
+  | /w/contracts_toys.py:49: error: false when calling add_bug_notrunc(-9999999, -1) (which returns -10000000)
+  | /w/contracts_toys.py:55: error: false when calling round_bug_banker(-999999950) (which returns -10000000)
+  | /w/contracts_toys.py:56: error: false when calling round_bug_banker(-450) (which returns -4)
+  | /w/contracts_toys.py:65: error: ValueError: boom when calling round_bug_raises(777)
+=== q6_ic_add_bug_verb  rc=1  wall=1.56s
+$ crosshair check --analysis_kind=icontract --report_verbose contracts_toys.add_bug_notrunc
+  | 
+  | [91mI was able to make your postcondition return False.[0m
+  | /w/contracts_toys.py:48:
+  | |# ---------------------------------------------------------------- FAIL cases
+  | |@icontract.require(lambda a: -P7 < a < P7)
+  | |@icontract.require(lambda b: -P7 < b < P7)
+  | >[93m@icontract.ensure(lambda result: -P7 < result < P7)
+  | [0m|@icontract.ensure(lambda a, b, result: result == _exact_add_trunc(a, b))
+  | |def add_bug_notrunc(a: int, b: int) -> int:
+  | |    return a + b
+  | 
+  | false
+  | when calling add_bug_notrunc(-1, -9999999) (which returns -10000000)
+  | 
+  | 
+  | [91mI was able to make your postcondition return False.[0m
+  | /w/contracts_toys.py:49:
+  | |@icontract.require(lambda a: -P7 < a < P7)
+  | |@icontract.require(lambda b: -P7 < b < P7)
+  | |@icontract.ensure(lambda result: -P7 < result < P7)
+=== q6_as_ok  rc=0  wall=1.46s
+$ crosshair check --analysis_kind=asserts asserts_toys.add_ok
+=== q6_as_bug  rc=1  wall=1.15s
+$ crosshair check --analysis_kind=asserts asserts_toys.add_bug
+  | /w/asserts_toys.py:19: error: AssertionError: result out of PIC S9(7) when calling add_bug(-9999999, -1)
+=== q7_eq_round_decimal  rc=0  wall=27.77s
+$ crosshair check --analysis_kind=asserts eq_harness.eq_round_decimal
+=== q7_eq_round_decimal_p30  rc=0  wall=34.26s
+$ crosshair check --analysis_kind=asserts --per_condition_timeout 30 eq_harness.eq_round_decimal
+=== q7_eq_round_banker  rc=1  wall=5.94s
+$ crosshair check --analysis_kind=asserts eq_harness.eq_round_banker
+  | /w/eq_harness.py:24: error: AssertionError:  when calling eq_round_banker(-50)
+=== q7_eq_round_floor  rc=1  wall=0.56s
+$ crosshair check --analysis_kind=asserts eq_harness.eq_round_floor
+  | /w/eq_harness.py:29: error: AssertionError:  when calling eq_round_floor(-150)
+=== q7_eq_div_msg  rc=0  wall=0.72s
+$ crosshair check --analysis_kind=asserts eq_harness.eq_div_msg
+=== q7_eq_div_type  rc=1  wall=0.68s
+$ crosshair check --analysis_kind=asserts eq_harness.eq_div_type
+  | /w/eq_harness.py:41: error: AssertionError:  when calling eq_div_type(0, 0)
+=== q7_eq_module_all  rc=1  wall=43.68s
+$ crosshair check --analysis_kind=asserts --report_all eq_harness
+  | /w/eq_harness.py:17: info: Not confirmed.
+  | /w/eq_harness.py:24: error: AssertionError:  when calling eq_round_banker(-50)
+  | /w/eq_harness.py:29: error: AssertionError:  when calling eq_round_floor(-150)
+  | /w/eq_harness.py:32: info: Confirmed over all paths.
+  | /w/eq_harness.py:41: error: AssertionError:  when calling eq_div_type(0, 0)

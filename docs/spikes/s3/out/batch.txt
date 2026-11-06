@@ -1,0 +1,55 @@
+src/Decimal.java:37: verify: The prover cannot establish an assertion (Postcondition: src/Decimal.java:31:) in method addTrunc5Buggy
+        return s;
+        ^
+src/Decimal.java:31: verify: Associated declaration: src/Decimal.java:37:
+    //@ ensures -100_000 < \result && \result < 100_000;
+        ^
+src/Decimal.java:47: verify: The prover cannot establish an assertion (Postcondition: src/Decimal.java:43:) in method addTruncBuggy
+        return r;
+        ^
+src/Decimal.java:43: verify: Associated declaration: src/Decimal.java:47:
+    //@ ensures \result == (a + b) % mod;
+        ^
+src/Account.java:29: verify: The prover cannot establish an assertion (Assignable: src/Account.java:23:) in method depositBad: audit
+        audit = amt;
+              ^
+src/Account.java:23: verify: Associated declaration: src/Account.java:29:
+    //@ assignable balance, count;
+        ^
+src/Status.java:34: verify: The prover cannot establish an assertion (Postcondition: src/Status.java:33:) in method setStatusA
+    public void setStatusA(char in) {
+                ^
+src/Status.java:33: verify: Associated declaration: src/Status.java:34:
+    //@ ensures okBodyOnly(in) ==> status == in;
+        ^
+src/Status.java:65: verify: The prover cannot establish an assertion (Postcondition: src/Status.java:63:) in method setStatusBuggy
+    public void setStatusBuggy(char in) {
+                ^
+src/Status.java:63: verify: Associated declaration: src/Status.java:65:
+    //@ ensures statusOk88(in) ==> status == in;
+        ^
+src/Loops.java:35: verify: The prover cannot establish an assertion (LoopInvariant) in method sumToBadInv
+        //@ maintaining s == (long) i * i / 2;
+            ^
+src/Loops.java:40: verify: The prover cannot establish an assertion (Postcondition: src/Loops.java:31:) in method sumToBadInv
+        return s;
+        ^
+src/Loops.java:31: verify: Associated declaration: src/Loops.java:40:
+    //@ ensures \result == (long) n * (n + 1) / 2;
+        ^
+src/Loops.java:50: verify: The prover cannot establish an assertion (LoopDecreases) in method sumToBadVariant
+        //@ decreases i;
+            ^
+src/Loops.java:26: verify: The prover cannot establish an assertion (Postcondition: src/Loops.java:20:) in method sumToNoInv
+        return s;
+        ^
+src/Loops.java:20: verify: Associated declaration: src/Loops.java:26:
+    //@ ensures \result == (long) n * (n + 1) / 2;
+        ^
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: overflow in long sum
+            s += i;
+              ^
+src/Loops.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method sumToNoInv: underflow in long sum
+            s += i;
+              ^
+18 verification failures

@@ -1,0 +1,12 @@
+Given: (v=-50),
+    cobol_ref.ref_add_trunc : raises TypeError("ref_add_trunc() missing 1 required positional argument: 'b'")
+  cobol_ref.ref_round_drop2 : returns -1
+Given: (a=0, b=-1),
+    cobol_ref.ref_add_trunc : returns -1
+  cobol_ref.ref_round_drop2 : raises TypeError('ref_round_drop2() takes 1 positional argument but 2 were given')
+Given: (v=50),
+    cobol_ref.ref_add_trunc : raises TypeError("ref_add_trunc() missing 1 required positional argument: 'b'")
+  cobol_ref.ref_round_drop2 : returns 1
+Given: (a=0, b=0),
+    cobol_ref.ref_add_trunc : returns 0
+  cobol_ref.ref_round_drop2 : raises TypeError('ref_round_drop2() takes 1 positional argument but 2 were given')
