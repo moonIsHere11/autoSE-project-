@@ -195,9 +195,12 @@ public class Payroll {
 
     void splitHours() {
         wsRegHours = 400;
-        wsOtHours = (wsHours - 400) % 10000;
+        // WS-OT-HOURS / WS-DT-HOURS are unsigned 9(3)V9: storing drops the sign and the high-order digits
+        long ot = (wsHours - 400) % 10000;
+        wsOtHours = ot < 0 ? -ot : ot;
         if (wsOtHours > 200) {
-            wsDtHours = (wsOtHours - 200) % 10000;
+            long dt = (wsOtHours - 200) % 10000;
+            wsDtHours = dt < 0 ? -dt : dt;
             wsOtHours = 200;
         }
     }

@@ -249,6 +249,11 @@ def _slots(pc: ProgramCtx, ref: EmittedRef) -> list[Slot]:
     assert res is not None and res.type_sym is not None
     cand_fields = {f.name: f.type_text for f in res.type_sym.fields}
     slots: list[Slot] = []
+    # A manifest may map several COBOL items onto one Java field (e.g. an output-record copy PR-HOURS and
+    # WS-HOURS both -> wsHours). The harness loads one independent value per slot, so a Java field may
+    # back only one slot: two *unit* fields sharing one is not checkable; a frame-only alias of a unit
+    # field is skipped (its value is the unit field's value, already loaded and compared).
+    claimed: dict[str, str] = {}  # Java field -> COBOL item that owns it
     for cobol, rf in sorted(ref.fields.items()):
         mapping = res.fields.get(cobol)
         if mapping is None:
@@ -259,11 +264,18 @@ def _slots(pc: ProgramCtx, ref: EmittedRef) -> list[Slot]:
             raise HarnessUnsupported(f"COBOL field {cobol} used by the unit has no target counterpart")
         if not mapping.get("target_type"):
             mapping = {**mapping, "target_type": cand_fields.get(mapping["target"])}
+        target = str(mapping["target"])
+        if target in claimed:
+            raise HarnessUnsupported(f"COBOL fields {claimed[target]} and {cobol}, both used by the unit, map to "
+                                     f"the same target field `{target}`")
+        claimed[target] = cobol
         slots.append(slot_for(cobol, rf, {}, mapping))
     # frame: every other mapped elementary item must stay unchanged
     for cobol, mapping in sorted(res.fields.items()):
         if cobol in ref.fields or not mapping.get("target"):
             continue
+        if str(mapping["target"]) in claimed:
+            continue  # alias of a field already in the harness (see above)
         item = pc.program.resolve(cobol)
         if item is None:
             continue
@@ -277,6 +289,7 @@ def _slots(pc: ProgramCtx, ref: EmittedRef) -> list[Slot]:
             slots.append(slot_for(cobol, None, info, mapping))
         except HarnessUnsupported:
             continue
+        claimed[str(mapping["target"])] = cobol
     return slots
 
 
