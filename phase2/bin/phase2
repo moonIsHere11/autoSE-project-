@@ -1,0 +1,5 @@
+#!/bin/sh
+# Runs the adapter under the cobol-verifier venv (pydantic 2, tree-sitter) with the repo root on the path.
+HERE=$(cd "$(dirname "$0")/.." && pwd)
+PY=${VERIFIER_PY:-$HOME/.venvs/cobol-verifier/bin/python}
+PYTHONPATH="$HERE:$HERE/..${PYTHONPATH:+:$PYTHONPATH}" exec "$PY" -m phase2_adapter.cli "$@"
