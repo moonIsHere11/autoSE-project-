@@ -72,9 +72,9 @@ def render_summary(report: Report) -> str:
         )
     na_reasons = sorted({f"{k}: {t.reason}" for p in report.programs for k, t in p.tiers.items()
                       if t.status in (Status.NOT_APPLICABLE, Status.ERROR, Status.TIMEOUT) and t.reason})
-    if reasons:
+    if na_reasons:
         out.append("\n## Not-applicable / error reasons\n")
-        out.extend(f"- {x}" for x in reasons[:40])
+        out.extend(f"- {x}" for x in na_reasons[:40])
     if s.tier_timings_s:
         out.append("\n## Time per tier (s)\n")
         out.append(" · ".join(f"{k}: {v:.1f}" for k, v in s.tier_timings_s.items()))
