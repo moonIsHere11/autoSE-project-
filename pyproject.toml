@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cobol-verifier"
+version = "0.1.0"
+description = "Deterministic verification pipeline for COBOL -> Java/Python/Go migrations"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic==2.14.1",
+  "tree-sitter==0.26.0",
+  "tree-sitter-java==0.23.5",
+  "tree-sitter-python==0.25.0",
+  "tree-sitter-go==0.25.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.1.1",
+  "hypothesis==6.170.4",
+  "ruff==0.17.1",
+  "mypy==2.4.0",
+]
+
+[project.scripts]
+verify = "verifier.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["verifier*"]
+
+[tool.setuptools.package-data]
+verifier = ["sandbox/batch_runner.py", "py.typed"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["corpus", "tests/semantics/programs", "runtimes"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501", "RUF001", "RUF002", "RUF003"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["verifier"]
+exclude = ["verifier/sandbox/batch_runner.py"]
+
+[[tool.mypy.overrides]]
+module = ["tree_sitter_java", "tree_sitter_python", "tree_sitter_go"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "docker: needs the toolchain image (make image)",
+  "slow: long-running end-to-end test",
+]

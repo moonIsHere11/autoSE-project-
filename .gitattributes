@@ -1,0 +1,12 @@
+# Source text is normalised to LF.
+* text=auto eol=lf
+
+# COBOL test data and recorded outputs must stay byte-exact: never convert.
+*.dat            binary
+*.bin            binary
+**/in/**         binary
+**/expected/**   binary
+**/golden/**     binary
+stdin.txt        binary
+*.pdf            binary
+*.jar            binary
