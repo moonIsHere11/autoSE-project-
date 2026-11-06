@@ -404,6 +404,16 @@ def _lit_scaled(text: str, scale: int) -> int:
     return -v if neg else v
 
 
+def _frame_locs(fm: FieldMap) -> list[str]:
+    """JML frame locations for a written field, decided by the candidate's Java type (not the PIC):
+    an array field (`char[]`, `long[]`, `String[]`, ...) may have its elements and its reference
+    replaced; any other field (`long`, `String`, ...) is a single location."""
+    base = f"this.{fm.jfield}"
+    if fm.jtype.endswith("[]"):
+        return [base, f"{base}[*]"]
+    return [base]
+
+
 # ---------------------------------------------------------------------------------------------
 def build_contract(irp: ir.IrProgram, closure: list[str], cand_fields: dict[str, str],
                    mapping: dict[str, dict[str, object]], unmapped_cand_fields: list[str]) -> Contract:
@@ -430,8 +440,8 @@ def build_contract(irp: ir.IrProgram, closure: list[str], cand_fields: dict[str,
         fmap[name] = FieldMap(name, rf, jf, jt)
     requires = [_range(fm) for fm in fmap.values() if fm.rf.kind == "num" and not fm.rf.occurs]
     ensures = [_range(fm) for n, fm in fmap.items() if n in writes and fm.rf.kind == "num" and not fm.rf.occurs]
-    assignable = sorted({f"this.{fmap[n].jfield}" + ("[*]" if fmap[n].rf.occurs or fmap[n].rf.kind == "alnum" else "")
-                         for n in writes if n in fmap} | {f"this.{f}" for f in unmapped_cand_fields})
+    assignable = sorted({loc for n in writes if n in fmap for loc in _frame_locs(fmap[n])}
+                        | {f"this.{f}" for f in unmapped_cand_fields})
     functional = False
     notes: list[str] = []
     try:
