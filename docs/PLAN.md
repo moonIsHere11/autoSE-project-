@@ -5,36 +5,36 @@ Mid-eval cut line: M0–M4; M2 is the minimum demo; if M4 slips, T2a is the hone
 Each milestone ends with tests green, `make selftest`, RESULTS.md and a PROGRESS.md entry.
 
 ## M0 — environment and spikes
-- [ ] `docker/Dockerfile` pinned: GnuCOBOL 3.2, JDK 17, CBMC/JBMC 6.8.0, OpenJML 21.0.28, Python, z3, CrossHair, Go 1.22.12, libfaketime, tree-sitter grammars
-- [ ] host dev env: venv, ruff, mypy, pytest, `Makefile`
-- [ ] S1 cobc build / run / `-E` / trace (+ exact trace env vars) → `docs/spikes/S1.md`
-- [ ] S2 JBMC on Java-17 harness with `CProver.nondet*` + long-backed decimal → `S2.md`
-- [ ] S3 OpenJML ESC on toy example → `S3.md`
-- [ ] S4 `crosshair diffbehavior` toy → `S4.md`
-- [ ] S5 ProLeap vs hand-written subset parser → `S5.md`
-- [ ] S6 ACCEPT parsing rules, DISPLAY formats, layout probe → `S6.md`
+- [x] `docker/Dockerfile` pinned: GnuCOBOL 3.2, JDK 17, CBMC/JBMC 6.8.0, OpenJML 21.0.28, Python, z3, CrossHair, Go 1.22.12, libfaketime, tree-sitter grammars
+- [x] host dev env: venv, ruff, mypy, pytest, `Makefile`
+- [x] S1 cobc build / run / `-E` / trace (+ exact trace env vars) → `docs/spikes/S1.md`
+- [x] S2 JBMC on Java-17 harness with `CProver.nondet*` + long-backed decimal → `S2.md`
+- [x] S3 OpenJML ESC on toy example → `S3.md`
+- [x] S4 `crosshair diffbehavior` toy → `S4.md`
+- [x] S5 ProLeap vs hand-written subset parser → `S5.md`
+- [x] S6 ACCEPT parsing rules, DISPLAY formats, layout probe → `S6.md`
 
 ## M1 — Java T0, reports, corpus
-- [ ] pydantic report schema, `summary.md` renderer, feedback skeleton, scoring/levels/acceptance
-- [ ] manifest model + conventions resolver
-- [ ] sandbox runner (docker, limits, batch runner)
-- [ ] COBOL front end part 1: preprocess, PIC/data division with probe validation, program structure
-- [ ] T0a Java build with diagnostics mapped to file:line + excerpts
-- [ ] T0b tree-sitter checks: data mapping, forbidden representations, completeness, forbidden APIs, integrity, anti-overfitting
+- [x] pydantic report schema, `summary.md` renderer, feedback skeleton, scoring/levels/acceptance
+- [x] manifest model + conventions resolver
+- [x] sandbox runner (docker, limits, batch runner)
+- [x] COBOL front end part 1: preprocess, PIC/data division with probe validation, program structure
+- [x] T0a Java build with diagnostics mapped to file:line + excerpts
+- [x] T0b tree-sitter checks: data mapping, forbidden representations, completeness, forbidden APIs, integrity, anti-overfitting
 - [ ] seed corpus (10–15 programs) with correct Java translations
-- [ ] CLI + API + held-out guard; e2e test T0 on corpus
+- [x] CLI + API + held-out guard; e2e test T0 on corpus
 
 ## M2 — Java T1 (mid-eval minimum)
-- [ ] cobc build cache, `-ftraceall` variant, coverage parser
-- [ ] input channels, strategies, encoders, bundle writer, expected-output capture
-- [ ] differential runner, byte comparison, exclusions (runtime errors, flaky/time)
-- [ ] decoding to field values, signatures, shrinking, classifier, localisation
-- [ ] coverage-preserving greedy minimisation
-- [ ] mutation operators + `make selftest` (0 false positives, catch rate)
+- [x] cobc build cache, `-ftraceall` variant, coverage parser
+- [x] input channels, strategies, encoders, bundle writer, expected-output capture
+- [x] differential runner, byte comparison, exclusions (runtime errors, flaky/time)
+- [x] decoding to field values, signatures, shrinking, classifier, localisation
+- [x] coverage-preserving greedy minimisation
+- [x] mutation operators (verifier/mutation, Java/Python/Go) + `make selftest` (tools/selftest.py)
 
 ## M3 — cheap breadth
 - [ ] Python and Go packs: T0 + T1
-- [ ] T2a exhaustive small-domain proofs (all languages)
+- [x] T2a exhaustive small-domain proofs (all languages)
 
 ## M4 — Java T2b
 - [ ] runtime library `cobolrt` (Java, Python, Go) + RUNTIME_API.md + differential property tests vs GnuCOBOL

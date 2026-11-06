@@ -260,12 +260,13 @@ def javap(runner: DockerRunner, work: Path, classes_dir: str, extra_mounts: list
 
 def run_jbmc(runner: DockerRunner, work: Path, classpath: list[str], cls: str, function: str, *,
              unwind: int | None, timeout_s: float, tag: str, extra_mounts: list[Mount] | None = None,
-             input_prefix: str = "in_") -> JbmcOutcome:
+             input_prefix: str = "in_", extra_flags: list[str] | None = None) -> JbmcOutcome:
     """Run one JBMC entry point; the JSON output is kept as `<work>/<tag>.json`."""
     cp = ":".join([*classpath, CPROVER_JAR])
     flags = ["--sat-solver", "cadical", "--java-assume-inputs-non-null", "--json-ui", "--trace"]
     if unwind is not None:
         flags = ["--unwind", str(unwind), "--unwinding-assertions", *flags]
+    flags = [*(extra_flags or []), *flags]
     jbmc_cmd = ["jbmc", cls, "--function", function, "-cp", cp, *flags]
     t = max(5, int(timeout_s))
     script = (f"timeout -k 10 {t} {' '.join(shlex.quote(a) for a in jbmc_cmd)} > /w/{tag}.json 2> /w/{tag}.err; "

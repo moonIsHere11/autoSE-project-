@@ -444,6 +444,8 @@ class Pipeline:
                 for key in ("T0", "T1", "T2", "T3"):
                     t = pc.unit_tiers.get(para, {}).get(key) or pc.tiers[key]
                     unit.tiers[key] = t
+                for key, t in pc.unit_tiers.get(para, {}).items():  # unit-only tiers such as T1u
+                    unit.tiers.setdefault(key, t)
                 t1 = unit.tiers.get("T1")
                 if t1 is not None and t1.coverage is not None:
                     t1 = t1.model_copy(update={"unit_covered": para in t1.coverage.covered_paragraphs})

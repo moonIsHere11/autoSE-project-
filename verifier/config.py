@@ -87,8 +87,14 @@ class T2Config(_Strict):
     unwind_fast: int = 4
     unwind_full: int = 16
     checker_timeout_s: float = 300.0
+    checker_timeout_fast_s: float = 60.0
     mutants: int = 5
+    mutants_fast: int = 3
     min_kill_rate: float = 0.6
+    t1u_fast: int = 200
+    t1u_full: int = 1000
+    fast_budget_s: float = 120.0  # total T2b time per program in fast mode; later units are SKIPPED
+    full_budget_s: float = 3600.0
 
 
 class T3Config(_Strict):
