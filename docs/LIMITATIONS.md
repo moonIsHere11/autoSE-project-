@@ -67,6 +67,12 @@ None of it is ever reported as PASS. Status as of 6 Nov 2026.
   NOT_APPLICABLE anyway. If the crash comes from a unit method's own body, T3 still reports ERROR.
 * An ESC warning without a concrete counterexample from T1u is NOT_APPLICABLE ("not confirmed"),
   never FAIL.
+* **Known open issue:** `INVENTORY::VALIDATE-RECORD` (correct translation) gets T3 **ERROR**
+  "contradictory preconditions (vacuous contract)". The method calls uncontracted helpers
+  (`packedIsNumeric`, `unpack`, ...), so T3 could at best be NOT_APPLICABLE. The classifier checks
+  infeasibility first. The cause of the infeasibility (our generated contract vs OpenJML's handling of
+  the elided helper bodies) is not yet diagnosed. It is never reported as PASS, but it makes one
+  correct unit "not accepted".
 
 ## Runtime library
 
