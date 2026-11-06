@@ -119,6 +119,9 @@ class VerifierConfig(_Strict):
         )
     )
     allow_build_network: bool = False
+    # False only for the self-test: run every selected tier even after an earlier FAIL (a build
+    # failure still gates everything), so the planted-bug catch rate can be measured per tier.
+    gating: bool = True
 
     def all_heldout_dirs(self) -> list[Path]:
         dirs = list(self.heldout_dirs)

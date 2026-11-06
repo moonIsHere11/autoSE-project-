@@ -124,6 +124,31 @@ def _stub(reason: str) -> TierResult:
     return TierResult(status=Status.NOT_APPLICABLE, reason=reason, stub=True)
 
 
+_T2_ORDER = (Status.FAIL, Status.PASS, Status.ERROR, Status.TIMEOUT, Status.NOT_APPLICABLE, Status.SKIPPED)
+
+
+def combine_t2(t2a: TierResult, t2b: TierResult | None) -> TierResult:
+    """One T2 verdict per unit from the program-level T2a and the unit-level T2b.
+
+    FAIL wins (a confirmed counterexample); otherwise any PASS is a proof (T2a: over the declared
+    input domain of the whole program; T2b: bounded/complete model checking of the unit); then
+    ERROR, TIMEOUT; NOT_APPLICABLE only when neither sub-tier applies.
+    """
+    subs = {"T2a": t2a} if t2b is None else {"T2a": t2a, "T2b": t2b}
+    present = list(subs.values())
+    for st in _T2_ORDER:
+        hits = [t for t in present if t.status == st]
+        if not hits:
+            continue
+        primary = hits[0]
+        if st in (Status.NOT_APPLICABLE, Status.SKIPPED):
+            reason = "; ".join(f"{k}: {v.reason}" for k, v in subs.items())
+            return TierResult(status=st, reason=reason, stub=all(t.stub for t in present), sub=subs)
+        methods = "+".join(t.method for t in hits if t.method)
+        return primary.model_copy(update={"sub": subs, "method": methods or primary.method})
+    raise AssertionError("unreachable")
+
+
 class Pipeline:
     def __init__(self, req: VerifyRequest, config: VerifierConfig) -> None:
         self.req = req
@@ -309,9 +334,18 @@ class Pipeline:
             return TierResult.skipped(f"gated by T0a build {t0.sub['T0a'].status.value}")
         return None
 
+    def _build_gate(self, pc: ProgramCtx) -> TierResult | None:
+        t0 = pc.tiers.get("T0")
+        t0a = t0.sub.get("T0a") if t0 is not None else None
+        if t0a is not None and t0a.status != Status.PASS:
+            return TierResult.skipped(f"gated by T0a build {t0a.status.value}")
+        return None
+
     def _gate_t2_t3(self, pc: ProgramCtx) -> TierResult | None:
         if pc.out_of_scope:
             return TierResult.not_applicable("; ".join(pc.out_of_scope))
+        if not self.cfg.gating:
+            return self._build_gate(pc)
         for k in ("T0", "T1"):
             t = pc.tiers.get(k)
             if t is not None and t.status in (Status.FAIL, Status.ERROR, Status.TIMEOUT):
@@ -321,20 +355,30 @@ class Pipeline:
         return None
 
     def tier2(self) -> None:
+        """T2a (program-level exhaustive proof) and T2b (per-unit bounded symbolic), combined per unit."""
         start = time.monotonic()
+        run_t2a = optional("verifier.tiers.t2_exhaustive", "run_t2a")
+        run_t2b = optional("verifier.tiers.t2_symbolic", "run_t2b")
         for pc in self.active():
             gate = self._gate_t2_t3(pc)
             if gate is not None:
                 pc.tiers["T2"] = gate
                 continue
-            run_t2a = optional("verifier.tiers.t2_exhaustive", "run_t2a")
-            if run_t2a is None:
-                pc.tiers["T2"] = TierResult(status=Status.NOT_APPLICABLE, stub=True,
-                                            reason="T2 not implemented yet (milestones M3/M4)",
-                                            sub={"T2a": _stub("T2a not implemented yet (M3)"),
-                                                 "T2b": _stub("T2b not implemented yet (M4)")})
-                continue
-            pc.tiers["T2"] = run_t2a(self, pc)
+            t0 = time.monotonic()
+            t2a = run_t2a(self, pc) if run_t2a is not None else _stub("T2a not implemented yet (M3)")
+            self.timings["T2a"] = self.timings.get("T2a", 0.0) + time.monotonic() - t0
+            t0 = time.monotonic()
+            t2b_units: dict[str, TierResult]
+            if t2a.status == Status.FAIL and self.cfg.gating:
+                t2b_units = {p: TierResult.skipped("gated by T2a FAIL") for p in pc.selected_paragraphs}
+            elif run_t2b is not None:
+                t2b_units = run_t2b(self, pc)
+            else:
+                t2b_units = {p: _stub("T2b not implemented yet (M4)") for p in pc.selected_paragraphs}
+            self.timings["T2b"] = self.timings.get("T2b", 0.0) + time.monotonic() - t0
+            pc.tiers["T2"] = combine_t2(t2a, None)
+            for para in pc.selected_paragraphs:
+                pc.unit_tiers.setdefault(para, {})["T2"] = combine_t2(t2a, t2b_units.get(para))
         self.timings["T2"] = time.monotonic() - start
 
     def tier3(self) -> None:
@@ -344,6 +388,8 @@ class Pipeline:
             t1 = pc.tiers.get("T1")
             if pc.out_of_scope:
                 gate = TierResult.not_applicable("; ".join(pc.out_of_scope))
+            elif not self.cfg.gating:
+                gate = self._build_gate(pc)
             elif t1 is not None and t1.status == Status.FAIL:
                 gate = TierResult.skipped("gated by T1 FAIL")
             pc.tiers["T3"] = gate or _stub("T3 contracts not implemented yet (milestone M5)")

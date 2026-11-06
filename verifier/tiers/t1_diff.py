@@ -237,7 +237,7 @@ def _write_bundles(pl: Pipeline, pid: str, outcomes: dict[str, CaseOutcome]) -> 
 
 # ---------------------------------------------------------------------------------------------
 def _diagnose(pl: Pipeline, pc: ProgramCtx, side: SideRunner, gen: Generator,
-              failed: dict[str, CaseOutcome]) -> tuple[list[FailureSignature], list[Counterexample]]:
+              failed: dict[str, CaseOutcome], tier: str = "T1") -> tuple[list[FailureSignature], list[Counterexample]]:
     groups: dict[str, list[tuple[str, Mismatch]]] = defaultdict(list)
     for cid, o in failed.items():
         for m in o.mismatches:
@@ -252,7 +252,7 @@ def _diagnose(pl: Pipeline, pc: ProgramCtx, side: SideRunner, gen: Generator,
     for k, (sig, members) in enumerate(top):
         oc, steps = shrunk.get(sig, (failed[members[0][0]], 0))
         m = next((mm for mm in oc.mismatches if mm.signature == sig), members[0][1])
-        cx = _counterexample(pl, pc, oc, m, steps, k)
+        cx = _counterexample(pl, pc, oc, m, steps, k, tier)
         cxs.append(cx)
         sigs[k].counterexample_id = cx.id
     return sigs, cxs
@@ -314,7 +314,8 @@ def _input_fields(model: Model | None, pc: ProgramCtx) -> list[FieldValue]:
     return out
 
 
-def _counterexample(pl: Pipeline, pc: ProgramCtx, oc: CaseOutcome, m: Mismatch, steps: int, k: int) -> Counterexample:
+def _counterexample(pl: Pipeline, pc: ProgramCtx, oc: CaseOutcome, m: Mismatch, steps: int, k: int,
+                    tier: str = "T1") -> Counterexample:
     prog = pc.program
     cid = oc.spec.case_id()
     events = parse_trace(oc.expected.trace) if oc.expected and oc.expected.trace else []
@@ -336,7 +337,7 @@ def _counterexample(pl: Pipeline, pc: ProgramCtx, oc: CaseOutcome, m: Mismatch, 
     case_dir = pl.req.out / "cases" / prog.program_id / cid
     exp, act = oc.expected, oc.actual
     return Counterexample(
-        id=f"cx_{prog.program_id}_{k}_{cid[5:13]}", source_tier="T1", signature=m.signature, case_id=cid,
+        id=f"cx_{prog.program_id}_{tier}_{k}_{cid[5:13]}", source_tier=tier, signature=m.signature, case_id=cid,
         case_dir=str(case_dir.relative_to(pl.req.out)),
         inputs={"stdin_lines": [e["text"] for e in (oc.spec.model or {}).get("stdin", [])]
                 if oc.spec.model else oc.spec.stdin.decode("latin-1").splitlines()[:20],
