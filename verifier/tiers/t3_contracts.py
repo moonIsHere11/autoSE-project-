@@ -118,6 +118,12 @@ def run_t3(pl: Pipeline, pc: ProgramCtx) -> dict[str, TierResult]:
         for ln, text in sorted(inserts, key=lambda x: -x[0]):
             lines.insert(ln - 1, text)
         path.write_text("\n".join(lines), "utf-8")
+    # OpenJML 21.0.28 crashes (`AssertionError: isSameType DEFERRED`) while attributing ordinary Java such
+    # as a reference-typed `c ? a : b` passed as a method argument. ESC is modular — a contracted method is
+    # verified against its callees' specs, never their bodies, and a unit calling an uncontracted method is
+    # NOT_APPLICABLE anyway (`_calls_unspecified`) — so in the verification *copy* the bodies of every
+    # method that is not under check are replaced by a throw. Verdicts for the units are unchanged.
+    elided = sum(elide_bodies(src / s, set(unit_methods)) for s in JavaPack().sources(src))
     loops = {para: _has_unannotated_loop(pl, loc, hints.get(str(res.units[para]), []))
              for para, (_c, loc, _cl) in plans.items()}
     calls = {para: _calls_unspecified(pl, loc, set(unit_methods)) for para, (_c, loc, _cl) in plans.items()}
@@ -143,6 +149,7 @@ def run_t3(pl: Pipeline, pc: ProgramCtx) -> dict[str, TierResult]:
                       tools=[ToolInfo(name="openjml", version=str(pl.toolchain.get("openjml", "21.0.28")))],
                       commands=[esc.command])
         details = {"contract": c.jml(""), "notes": c.notes, "esc_seconds": v.seconds,
+                   "elided_non_unit_method_bodies": elided,
                    "warnings": [f"{w.key} at {w.file}:{w.line} {w.detail}" for w in v.warnings][:10]}
         if v.status == Status.PASS:
             out[para] = TierResult(status=Status.PASS, method=METHOD, scope=scope, duration_s=dur / len(plans),
@@ -161,6 +168,35 @@ def run_t3(pl: Pipeline, pc: ProgramCtx) -> dict[str, TierResult]:
             # ERROR / TIMEOUT / NOT_APPLICABLE: no positive result, so no scope is claimed
             out[para] = TierResult(status=v.status, method=METHOD, reason=v.reason, details=details)
     return out
+
+
+ELIDED_BODY = '{ throw new UnsupportedOperationException("body elided for modular ESC (T3)"); }'
+
+
+def elide_bodies(path: Path, keep: set[str]) -> int:
+    """Replace the body of every method whose name is not in `keep` by a throw (compiles for any return
+    type). Constructors, initialisers and field declarations are untouched. Returns the count."""
+    data = path.read_bytes()
+    tree = ts.parser_for("java").parse(data)
+    spans = []
+    for n in ts.walk(tree.root_node):
+        if n.type != "method_declaration":
+            continue
+        body = n.child_by_field_name("body")
+        if body is None or ts.text(n.child_by_field_name("name")) in keep:
+            continue
+        spans.append((body.start_byte, body.end_byte))
+    # outermost spans only (a method inside an anonymous class inside an elided body disappears with it)
+    spans.sort()
+    outer: list[tuple[int, int]] = []
+    for s, e in spans:
+        if outer and s < outer[-1][1]:
+            continue
+        outer.append((s, e))
+    for s, e in reversed(outer):
+        data = data[:s] + ELIDED_BODY.encode() + data[e:]
+    path.write_bytes(data)
+    return len(outer)
 
 
 def _what(c: Contract, closure: list[str]) -> str:
