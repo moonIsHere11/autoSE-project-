@@ -131,3 +131,45 @@ the `assert false` reachability run to FAIL; (6) every counterexample is replaye
 on both sides before it is reported as FAIL, otherwise `ERROR`.
 *Consequence:* multiply/divide-heavy units will mostly end at TIMEOUT for T2b; T2a (exhaustive) and
 T3 (contracts) are their routes to level 2/3. This is reported honestly in RESULTS.md.
+
+### D16 — Scope narrowed to COBOL → Java (6 Nov)
+*Context:* team decision before the deadline.
+*Decision:* only the Java pipeline is finished and measured. Python/Go packs, runtimes, tests and
+corpus translations stay in the repo untouched but are not re-validated; `make selftest` is run with
+`--lang java`. No change to INTERFACE.md or RUNTIME_API.md conventions follows from this.
+
+### D17 — How the T2b validation gate is implemented (spec T2b.4)
+*Context:* the gate was a labelled stub; the spec asks that the IR interpreter and the emitted
+reference both match GnuCOBOL on every T1 case. The reference is per paragraph, while T1 cases are
+whole-program runs.
+*Decision:* (a) per program, the interpreter is re-run in-process on every T1 bundle T1 already
+recorded (`<out>/cases/<PROG>/*/expected`, real GnuCOBOL output) and compared byte for byte with
+`tools.validate_interp.compare_case`; (b) per unit, the emitted reference and the interpreter's
+`run_paragraph` are run on the same 200 random PIC-domain states and must agree on every field. A
+disagreement is ERROR (our model's bug); an impossible check is NOT_APPLICABLE with the reason.
+*Alternatives:* snapshotting the interpreter at paragraph boundaries during T1 runs (closer to the
+letter of the spec, but needs instrumentation not available in time).
+
+### D18 — T3 elides bodies of methods not under check (OpenJML crash)
+*Context:* OpenJML 21.0.28 crashes (`isSameType DEFERRED`) while attributing ordinary candidate Java
+(a reference-typed conditional passed as an argument), turning whole programs into T3 ERROR.
+*Decision:* in the verification copy only, every method that is not a contracted unit gets the body
+`{ throw new UnsupportedOperationException(...); }`. ESC is modular (callees are used through their
+specs) and a unit calling an uncontracted method is already NOT_APPLICABLE, so no unit verdict
+changes. The count is recorded in `details.elided_non_unit_method_bodies`.
+*Alternatives:* report the crash as ERROR (correct but leaves T3 unusable on most programs).
+
+### D19 — Several COBOL items mapped to one Java field
+*Context:* PAYROLL's manifest maps both `WS-HOURS` and the record field `PR-HOURS` to `wsHours`; the
+T2b harness loaded one value per COBOL item, so the frame alias overwrote the unit's input (a false
+FAIL on a correct translation).
+*Decision:* one harness slot per Java field. A frame-only alias of a unit field is skipped; two unit
+fields sharing one Java field make the unit NOT_APPLICABLE.
+
+### D20 — Unit-level tiers check every PIC-domain state
+*Context:* after D19, `PAYROLL::SPLIT-HOURS` still failed T1u: for `WS-HOURS < 40`, COBOL stores
+`WS-HOURS - 40` into an unsigned field (sign dropped) while the Java kept the negative value. The
+program only performs the paragraph when hours > 40, so T1 passes.
+*Decision:* keep the check (spec: T1u/T2b quantify over the PIC domain; "never weaken a check") and
+fix the translation to drop the sign like COBOL. LIMITATIONS.md explains that unit-level tiers are
+stricter than program context.

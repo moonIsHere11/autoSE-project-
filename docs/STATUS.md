@@ -24,7 +24,7 @@ It does **not** translate anything. Real COBOL (GnuCOBOL 3.2) is always the judg
 | 8 | **Runtime library (`cobolrt`)** | A Java helper library that does COBOL math exactly. | ✅ Written and matches real COBOL on 10,000 random cases. ❌ Its own formal proof run is not working yet. |
 | 9 | **COBOL rule tests** | 25 tiny COBOL programs pinning down tricky rules (rounding, truncation, signs, …). | ✅ Done. |
 | 10 | **Reports + feedback for the fixing AI** | `report.json`, `summary.md`, per-paragraph feedback with the failing input. | ✅ Done. |
-| 11 | **Self-test with planted bugs** | Insert known bugs into correct Java and count how many we catch. | ⏳ Running now; numbers go into `RESULTS.md`. |
+| 11 | **Self-test with planted bugs** | Insert known bugs into correct Java and count how many we catch. | ✅ Run. **0 false alarms** on the 14 correct programs. **71% of planted bugs caught** (29/41); the target was 90%. Details in `RESULTS.md`. |
 | 12 | Python and Go | Same checks for other languages. | ⏸️ Paused on purpose (code kept). |
 
 ## What we can guarantee
@@ -50,10 +50,18 @@ It does **not** translate anything. Real COBOL (GnuCOBOL 3.2) is always the judg
   These paragraphs still get T1 testing and, where possible, T2a and T3.
 * T1 is testing, not proof: a bug that shows up only on inputs we never generated could slip through.
 
+## Final numbers (14 programs, 101 paragraphs)
+
+* 0 false alarms. All 14 programs pass T0 and T1. 93 of 101 paragraphs are accepted; the other 8
+  are correct but were not *proven* (memory limit, timeout, one T3 error), and none were wrongly failed.
+* 18 paragraphs reach level 2 or 3 (a real proof).
+* 71% of planted bugs caught. The misses are mostly "used `double` inside a calculation", which may
+  give identical results at these sizes.
+
 ## What is left
 
-1. Finish the final corpus run and the planted-bug self-test, then publish the numbers (`RESULTS.md`).
-2. Investigate 4 empty `*-EXIT` paragraphs in MERGE2 that T2b reports as ERROR. That is the safety
-   check refusing an unconvincing proof, so it is never a wrong PASS.
-3. Get the runtime library's own formal proof working.
-4. Later: Python and Go, and plugging in the teammates' real manifests and test bundles.
+1. Catch `double` used inside calculations (a new T0 rule), and review the 12 bugs that slipped through.
+2. Give JBMC more memory so the 4 empty MERGE2 `*-EXIT` paragraphs can be proven.
+3. Fix the T3 issues: 3 timeouts in PAYROLL, 1 error in INVENTORY.
+4. Get the runtime library's own formal proof working.
+5. Later: Python and Go, and plugging in the teammates' real manifests and test bundles.

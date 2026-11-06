@@ -1,6 +1,6 @@
 # Plan (milestone checklist)
 
-Mid-evaluation date: **TBD** (placeholder `<MIDEVAL_DATE>` was not filled in the spec).
+Status 6 Nov 2026: scope narrowed to **COBOL → Java** (Python/Go deferred, code kept). Mid-evaluation date: **TBD** (placeholder `<MIDEVAL_DATE>` was not filled in the spec).
 Mid-eval cut line: M0–M4; M2 is the minimum demo; if M4 slips, T2a is the honest proof tier.
 Each milestone ends with tests green, `make selftest`, RESULTS.md and a PROGRESS.md entry.
 
@@ -21,7 +21,7 @@ Each milestone ends with tests green, `make selftest`, RESULTS.md and a PROGRESS
 - [x] COBOL front end part 1: preprocess, PIC/data division with probe validation, program structure
 - [x] T0a Java build with diagnostics mapped to file:line + excerpts
 - [x] T0b tree-sitter checks: data mapping, forbidden representations, completeness, forbidden APIs, integrity, anti-overfitting
-- [ ] seed corpus (10–15 programs) with correct Java translations
+- [x] seed corpus (10–15 programs) with correct Java translations — 14 programs
 - [x] CLI + API + held-out guard; e2e test T0 on corpus
 
 ## M2 — Java T1 (mid-eval minimum)
@@ -33,19 +33,21 @@ Each milestone ends with tests green, `make selftest`, RESULTS.md and a PROGRESS
 - [x] mutation operators (verifier/mutation, Java/Python/Go) + `make selftest` (tools/selftest.py)
 
 ## M3 — cheap breadth
-- [ ] Python and Go packs: T0 + T1
+- [ ] Python and Go packs: T0 + T1 — code exists, **deferred** (Java-only scope, 6 Nov); not re-validated
 - [x] T2a exhaustive small-domain proofs (all languages)
 
 ## M4 — Java T2b
-- [ ] runtime library `cobolrt` (Java, Python, Go) + RUNTIME_API.md + differential property tests vs GnuCOBOL
-- [ ] semantics golden suite `tests/semantics/`
-- [ ] subset parser → IR, interpreter, dataflow
-- [ ] Java reference emitter, validation gate, JBMC harness, vacuity + mutation sanity, T1u
+- [x] runtime library `cobolrt` (Java, Python, Go) + RUNTIME_API.md + differential property tests vs GnuCOBOL (10,000 cases, 0 mismatches)
+- [ ] OpenJML ESC on the Java runtime core (script broken — LIMITATIONS.md)
+- [x] semantics golden suite `tests/semantics/` (25 programs)
+- [x] subset parser → IR, interpreter, dataflow
+- [x] Java reference emitter, validation gate, JBMC harness, vacuity + mutation sanity, T1u — works; few units eligible (LIMITATIONS.md)
 
 ## M5 — Java T3
-- [ ] contracts from IR (requires/ensures/assignable/88-level predicates/functional post)
-- [ ] JML insertion + OpenJML ESC; loop-invariant hook
+- [x] contracts from IR (requires/ensures/assignable/88-level predicates/functional post)
+- [x] JML insertion + OpenJML ESC; loop-invariant hook (hint file `.verifier/invariants.json`; no automatic PERFORM VARYING invariants yet)
 
 ## M6 — wider coverage, integration
-- [ ] Python T2b/T3 via CrossHair; optional Go T1.5 fuzzing
-- [ ] integration with teammates' manifests/bundles; final RESULTS.md
+- [ ] Python T2b/T3 via CrossHair; optional Go T1.5 fuzzing — deferred
+- [ ] integration with teammates' manifests/bundles — not started
+- [x] RESULTS.md with self-test numbers (Java)

@@ -228,8 +228,16 @@ def _unit(pl: Pipeline, pc: ProgramCtx, pt: ProgramT2b, para: str) -> tuple[Tier
         f.kind == "assertion" for f in reach.failed)
     vac: dict[str, Any] = {"reachability": "end of both units reachable" if reach_ok else f"FAILED ({reach.verdict})"}
     if not reach_ok:
-        return t1u, TierResult(status=Status.ERROR, reason="vacuous proof: the end of the harness is unreachable "
-                               "(contradictory assumptions?)", method=METHOD, scope=scope, vacuity=vac)
+        if reach.verdict == "PROVED":  # `assert false` held: the end of both units is genuinely unreachable
+            why = "vacuous proof: the end of the harness is unreachable (contradictory assumptions?)"
+        elif reach.verdict == "TIMEOUT":
+            return t1u, TierResult(status=Status.TIMEOUT, method=METHOD, scope=scope, vacuity=vac,
+                                   reason=f"equivalence proved, but the reachability (vacuity) check did not finish "
+                                   f"within {tmo:.0f} s, so the proof is not reported")
+        else:  # crashed / killed (e.g. memory cap) / unparsable output
+            why = (f"equivalence proved, but the reachability (vacuity) check did not complete ({reach.verdict}: "
+                   f"{'; '.join(reach.errors)[:200] or 'no verdict'}), so the proof is not reported")
+        return t1u, TierResult(status=Status.ERROR, reason=why, method=METHOD, scope=scope, vacuity=vac)
     _killed, detail = _mutation_sanity(pl, pc, pt, uw, h, ref, loc, k, tmo)
     vac["mutation_sanity"] = detail
     rate = None if detail["live"] == 0 else detail["killed"] / detail["live"]
