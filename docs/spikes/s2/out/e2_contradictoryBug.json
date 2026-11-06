@@ -1,0 +1,1444 @@
+[
+  {
+    "program": "JBMC 6.8.0 (cbmc-6.8.0)"
+  },
+  {
+    "messageText": "JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Parsing ...",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Trying to load Java main class: s2.Harness",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Found Java main class: s2.Harness",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Converting",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "stub class symbol java::java.lang.Object already exists",
+    "messageType": "WARNING"
+  },
+  {
+    "messageText": "Java: added 65 String or Class constant symbols",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Generating GOTO Program",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Running GOTO functions transformation passes",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Running with 16 object bits, 48 offset bits (default)",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Starting Bounded Model Checking",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Unwinding recursion java::s2.Harness.<clinit_wrapper> iteration 1",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "aborting path on assume(false) at file s2/Harness.java line 109 function java::s2.Harness.contradictoryBug:()V bytecode-index 57 thread 0",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "aborting path on assume(false) at file s2/Harness.java line 110 function java::s2.Harness.contradictoryBug:()V bytecode-index 71 thread 0",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Runtime Symex: 0.0698966s",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "size of program expression: 948 steps",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "simple slicing removed 6 assignments",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Generated 101 VCC(s), 2 remaining after simplification",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Runtime Postprocess Equation: 0.00369801s",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Passing problem to string refinement loop with CaDiCaL 2.0.0",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "converting SSA",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Runtime Convert SSA: 0.0109311s",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Running string refinement loop with CaDiCaL 2.0.0",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "25410 variables, 75435 clauses",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "SAT checker: instance is UNSATISFIABLE",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "BV-Refinement: got UNSAT, and the proof passes => UNSAT",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Total iterations: 1",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Runtime Solver: 0.0695862s",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Runtime decision procedure: 0.0862793s",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "result": [
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.pow10:(I)J.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "43",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.pow10:(I)J",
+          "line": "43",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.pow10:(I)J.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.pow10:(I)J.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "44",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.pow10:(I)J",
+          "line": "43",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.pow10:(I)J.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "1",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "14",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "8",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "15",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "9",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "15",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "16",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "16",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.5",
+        "sourceLocation": {
+          "bytecodeIndex": "17",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "16",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.6",
+        "sourceLocation": {
+          "bytecodeIndex": "24",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "17",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.7",
+        "sourceLocation": {
+          "bytecodeIndex": "25",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "17",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.7"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.8",
+        "sourceLocation": {
+          "bytecodeIndex": "32",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "18",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.8"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.<init>:()V.null-pointer-exception.9",
+        "sourceLocation": {
+          "bytecodeIndex": "33",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.<init>:()V",
+          "line": "18",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.<init>:()V.null-pointer-exception.9"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "2",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "24",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "7",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "25",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "7",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "25",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "11",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "26",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.5",
+        "sourceLocation": {
+          "bytecodeIndex": "11",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "26",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.6",
+        "sourceLocation": {
+          "bytecodeIndex": "15",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "27",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.7",
+        "sourceLocation": {
+          "bytecodeIndex": "15",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "27",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.7"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.8",
+        "sourceLocation": {
+          "bytecodeIndex": "19",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "28",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.8"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.9",
+        "sourceLocation": {
+          "bytecodeIndex": "19",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;",
+          "line": "28",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.9"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "7",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.calcTotal:()V",
+          "line": "21",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "7",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.calcTotal:()V",
+          "line": "21",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "7",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.calcTotal:()V",
+          "line": "21",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "15",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.calcTotal:()V",
+          "line": "22",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.5",
+        "sourceLocation": {
+          "bytecodeIndex": "15",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.calcTotal:()V",
+          "line": "22",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.6",
+        "sourceLocation": {
+          "bytecodeIndex": "15",
+          "comment": "Null pointer check",
+          "file": "s2/RefUnit.java",
+          "function": "java::s2.RefUnit.calcTotal:()V",
+          "line": "22",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.RefUnit.calcTotal:()V.null-pointer-exception.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.LlmBug.<init>:()V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "1",
+          "comment": "Null pointer check",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.<init>:()V",
+          "line": "4",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.LlmBug.<init>:()V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "5",
+          "comment": "Null pointer check",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "11",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "5",
+          "comment": "Null pointer check",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "11",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "12",
+          "comment": "Null pointer check",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "12",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Denominator should be nonzero",
+        "property": "java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.1",
+        "sourceLocation": {
+          "bytecodeIndex": "12",
+          "comment": "Denominator should be nonzero",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "12",
+          "propertyClass": "integer-divide-by-zero",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Denominator should be nonzero",
+        "property": "java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.2",
+        "sourceLocation": {
+          "bytecodeIndex": "12",
+          "comment": "Denominator should be nonzero",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "12",
+          "propertyClass": "integer-divide-by-zero",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "18",
+          "comment": "Null pointer check",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "13",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.5",
+        "sourceLocation": {
+          "bytecodeIndex": "18",
+          "comment": "Null pointer check",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "13",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.6",
+        "sourceLocation": {
+          "bytecodeIndex": "30",
+          "comment": "Null pointer check",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "17",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.null-pointer-exception.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Denominator should be nonzero",
+        "property": "java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.3",
+        "sourceLocation": {
+          "bytecodeIndex": "30",
+          "comment": "Denominator should be nonzero",
+          "file": "s2/LlmBug.java",
+          "function": "java::s2.LlmBug.calcTotal:()V",
+          "line": "17",
+          "propertyClass": "integer-divide-by-zero",
+          "propertyId": "java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "32",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "105",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "36",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "106",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "39",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "106",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "41",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "107",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.5",
+        "sourceLocation": {
+          "bytecodeIndex": "43",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "108",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.6",
+        "sourceLocation": {
+          "bytecodeIndex": "52",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.7",
+        "sourceLocation": {
+          "bytecodeIndex": "52",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.7"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.8",
+        "sourceLocation": {
+          "bytecodeIndex": "52",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.8"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.9",
+        "sourceLocation": {
+          "bytecodeIndex": "52",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.9"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.10",
+        "sourceLocation": {
+          "bytecodeIndex": "52",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.10"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.11",
+        "sourceLocation": {
+          "bytecodeIndex": "52",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.11"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.12",
+        "sourceLocation": {
+          "bytecodeIndex": "56",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.12"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "assertion at file s2/Harness.java line 109 function java::s2.Harness.contradictoryBug:()V bytecode-index 57",
+        "property": "java::s2.Harness.contradictoryBug:()V.assertion.1",
+        "sourceLocation": {
+          "bytecodeIndex": "57",
+          "comment": "assertion at file s2/Harness.java line 109 function java::s2.Harness.contradictoryBug:()V bytecode-index 57",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "109",
+          "propertyClass": "assertion",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.assertion.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.13",
+        "sourceLocation": {
+          "bytecodeIndex": "66",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.13"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.14",
+        "sourceLocation": {
+          "bytecodeIndex": "66",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.14"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.15",
+        "sourceLocation": {
+          "bytecodeIndex": "66",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.15"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.16",
+        "sourceLocation": {
+          "bytecodeIndex": "66",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.16"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.17",
+        "sourceLocation": {
+          "bytecodeIndex": "66",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.17"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.18",
+        "sourceLocation": {
+          "bytecodeIndex": "66",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.18"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.19",
+        "sourceLocation": {
+          "bytecodeIndex": "70",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.null-pointer-exception.19"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "assertion at file s2/Harness.java line 110 function java::s2.Harness.contradictoryBug:()V bytecode-index 71",
+        "property": "java::s2.Harness.contradictoryBug:()V.assertion.2",
+        "sourceLocation": {
+          "bytecodeIndex": "71",
+          "comment": "assertion at file s2/Harness.java line 110 function java::s2.Harness.contradictoryBug:()V bytecode-index 71",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "110",
+          "propertyClass": "assertion",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.assertion.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Harness.<clinit>:()V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "1",
+          "comment": "Null pointer check",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.<clinit>:()V",
+          "line": "12",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Harness.<clinit>:()V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "1",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.<init>:(IIZ)V",
+          "line": "15",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "4",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.<init>:(IIZ)V",
+          "line": "16",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "7",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.<init>:(IIZ)V",
+          "line": "17",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "10",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.<init>:(IIZ)V",
+          "line": "18",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "4",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "83",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "4",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "83",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "assertion",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.1",
+        "sourceLocation": {
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "assertion",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.2",
+        "sourceLocation": {
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "17",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "84",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "17",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "84",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.5",
+        "sourceLocation": {
+          "bytecodeIndex": "25",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "85",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.6",
+        "sourceLocation": {
+          "bytecodeIndex": "25",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "85",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.7",
+        "sourceLocation": {
+          "bytecodeIndex": "33",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "86",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.7"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "4",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "91",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "4",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "91",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "assertion",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.1",
+        "sourceLocation": {
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "assertion",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.2",
+        "sourceLocation": {
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "17",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "92",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "17",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "92",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.5",
+        "sourceLocation": {
+          "bytecodeIndex": "25",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "93",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.6",
+        "sourceLocation": {
+          "bytecodeIndex": "25",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "93",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.7",
+        "sourceLocation": {
+          "bytecodeIndex": "33",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V",
+          "line": "94",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.7"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Denominator should be nonzero",
+        "property": "java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.1",
+        "sourceLocation": {
+          "bytecodeIndex": "18",
+          "comment": "Denominator should be nonzero",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.rescale:(JIIZ)J",
+          "line": "56",
+          "propertyClass": "integer-divide-by-zero",
+          "propertyId": "java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Denominator should be nonzero",
+        "property": "java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.2",
+        "sourceLocation": {
+          "bytecodeIndex": "24",
+          "comment": "Denominator should be nonzero",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.rescale:(JIIZ)J",
+          "line": "58",
+          "propertyClass": "integer-divide-by-zero",
+          "propertyId": "java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.1",
+        "sourceLocation": {
+          "bytecodeIndex": "5",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.store:(JIZ)V",
+          "line": "73",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.2",
+        "sourceLocation": {
+          "bytecodeIndex": "10",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.store:(JIZ)V",
+          "line": "74",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Denominator should be nonzero",
+        "property": "java::s2.Dec.store:(JIZ)V.integer-divide-by-zero.1",
+        "sourceLocation": {
+          "bytecodeIndex": "12",
+          "comment": "Denominator should be nonzero",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.store:(JIZ)V",
+          "line": "74",
+          "propertyClass": "integer-divide-by-zero",
+          "propertyId": "java::s2.Dec.store:(JIZ)V.integer-divide-by-zero.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.3",
+        "sourceLocation": {
+          "bytecodeIndex": "15",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.store:(JIZ)V",
+          "line": "75",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Null pointer check",
+        "property": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.4",
+        "sourceLocation": {
+          "bytecodeIndex": "25",
+          "comment": "Null pointer check",
+          "file": "s2/Dec.java",
+          "function": "java::s2.Dec.store:(JIZ)V",
+          "line": "78",
+          "propertyClass": "null-pointer-exception",
+          "propertyId": "java::s2.Dec.store:(JIZ)V.null-pointer-exception.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.1",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.1"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.2",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.2"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.3",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.3"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.4",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.4"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.5",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.5"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.6",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.6"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.7",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.7"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.8",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.8"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "Array size should be >= 0",
+        "property": "array-create-negative-size.9",
+        "sourceLocation": {
+          "comment": "Array size should be >= 0",
+          "propertyClass": "array-create-negative-size",
+          "propertyId": "array-create-negative-size.9"
+        },
+        "status": "SUCCESS"
+      },
+      {
+        "description": "no uncaught exception",
+        "property": "java::s2.Harness.contradictoryBug:()V.1",
+        "sourceLocation": {
+          "comment": "no uncaught exception",
+          "file": "s2/Harness.java",
+          "function": "java::s2.Harness.contradictoryBug:()V",
+          "line": "100",
+          "propertyId": "java::s2.Harness.contradictoryBug:()V.1"
+        },
+        "status": "SUCCESS"
+      }
+    ]
+  },
+  {
+    "messageText": "VERIFICATION SUCCESSFUL",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "cProverStatus": "success"
+  }
+]

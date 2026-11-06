@@ -1,0 +1,151 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 81 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::s2.Gotchas.<clinit_wrapper> iteration 1
+aborting path on assume(false) at file s2/Gotchas.java line 37 function java::s2.Gotchas.mathAbs:()V bytecode-index 31 thread 0
+Runtime Symex: 0.00674544s
+size of program expression: 168 steps
+simple slicing removed 4 assignments
+Generated 4 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 0.00290656s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.00109442s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+1316 variables, 1526 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.00562481s
+Runtime decision procedure: 0.0115387s
+Building error trace
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+s2/Gotchas.java function java::s2.Gotchas.<clinit>:()V
+[java::s2.Gotchas.<clinit>:()V.null-pointer-exception.1] line 6 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.mathAbs:()V
+[java::s2.Gotchas.mathAbs:()V.1] line 34 no uncaught exception: SUCCESS
+[java::s2.Gotchas.mathAbs:()V.assertion.1] line 37 assertion at file s2/Gotchas.java line 37 function java::s2.Gotchas.mathAbs:()V bytecode-index 31: FAILURE
+[java::s2.Gotchas.mathAbs:()V.null-pointer-exception.1] line 37 Null pointer check: SUCCESS
+
+Trace for java::s2.Gotchas.mathAbs:()V.assertion.1:
+
+↳ __CPROVER_initialize()
+  __CPROVER_rounding_mode=0 (00000000 00000000 00000000 00000000)
+  @inflight_exception=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  abs_20in_20range.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+  abs_20in_20range.length=12 (00000000 00000000 00000000 00001100)
+  abs_20in_20range.data=abs_20in_20range_constarray (?)
+  abs_20in_20range_constarray={ 'a', 'b', 's', ' ', 'i', 'n', ' ', 'r', 'a', 'n', 'g', 'e' } ({ 00000000 01100001, 00000000 01100010, 00000000 01110011, 00000000 00100000, 00000000 01101001, 00000000 01101110, 00000000 00100000, 00000000 01110010, 00000000 01100001, 00000000 01101110, 00000000 01100111, 00000000 01100101 })
+  abs_20in_20range_constarray[0L]='a' (00000000 01100001)
+  abs_20in_20range_constarray[1L]='b' (00000000 01100010)
+  abs_20in_20range_constarray[2L]='s' (00000000 01110011)
+  abs_20in_20range_constarray[3L]=' ' (00000000 00100000)
+  abs_20in_20range_constarray[4L]='i' (00000000 01101001)
+  abs_20in_20range_constarray[5L]='n' (00000000 01101110)
+  abs_20in_20range_constarray[6L]=' ' (00000000 00100000)
+  abs_20in_20range_constarray[7L]='r' (00000000 01110010)
+  abs_20in_20range_constarray[8L]='a' (00000000 01100001)
+  abs_20in_20range_constarray[9L]='n' (00000000 01101110)
+  abs_20in_20range_constarray[10L]='g' (00000000 01100111)
+  abs_20in_20range_constarray[11L]='e' (00000000 01100101)
+  abs_20in_20range_return_value=0 (00000000 00000000 00000000 00000000)
+  enableAssume=false (00000000)
+  enableConcurrency=false (00000000)
+  enableNondet=false (00000000)
+  java$$org_cprover_CProver$$clinit_already_run=false (0)
+  $assertionsDisabled=false (00000000)
+  java$$s2_Gotchas$$clinit_already_run=false (0)
+  s2.Gotchas@class_model.@class_identifier="java::java.lang.Class" (?)
+↵
+  uncaught_exception'=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:34 s2.Gotchas.mathAbs()()
+
+↳ s2/Gotchas.java:34 java::org.cprover.CProver.<clinit_wrapper>()
+  java$$org_cprover_CProver$$clinit_already_run=true (1)
+
+↳ org/cprover/CProver.java:22 org.cprover.CProver.<clinit>()()
+
+↳ org/cprover/CProver.java:22 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+  22: enableAssume=true (00000001)
+
+↳ org/cprover/CProver.java:31 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+  31: enableNondet=true (00000001)
+
+↳ org/cprover/CProver.java:40 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+  40: enableConcurrency=true (00000001)
+↵
+↵
+
+↳ s2/Gotchas.java:34 org.cprover.CProver.nondetLong()()
+  to_return=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+↵
+  34: return_tmp0=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  34: v=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp1=1 (00000000 00000000 00000000 00000001)
+
+↳ s2/Gotchas.java:36 java.lang.Math.abs()(0L)
+  to_return=1009L (00000000 00000000 00000000 00000000 00000000 00000000 00000011 11110001)
+↵
+  36: return_tmp2=1009L (00000000 00000000 00000000 00000000 00000000 00000000 00000011 11110001)
+  36: m=1009L (00000000 00000000 00000000 00000000 00000000 00000000 00000011 11110001)
+
+↳ s2/Gotchas.java:37 java::s2.Gotchas.<clinit_wrapper>()
+  java$$s2_Gotchas$$clinit_already_run=true (1)
+
+↳ s2/Gotchas.java:6 s2.Gotchas.<clinit>()()
+
+↳ s2/Gotchas.java:6 java.lang.Class.desiredAssertionStatus()(&s2.Gotchas@class_model)
+  to_return=true (00000001)
+↵
+  6: return_tmp0=true (00000001)
+  $stack_tmp1=0 (00000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:6 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  6: $assertionsDisabled=false (00000000)
+↵
+↵
+  37: dynamic_object={ .@class_identifier="java::java.lang.String" } ({ ? })
+  37: dynamic_object.@class_identifier="java::java.lang.String" (?)
+  37: new_tmp3=&dynamic_object (00000000 00000100 00000000 00000000 00000000 00000000 00000000 00000000)
+  37: dynamic_object.@class_identifier="java::java.lang.AssertionError" (?)
+
+↳ s2/Gotchas.java:37 java.lang.AssertionError.<init>()(&dynamic_object, &abs_20in_20range.@java.lang.Object)
+  to_construct=&dynamic_object (00000000 00000100 00000000 00000000 00000000 00000000 00000000 00000000)
+↵
+
+Violated property:
+  file s2/Gotchas.java function s2.Gotchas.mathAbs() line 37 thread 0
+  assertion at file s2/Gotchas.java line 37 function java::s2.Gotchas.mathAbs:()V bytecode-index 31
+  false
+
+
+
+** 1 of 13 failed (2 iterations)
+VERIFICATION FAILED

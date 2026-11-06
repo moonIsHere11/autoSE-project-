@@ -114,3 +114,20 @@ it is a WARNING, and that unit's unit-level tiers (T1u/T2b/T3) become NOT_APPLIC
 boundary, overlong and alphanumeric edge cases, not malformed numerics.
 *Decision:* the default strategies emit canonical numeric texts plus overlong forms (to provoke
 truncation); an `invalid_text` strategy exists but is off by default (`t1.invalid_text = false`).
+
+### D15 — JBMC scope for T2b (spike S2)
+*Context:* S2: JBMC 6.8.0 proves add/subtract/MOVE and OCCURS-loop paragraphs on `long`-backed
+decimals and `char[]` PIC X (16–90 s with CaDiCaL), but multiplication/division between two
+variables did not finish in 900 s. JBMC silently stubs JDK methods it has no model for (`Math.abs`,
+`System.arraycopy`, `BigDecimal`, `String` concatenation via `invokedynamic`), producing false
+failures — or, worse, false passes.
+*Decision:* (1) harness, reference and candidate are compiled with `javac --release 8`;
+(2) run `jbmc … --unwind K --unwinding-assertions --sat-solver cadical --json-ui --trace` under an
+outer timeout and memory cap; (3) before running, scan the candidate's bytecode for calls into
+library methods outside an allowlist with real models; any hit ⇒ T2b `NOT_APPLICABLE`
+("uses <method>, which JBMC does not model"); (4) a checker timeout ⇒ `TIMEOUT` (never PASS); a
+counterexample found before the timeout is still a FAIL after concrete replay; (5) every PASS needs
+the `assert false` reachability run to FAIL; (6) every counterexample is replayed with plain `java`
+on both sides before it is reported as FAIL, otherwise `ERROR`.
+*Consequence:* multiply/divide-heavy units will mostly end at TIMEOUT for T2b; T2a (exhaustive) and
+T3 (contracts) are their routes to level 2/3. This is reported honestly in RESULTS.md.

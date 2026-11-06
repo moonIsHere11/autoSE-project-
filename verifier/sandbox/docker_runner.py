@@ -89,7 +89,7 @@ class DockerRunner:
         if not res.ok:
             return {"error": res.text()[:500]}
         try:
-            data: dict[str, str] = json.loads(res.stdout.decode("utf-8", errors="replace"))
+            data: dict[str, str] = json.loads(res.stdout.decode("utf-8", errors="replace"), strict=False)
         except json.JSONDecodeError:
             return {"error": "unparseable versions.json"}
         data["image"] = f"{self.image}@{self.image_id()}"

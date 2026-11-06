@@ -1,0 +1,33 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 81 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Runtime Symex: 0.00347175s
+size of program expression: 48 steps
+simple slicing removed 1 assignments
+Generated 1 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 1.6592e-05s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.000362278s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+10273 variables, 45811 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.0187426s
+Runtime decision procedure: 0.023746s
+
+** Results:
+s2/Gotchas.java function java::s2.Gotchas.divZero:(JJ)J
+[java::s2.Gotchas.divZero:(JJ)J.1] line 11 no uncaught exception: FAILURE
+
+** 1 of 1 failed (2 iterations)
+VERIFICATION FAILED

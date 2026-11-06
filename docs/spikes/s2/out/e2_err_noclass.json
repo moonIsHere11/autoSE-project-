@@ -1,0 +1,25 @@
+[
+  {
+    "program": "JBMC 6.8.0 (cbmc-6.8.0)"
+  },
+  {
+    "messageText": "JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Parsing ...",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Trying to load Java main class: s2.NoSuchClass",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Trying to load Java main class: s2",
+    "messageType": "STATUS-MESSAGE"
+  },
+  {
+    "messageText": "Error: Could not find or load main class s2.NoSuchClass",
+    "messageType": "ERROR"
+  }
+]

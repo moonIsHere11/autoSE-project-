@@ -1,0 +1,43 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 81 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Runtime Symex: 0.002478s
+size of program expression: 64 steps
+simple slicing removed 8 assignments
+Generated 2 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 1.8491e-05s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.000398035s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+621 variables, 202 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.00527527s
+Runtime decision procedure: 0.0119195s
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+s2/Gotchas.java function java::s2.Gotchas.nullIn:(Ls2/Dec;)J
+[java::s2.Gotchas.nullIn:(Ls2/Dec;)J.1] line 22 no uncaught exception: SUCCESS
+[java::s2.Gotchas.nullIn:(Ls2/Dec;)J.null-pointer-exception.1] line 22 Null pointer check: FAILURE
+
+** 1 of 11 failed (2 iterations)
+VERIFICATION FAILED

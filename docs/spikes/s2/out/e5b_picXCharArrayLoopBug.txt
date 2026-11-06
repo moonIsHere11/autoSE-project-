@@ -1,0 +1,447 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 81 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::s2.Gotchas.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 1 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 2 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 3 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 4 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 5 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 1 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 2 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 3 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 4 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 5 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 6 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 7 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 8 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 1 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 2 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 3 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 4 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 5 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 6 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 7 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.0 iteration 8 file s2/Gotchas.java line 92 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 27 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 1 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 2 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 3 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 4 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 5 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 6 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 7 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46 thread 0
+Unwinding loop java::s2.Gotchas.picXCharArrayLoopBug:()V.1 iteration 8 file s2/Gotchas.java line 95 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 48 thread 0
+Runtime Symex: 0.123614s
+size of program expression: 772 steps
+simple slicing removed 8 assignments
+Generated 170 VCC(s), 8 remaining after simplification
+Runtime Postprocess Equation: 0.000143352s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.00572232s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+4956 variables, 2997 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.0109425s
+Runtime decision procedure: 0.0270857s
+Building error trace
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+function java::s2.Gotchas.picXCharArrayLoopBug:()V
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.1] assertion: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.2] assertion: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.3] assertion: SUCCESS
+
+function java::s2.Gotchas.refMove:([CI)[C
+[java::s2.Gotchas.refMove:([CI)[C.1] assertion: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.2] assertion: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.3] assertion: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.<clinit>:()V
+[java::s2.Gotchas.<clinit>:()V.null-pointer-exception.1] line 6 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.nondetPicX:(I)[C
+[java::s2.Gotchas.nondetPicX:(I)[C.array-create-negative-size.1] line 43 Array size should be >= 0: SUCCESS
+[java::s2.Gotchas.nondetPicX:(I)[C.array-index-out-of-bounds-high.1] line 47 Array index should be < length: SUCCESS
+[java::s2.Gotchas.nondetPicX:(I)[C.array-index-out-of-bounds-low.1] line 47 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.nondetPicX:(I)[C.null-pointer-exception.1] line 47 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.picXCharArrayLoopBug:()V
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.4] line 89 no uncaught exception: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.array-create-negative-size.1] line 91 Array size should be >= 0: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.array-index-out-of-bounds-high.1] line 93 Array index should be < length: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.array-index-out-of-bounds-low.1] line 93 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.null-pointer-exception.1] line 93 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.array-index-out-of-bounds-high.2] line 96 Array index should be < length: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.array-index-out-of-bounds-high.3] line 96 Array index should be < length: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.array-index-out-of-bounds-low.2] line 96 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.array-index-out-of-bounds-low.3] line 96 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.assertion.1] line 96 assertion at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46: FAILURE
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.null-pointer-exception.2] line 96 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.null-pointer-exception.3] line 96 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXCharArrayLoopBug:()V.null-pointer-exception.4] line 96 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.refMove:([CI)[C
+[java::s2.Gotchas.refMove:([CI)[C.array-create-negative-size.1] line 53 Array size should be >= 0: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.array-index-out-of-bounds-high.1] line 55 Array index should be < length: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.array-index-out-of-bounds-low.1] line 55 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.null-pointer-exception.1] line 55 Null pointer check: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.null-pointer-exception.2] line 55 Null pointer check: SUCCESS
+
+Trace for java::s2.Gotchas.picXCharArrayLoopBug:()V.assertion.1:
+
+↳ __CPROVER_initialize()
+  __CPROVER_rounding_mode=0 (00000000 00000000 00000000 00000000)
+  @inflight_exception=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  EQ_20WS_2dOUT.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+  EQ_20WS_2dOUT.length=9 (00000000 00000000 00000000 00001001)
+  EQ_20WS_2dOUT.data=EQ_20WS_2dOUT_constarray (?)
+  EQ_20WS_2dOUT_constarray={ 'E', 'Q', ' ', 'W', 'S', '-', 'O', 'U', 'T' } ({ 00000000 01000101, 00000000 01010001, 00000000 00100000, 00000000 01010111, 00000000 01010011, 00000000 00101101, 00000000 01001111, 00000000 01010101, 00000000 01010100 })
+  EQ_20WS_2dOUT_constarray[0L]='E' (00000000 01000101)
+  EQ_20WS_2dOUT_constarray[1L]='Q' (00000000 01010001)
+  EQ_20WS_2dOUT_constarray[2L]=' ' (00000000 00100000)
+  EQ_20WS_2dOUT_constarray[3L]='W' (00000000 01010111)
+  EQ_20WS_2dOUT_constarray[4L]='S' (00000000 01010011)
+  EQ_20WS_2dOUT_constarray[5L]='-' (00000000 00101101)
+  EQ_20WS_2dOUT_constarray[6L]='O' (00000000 01001111)
+  EQ_20WS_2dOUT_constarray[7L]='U' (00000000 01010101)
+  EQ_20WS_2dOUT_constarray[8L]='T' (00000000 01010100)
+  EQ_20WS_2dOUT_return_value=0 (00000000 00000000 00000000 00000000)
+  enableAssume=false (00000000)
+  enableConcurrency=false (00000000)
+  enableNondet=false (00000000)
+  java$$org_cprover_CProver$$clinit_already_run=false (0)
+  $assertionsDisabled=false (00000000)
+  java$$s2_Gotchas$$clinit_already_run=false (0)
+  s2.Gotchas@class_model.@class_identifier="java::java.lang.Class" (?)
+↵
+  uncaught_exception'=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:89 s2.Gotchas.picXCharArrayLoopBug()()
+
+↳ s2/Gotchas.java:89 java::s2.Gotchas.<clinit_wrapper>()
+  java$$s2_Gotchas$$clinit_already_run=true (1)
+
+↳ s2/Gotchas.java:6 s2.Gotchas.<clinit>()()
+
+↳ s2/Gotchas.java:6 java.lang.Class.desiredAssertionStatus()(&s2.Gotchas@class_model)
+  to_return=true (00000001)
+↵
+  6: return_tmp0=true (00000001)
+  $stack_tmp1=0 (00000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:6 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  6: $assertionsDisabled=false (00000000)
+↵
+↵
+
+↳ s2/Gotchas.java:89 s2.Gotchas.nondetPicX(int)(5)
+  43: dynamic_object={ .@java.lang.Object={ .@class_identifier="java::java.lang.String" },
+    .length=0, .data=null } ({ { ? }, 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 })
+  43: dynamic_object.@java.lang.Object={ .@class_identifier="java::java.lang.String" } ({ ? })
+  43: dynamic_object.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+  43: dynamic_object.length=0 (00000000 00000000 00000000 00000000)
+  43: dynamic_object.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  43: newarray_tmp0=&dynamic_object (00000000 00000100 00000000 00000000 00000000 00000000 00000000 00000000)
+  43: dynamic_object.@java.lang.Object.@class_identifier="java::array[char]" (?)
+  43: dynamic_object.length=0 (00000000 00000000 00000000 00000000)
+  43: dynamic_object.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  43: dynamic_object.length=5 (00000000 00000000 00000000 00000101)
+  43: tmp_new_data_array=dynamic_array (?)
+  43: dynamic_object.data=dynamic_array (?)
+  43: dynamic_array={ '\u0000', '\u0000', '\u0000', '\u0000', '\u0000' } ({ 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000 })
+  43: dynamic_array[0L]='\u0000' (00000000 00000000)
+  43: dynamic_array[1L]='\u0000' (00000000 00000000)
+  43: dynamic_array[2L]='\u0000' (00000000 00000000)
+  43: dynamic_array[3L]='\u0000' (00000000 00000000)
+  43: dynamic_array[4L]='\u0000' (00000000 00000000)
+  43: c=&dynamic_object (00000000 00000100 00000000 00000000 00000000 00000000 00000000 00000000)
+  44: k=0 (00000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:45 java::org.cprover.CProver.<clinit_wrapper>()
+  java$$org_cprover_CProver$$clinit_already_run=true (1)
+
+↳ org/cprover/CProver.java:22 org.cprover.CProver.<clinit>()()
+
+↳ org/cprover/CProver.java:22 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+  22: enableAssume=true (00000001)
+
+↳ org/cprover/CProver.java:31 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+  31: enableNondet=true (00000001)
+
+↳ org/cprover/CProver.java:40 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+  40: enableConcurrency=true (00000001)
+↵
+↵
+
+↳ s2/Gotchas.java:45 org.cprover.CProver.nondetChar()()
+  to_return=' ' (00000000 00100000)
+↵
+  45: return_tmp1=' ' (00000000 00100000)
+  45: ch=' ' (00000000 00100000)
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+  47: dynamic_array[0L]=' ' (00000000 00100000)
+  44: k=1 (00000000 00000000 00000000 00000001)
+
+↳ s2/Gotchas.java:45 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+
+↳ s2/Gotchas.java:45 org.cprover.CProver.nondetChar()()
+  to_return=' ' (00000000 00100000)
+↵
+  45: return_tmp1=' ' (00000000 00100000)
+  45: ch=' ' (00000000 00100000)
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+  47: dynamic_array[1L]=' ' (00000000 00100000)
+  44: k=2 (00000000 00000000 00000000 00000010)
+
+↳ s2/Gotchas.java:45 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+
+↳ s2/Gotchas.java:45 org.cprover.CProver.nondetChar()()
+  to_return='~' (00000000 01111110)
+↵
+  45: return_tmp1='~' (00000000 01111110)
+  45: ch='~' (00000000 01111110)
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+  47: dynamic_array[2L]='~' (00000000 01111110)
+  44: k=3 (00000000 00000000 00000000 00000011)
+
+↳ s2/Gotchas.java:45 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+
+↳ s2/Gotchas.java:45 org.cprover.CProver.nondetChar()()
+  to_return=' ' (00000000 00100000)
+↵
+  45: return_tmp1=' ' (00000000 00100000)
+  45: ch=' ' (00000000 00100000)
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+  47: dynamic_array[3L]=' ' (00000000 00100000)
+  44: k=4 (00000000 00000000 00000000 00000100)
+
+↳ s2/Gotchas.java:45 java::org.cprover.CProver.<clinit_wrapper>()
+↵
+
+↳ s2/Gotchas.java:45 org.cprover.CProver.nondetChar()()
+  to_return=' ' (00000000 00100000)
+↵
+  45: return_tmp1=' ' (00000000 00100000)
+  45: ch=' ' (00000000 00100000)
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+  47: dynamic_array[4L]=' ' (00000000 00100000)
+  44: k=5 (00000000 00000000 00000000 00000101)
+↵
+  89: return_tmp0=&dynamic_object (00000000 00000100 00000000 00000000 00000000 00000000 00000000 00000000)
+  89: in=&dynamic_object (00000000 00000100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:90 java::s2.Gotchas.<clinit_wrapper>()
+↵
+
+↳ s2/Gotchas.java:90 s2.Gotchas.refMove(char[], int)(&dynamic_object, 8)
+  53: dynamic_object$0={ .@java.lang.Object={ .@class_identifier="java::java.lang.String" },
+    .length=0, .data=null } ({ { ? }, 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 })
+  53: dynamic_object$0.@java.lang.Object={ .@class_identifier="java::java.lang.String" } ({ ? })
+  53: dynamic_object$0.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+  53: dynamic_object$0.length=0 (00000000 00000000 00000000 00000000)
+  53: dynamic_object$0.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  53: newarray_tmp0=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  53: dynamic_object$0.@java.lang.Object.@class_identifier="java::array[char]" (?)
+  53: dynamic_object$0.length=0 (00000000 00000000 00000000 00000000)
+  53: dynamic_object$0.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  53: dynamic_object$0.length=8 (00000000 00000000 00000000 00001000)
+  53: tmp_new_data_array=dynamic_array$0 (?)
+  53: dynamic_object$0.data=dynamic_array$0 (?)
+  53: dynamic_array$0={ '\u0000', '\u0000', '\u0000', '\u0000', '\u0000', '\u0000', '\u0000', '\u0000' } ({ 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000 })
+  53: dynamic_array$0[0L]='\u0000' (00000000 00000000)
+  53: dynamic_array$0[1L]='\u0000' (00000000 00000000)
+  53: dynamic_array$0[2L]='\u0000' (00000000 00000000)
+  53: dynamic_array$0[3L]='\u0000' (00000000 00000000)
+  53: dynamic_array$0[4L]='\u0000' (00000000 00000000)
+  53: dynamic_array$0[5L]='\u0000' (00000000 00000000)
+  53: dynamic_array$0[6L]='\u0000' (00000000 00000000)
+  53: dynamic_array$0[7L]='\u0000' (00000000 00000000)
+  53: out=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  54: k=0 (00000000 00000000 00000000 00000000)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=0 (00000000 00000000 00000000 00000000)
+  $stack_tmp3=32 (00000000 00000000 00000000 00100000)
+  55: dynamic_array$0[0L]=' ' (00000000 00100000)
+  54: k=1 (00000000 00000000 00000000 00000001)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+  $stack_tmp3=32 (00000000 00000000 00000000 00100000)
+  55: dynamic_array$0[1L]=' ' (00000000 00100000)
+  54: k=2 (00000000 00000000 00000000 00000010)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=2 (00000000 00000000 00000000 00000010)
+  $stack_tmp3=126 (00000000 00000000 00000000 01111110)
+  55: dynamic_array$0[2L]='~' (00000000 01111110)
+  54: k=3 (00000000 00000000 00000000 00000011)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=3 (00000000 00000000 00000000 00000011)
+  $stack_tmp3=32 (00000000 00000000 00000000 00100000)
+  55: dynamic_array$0[3L]=' ' (00000000 00100000)
+  54: k=4 (00000000 00000000 00000000 00000100)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=4 (00000000 00000000 00000000 00000100)
+  $stack_tmp3=32 (00000000 00000000 00000000 00100000)
+  55: dynamic_array$0[4L]=' ' (00000000 00100000)
+  54: k=5 (00000000 00000000 00000000 00000101)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=5 (00000000 00000000 00000000 00000101)
+  $stack_tmp3=32 (00000000 00000000 00000000 00100000)
+  55: dynamic_array$0[5L]=' ' (00000000 00100000)
+  54: k=6 (00000000 00000000 00000000 00000110)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=6 (00000000 00000000 00000000 00000110)
+  $stack_tmp3=32 (00000000 00000000 00000000 00100000)
+  55: dynamic_array$0[6L]=' ' (00000000 00100000)
+  54: k=7 (00000000 00000000 00000000 00000111)
+  $stack_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp2=7 (00000000 00000000 00000000 00000111)
+  $stack_tmp3=32 (00000000 00000000 00000000 00100000)
+  55: dynamic_array$0[7L]=' ' (00000000 00100000)
+  54: k=8 (00000000 00000000 00000000 00001000)
+↵
+  90: return_tmp1=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  90: ref=&dynamic_object$0 (00000000 00000110 00000000 00000000 00000000 00000000 00000000 00000000)
+  91: dynamic_object$1={ .@java.lang.Object={ .@class_identifier="java::java.lang.String" },
+    .length=0, .data=null } ({ { ? }, 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 })
+  91: dynamic_object$1.@java.lang.Object={ .@class_identifier="java::java.lang.String" } ({ ? })
+  91: dynamic_object$1.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+  91: dynamic_object$1.length=0 (00000000 00000000 00000000 00000000)
+  91: dynamic_object$1.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  91: newarray_tmp2=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  91: dynamic_object$1.@java.lang.Object.@class_identifier="java::array[char]" (?)
+  91: dynamic_object$1.length=0 (00000000 00000000 00000000 00000000)
+  91: dynamic_object$1.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  91: dynamic_object$1.length=8 (00000000 00000000 00000000 00001000)
+  91: tmp_new_data_array=dynamic_array$1 (?)
+  91: dynamic_object$1.data=dynamic_array$1 (?)
+  91: dynamic_array$1={ '\u0000', '\u0000', '\u0000', '\u0000', '\u0000', '\u0000', '\u0000', '\u0000' } ({ 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000, 00000000 00000000 })
+  91: dynamic_array$1[0L]='\u0000' (00000000 00000000)
+  91: dynamic_array$1[1L]='\u0000' (00000000 00000000)
+  91: dynamic_array$1[2L]='\u0000' (00000000 00000000)
+  91: dynamic_array$1[3L]='\u0000' (00000000 00000000)
+  91: dynamic_array$1[4L]='\u0000' (00000000 00000000)
+  91: dynamic_array$1[5L]='\u0000' (00000000 00000000)
+  91: dynamic_array$1[6L]='\u0000' (00000000 00000000)
+  91: dynamic_array$1[7L]='\u0000' (00000000 00000000)
+  91: llm=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  92: k=0 (00000000 00000000 00000000 00000000)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=0 (00000000 00000000 00000000 00000000)
+  $stack_tmp5=32 (00000000 00000000 00000000 00100000)
+  93: dynamic_array$1[0L]=' ' (00000000 00100000)
+  92: k=1 (00000000 00000000 00000000 00000001)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=1 (00000000 00000000 00000000 00000001)
+  $stack_tmp5=32 (00000000 00000000 00000000 00100000)
+  93: dynamic_array$1[1L]=' ' (00000000 00100000)
+  92: k=2 (00000000 00000000 00000000 00000010)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=2 (00000000 00000000 00000000 00000010)
+  $stack_tmp5=126 (00000000 00000000 00000000 01111110)
+  93: dynamic_array$1[2L]='~' (00000000 01111110)
+  92: k=3 (00000000 00000000 00000000 00000011)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=3 (00000000 00000000 00000000 00000011)
+  $stack_tmp5=32 (00000000 00000000 00000000 00100000)
+  93: dynamic_array$1[3L]=' ' (00000000 00100000)
+  92: k=4 (00000000 00000000 00000000 00000100)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=4 (00000000 00000000 00000000 00000100)
+  $stack_tmp5=32 (00000000 00000000 00000000 00100000)
+  93: dynamic_array$1[4L]=' ' (00000000 00100000)
+  92: k=5 (00000000 00000000 00000000 00000101)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=5 (00000000 00000000 00000000 00000101)
+  $stack_tmp5=48 (00000000 00000000 00000000 00110000)
+  93: dynamic_array$1[5L]='0' (00000000 00110000)
+  92: k=6 (00000000 00000000 00000000 00000110)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=6 (00000000 00000000 00000000 00000110)
+  $stack_tmp5=48 (00000000 00000000 00000000 00110000)
+  93: dynamic_array$1[6L]='0' (00000000 00110000)
+  92: k=7 (00000000 00000000 00000000 00000111)
+  $stack_tmp3=&dynamic_object$1 (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+  $stack_tmp4=7 (00000000 00000000 00000000 00000111)
+  $stack_tmp5=48 (00000000 00000000 00000000 00110000)
+  93: dynamic_array$1[7L]='0' (00000000 00110000)
+  92: k=8 (00000000 00000000 00000000 00001000)
+  95: k=0 (00000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:96 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  95: k=1 (00000000 00000000 00000000 00000001)
+
+↳ s2/Gotchas.java:96 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  95: k=2 (00000000 00000000 00000000 00000010)
+
+↳ s2/Gotchas.java:96 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  95: k=3 (00000000 00000000 00000000 00000011)
+
+↳ s2/Gotchas.java:96 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  95: k=4 (00000000 00000000 00000000 00000100)
+
+↳ s2/Gotchas.java:96 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  95: k=5 (00000000 00000000 00000000 00000101)
+
+↳ s2/Gotchas.java:96 java::s2.Gotchas.<clinit_wrapper>()
+↵
+  96: dynamic_object$7={ .@class_identifier="java::java.lang.String" } ({ ? })
+  96: dynamic_object$7.@class_identifier="java::java.lang.String" (?)
+  96: new_tmp6=&dynamic_object$7 (00000000 00010000 00000000 00000000 00000000 00000000 00000000 00000000)
+  96: dynamic_object$7.@class_identifier="java::java.lang.AssertionError" (?)
+
+↳ s2/Gotchas.java:96 java.lang.AssertionError.<init>()(&dynamic_object$7, &EQ_20WS_2dOUT.@java.lang.Object)
+  to_construct=&dynamic_object$7 (00000000 00010000 00000000 00000000 00000000 00000000 00000000 00000000)
+↵
+
+Violated property:
+  file s2/Gotchas.java function s2.Gotchas.picXCharArrayLoopBug() line 96 thread 0
+  assertion at file s2/Gotchas.java line 96 function java::s2.Gotchas.picXCharArrayLoopBug:()V bytecode-index 46
+  false
+
+
+
+** 1 of 38 failed (2 iterations)
+VERIFICATION FAILED

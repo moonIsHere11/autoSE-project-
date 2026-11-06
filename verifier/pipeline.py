@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from verifier.cobol import analysis
+from verifier.cobol.gnucobol import CobolBinary
 from verifier.cobol.lexer import Token, tokenize
 from verifier.cobol.parser import ParseError, parse_source
 from verifier.cobol.preprocess import Preprocessed, find_cobol_sources, preprocess_all
@@ -137,6 +138,15 @@ class Pipeline:
         self.runner = DockerRunner(config.image, SandboxLimits.from_config(config.limits))
         self.selected = [f"T{t}" for t in req.selected_tiers()]
         self.toolchain: dict[str, Any] = {}
+        self.cobol_bins: dict[str, CobolBinary] = {}
+
+    @property
+    def iteration(self) -> int:
+        return (self.previous.run.iteration + 1) if self.previous else 1
+
+    @property
+    def effective_seed(self) -> int:
+        return effective_seed(self.req.seed, self.iteration)
 
     # ------------------------------------------------------------------------------------------
     def guard_heldout(self) -> None:
@@ -341,11 +351,11 @@ class Pipeline:
 
     # ------------------------------------------------------------------------------------------
     def assemble(self) -> Report:
-        iteration = (self.previous.run.iteration + 1) if self.previous else 1
+        iteration = self.iteration
         run = RunInfo(
             cobol=str(self.req.cobol), target=str(self.req.target), lang=self.req.lang,
             mode="full" if self.req.mode == "full" else "fast", tiers=self.req.selected_tiers(),
-            seed=self.req.seed, iteration=iteration, effective_seed=effective_seed(self.req.seed, iteration),
+            seed=self.req.seed, iteration=iteration, effective_seed=self.effective_seed,
             previous_report=str(self.req.previous_report) if self.req.previous_report else None,
             manifest=str(self.req.manifest) if self.req.manifest else None,
             units_filter=self.req.units, argv=self.req.argv,

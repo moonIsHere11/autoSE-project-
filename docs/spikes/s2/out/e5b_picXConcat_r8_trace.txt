@@ -1,0 +1,70 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 84 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::s2.Gotchas.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 1 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 2 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 3 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 4 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 5 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 1 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 2 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 3 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 4 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 5 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 6 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 7 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 8 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 106 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 34 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 1 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 2 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 3 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 4 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 5 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 6 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 7 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 108 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 8 file s2/Gotchas.java line 107 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+Runtime Symex: 0.12459s
+size of program expression: 1085 steps
+simple slicing removed 9 assignments
+Generated 140 VCC(s), 18 remaining after simplification
+Runtime Postprocess Equation: 0.00152552s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.0113463s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+11326 variables, 8418 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.0149356s
+Runtime decision procedure: 0.0326762s
+Building error trace
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+11326 variables, 4288 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.00358146s
+Runtime decision procedure: 0.00495871s
+Building error trace
+/w/e5b_strings.sh: line 6:    97 Killed                  timeout 600 jbmc -cp "/w/build/e5b$rel:$API" s2.Gotchas --unwind 10 --unwinding-assertions "$@"

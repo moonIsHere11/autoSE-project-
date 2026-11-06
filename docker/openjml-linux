@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+## openjml-linux -- drop-in replacement for /opt/openjml/openjml for use inside a Linux
+## Docker container that runs on a WSL2 kernel (or anywhere /proc/version mentions
+## "microsoft").
+##
+## Why: /opt/openjml/setup-vars (and os-name.sh) decide "we are on WSL" by grepping
+## /proc/version for "microsoft". Inside a container on Docker-for-WSL2 the kernel string is
+## "...-microsoft-standard-WSL2", so the script appends ".exe" to the JDK binaries and calls
+## `wslpath` (absent) -> "wslpath: command not found", and it would run jdk/bin/javac.exe,
+## which does not exist.
+##
+## This wrapper does exactly what /opt/openjml/openjml + setup-vars do for a *Linux* release
+## install, without the WSL probe. It does not modify the image.
+set -euo pipefail
+INSTALL="${OPENJML_INSTALL:-/opt/openjml}"
+export OPENJML_INSTALL="$INSTALL"
+export SMT_SOLVER_DIR="${SMT_SOLVER_DIR:-$INSTALL/Solvers-linux}"
+export OJ="${OJ-}"   # same "issue #876" hack as the original launcher
+exec "$INSTALL/jdk/bin/javac" "-J--patch-module=jdk.compiler=$INSTALL/libs/jSMTLIB.jar" "$@"

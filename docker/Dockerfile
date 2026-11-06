@@ -62,8 +62,10 @@ RUN curl -fsSL -o /tmp/openjml.zip \
         https://github.com/OpenJML/OpenJML/releases/download/${OPENJML_VERSION}/openjml-ubuntu-24.04-${OPENJML_VERSION}.zip \
     && echo "${OPENJML_SHA256}  /tmp/openjml.zip" | sha256sum -c - \
     && mkdir -p /opt/openjml && unzip -q /tmp/openjml.zip -d /opt/openjml && rm /tmp/openjml.zip \
-    && chmod -R a+rX /opt/openjml && chmod a+x /opt/openjml/openjml* \
-    && ln -s /opt/openjml/openjml /usr/local/bin/openjml
+    && chmod -R a+rX /opt/openjml && chmod a+x /opt/openjml/openjml*
+# The stock launcher misdetects WSL inside containers on WSL2 kernels (spike S3, DECISIONS D11).
+COPY openjml-linux /usr/local/bin/openjml-linux
+RUN chmod a+rx /usr/local/bin/openjml-linux && ln -s /usr/local/bin/openjml-linux /usr/local/bin/openjml
 
 # --- Go -------------------------------------------------------------------------
 RUN curl -fsSL -o /tmp/go.tgz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz \

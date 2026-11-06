@@ -1,0 +1,41 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Harness
+Found Java main class: s2.Harness
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 65 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::s2.Harness.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+aborting path on assume(false) at file s2/Harness.java line 44 function java::s2.Harness.checkGood:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Harness.java line 45 function java::s2.Harness.checkGood:()V bytecode-index 69 thread 0
+aborting path on assume(false) at file s2/Harness.java line 46 function java::s2.Harness.checkGood:()V bytecode-index 83 thread 0
+aborting path on assume(false) at file s2/Harness.java line 47 function java::s2.Harness.checkGood:()V bytecode-index 97 thread 0
+Runtime Symex: 0.1229s
+size of program expression: 1307 steps
+slicing removed 508 assignments
+Generated 1 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 0.00872989s
+Passing problem to string refinement loop with CaDiCaL 2.0.0
+converting SSA
+Runtime Convert SSA: 0.0225362s
+Running string refinement loop with CaDiCaL 2.0.0
+16487 variables, 54902 clauses
+SAT checker: instance is UNSATISFIABLE
+BV-Refinement: got UNSAT, and the proof passes => UNSAT
+Total iterations: 1
+Runtime Solver: 269.857s
+Runtime decision procedure: 269.885s
+
+** Results:
+s2/Harness.java function java::s2.Harness.checkGood:()V
+[java::s2.Harness.checkGood:()V.assertion.3] line 46 assertion at file s2/Harness.java line 46 function java::s2.Harness.checkGood:()V bytecode-index 83: SUCCESS
+
+** 0 of 1 failed (1 iterations)
+VERIFICATION SUCCESSFUL

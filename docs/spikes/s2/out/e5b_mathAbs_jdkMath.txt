@@ -1,0 +1,68 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 94 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::java.lang.Math.<clinit_wrapper> iteration 1
+Unwinding recursion java::s2.Gotchas.<clinit_wrapper> iteration 1
+aborting path on assume(false) at file s2/Gotchas.java line 37 function java::s2.Gotchas.mathAbs:()V bytecode-index 31 thread 0
+Runtime Symex: 0.0151735s
+size of program expression: 313 steps
+simple slicing removed 4 assignments
+Generated 5 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 7.0034e-05s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.00111787s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+2482 variables, 2801 clauses
+SAT checker: instance is UNSATISFIABLE
+BV-Refinement: got UNSAT, and the proof passes => UNSAT
+Total iterations: 1
+Runtime Solver: 0.00632352s
+Runtime decision procedure: 0.0113522s
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+java/lang/Math.java function java::java.lang.Math.<clinit>:()V
+[java::java.lang.Math.<clinit>:()V.null-pointer-exception.1] line 128 Null pointer check: SUCCESS
+
+java/lang/Math.java function java::java.lang.Math.powerOfTwoD:(I)D
+[java::java.lang.Math.powerOfTwoD:(I)D.assertion.1] line 2794 assertion at file java/lang/Math.java line 2794 function java::java.lang.Math.powerOfTwoD:(I)D bytecode-index 11: SUCCESS
+[java::java.lang.Math.powerOfTwoD:(I)D.null-pointer-exception.1] line 2794 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.<clinit>:()V
+[java::s2.Gotchas.<clinit>:()V.null-pointer-exception.1] line 6 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.mathAbs:()V
+[java::s2.Gotchas.mathAbs:()V.1] line 34 no uncaught exception: SUCCESS
+[java::s2.Gotchas.mathAbs:()V.assertion.1] line 37 assertion at file s2/Gotchas.java line 37 function java::s2.Gotchas.mathAbs:()V bytecode-index 31: SUCCESS
+[java::s2.Gotchas.mathAbs:()V.null-pointer-exception.1] line 37 Null pointer check: SUCCESS
+
+** 0 of 16 failed (1 iterations)
+VERIFICATION SUCCESSFUL

@@ -1,0 +1,79 @@
+### e2_checkBug.json (exit 10)
+verdict: COUNTEREXAMPLE
+failed: [('java::s2.Harness.checkBug:()V.assertion.3', '62')]
+inputs: {'in_wsA': -3, 'in_wsB': -2, 'in_wsC': -1, 'in_wsD': 0}
+errors: []
+### e2_checkBugTrunc.json (exit 10)
+verdict: COUNTEREXAMPLE
+failed: [('java::s2.Harness.checkBugTrunc:()V.assertion.4', '79')]
+inputs: {'in_wsA': -294912, 'in_wsB': 8388608, 'in_wsC': -1, 'in_wsD': 0}
+errors: []
+### e2_checkGood.json (exit 0)
+verdict: PROVED
+failed: []
+inputs: {}
+errors: []
+### e2_contradictoryBug.json (exit 0)
+verdict: PROVED
+failed: []
+inputs: {}
+errors: []
+### e2_contradictoryReach.json (exit 0)
+verdict: PROVED
+failed: []
+inputs: {}
+errors: []
+### e2_err_badopt.json (exit 64)
+verdict: TOOL_ERROR
+failed: []
+inputs: {}
+errors: ["unparsable output: Expecting ',' delimiter: line 5 column 1 (char 51)"]
+### e2_err_noclass.json (exit 6)
+verdict: TOOL_ERROR
+failed: []
+inputs: {}
+errors: ['Error: Could not find or load main class s2.NoSuchClass']
+### e2_err_nocp.json (exit 6)
+verdict: TOOL_ERROR
+failed: []
+inputs: {}
+errors: ['Error: Could not find or load main class s2.Harness']
+### e2_err_nofunc.json (exit 6)
+verdict: TOOL_ERROR
+failed: []
+inputs: {}
+errors: ["main symbol resolution failed: 's2.Harness.noSuchMethod' not found", "main symbol resolution failed: 's2.Harness.noSuchMethod' not found", 'SUPPORT FUNCTION GENERATION ERROR']
+### e2_loop5_unwind3.json (exit 10)
+verdict: BOUND_INSUFFICIENT
+failed: [('java::s2.Cost.loopSum:(I)V.unwind.0', '73')]
+inputs: {}
+errors: []
+### e2_reachGood.json (exit 10)
+verdict: COUNTEREXAMPLE
+failed: [('java::s2.Harness.reachGood:()V.assertion.1', '95')]
+inputs: {'in_wsA': 0, 'in_wsB': 0, 'in_wsC': 0, 'in_wsD': 0}
+errors: []
+### replay Bug with: -3 -2 -1 0
+WS-A: reference=-3 candidate=-3  ok
+WS-B: reference=-2 candidate=-2  ok
+WS-C: reference=-1 candidate=0  MISMATCH
+WS-D: reference=1 candidate=1  ok
+exit=1
+### replay Good with: -3 -2 -1 0
+WS-A: reference=-3 candidate=-3  ok
+WS-B: reference=-2 candidate=-2  ok
+WS-C: reference=-1 candidate=-1  ok
+WS-D: reference=1 candidate=1  ok
+exit=0
+### replay BugTrunc with: -294912 8388608 -1 0
+WS-A: reference=-294912 candidate=-294912  ok
+WS-B: reference=8388608 candidate=8388608  ok
+WS-C: reference=809370 candidate=809370  ok
+WS-D: reference=683520 candidate=8683520  MISMATCH
+exit=1
+### replay Good with: -294912 8388608 -1 0
+WS-A: reference=-294912 candidate=-294912  ok
+WS-B: reference=8388608 candidate=8388608  ok
+WS-C: reference=809370 candidate=809370  ok
+WS-D: reference=683520 candidate=683520  ok
+exit=0

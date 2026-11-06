@@ -1,0 +1,152 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 84 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::s2.Gotchas.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 1 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 2 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 3 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 4 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.nondetPicX:(I)[C.0 iteration 5 file s2/Gotchas.java line 44 function java::s2.Gotchas.nondetPicX:(I)[C bytecode-index 25 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 1 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 2 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 3 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 4 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 5 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 6 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 7 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+Unwinding loop java::s2.Gotchas.refMove:([CI)[C.0 iteration 8 file s2/Gotchas.java line 54 function java::s2.Gotchas.refMove:([CI)[C bytecode-index 21 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 80 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 34 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 1 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 2 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 3 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 4 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 5 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 6 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 7 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53 thread 0
+Unwinding loop java::s2.Gotchas.picXStringConcat:()V.0 iteration 8 file s2/Gotchas.java line 81 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 55 thread 0
+Runtime Symex: 0.0893308s
+size of program expression: 1085 steps
+simple slicing removed 9 assignments
+Generated 140 VCC(s), 18 remaining after simplification
+Runtime Postprocess Equation: 0.00125396s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.00579399s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+11326 variables, 8418 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.0143435s
+Runtime decision procedure: 0.0240315s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+11326 variables, 4278 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.00607687s
+Runtime decision procedure: 0.00783774s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+11326 variables, 4271 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.00357116s
+Runtime decision procedure: 0.00477168s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+11326 variables, 4271 clauses
+SAT checker inconsistent: instance is UNSATISFIABLE
+BV-Refinement: got UNSAT, and the proof passes => UNSAT
+Total iterations: 1
+Runtime Solver: 0.00286237s
+Runtime decision procedure: 0.00407159s
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+function java::java.lang.String.length:()I
+[java::java.lang.String.length:()I.1] assertion: SUCCESS
+
+function java::java.lang.StringBuilder.<init>:()V
+[java::java.lang.StringBuilder.<init>:()V.1] assertion: SUCCESS
+
+function java::java.lang.StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+[java::java.lang.StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;.1] assertion: SUCCESS
+[java::java.lang.StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;.2] assertion: SUCCESS
+[java::java.lang.StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;.3] assertion: SUCCESS
+[java::java.lang.StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;.4] assertion: SUCCESS
+[java::java.lang.StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;.5] assertion: SUCCESS
+[java::java.lang.StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;.6] assertion: SUCCESS
+
+function java::java.lang.StringBuilder.toString:()Ljava/lang/String;
+[java::java.lang.StringBuilder.toString:()Ljava/lang/String;.1] assertion: SUCCESS
+[java::java.lang.StringBuilder.toString:()Ljava/lang/String;.2] assertion: SUCCESS
+[java::java.lang.StringBuilder.toString:()Ljava/lang/String;.3] assertion: SUCCESS
+
+function java::s2.Gotchas.refMove:([CI)[C
+[java::s2.Gotchas.refMove:([CI)[C.1] assertion: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.2] assertion: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.3] assertion: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.<clinit>:()V
+[java::s2.Gotchas.<clinit>:()V.null-pointer-exception.1] line 6 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.nondetPicX:(I)[C
+[java::s2.Gotchas.nondetPicX:(I)[C.array-create-negative-size.1] line 43 Array size should be >= 0: SUCCESS
+[java::s2.Gotchas.nondetPicX:(I)[C.array-index-out-of-bounds-high.1] line 47 Array index should be < length: SUCCESS
+[java::s2.Gotchas.nondetPicX:(I)[C.array-index-out-of-bounds-low.1] line 47 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.nondetPicX:(I)[C.null-pointer-exception.1] line 47 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.picXStringConcat:()V
+[java::s2.Gotchas.picXStringConcat:()V.1] line 76 no uncaught exception: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.1] line 78 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.2] line 79 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.3] line 79 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.4] line 79 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.5] line 79 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.6] line 79 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.assertion.1] line 80 assertion at file s2/Gotchas.java line 80 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 34: FAILURE
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.7] line 80 Null pointer check: FAILURE
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.8] line 80 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.array-index-out-of-bounds-high.1] line 82 Array index should be < length: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.array-index-out-of-bounds-low.1] line 82 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.assertion.2] line 82 assertion at file s2/Gotchas.java line 82 function java::s2.Gotchas.picXStringConcat:()V bytecode-index 53: FAILURE
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.9] line 82 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.10] line 82 Null pointer check: SUCCESS
+[java::s2.Gotchas.picXStringConcat:()V.null-pointer-exception.11] line 82 Null pointer check: SUCCESS
+
+s2/Gotchas.java function java::s2.Gotchas.refMove:([CI)[C
+[java::s2.Gotchas.refMove:([CI)[C.array-create-negative-size.1] line 53 Array size should be >= 0: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.array-index-out-of-bounds-high.1] line 55 Array index should be < length: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.array-index-out-of-bounds-low.1] line 55 Array index should be >= 0: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.null-pointer-exception.1] line 55 Null pointer check: SUCCESS
+[java::s2.Gotchas.refMove:([CI)[C.null-pointer-exception.2] line 55 Null pointer check: SUCCESS
+
+** 3 of 49 failed (4 iterations)
+VERIFICATION FAILED

@@ -1,0 +1,131 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 81 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Runtime Symex: 0.00403692s
+size of program expression: 57 steps
+simple slicing removed 7 assignments
+Generated 5 VCC(s), 2 remaining after simplification
+Runtime Postprocess Equation: 6.7657e-05s
+Passing problem to string refinement loop with MiniSAT 2.2.1 without simplifier
+converting SSA
+Runtime Convert SSA: 0.000467331s
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+545 variables, 323 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.00370543s
+Runtime decision procedure: 0.00866602s
+Building error trace
+Running string refinement loop with MiniSAT 2.2.1 without simplifier
+545 variables, 323 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.00374954s
+Runtime decision procedure: 0.0066562s
+Building error trace
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+s2/Gotchas.java function java::s2.Gotchas.arrIdx:(I)J
+[java::s2.Gotchas.arrIdx:(I)J.1] line 16 no uncaught exception: SUCCESS
+[java::s2.Gotchas.arrIdx:(I)J.array-create-negative-size.1] line 16 Array size should be >= 0: SUCCESS
+[java::s2.Gotchas.arrIdx:(I)J.array-index-out-of-bounds-high.1] line 17 Array index should be < length: FAILURE
+[java::s2.Gotchas.arrIdx:(I)J.array-index-out-of-bounds-low.1] line 17 Array index should be >= 0: FAILURE
+[java::s2.Gotchas.arrIdx:(I)J.null-pointer-exception.1] line 17 Null pointer check: SUCCESS
+
+Trace for java::s2.Gotchas.arrIdx:(I)J.array-index-out-of-bounds-high.1:
+
+↳ __CPROVER_initialize()
+  __CPROVER_rounding_mode=0 (00000000 00000000 00000000 00000000)
+  @inflight_exception=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+↵
+  uncaught_exception'=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: i=6 (00000000 00000000 00000000 00000110)
+
+↳ s2/Gotchas.java:16 s2.Gotchas.arrIdx(int)(6)
+  16: dynamic_object={ .@java.lang.Object={ .@class_identifier="java::array[long]" },
+    .length=0, .data=null } ({ { ? }, 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 })
+  16: dynamic_object.@java.lang.Object={ .@class_identifier="java::array[long]" } ({ ? })
+  16: dynamic_object.@java.lang.Object.@class_identifier="java::array[long]" (?)
+  16: dynamic_object.length=0 (00000000 00000000 00000000 00000000)
+  16: dynamic_object.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: newarray_tmp0=&dynamic_object (00000000 00000010 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_object.@java.lang.Object.@class_identifier="java::array[long]" (?)
+  16: dynamic_object.length=0 (00000000 00000000 00000000 00000000)
+  16: dynamic_object.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_object.length=5 (00000000 00000000 00000000 00000101)
+  16: tmp_new_data_array=dynamic_array (00000000 00000011 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_object.data=dynamic_array (00000000 00000011 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array={ 0L, 0L, 0L, 0L, 0L } ({ 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 })
+  16: dynamic_array[0L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[1L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[2L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[3L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[4L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: t=&dynamic_object (00000000 00000010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+Violated property:
+  file s2/Gotchas.java function s2.Gotchas.arrIdx(int) line 17 thread 0
+  Array index should be < length
+  i < t->length
+
+
+
+Trace for java::s2.Gotchas.arrIdx:(I)J.array-index-out-of-bounds-low.1:
+
+↳ __CPROVER_initialize()
+  __CPROVER_rounding_mode=0 (00000000 00000000 00000000 00000000)
+  @inflight_exception=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+↵
+  uncaught_exception'=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: i=-2147483648 (10000000 00000000 00000000 00000000)
+
+↳ s2/Gotchas.java:16 s2.Gotchas.arrIdx(int)(-2147483648)
+  16: dynamic_object={ .@java.lang.Object={ .@class_identifier="java::array[long]" },
+    .length=0, .data=null } ({ { ? }, 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 })
+  16: dynamic_object.@java.lang.Object={ .@class_identifier="java::array[long]" } ({ ? })
+  16: dynamic_object.@java.lang.Object.@class_identifier="java::array[long]" (?)
+  16: dynamic_object.length=0 (00000000 00000000 00000000 00000000)
+  16: dynamic_object.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: newarray_tmp0=&dynamic_object (00000000 00000010 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_object.@java.lang.Object.@class_identifier="java::array[long]" (?)
+  16: dynamic_object.length=0 (00000000 00000000 00000000 00000000)
+  16: dynamic_object.data=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_object.length=5 (00000000 00000000 00000000 00000101)
+  16: tmp_new_data_array=dynamic_array (00000000 00000011 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_object.data=dynamic_array (00000000 00000011 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array={ 0L, 0L, 0L, 0L, 0L } ({ 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000, 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 })
+  16: dynamic_array[0L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[1L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[2L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[3L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: dynamic_array[4L]=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+  16: t=&dynamic_object (00000000 00000010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+Violated property:
+  file s2/Gotchas.java function s2.Gotchas.arrIdx(int) line 17 thread 0
+  Array index should be >= 0
+  i >= 0
+
+
+
+** 2 of 14 failed (3 iterations)
+VERIFICATION FAILED

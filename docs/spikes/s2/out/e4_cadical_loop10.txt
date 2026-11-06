@@ -1,0 +1,145 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Cost
+Found Java main class: s2.Cost
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 78 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::s2.Cost.<clinit_wrapper> iteration 1
+Unwinding recursion java::s2.Harness.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 1 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 2 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 3 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 4 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 5 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 6 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 7 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 8 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 9 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.0 iteration 10 file s2/Cost.java line 73 function java::s2.Cost.loopSum:(I)V bytecode-index 24 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 1 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 2 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 3 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 4 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 5 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 6 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 7 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 8 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 9 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.1 iteration 10 file s2/Cost.java line 83 function java::s2.Cost.loopSum:(I)V bytecode-index 60 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 1 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 2 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 3 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 4 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 5 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 6 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 7 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 8 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 9 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+Unwinding loop java::s2.Cost.loopSum:(I)V.2 iteration 10 file s2/Cost.java line 90 function java::s2.Cost.loopSum:(I)V bytecode-index 77 thread 0
+aborting path on assume(false) at file s2/Cost.java line 94 function java::s2.Cost.loopSum:(I)V bytecode-index 93 thread 0
+Runtime Symex: 0.239783s
+size of program expression: 2562 steps
+simple slicing removed 15 assignments
+Generated 281 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 0.000589227s
+Passing problem to string refinement loop with CaDiCaL 2.0.0
+converting SSA
+Runtime Convert SSA: 0.0274209s
+Running string refinement loop with CaDiCaL 2.0.0
+57496 variables, 185411 clauses
+SAT checker: instance is UNSATISFIABLE
+BV-Refinement: got UNSAT, and the proof passes => UNSAT
+Total iterations: 1
+Runtime Solver: 86.4572s
+Runtime decision procedure: 86.4927s
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+function java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.1] assertion: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.2] assertion: SUCCESS
+
+s2/Cost.java function java::s2.Cost.<clinit>:()V
+[java::s2.Cost.<clinit>:()V.null-pointer-exception.1] line 6 Null pointer check: SUCCESS
+
+s2/Cost.java function java::s2.Cost.loopSum10:()V
+[java::s2.Cost.loopSum10:()V.1] line 99 no uncaught exception: SUCCESS
+
+s2/Cost.java function java::s2.Cost.loopSum:(I)V
+[java::s2.Cost.loopSum:(I)V.array-create-negative-size.1] line 71 Array size should be >= 0: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-create-negative-size.2] line 72 Array size should be >= 0: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-high.1] line 75 Array index should be < length: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-low.1] line 75 Array index should be >= 0: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.1] line 75 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-high.2] line 76 Array index should be < length: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-low.2] line 76 Array index should be >= 0: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.2] line 76 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.3] line 79 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.4] line 80 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.5] line 81 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-high.3] line 84 Array index should be < length: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-low.3] line 84 Array index should be >= 0: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.6] line 84 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.7] line 84 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-high.4] line 91 Array index should be < length: SUCCESS
+[java::s2.Cost.loopSum:(I)V.array-index-out-of-bounds-low.4] line 91 Array index should be >= 0: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.8] line 91 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.integer-divide-by-zero.1] line 93 Denominator should be nonzero: SUCCESS
+[java::s2.Cost.loopSum:(I)V.assertion.1] line 94 assertion at file s2/Cost.java line 94 function java::s2.Cost.loopSum:(I)V bytecode-index 93: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.9] line 94 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.10] line 94 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.11] line 94 Null pointer check: SUCCESS
+[java::s2.Cost.loopSum:(I)V.assertion.2] line 95 assertion at file s2/Cost.java line 95 function java::s2.Cost.loopSum:(I)V bytecode-index 103: SUCCESS
+[java::s2.Cost.loopSum:(I)V.null-pointer-exception.12] line 95 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.<init>:(IIZ)V
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.1] line 15 Null pointer check: SUCCESS
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.2] line 16 Null pointer check: SUCCESS
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.3] line 17 Null pointer check: SUCCESS
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.4] line 18 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.1] line 83 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.2] line 83 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.3] line 84 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.4] line 84 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.5] line 85 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.6] line 85 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.7] line 86 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.pow10:(I)J
+[java::s2.Dec.pow10:(I)J.null-pointer-exception.1] line 43 Null pointer check: SUCCESS
+[java::s2.Dec.pow10:(I)J.null-pointer-exception.2] line 43 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.rescale:(JIIZ)J
+[java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.1] line 56 Denominator should be nonzero: SUCCESS
+[java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.2] line 58 Denominator should be nonzero: SUCCESS
+
+s2/Dec.java function java::s2.Dec.store:(JIZ)V
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.1] line 73 Null pointer check: SUCCESS
+[java::s2.Dec.store:(JIZ)V.integer-divide-by-zero.1] line 74 Denominator should be nonzero: SUCCESS
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.2] line 74 Null pointer check: SUCCESS
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.3] line 75 Null pointer check: SUCCESS
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.4] line 78 Null pointer check: SUCCESS
+
+s2/Harness.java function java::s2.Harness.<clinit>:()V
+[java::s2.Harness.<clinit>:()V.null-pointer-exception.1] line 12 Null pointer check: SUCCESS
+
+** 0 of 59 failed (1 iterations)
+VERIFICATION SUCCESSFUL

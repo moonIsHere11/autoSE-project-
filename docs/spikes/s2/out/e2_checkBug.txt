@@ -1,0 +1,1871 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Harness
+Found Java main class: s2.Harness
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 65 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::s2.Harness.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+aborting path on assume(false) at file s2/Harness.java line 60 function java::s2.Harness.checkBug:()V bytecode-index 55 thread 0
+aborting path on assume(false) at file s2/Harness.java line 61 function java::s2.Harness.checkBug:()V bytecode-index 69 thread 0
+aborting path on assume(false) at file s2/Harness.java line 62 function java::s2.Harness.checkBug:()V bytecode-index 83 thread 0
+aborting path on assume(false) at file s2/Harness.java line 63 function java::s2.Harness.checkBug:()V bytecode-index 97 thread 0
+Runtime Symex: 0.0870124s
+size of program expression: 1160 steps
+simple slicing removed 6 assignments
+Generated 119 VCC(s), 4 remaining after simplification
+Runtime Postprocess Equation: 0.000243171s
+Passing problem to string refinement loop with CaDiCaL 2.0.0
+converting SSA
+Runtime Convert SSA: 0.0111463s
+Running string refinement loop with CaDiCaL 2.0.0
+27682 variables, 77898 clauses
+SAT checker: instance is SATISFIABLE
+BV-Refinement: got SAT, and it simulates => SAT
+Total iterations: 1
+Runtime Solver: 0.0945231s
+Runtime decision procedure: 0.111543s
+Building error trace
+Running string refinement loop with CaDiCaL 2.0.0
+27682 variables, 77899 clauses
+SAT checker: instance is UNSATISFIABLE
+BV-Refinement: got UNSAT, and the proof passes => UNSAT
+Total iterations: 1
+Runtime Solver: 4.35554s
+Runtime decision procedure: 4.35722s
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+function java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.1] assertion: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.2] assertion: SUCCESS
+
+function java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.1] assertion: SUCCESS
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.2] assertion: SUCCESS
+
+s2/Dec.java function java::s2.Dec.<init>:(IIZ)V
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.1] line 15 Null pointer check: SUCCESS
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.2] line 16 Null pointer check: SUCCESS
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.3] line 17 Null pointer check: SUCCESS
+[java::s2.Dec.<init>:(IIZ)V.null-pointer-exception.4] line 18 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.1] line 83 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.2] line 83 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.3] line 84 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.4] line 84 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.5] line 85 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.6] line 85 Null pointer check: SUCCESS
+[java::s2.Dec.add:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.7] line 86 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.pow10:(I)J
+[java::s2.Dec.pow10:(I)J.null-pointer-exception.1] line 43 Null pointer check: SUCCESS
+[java::s2.Dec.pow10:(I)J.null-pointer-exception.2] line 43 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.rescale:(JIIZ)J
+[java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.1] line 56 Denominator should be nonzero: SUCCESS
+[java::s2.Dec.rescale:(JIIZ)J.integer-divide-by-zero.2] line 58 Denominator should be nonzero: SUCCESS
+
+s2/Dec.java function java::s2.Dec.store:(JIZ)V
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.1] line 73 Null pointer check: SUCCESS
+[java::s2.Dec.store:(JIZ)V.integer-divide-by-zero.1] line 74 Denominator should be nonzero: SUCCESS
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.2] line 74 Null pointer check: SUCCESS
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.3] line 75 Null pointer check: SUCCESS
+[java::s2.Dec.store:(JIZ)V.null-pointer-exception.4] line 78 Null pointer check: SUCCESS
+
+s2/Dec.java function java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.1] line 91 Null pointer check: SUCCESS
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.2] line 91 Null pointer check: SUCCESS
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.3] line 92 Null pointer check: SUCCESS
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.4] line 92 Null pointer check: SUCCESS
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.5] line 93 Null pointer check: SUCCESS
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.6] line 93 Null pointer check: SUCCESS
+[java::s2.Dec.subtract:(Ls2/Dec;Ls2/Dec;Ls2/Dec;Z)V.null-pointer-exception.7] line 94 Null pointer check: SUCCESS
+
+s2/Harness.java function java::s2.Harness.<clinit>:()V
+[java::s2.Harness.<clinit>:()V.null-pointer-exception.1] line 12 Null pointer check: SUCCESS
+
+s2/Harness.java function java::s2.Harness.checkBug:()V
+[java::s2.Harness.checkBug:()V.1] line 51 no uncaught exception: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.1] line 56 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.2] line 57 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.3] line 57 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.4] line 57 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.5] line 57 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.6] line 58 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.7] line 59 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.assertion.1] line 60 assertion at file s2/Harness.java line 60 function java::s2.Harness.checkBug:()V bytecode-index 55: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.8] line 60 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.9] line 60 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.10] line 60 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.11] line 60 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.12] line 60 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.13] line 60 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.14] line 60 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.assertion.2] line 61 assertion at file s2/Harness.java line 61 function java::s2.Harness.checkBug:()V bytecode-index 69: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.15] line 61 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.16] line 61 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.17] line 61 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.18] line 61 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.19] line 61 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.20] line 61 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.21] line 61 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.assertion.3] line 62 assertion at file s2/Harness.java line 62 function java::s2.Harness.checkBug:()V bytecode-index 83: FAILURE
+[java::s2.Harness.checkBug:()V.null-pointer-exception.22] line 62 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.23] line 62 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.24] line 62 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.25] line 62 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.26] line 62 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.27] line 62 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.28] line 62 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.assertion.4] line 63 assertion at file s2/Harness.java line 63 function java::s2.Harness.checkBug:()V bytecode-index 97: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.29] line 63 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.30] line 63 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.31] line 63 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.32] line 63 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.33] line 63 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.34] line 63 Null pointer check: SUCCESS
+[java::s2.Harness.checkBug:()V.null-pointer-exception.35] line 63 Null pointer check: SUCCESS
+
+s2/Harness.java function java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.1] line 24 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.2] line 25 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.3] line 25 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.4] line 26 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.5] line 26 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.6] line 27 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.7] line 27 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.8] line 28 Null pointer check: SUCCESS
+[java::s2.Harness.ref:(JJJJ)Ls2/RefUnit;.null-pointer-exception.9] line 28 Null pointer check: SUCCESS
+
+s2/LlmBug.java function java::s2.LlmBug.<init>:()V
+[java::s2.LlmBug.<init>:()V.null-pointer-exception.1] line 4 Null pointer check: SUCCESS
+
+s2/LlmBug.java function java::s2.LlmBug.calcTotal:()V
+[java::s2.LlmBug.calcTotal:()V.null-pointer-exception.1] line 11 Null pointer check: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.null-pointer-exception.2] line 11 Null pointer check: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.1] line 12 Denominator should be nonzero: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.2] line 12 Denominator should be nonzero: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.null-pointer-exception.3] line 12 Null pointer check: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.null-pointer-exception.4] line 13 Null pointer check: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.null-pointer-exception.5] line 13 Null pointer check: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.integer-divide-by-zero.3] line 17 Denominator should be nonzero: SUCCESS
+[java::s2.LlmBug.calcTotal:()V.null-pointer-exception.6] line 17 Null pointer check: SUCCESS
+
+s2/RefUnit.java function java::s2.RefUnit.<init>:()V
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.1] line 14 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.2] line 15 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.3] line 15 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.4] line 16 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.5] line 16 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.6] line 17 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.7] line 17 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.8] line 18 Null pointer check: SUCCESS
+[java::s2.RefUnit.<init>:()V.null-pointer-exception.9] line 18 Null pointer check: SUCCESS
+
+s2/RefUnit.java function java::s2.RefUnit.calcTotal:()V
+[java::s2.RefUnit.calcTotal:()V.null-pointer-exception.1] line 21 Null pointer check: SUCCESS
+[java::s2.RefUnit.calcTotal:()V.null-pointer-exception.2] line 21 Null pointer check: SUCCESS
+[java::s2.RefUnit.calcTotal:()V.null-pointer-exception.3] line 21 Null pointer check: SUCCESS
+[java::s2.RefUnit.calcTotal:()V.null-pointer-exception.4] line 22 Null pointer check: SUCCESS
+[java::s2.RefUnit.calcTotal:()V.null-pointer-exception.5] line 22 Null pointer check: SUCCESS
+[java::s2.RefUnit.calcTotal:()V.null-pointer-exception.6] line 22 Null pointer check: SUCCESS
+
+Trace for java::s2.Harness.checkBug:()V.assertion.3:
+
+State 3 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  __CPROVER_rounding_mode=0 (00000000 00000000 00000000 00000000)
+
+State 4 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  @inflight_exception=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 5 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+
+State 6 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA.length=7 (00000000 00000000 00000000 00000111)
+
+State 7 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA.data=EQ_20WS_2dA_constarray (?)
+
+State 8 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray={ 'E', 'Q', ' ', 'W', 'S', '-', 'A' } ({ 00000000 01000101, 00000000 01010001, 00000000 00100000, 00000000 01010111, 00000000 01010011, 00000000 00101101, 00000000 01000001 })
+
+State 9 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray[0L]='E' (00000000 01000101)
+
+State 10 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray[1L]='Q' (00000000 01010001)
+
+State 11 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray[2L]=' ' (00000000 00100000)
+
+State 12 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray[3L]='W' (00000000 01010111)
+
+State 13 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray[4L]='S' (00000000 01010011)
+
+State 14 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray[5L]='-' (00000000 00101101)
+
+State 15 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_constarray[6L]='A' (00000000 01000001)
+
+State 16 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dA_return_value=0 (00000000 00000000 00000000 00000000)
+
+State 17 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+
+State 18 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB.length=7 (00000000 00000000 00000000 00000111)
+
+State 19 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB.data=EQ_20WS_2dB_constarray (?)
+
+State 20 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray={ 'E', 'Q', ' ', 'W', 'S', '-', 'B' } ({ 00000000 01000101, 00000000 01010001, 00000000 00100000, 00000000 01010111, 00000000 01010011, 00000000 00101101, 00000000 01000010 })
+
+State 21 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray[0L]='E' (00000000 01000101)
+
+State 22 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray[1L]='Q' (00000000 01010001)
+
+State 23 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray[2L]=' ' (00000000 00100000)
+
+State 24 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray[3L]='W' (00000000 01010111)
+
+State 25 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray[4L]='S' (00000000 01010011)
+
+State 26 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray[5L]='-' (00000000 00101101)
+
+State 27 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_constarray[6L]='B' (00000000 01000010)
+
+State 28 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dB_return_value=0 (00000000 00000000 00000000 00000000)
+
+State 29 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+
+State 30 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC.length=7 (00000000 00000000 00000000 00000111)
+
+State 31 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC.data=EQ_20WS_2dC_constarray (?)
+
+State 32 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray={ 'E', 'Q', ' ', 'W', 'S', '-', 'C' } ({ 00000000 01000101, 00000000 01010001, 00000000 00100000, 00000000 01010111, 00000000 01010011, 00000000 00101101, 00000000 01000011 })
+
+State 33 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray[0L]='E' (00000000 01000101)
+
+State 34 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray[1L]='Q' (00000000 01010001)
+
+State 35 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray[2L]=' ' (00000000 00100000)
+
+State 36 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray[3L]='W' (00000000 01010111)
+
+State 37 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray[4L]='S' (00000000 01010011)
+
+State 38 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray[5L]='-' (00000000 00101101)
+
+State 39 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_constarray[6L]='C' (00000000 01000011)
+
+State 40 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dC_return_value=0 (00000000 00000000 00000000 00000000)
+
+State 41 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+
+State 42 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD.length=7 (00000000 00000000 00000000 00000111)
+
+State 43 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD.data=EQ_20WS_2dD_constarray (?)
+
+State 44 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray={ 'E', 'Q', ' ', 'W', 'S', '-', 'D' } ({ 00000000 01000101, 00000000 01010001, 00000000 00100000, 00000000 01010111, 00000000 01010011, 00000000 00101101, 00000000 01000100 })
+
+State 45 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray[0L]='E' (00000000 01000101)
+
+State 46 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray[1L]='Q' (00000000 01010001)
+
+State 47 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray[2L]=' ' (00000000 00100000)
+
+State 48 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray[3L]='W' (00000000 01010111)
+
+State 49 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray[4L]='S' (00000000 01010011)
+
+State 50 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray[5L]='-' (00000000 00101101)
+
+State 51 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_constarray[6L]='D' (00000000 01000100)
+
+State 52 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  EQ_20WS_2dD_return_value=0 (00000000 00000000 00000000 00000000)
+
+State 53 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range.@java.lang.Object.@class_identifier="java::java.lang.String" (?)
+
+State 54 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range.length=18 (00000000 00000000 00000000 00010010)
+
+State 55 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range.data=pow10_20out_20of_20range_constarray (?)
+
+State 56 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray={ 'p', 'o', 'w', '1', '0', ' ', 'o', 'u', 't', ' ', 'o', 'f', ' ', 'r', 'a', 'n', 'g', 'e' } ({ 00000000 01110000, 00000000 01101111, 00000000 01110111, 00000000 00110001, 00000000 00110000, 00000000 00100000, 00000000 01101111, 00000000 01110101, 00000000 01110100, 00000000 00100000, 00000000 01101111, 00000000 01100110, 00000000 00100000, 00000000 01110010, 00000000 01100001, 00000000 01101110, 00000000 01100111, 00000000 01100101 })
+
+State 57 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[0L]='p' (00000000 01110000)
+
+State 58 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[1L]='o' (00000000 01101111)
+
+State 59 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[2L]='w' (00000000 01110111)
+
+State 60 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[3L]='1' (00000000 00110001)
+
+State 61 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[4L]='0' (00000000 00110000)
+
+State 62 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[5L]=' ' (00000000 00100000)
+
+State 63 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[6L]='o' (00000000 01101111)
+
+State 64 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[7L]='u' (00000000 01110101)
+
+State 65 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[8L]='t' (00000000 01110100)
+
+State 66 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[9L]=' ' (00000000 00100000)
+
+State 67 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[10L]='o' (00000000 01101111)
+
+State 68 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[11L]='f' (00000000 01100110)
+
+State 69 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[12L]=' ' (00000000 00100000)
+
+State 70 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[13L]='r' (00000000 01110010)
+
+State 71 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[14L]='a' (00000000 01100001)
+
+State 72 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[15L]='n' (00000000 01101110)
+
+State 73 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[16L]='g' (00000000 01100111)
+
+State 74 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_constarray[17L]='e' (00000000 01100101)
+
+State 75 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  pow10_20out_20of_20range_return_value=0 (00000000 00000000 00000000 00000000)
+
+State 76 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  enableAssume=false (00000000)
+
+State 77 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  enableConcurrency=false (00000000)
+
+State 78 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  enableNondet=false (00000000)
+
+State 79 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  java$$org_cprover_CProver$$clinit_already_run=false (0)
+
+State 80 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  $assertionsDisabled=false (00000000)
+
+State 81 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  java$$s2_Harness$$clinit_already_run=false (0)
+
+State 82 function __CPROVER_initialize thread 0
+----------------------------------------------------
+  s2.Harness@class_model.@class_identifier="java::java.lang.Class" (?)
+
+State 84 function __CPROVER__start thread 0
+----------------------------------------------------
+  uncaught_exception'=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 87 function s2.Harness.checkBug() thread 0
+----------------------------------------------------
+  l=INVALID-65535 (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 88 function s2.Harness.checkBug() thread 0
+----------------------------------------------------
+  r=INVALID-65535 (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 89 function s2.Harness.checkBug() thread 0
+----------------------------------------------------
+  in_wsD=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 90 function s2.Harness.checkBug() thread 0
+----------------------------------------------------
+  in_wsC=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 91 function s2.Harness.checkBug() thread 0
+----------------------------------------------------
+  in_wsB=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 92 function s2.Harness.checkBug() thread 0
+----------------------------------------------------
+  in_wsA=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 102 function java::s2.Harness.<clinit_wrapper> thread 0
+----------------------------------------------------
+  java$$s2_Harness$$clinit_already_run=true (1)
+
+State 109 file s2/Harness.java function s2.Harness.<clinit>() line 12 thread 0
+----------------------------------------------------
+  this=&s2.Harness@class_model (00000000 00000111 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 110 function java.lang.Class.desiredAssertionStatus() thread 0
+----------------------------------------------------
+  to_return=true (00000001)
+
+State 113 file s2/Harness.java function s2.Harness.<clinit>() line 12 thread 0
+----------------------------------------------------
+  return_tmp0=true (00000001)
+
+State 116 function s2.Harness.<clinit>() thread 0
+----------------------------------------------------
+  $stack_tmp1=0 (00000000 00000000 00000000 00000000)
+
+State 121 file s2/Harness.java function s2.Harness.<clinit>() line 12 thread 0
+----------------------------------------------------
+  $assertionsDisabled=false (00000000)
+
+State 126 file s2/Harness.java function s2.Harness.checkBug() line 51 thread 0
+----------------------------------------------------
+  digits=7 (00000000 00000000 00000000 00000111)
+
+State 127 file s2/Harness.java function s2.Harness.checkBug() line 51 thread 0
+----------------------------------------------------
+  signed=true (00000001)
+
+State 130 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  lim=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 131 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  v=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 137 function java::org.cprover.CProver.<clinit_wrapper> thread 0
+----------------------------------------------------
+  java$$org_cprover_CProver$$clinit_already_run=true (1)
+
+State 144 file org/cprover/CProver.java function org.cprover.CProver.<clinit>() line 22 thread 0
+----------------------------------------------------
+  enableAssume=true (00000001)
+
+State 149 file org/cprover/CProver.java function org.cprover.CProver.<clinit>() line 31 thread 0
+----------------------------------------------------
+  enableNondet=true (00000001)
+
+State 154 file org/cprover/CProver.java function org.cprover.CProver.<clinit>() line 40 thread 0
+----------------------------------------------------
+  enableConcurrency=true (00000001)
+
+State 159 function org.cprover.CProver.nondetLong() thread 0
+----------------------------------------------------
+  to_return=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 162 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  return_tmp0=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 163 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  v=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 166 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  n=7 (00000000 00000000 00000000 00000111)
+
+State 181 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  return_tmp1=10000000L (00000000 00000000 00000000 00000000 00000000 10011000 10010110 10000000)
+
+State 182 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  lim=10000000L (00000000 00000000 00000000 00000000 00000000 10011000 10010110 10000000)
+
+State 184 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 18 function java::s2.Harness.pic:(IZ)J bytecode-index 12
+  (__CPROVER_bool)$stack_tmp2
+
+State 189 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp3=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 19 function java::s2.Harness.pic:(IZ)J bytecode-index 31
+  (__CPROVER_bool)$stack_tmp3
+
+State 195 file s2/Harness.java function s2.Harness.checkBug() line 51 thread 0
+----------------------------------------------------
+  return_tmp0=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 196 file s2/Harness.java function s2.Harness.checkBug() line 51 thread 0
+----------------------------------------------------
+  in_wsA=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 203 file s2/Harness.java function s2.Harness.checkBug() line 52 thread 0
+----------------------------------------------------
+  digits=7 (00000000 00000000 00000000 00000111)
+
+State 204 file s2/Harness.java function s2.Harness.checkBug() line 52 thread 0
+----------------------------------------------------
+  signed=true (00000001)
+
+State 207 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  lim=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 208 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  v=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 217 function org.cprover.CProver.nondetLong() thread 0
+----------------------------------------------------
+  to_return=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 220 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  return_tmp0=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 221 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  v=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 224 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  n=7 (00000000 00000000 00000000 00000111)
+
+State 239 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  return_tmp1=10000000L (00000000 00000000 00000000 00000000 00000000 10011000 10010110 10000000)
+
+State 240 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  lim=10000000L (00000000 00000000 00000000 00000000 00000000 10011000 10010110 10000000)
+
+State 242 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 18 function java::s2.Harness.pic:(IZ)J bytecode-index 12
+  (__CPROVER_bool)$stack_tmp2
+
+State 247 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp3=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 19 function java::s2.Harness.pic:(IZ)J bytecode-index 31
+  (__CPROVER_bool)$stack_tmp3
+
+State 253 file s2/Harness.java function s2.Harness.checkBug() line 52 thread 0
+----------------------------------------------------
+  return_tmp1=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 254 file s2/Harness.java function s2.Harness.checkBug() line 52 thread 0
+----------------------------------------------------
+  in_wsB=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 261 file s2/Harness.java function s2.Harness.checkBug() line 53 thread 0
+----------------------------------------------------
+  digits=6 (00000000 00000000 00000000 00000110)
+
+State 262 file s2/Harness.java function s2.Harness.checkBug() line 53 thread 0
+----------------------------------------------------
+  signed=true (00000001)
+
+State 265 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  lim=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 266 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  v=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 275 function org.cprover.CProver.nondetLong() thread 0
+----------------------------------------------------
+  to_return=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 278 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  return_tmp0=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 279 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  v=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 282 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  n=6 (00000000 00000000 00000000 00000110)
+
+State 296 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  return_tmp1=1000000L (00000000 00000000 00000000 00000000 00000000 00001111 01000010 01000000)
+
+State 297 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  lim=1000000L (00000000 00000000 00000000 00000000 00000000 00001111 01000010 01000000)
+
+State 299 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 18 function java::s2.Harness.pic:(IZ)J bytecode-index 12
+  (__CPROVER_bool)$stack_tmp2
+
+State 304 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp3=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 19 function java::s2.Harness.pic:(IZ)J bytecode-index 31
+  (__CPROVER_bool)$stack_tmp3
+
+State 310 file s2/Harness.java function s2.Harness.checkBug() line 53 thread 0
+----------------------------------------------------
+  return_tmp2=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 311 file s2/Harness.java function s2.Harness.checkBug() line 53 thread 0
+----------------------------------------------------
+  in_wsC=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 318 file s2/Harness.java function s2.Harness.checkBug() line 54 thread 0
+----------------------------------------------------
+  digits=6 (00000000 00000000 00000000 00000110)
+
+State 319 file s2/Harness.java function s2.Harness.checkBug() line 54 thread 0
+----------------------------------------------------
+  signed=false (00000000)
+
+State 322 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  lim=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 323 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  v=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 332 function org.cprover.CProver.nondetLong() thread 0
+----------------------------------------------------
+  to_return=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 335 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  return_tmp0=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 336 file s2/Harness.java function s2.Harness.pic(int, boolean) line 16 thread 0
+----------------------------------------------------
+  v=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 339 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  n=6 (00000000 00000000 00000000 00000110)
+
+State 353 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  return_tmp1=1000000L (00000000 00000000 00000000 00000000 00000000 00001111 01000010 01000000)
+
+State 354 file s2/Harness.java function s2.Harness.pic(int, boolean) line 17 thread 0
+----------------------------------------------------
+  lim=1000000L (00000000 00000000 00000000 00000000 00000000 00001111 01000010 01000000)
+
+State 356 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp2=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 18 function java::s2.Harness.pic:(IZ)J bytecode-index 12
+  (__CPROVER_bool)$stack_tmp2
+
+State 361 function s2.Harness.pic(int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp3=1 (00000000 00000000 00000000 00000001)
+
+Assumption:
+  file s2/Harness.java line 19 function java::s2.Harness.pic:(IZ)J bytecode-index 31
+  (__CPROVER_bool)$stack_tmp3
+
+State 367 file s2/Harness.java function s2.Harness.checkBug() line 54 thread 0
+----------------------------------------------------
+  return_tmp3=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 368 file s2/Harness.java function s2.Harness.checkBug() line 54 thread 0
+----------------------------------------------------
+  in_wsD=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 375 file s2/Harness.java function s2.Harness.checkBug() line 55 thread 0
+----------------------------------------------------
+  a=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 376 file s2/Harness.java function s2.Harness.checkBug() line 55 thread 0
+----------------------------------------------------
+  b=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 377 file s2/Harness.java function s2.Harness.checkBug() line 55 thread 0
+----------------------------------------------------
+  c=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 378 file s2/Harness.java function s2.Harness.checkBug() line 55 thread 0
+----------------------------------------------------
+  d=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 380 function s2.Harness.ref(long, long, long, long) thread 0
+----------------------------------------------------
+  r=INVALID-65535 (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 381 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object={ .@java.lang.Object={ .@class_identifier="" },
+    .wsA=INVALID-65535, .wsB=INVALID-65535,
+    .wsC=INVALID-65535, .wsD=INVALID-65535 } ({ { ? }, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111 })
+
+State 382 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.@java.lang.Object={ .@class_identifier="" } ({ ? })
+
+State 383 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.@java.lang.Object.@class_identifier="" (?)
+
+State 384 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsA=INVALID-65535 (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 385 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsB=INVALID-65535 (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 386 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsC=INVALID-65535 (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 387 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsD=INVALID-65535 (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 388 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  new_tmp0=&dynamic_object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 389 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.@java.lang.Object.@class_identifier="java::s2.RefUnit" (?)
+
+State 390 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsA=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 391 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsB=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 392 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsC=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 393 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  dynamic_object.wsD=null (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 396 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  this=&dynamic_object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 403 file s2/RefUnit.java function s2.RefUnit() line 14 thread 0
+----------------------------------------------------
+  this=&dynamic_object.@java.lang.Object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 404 function java.lang.Object.<init>() thread 0
+----------------------------------------------------
+  to_construct=&dynamic_object.@java.lang.Object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 406 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0={ .@java.lang.Object={ .@class_identifier="" },
+    .unscaled=-1L, .digits=-1, .scale=-1,
+    .signed=true } ({ { ? }, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 })
+
+State 407 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.@java.lang.Object={ .@class_identifier="" } ({ ? })
+
+State 408 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.@java.lang.Object.@class_identifier="" (?)
+
+State 409 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.unscaled=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 410 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.digits=-1 (11111111 11111111 11111111 11111111)
+
+State 411 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.scale=-1 (11111111 11111111 11111111 11111111)
+
+State 412 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.signed=true (11111111)
+
+State 413 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  new_tmp0=&dynamic_object$0 (00000000 00001001 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 414 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.@java.lang.Object.@class_identifier="java::s2.Dec" (?)
+
+State 415 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.unscaled=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 416 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.digits=0 (00000000 00000000 00000000 00000000)
+
+State 417 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.scale=0 (00000000 00000000 00000000 00000000)
+
+State 418 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object$0.signed=false (00000000)
+
+State 421 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  this=&dynamic_object$0 (00000000 00001001 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 422 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  digits=7 (00000000 00000000 00000000 00000111)
+
+State 423 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  scale=2 (00000000 00000000 00000000 00000010)
+
+State 424 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  signed=true (00000001)
+
+State 427 file s2/Dec.java function s2.Dec(int, int, boolean) line 15 thread 0
+----------------------------------------------------
+  this=&dynamic_object$0.@java.lang.Object (00000000 00001001 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 428 function java.lang.Object.<init>() thread 0
+----------------------------------------------------
+  to_construct=&dynamic_object$0.@java.lang.Object (00000000 00001001 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 430 file s2/Dec.java function s2.Dec(int, int, boolean) line 16 thread 0
+----------------------------------------------------
+  dynamic_object$0.digits=7 (00000000 00000000 00000000 00000111)
+
+State 431 file s2/Dec.java function s2.Dec(int, int, boolean) line 17 thread 0
+----------------------------------------------------
+  dynamic_object$0.scale=2 (00000000 00000000 00000000 00000010)
+
+State 432 file s2/Dec.java function s2.Dec(int, int, boolean) line 18 thread 0
+----------------------------------------------------
+  dynamic_object$0.signed=true (00000001)
+
+State 434 file s2/RefUnit.java function s2.RefUnit() line 15 thread 0
+----------------------------------------------------
+  dynamic_object.wsA=&dynamic_object$0 (00000000 00001001 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 435 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1={ .@java.lang.Object={ .@class_identifier="" },
+    .unscaled=-1L, .digits=-1, .scale=-1,
+    .signed=true } ({ { ? }, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 })
+
+State 436 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.@java.lang.Object={ .@class_identifier="" } ({ ? })
+
+State 437 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.@java.lang.Object.@class_identifier="" (?)
+
+State 438 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.unscaled=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 439 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.digits=-1 (11111111 11111111 11111111 11111111)
+
+State 440 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.scale=-1 (11111111 11111111 11111111 11111111)
+
+State 441 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.signed=true (11111111)
+
+State 442 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  new_tmp1=&dynamic_object$1 (00000000 00001010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 443 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.@java.lang.Object.@class_identifier="java::s2.Dec" (?)
+
+State 444 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.unscaled=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 445 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.digits=0 (00000000 00000000 00000000 00000000)
+
+State 446 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.scale=0 (00000000 00000000 00000000 00000000)
+
+State 447 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.signed=false (00000000)
+
+State 450 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  this=&dynamic_object$1 (00000000 00001010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 451 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  digits=7 (00000000 00000000 00000000 00000111)
+
+State 452 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  scale=2 (00000000 00000000 00000000 00000010)
+
+State 453 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  signed=true (00000001)
+
+State 456 file s2/Dec.java function s2.Dec(int, int, boolean) line 15 thread 0
+----------------------------------------------------
+  this=&dynamic_object$1.@java.lang.Object (00000000 00001010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 457 function java.lang.Object.<init>() thread 0
+----------------------------------------------------
+  to_construct=&dynamic_object$1.@java.lang.Object (00000000 00001010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 459 file s2/Dec.java function s2.Dec(int, int, boolean) line 16 thread 0
+----------------------------------------------------
+  dynamic_object$1.digits=7 (00000000 00000000 00000000 00000111)
+
+State 460 file s2/Dec.java function s2.Dec(int, int, boolean) line 17 thread 0
+----------------------------------------------------
+  dynamic_object$1.scale=2 (00000000 00000000 00000000 00000010)
+
+State 461 file s2/Dec.java function s2.Dec(int, int, boolean) line 18 thread 0
+----------------------------------------------------
+  dynamic_object$1.signed=true (00000001)
+
+State 463 file s2/RefUnit.java function s2.RefUnit() line 16 thread 0
+----------------------------------------------------
+  dynamic_object.wsB=&dynamic_object$1 (00000000 00001010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 464 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2={ .@java.lang.Object={ .@class_identifier="" },
+    .unscaled=-1L, .digits=-1, .scale=-1,
+    .signed=true } ({ { ? }, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 })
+
+State 465 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.@java.lang.Object={ .@class_identifier="" } ({ ? })
+
+State 466 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.@java.lang.Object.@class_identifier="" (?)
+
+State 467 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.unscaled=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 468 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.digits=-1 (11111111 11111111 11111111 11111111)
+
+State 469 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.scale=-1 (11111111 11111111 11111111 11111111)
+
+State 470 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.signed=true (11111111)
+
+State 471 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  new_tmp2=&dynamic_object$2 (00000000 00001011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 472 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.@java.lang.Object.@class_identifier="java::s2.Dec" (?)
+
+State 473 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.unscaled=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 474 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.digits=0 (00000000 00000000 00000000 00000000)
+
+State 475 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.scale=0 (00000000 00000000 00000000 00000000)
+
+State 476 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.signed=false (00000000)
+
+State 479 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  this=&dynamic_object$2 (00000000 00001011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 480 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  digits=6 (00000000 00000000 00000000 00000110)
+
+State 481 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  scale=1 (00000000 00000000 00000000 00000001)
+
+State 482 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  signed=true (00000001)
+
+State 485 file s2/Dec.java function s2.Dec(int, int, boolean) line 15 thread 0
+----------------------------------------------------
+  this=&dynamic_object$2.@java.lang.Object (00000000 00001011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 486 function java.lang.Object.<init>() thread 0
+----------------------------------------------------
+  to_construct=&dynamic_object$2.@java.lang.Object (00000000 00001011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 488 file s2/Dec.java function s2.Dec(int, int, boolean) line 16 thread 0
+----------------------------------------------------
+  dynamic_object$2.digits=6 (00000000 00000000 00000000 00000110)
+
+State 489 file s2/Dec.java function s2.Dec(int, int, boolean) line 17 thread 0
+----------------------------------------------------
+  dynamic_object$2.scale=1 (00000000 00000000 00000000 00000001)
+
+State 490 file s2/Dec.java function s2.Dec(int, int, boolean) line 18 thread 0
+----------------------------------------------------
+  dynamic_object$2.signed=true (00000001)
+
+State 492 file s2/RefUnit.java function s2.RefUnit() line 17 thread 0
+----------------------------------------------------
+  dynamic_object.wsC=&dynamic_object$2 (00000000 00001011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 493 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3={ .@java.lang.Object={ .@class_identifier="" },
+    .unscaled=-1L, .digits=-1, .scale=-1,
+    .signed=true } ({ { ? }, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111, 11111111 })
+
+State 494 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.@java.lang.Object={ .@class_identifier="" } ({ ? })
+
+State 495 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.@java.lang.Object.@class_identifier="" (?)
+
+State 496 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.unscaled=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 497 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.digits=-1 (11111111 11111111 11111111 11111111)
+
+State 498 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.scale=-1 (11111111 11111111 11111111 11111111)
+
+State 499 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.signed=true (11111111)
+
+State 500 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  new_tmp3=&dynamic_object$3 (00000000 00001100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 501 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.@java.lang.Object.@class_identifier="java::s2.Dec" (?)
+
+State 502 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.unscaled=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 503 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.digits=0 (00000000 00000000 00000000 00000000)
+
+State 504 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.scale=0 (00000000 00000000 00000000 00000000)
+
+State 505 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.signed=false (00000000)
+
+State 508 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  this=&dynamic_object$3 (00000000 00001100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 509 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  digits=6 (00000000 00000000 00000000 00000110)
+
+State 510 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  scale=2 (00000000 00000000 00000000 00000010)
+
+State 511 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  signed=false (00000000)
+
+State 514 file s2/Dec.java function s2.Dec(int, int, boolean) line 15 thread 0
+----------------------------------------------------
+  this=&dynamic_object$3.@java.lang.Object (00000000 00001100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 515 function java.lang.Object.<init>() thread 0
+----------------------------------------------------
+  to_construct=&dynamic_object$3.@java.lang.Object (00000000 00001100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 517 file s2/Dec.java function s2.Dec(int, int, boolean) line 16 thread 0
+----------------------------------------------------
+  dynamic_object$3.digits=6 (00000000 00000000 00000000 00000110)
+
+State 518 file s2/Dec.java function s2.Dec(int, int, boolean) line 17 thread 0
+----------------------------------------------------
+  dynamic_object$3.scale=2 (00000000 00000000 00000000 00000010)
+
+State 519 file s2/Dec.java function s2.Dec(int, int, boolean) line 18 thread 0
+----------------------------------------------------
+  dynamic_object$3.signed=false (00000000)
+
+State 521 file s2/RefUnit.java function s2.RefUnit() line 18 thread 0
+----------------------------------------------------
+  dynamic_object.wsD=&dynamic_object$3 (00000000 00001100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 523 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 24 thread 0
+----------------------------------------------------
+  r=&dynamic_object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 524 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 25 thread 0
+----------------------------------------------------
+  dynamic_object$0.unscaled=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 525 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 26 thread 0
+----------------------------------------------------
+  dynamic_object$1.unscaled=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 526 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 27 thread 0
+----------------------------------------------------
+  dynamic_object$2.unscaled=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 527 file s2/Harness.java function s2.Harness.ref(long, long, long, long) line 28 thread 0
+----------------------------------------------------
+  dynamic_object$3.unscaled=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 530 file s2/Harness.java function s2.Harness.checkBug() line 55 thread 0
+----------------------------------------------------
+  return_tmp4=&dynamic_object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 531 file s2/Harness.java function s2.Harness.checkBug() line 55 thread 0
+----------------------------------------------------
+  r=&dynamic_object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 532 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4={ .@java.lang.Object={ .@class_identifier="" },
+    .wsA=-1L, .wsB=-1L, .wsC=-1L, .wsD=-1L } ({ { ? }, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111, 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111 })
+
+State 533 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.@java.lang.Object={ .@class_identifier="" } ({ ? })
+
+State 534 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.@java.lang.Object.@class_identifier="" (?)
+
+State 535 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsA=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 536 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsB=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 537 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsC=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 538 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsD=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 539 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  new_tmp5=&dynamic_object$4 (00000000 00001101 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 540 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.@java.lang.Object.@class_identifier="java::s2.LlmBug" (?)
+
+State 541 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsA=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 542 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsB=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 543 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsC=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 544 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsD=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 547 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  this=&dynamic_object$4 (00000000 00001101 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 550 file s2/LlmBug.java function s2.LlmBug() line 4 thread 0
+----------------------------------------------------
+  this=&dynamic_object$4.@java.lang.Object (00000000 00001101 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 551 function java.lang.Object.<init>() thread 0
+----------------------------------------------------
+  to_construct=&dynamic_object$4.@java.lang.Object (00000000 00001101 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 554 file s2/Harness.java function s2.Harness.checkBug() line 56 thread 0
+----------------------------------------------------
+  l=&dynamic_object$4 (00000000 00001101 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 555 file s2/Harness.java function s2.Harness.checkBug() line 57 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsA=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 556 file s2/Harness.java function s2.Harness.checkBug() line 57 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsB=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 557 file s2/Harness.java function s2.Harness.checkBug() line 57 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsC=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 558 file s2/Harness.java function s2.Harness.checkBug() line 57 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsD=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 561 file s2/Harness.java function s2.Harness.checkBug() line 58 thread 0
+----------------------------------------------------
+  this=&dynamic_object (00000000 00001000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 564 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 21 thread 0
+----------------------------------------------------
+  a=&dynamic_object$0 (00000000 00001001 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 565 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 21 thread 0
+----------------------------------------------------
+  b=&dynamic_object$1 (00000000 00001010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 566 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 21 thread 0
+----------------------------------------------------
+  target=&dynamic_object$2 (00000000 00001011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 567 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 21 thread 0
+----------------------------------------------------
+  rounded=true (00000001)
+
+State 570 function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp0=2 (00000000 00000000 00000000 00000010)
+
+State 573 function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  y=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 574 function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  x=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 575 function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  s=-1 (11111111 11111111 11111111 11111111)
+
+State 576 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 83 thread 0
+----------------------------------------------------
+  s=2 (00000000 00000000 00000000 00000010)
+
+State 579 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 84 thread 0
+----------------------------------------------------
+  v=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 580 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 84 thread 0
+----------------------------------------------------
+  from=2 (00000000 00000000 00000000 00000010)
+
+State 581 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 84 thread 0
+----------------------------------------------------
+  to=2 (00000000 00000000 00000000 00000010)
+
+State 582 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 84 thread 0
+----------------------------------------------------
+  rounded=false (00000000)
+
+State 587 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  n=0 (00000000 00000000 00000000 00000000)
+
+State 595 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  return_tmp0=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 600 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 84 thread 0
+----------------------------------------------------
+  return_tmp1=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 601 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 84 thread 0
+----------------------------------------------------
+  x=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 604 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 85 thread 0
+----------------------------------------------------
+  v=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 605 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 85 thread 0
+----------------------------------------------------
+  from=2 (00000000 00000000 00000000 00000010)
+
+State 606 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 85 thread 0
+----------------------------------------------------
+  to=2 (00000000 00000000 00000000 00000010)
+
+State 607 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 85 thread 0
+----------------------------------------------------
+  rounded=false (00000000)
+
+State 612 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  n=0 (00000000 00000000 00000000 00000000)
+
+State 620 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  return_tmp0=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 625 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 85 thread 0
+----------------------------------------------------
+  return_tmp2=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 626 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 85 thread 0
+----------------------------------------------------
+  y=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 629 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 86 thread 0
+----------------------------------------------------
+  this=&dynamic_object$2 (00000000 00001011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 630 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 86 thread 0
+----------------------------------------------------
+  v=-5L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111011)
+
+State 631 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 86 thread 0
+----------------------------------------------------
+  vScale=2 (00000000 00000000 00000000 00000010)
+
+State 632 file s2/Dec.java function s2.Dec.add(s2.Dec, s2.Dec, s2.Dec, boolean) line 86 thread 0
+----------------------------------------------------
+  rounded=true (00000001)
+
+State 633 function s2.Dec.store(long, int, boolean) thread 0
+----------------------------------------------------
+  r=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 638 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  v=-5L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111011)
+
+State 639 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  from=2 (00000000 00000000 00000000 00000010)
+
+State 640 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  to=1 (00000000 00000000 00000000 00000001)
+
+State 641 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  rounded=true (00000001)
+
+State 643 function s2.Dec.rescale(long, int, int, boolean) thread 0
+----------------------------------------------------
+  q=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 644 function s2.Dec.rescale(long, int, int, boolean) thread 0
+----------------------------------------------------
+  p=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 648 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 55 thread 0
+----------------------------------------------------
+  n=1 (00000000 00000000 00000000 00000001)
+
+State 657 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 55 thread 0
+----------------------------------------------------
+  return_tmp1=10L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001010)
+
+State 658 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 55 thread 0
+----------------------------------------------------
+  p=10L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001010)
+
+State 659 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 56 thread 0
+----------------------------------------------------
+  q=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 662 function s2.Dec.rescale(long, int, int, boolean) thread 0
+----------------------------------------------------
+  rem=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 663 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 58 thread 0
+----------------------------------------------------
+  rem=-5L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111011)
+
+State 665 function s2.Dec.rescale(long, int, int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp2=5L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)
+
+State 669 function s2.Dec.rescale(long, int, int, boolean) thread 0
+----------------------------------------------------
+  mag=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 670 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 59 thread 0
+----------------------------------------------------
+  mag=5L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)
+
+State 673 function s2.Dec.rescale(long, int, int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp3=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 674 function s2.Dec.rescale(long, int, int, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp4=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 676 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 61 thread 0
+----------------------------------------------------
+  q=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 680 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  return_tmp0=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 681 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  r=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 684 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 74 thread 0
+----------------------------------------------------
+  n=6 (00000000 00000000 00000000 00000110)
+
+State 698 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 74 thread 0
+----------------------------------------------------
+  return_tmp1=1000000L (00000000 00000000 00000000 00000000 00000000 00001111 01000010 01000000)
+
+State 699 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 74 thread 0
+----------------------------------------------------
+  r=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 702 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 78 thread 0
+----------------------------------------------------
+  dynamic_object$2.unscaled=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 709 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 22 thread 0
+----------------------------------------------------
+  a=&dynamic_object$1 (00000000 00001010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 710 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 22 thread 0
+----------------------------------------------------
+  b=&dynamic_object$0 (00000000 00001001 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 711 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 22 thread 0
+----------------------------------------------------
+  target=&dynamic_object$3 (00000000 00001100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 712 file s2/RefUnit.java function s2.RefUnit.calcTotal() line 22 thread 0
+----------------------------------------------------
+  rounded=false (00000000)
+
+State 715 function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  $stack_tmp0=2 (00000000 00000000 00000000 00000010)
+
+State 718 function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  y=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 719 function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  x=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 720 function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) thread 0
+----------------------------------------------------
+  s=-1 (11111111 11111111 11111111 11111111)
+
+State 721 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 91 thread 0
+----------------------------------------------------
+  s=2 (00000000 00000000 00000000 00000010)
+
+State 724 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 92 thread 0
+----------------------------------------------------
+  v=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 725 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 92 thread 0
+----------------------------------------------------
+  from=2 (00000000 00000000 00000000 00000010)
+
+State 726 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 92 thread 0
+----------------------------------------------------
+  to=2 (00000000 00000000 00000000 00000010)
+
+State 727 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 92 thread 0
+----------------------------------------------------
+  rounded=false (00000000)
+
+State 732 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  n=0 (00000000 00000000 00000000 00000000)
+
+State 740 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  return_tmp0=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 745 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 92 thread 0
+----------------------------------------------------
+  return_tmp1=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 746 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 92 thread 0
+----------------------------------------------------
+  x=-2L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110)
+
+State 749 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 93 thread 0
+----------------------------------------------------
+  v=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 750 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 93 thread 0
+----------------------------------------------------
+  from=2 (00000000 00000000 00000000 00000010)
+
+State 751 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 93 thread 0
+----------------------------------------------------
+  to=2 (00000000 00000000 00000000 00000010)
+
+State 752 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 93 thread 0
+----------------------------------------------------
+  rounded=false (00000000)
+
+State 757 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  n=0 (00000000 00000000 00000000 00000000)
+
+State 765 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  return_tmp0=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 770 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 93 thread 0
+----------------------------------------------------
+  return_tmp2=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 771 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 93 thread 0
+----------------------------------------------------
+  y=-3L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111101)
+
+State 774 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 94 thread 0
+----------------------------------------------------
+  this=&dynamic_object$3 (00000000 00001100 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 775 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 94 thread 0
+----------------------------------------------------
+  v=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 776 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 94 thread 0
+----------------------------------------------------
+  vScale=2 (00000000 00000000 00000000 00000010)
+
+State 777 file s2/Dec.java function s2.Dec.subtract(s2.Dec, s2.Dec, s2.Dec, boolean) line 94 thread 0
+----------------------------------------------------
+  rounded=false (00000000)
+
+State 778 function s2.Dec.store(long, int, boolean) thread 0
+----------------------------------------------------
+  r=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 783 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  v=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 784 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  from=2 (00000000 00000000 00000000 00000010)
+
+State 785 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  to=2 (00000000 00000000 00000000 00000010)
+
+State 786 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  rounded=false (00000000)
+
+State 791 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  n=0 (00000000 00000000 00000000 00000000)
+
+State 799 file s2/Dec.java function s2.Dec.rescale(long, int, int, boolean) line 53 thread 0
+----------------------------------------------------
+  return_tmp0=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 804 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  return_tmp0=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 805 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 73 thread 0
+----------------------------------------------------
+  r=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 808 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 74 thread 0
+----------------------------------------------------
+  n=6 (00000000 00000000 00000000 00000110)
+
+State 822 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 74 thread 0
+----------------------------------------------------
+  return_tmp1=1000000L (00000000 00000000 00000000 00000000 00000000 00001111 01000010 01000000)
+
+State 823 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 74 thread 0
+----------------------------------------------------
+  r=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 826 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 76 thread 0
+----------------------------------------------------
+  r=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 827 file s2/Dec.java function s2.Dec.store(long, int, boolean) line 78 thread 0
+----------------------------------------------------
+  dynamic_object$3.unscaled=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 836 file s2/Harness.java function s2.Harness.checkBug() line 59 thread 0
+----------------------------------------------------
+  this=&dynamic_object$4 (00000000 00001101 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 837 function s2.LlmBug.calcTotal() thread 0
+----------------------------------------------------
+  diff=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 838 function s2.LlmBug.calcTotal() thread 0
+----------------------------------------------------
+  sum=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 839 file s2/LlmBug.java function s2.LlmBug.calcTotal() line 11 thread 0
+----------------------------------------------------
+  sum=-5L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111011)
+
+State 840 file s2/LlmBug.java function s2.LlmBug.calcTotal() line 12 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsC=0L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 841 file s2/LlmBug.java function s2.LlmBug.calcTotal() line 13 thread 0
+----------------------------------------------------
+  diff=-1L (11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111)
+
+State 843 file s2/LlmBug.java function s2.LlmBug.calcTotal() line 15 thread 0
+----------------------------------------------------
+  diff=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 844 file s2/LlmBug.java function s2.LlmBug.calcTotal() line 17 thread 0
+----------------------------------------------------
+  dynamic_object$4.wsD=1L (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 865 file s2/Harness.java function s2.Harness.checkBug() line 62 thread 0
+----------------------------------------------------
+  dynamic_object$7={ .@class_identifier="" } ({ ? })
+
+State 866 file s2/Harness.java function s2.Harness.checkBug() line 62 thread 0
+----------------------------------------------------
+  dynamic_object$7.@class_identifier="" (?)
+
+State 867 file s2/Harness.java function s2.Harness.checkBug() line 62 thread 0
+----------------------------------------------------
+  new_tmp8=&dynamic_object$7 (00000000 00010010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 868 file s2/Harness.java function s2.Harness.checkBug() line 62 thread 0
+----------------------------------------------------
+  dynamic_object$7.@class_identifier="java::java.lang.AssertionError" (?)
+
+State 871 file s2/Harness.java function s2.Harness.checkBug() line 62 thread 0
+----------------------------------------------------
+  this=&dynamic_object$7 (00000000 00010010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 872 file s2/Harness.java function s2.Harness.checkBug() line 62 thread 0
+----------------------------------------------------
+  stub_ignored_arg1=&EQ_20WS_2dC.@java.lang.Object (00000000 00010011 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 873 function java.lang.AssertionError.<init>() thread 0
+----------------------------------------------------
+  to_construct=&dynamic_object$7 (00000000 00010010 00000000 00000000 00000000 00000000 00000000 00000000)
+
+Violated property:
+  file s2/Harness.java function s2.Harness.checkBug() line 62 thread 0
+  assertion at file s2/Harness.java line 62 function java::s2.Harness.checkBug:()V bytecode-index 83
+  false
+
+
+
+** 1 of 115 failed (2 iterations)
+VERIFICATION FAILED

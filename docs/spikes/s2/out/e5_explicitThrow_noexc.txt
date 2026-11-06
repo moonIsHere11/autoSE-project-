@@ -1,0 +1,33 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Gotchas
+Found Java main class: s2.Gotchas
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 81 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Runtime Symex: 0.00425351s
+size of program expression: 62 steps
+simple slicing removed 0 assignments
+Generated 2 VCC(s), 0 remaining after simplification
+Runtime Postprocess Equation: 6.1799e-05s
+
+** Results:
+[array-create-negative-size.1] Array size should be >= 0: SUCCESS
+[array-create-negative-size.2] Array size should be >= 0: SUCCESS
+[array-create-negative-size.3] Array size should be >= 0: SUCCESS
+[array-create-negative-size.4] Array size should be >= 0: SUCCESS
+[array-create-negative-size.5] Array size should be >= 0: SUCCESS
+[array-create-negative-size.6] Array size should be >= 0: SUCCESS
+[array-create-negative-size.7] Array size should be >= 0: SUCCESS
+[array-create-negative-size.8] Array size should be >= 0: SUCCESS
+[array-create-negative-size.9] Array size should be >= 0: SUCCESS
+s2/Gotchas.java function java::s2.Gotchas.explicitThrow:(I)V
+[java::s2.Gotchas.explicitThrow:(I)V.null-pointer-exception.1] line 28 Null pointer check: SUCCESS
+[java::s2.Gotchas.explicitThrow:(I)V.null-pointer-exception.2] line 28 Null pointer check: SUCCESS
+
+** 0 of 11 failed (1 iterations)
+VERIFICATION SUCCESSFUL

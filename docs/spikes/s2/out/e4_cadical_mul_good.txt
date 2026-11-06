@@ -1,0 +1,27 @@
+JBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Parsing ...
+Trying to load Java main class: s2.Cost
+Found Java main class: s2.Cost
+Converting
+stub class symbol java::java.lang.Object already exists
+Java: added 78 String or Class constant symbols
+Generating GOTO Program
+Running GOTO functions transformation passes
+Running with 16 object bits, 48 offset bits (default)
+Starting Bounded Model Checking
+Unwinding recursion java::s2.Harness.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::org.cprover.CProver.<clinit_wrapper> iteration 1
+Unwinding recursion java::s2.Cost.<clinit_wrapper> iteration 1
+aborting path on assume(false) at file s2/Cost.java line 23 function java::s2.Cost.mulRescale:()V bytecode-index 81 thread 0
+Runtime Symex: 0.0376735s
+size of program expression: 595 steps
+simple slicing removed 6 assignments
+Generated 38 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 0.00434379s
+Passing problem to string refinement loop with CaDiCaL 2.0.0
+converting SSA
+Runtime Convert SSA: 0.016623s
+Running string refinement loop with CaDiCaL 2.0.0
+31737 variables, 131703 clauses
