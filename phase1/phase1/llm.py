@@ -43,9 +43,9 @@ class GroqClient:
                 return out["choices"][0]["message"], out.get("usage", {})
             except urllib.error.HTTPError as e:
                 detail = e.read().decode(errors="replace")
-                if e.code in (429, 500, 502, 503) and i < retries:
+                if (e.code in (429, 500, 502, 503) or (e.code == 413 and "per minute" in detail)) and i < retries:
                     ra = e.headers.get("retry-after") if e.headers else None  # Groq tells us when the TPM window frees up
-                    time.sleep(min(float(ra) + 1, 65) if ra and ra.replace(".", "").isdigit() else min(2 ** (i + 1), 30))
+                    time.sleep(min(float(ra) + 1, 65) if ra and ra.replace(".", "").isdigit() else (20 if e.code == 413 else min(2 ** (i + 1), 30)))
                     continue
                 raise LLMError(f"Groq HTTP {e.code}: {detail[:500]}")
             except urllib.error.URLError as e:

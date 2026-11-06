@@ -221,7 +221,7 @@ def run(ws, wanted=None, max_steps=40, verbose=True, skip_survey=False):
         Loop(llm, tb, sys_fn, toolset(cfg, TRANSLATE_TOOLS), ws, unit_id=uid, log=log, budget=cfg.get('phase1', {}).get('context_budget', 36000)).run(
             f"Translate unit `{uid}` (plan reason: {item.get('reason', '')}). Already accepted: {accepted or 'none'}. "
             f"Required tier: {cfg['gate']['required_tier']}. Build: {' '.join(tc['build_cmd'])}.\n\n"
-            + (ix.program_pack(uid, 7000) + _small_source(ix, uid) if uid in ix.progs else ix.context_pack(uid, 5000)),
+            + (ix.program_pack(uid, 2200 if cfg.get('phase1', {}).get('toolset') == 'minimal' else 7000) + _small_source(ix, uid) if uid in ix.progs else ix.context_pack(uid, 5000)),
             lambda: st["green"] or st["attempts"] >= st["max"], max_steps)
         if st["green"]:
             accepted.append(uid)
