@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "language": "java",
+  "programs": [{
+    "cobol_program_id": "INVENTORY",
+    "cobol_file": "INVENTORY.cbl",
+    "class": "corpus.Inventory",
+    "files": [
+      {"cobol_select": "STOCK-FILE", "path": "STOCK.DAT"},
+      {"cobol_select": "VALUE-FILE", "path": "VALUE.DAT"}
+    ],
+    "units": [
+      {"cobol_paragraph": "MAIN-PARA", "target_symbol": "mainPara"},
+      {"cobol_paragraph": "READ-STOCK", "target_symbol": "readStock"},
+      {"cobol_paragraph": "VALIDATE-RECORD", "target_symbol": "validateRecord"},
+      {"cobol_paragraph": "VALUE-ITEM", "target_symbol": "valueItem"},
+      {"cobol_paragraph": "REJECT-ITEM", "target_symbol": "rejectItem"},
+      {"cobol_paragraph": "WRITE-VALUE", "target_symbol": "writeValue"},
+      {"cobol_paragraph": "SET-RETURN", "target_symbol": "setReturn"},
+      {"cobol_paragraph": "SHOW-TOTALS", "target_symbol": "showTotals"}
+    ],
+    "fields": [
+      {"cobol": "STK-ITEM", "target": "stkItem", "declared": {"kind": "alnum", "length": 6}},
+      {"cobol": "STK-QTY", "target": "stkQty",
+       "declared": {"kind": "decimal", "digits": 5, "scale": 0, "signed": true, "usage": "COMP-3"}},
+      {"cobol": "STK-COST", "target": "stkCost",
+       "declared": {"kind": "decimal", "digits": 6, "scale": 2, "signed": false, "usage": "PACKED-DECIMAL"}},
+      {"cobol": "STK-REORDER", "target": "stkReorder",
+       "declared": {"kind": "binary", "digits": 4, "scale": 0, "signed": true, "usage": "COMP"}},
+      {"cobol": "STK-ADJ", "target": "stkAdj",
+       "declared": {"kind": "decimal", "digits": 3, "scale": 0, "signed": true, "usage": "DISPLAY"}},
+      {"cobol": "STK-DISC", "target": "stkDisc",
+       "declared": {"kind": "decimal", "digits": 2, "scale": 2, "signed": true, "usage": "DISPLAY"}},
+      {"cobol": "VAL-AMOUNT", "target": "valAmount",
+       "declared": {"kind": "decimal", "digits": 10, "scale": 2, "signed": true, "usage": "COMP-3"}},
+      {"cobol": "VAL-COUNT", "target": "valCount",
+       "declared": {"kind": "binary", "digits": 4, "scale": 0, "signed": false, "usage": "BINARY"}},
+      {"cobol": "VAL-NET", "target": "valNet",
+       "declared": {"kind": "decimal", "digits": 9, "scale": 2, "signed": true, "usage": "DISPLAY"}},
+      {"cobol": "WS-QTY", "target": "wsQty",
+       "declared": {"kind": "decimal", "digits": 5, "scale": 0, "signed": true, "usage": "COMP-3"}},
+      {"cobol": "WS-COST", "target": "wsCost",
+       "declared": {"kind": "decimal", "digits": 6, "scale": 2, "signed": false, "usage": "COMP-3"}},
+      {"cobol": "WS-UNIT", "target": "wsUnit",
+       "declared": {"kind": "decimal", "digits": 6, "scale": 2, "signed": true, "usage": "COMP-3"}},
+      {"cobol": "WS-AMOUNT", "target": "wsAmount",
+       "declared": {"kind": "decimal", "digits": 10, "scale": 2, "signed": true, "usage": "COMP-3"}},
+      {"cobol": "WS-STATUS", "target": "wsStatus", "declared": {"kind": "alnum", "length": 1}},
+      {"cobol": "WS-REC-COUNT", "target": "wsRecCount",
+       "declared": {"kind": "binary", "digits": 4, "scale": 0, "signed": false, "usage": "COMP"}},
+      {"cobol": "WS-TOTAL-VALUE", "target": "wsTotalValue",
+       "declared": {"kind": "decimal", "digits": 13, "scale": 2, "signed": true, "usage": "COMP-3"}}
+    ]
+  }]
+}

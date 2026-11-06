@@ -98,7 +98,8 @@ class T2Config(_Strict):
 
 
 class T3Config(_Strict):
-    timeout_s: float = 300.0
+    timeout_s: float = 900.0  # wall clock for one OpenJML run (all units of a program)
+    per_method_timeout_s: float = 30.0
 
 
 class AcceptancePolicy(_Strict):

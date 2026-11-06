@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "language": "java",
+  "programs": [{
+    "cobol_program_id": "TAXCALC",
+    "cobol_file": "TAXCALC.cbl",
+    "class": "corpus.Taxcalc",
+    "units": [
+      {"cobol_paragraph": "MAIN-PARA", "target_symbol": "mainPara"},
+      {"cobol_paragraph": "READ-INPUT", "target_symbol": "readInput"},
+      {"cobol_paragraph": "COMPUTE-TAX", "target_symbol": "computeTax"},
+      {"cobol_paragraph": "SHOW-RESULT", "target_symbol": "showResult"}
+    ],
+    "fields": [
+      {"cobol": "WS-CATEGORY", "target": "wsCategory", "target_type": "int",
+       "declared": {"kind": "decimal", "digits": 1, "scale": 0, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-INCOME-K", "target": "wsIncomeK", "target_type": "int",
+       "declared": {"kind": "decimal", "digits": 2, "scale": 0, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-INCOME", "target": "wsIncome", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 8, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-DEDUCTION", "target": "wsDeduction", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 7, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-TAXABLE", "target": "wsTaxable", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 8, "scale": 2, "signed": true, "usage": "DISPLAY"}},
+      {"cobol": "WS-GAP", "target": "wsGap", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 8, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-RATE", "target": "wsRate", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 3, "scale": 3, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-BRACKET", "target": "wsBracket", "target_type": "String",
+       "declared": {"kind": "alnum", "length": 6}},
+      {"cobol": "WS-TAX", "target": "wsTax", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 7, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-TAX-TRUNC", "target": "wsTaxTrunc", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 7, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-SURCHARGE", "target": "wsSurcharge", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 5, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-TOTAL-TAX", "target": "wsTotalTax", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 7, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-EFF-RATE", "target": "wsEffRate", "target_type": "long",
+       "declared": {"kind": "decimal", "digits": 4, "scale": 2, "signed": false, "usage": "DISPLAY"}},
+      {"cobol": "WS-SIZE-FLAG", "target": "wsSizeFlag", "target_type": "String",
+       "declared": {"kind": "alnum", "length": 1}},
+      {"cobol": "WS-RATE-FLAG", "target": "wsRateFlag", "target_type": "String",
+       "declared": {"kind": "alnum", "length": 1}}
+    ]
+  }]
+}

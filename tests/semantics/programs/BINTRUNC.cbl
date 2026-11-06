@@ -1,0 +1,54 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. BINTRUNC.
+      * COMP-3 and COMP truncation (binary-truncate: yes), COMP-5
+      * wrapping at the binary width, raw storage bytes.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 G1.
+          05 C2        PIC 9(2) COMP VALUE 99.
+       01 G2.
+          05 C4        PIC S9(4) COMP VALUE 9999.
+       01 G3.
+          05 P3        PIC 9(3) COMP-3 VALUE 999.
+       01 G4.
+          05 P4        PIC S9(4) COMP-3 VALUE 9999.
+       01 G5.
+          05 F4        PIC S9(4) COMP-5 VALUE 32767.
+       01 G6.
+          05 F2        PIC 9(2) COMP-5 VALUE 250.
+       01 I            PIC 9(2) COMP.
+       01 K            PIC 9(3).
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           ADD 1 TO C2
+           DISPLAY C2 " [" G1 "]"
+           ADD 1 TO C4
+           DISPLAY C4 " [" G2 "]"
+           ADD 1 TO P3
+           DISPLAY P3 " [" G3 "]"
+           ADD 1 TO P4
+           DISPLAY P4 " [" G4 "]"
+           ADD 1 TO F4
+           DISPLAY F4 " [" G5 "]"
+           ADD 10 TO F2
+           DISPLAY F2 " [" G6 "]"
+           COMPUTE C4 = 123456
+           DISPLAY C4 " [" G2 "]"
+           COMPUTE C4 = -123456
+           DISPLAY C4 " [" G2 "]"
+           MOVE 123456 TO C4
+           DISPLAY C4 " [" G2 "]"
+           COMPUTE P4 = 123456
+           DISPLAY P4 " [" G4 "]"
+           MOVE 123456 TO P4
+           DISPLAY P4 " [" G4 "]"
+           COMPUTE F4 = 70000
+           DISPLAY F4 " [" G5 "]"
+           MOVE 70000 TO F4
+           DISPLAY F4 " [" G5 "]"
+           MOVE 0 TO K
+           PERFORM VARYING I FROM 95 BY 1 UNTIL I > 100
+               ADD 1 TO K
+           END-PERFORM
+           DISPLAY "I=" I " K=" K
+           STOP RUN.

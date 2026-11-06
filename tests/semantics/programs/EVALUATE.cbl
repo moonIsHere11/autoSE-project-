@@ -1,0 +1,42 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. EVALUATE.
+      * EVALUATE: subject value, ALSO, TRUE/FALSE, THRU, ANY, OTHER,
+      * NOT, partial expressions, multiple WHEN for one body.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 A            PIC S9(3).
+       01 B            PIC X(3).
+       01 K            PIC 9.
+       01 ABC          PIC X(3) VALUE "ABC".
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           PERFORM VARYING K FROM 0 BY 1 UNTIL K > 6
+               COMPUTE A = K * 7 - 10
+               MOVE ABC (K / 3 + 1:1) TO B
+               PERFORM TEST-IT
+           END-PERFORM
+           STOP RUN.
+       TEST-IT.
+           EVALUATE A
+               WHEN -10 DISPLAY K " MINUS TEN"
+               WHEN 0 THRU 5 DISPLAY K " LOW"
+               WHEN 11
+               WHEN 18 DISPLAY K " ELEVEN OR EIGHTEEN"
+               WHEN > 20 DISPLAY K " BIG"
+               WHEN OTHER DISPLAY K " OTHER " A
+           END-EVALUATE
+           EVALUATE TRUE ALSO B
+               WHEN A < 0 ALSO "A" DISPLAY "  NEG-A"
+               WHEN A < 0 ALSO ANY DISPLAY "  NEG"
+               WHEN A > 10 ALSO NOT "C" DISPLAY "  POS-NOT-C"
+               WHEN OTHER DISPLAY "  REST " B
+           END-EVALUATE
+           EVALUATE FALSE
+               WHEN A > 0 DISPLAY "  NOT POSITIVE"
+               WHEN OTHER DISPLAY "  POSITIVE"
+           END-EVALUATE
+           EVALUATE A + 10
+               WHEN 0 DISPLAY "  SUM ZERO"
+               WHEN NOT 25 THRU 35 DISPLAY "  SUM OUTSIDE"
+               WHEN OTHER DISPLAY "  SUM INSIDE"
+           END-EVALUATE.

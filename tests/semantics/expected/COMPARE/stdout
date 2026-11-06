@@ -1,0 +1,14 @@
+PAD EQ
+LT
+NOT SP
+NUM EQ
+N3 = '007'
+N3 NOT > '7'
+NZ
+GT LOW
+LT HIGH
+SPACES = 0
+SP3 <> M3
+' 7' <> M3
+' 7' = 7
+008

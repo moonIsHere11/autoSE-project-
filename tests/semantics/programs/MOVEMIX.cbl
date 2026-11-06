@@ -1,0 +1,55 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. MOVEMIX.
+      * MOVE numeric <-> alphanumeric: digits without sign, de-editing
+      * of alphanumeric text into numeric items (spaces, signs, point,
+      * invalid characters), unsigned items dropping the sign.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 X8           PIC X(8).
+       01 G1.
+          05 N5        PIC 9(5).
+       01 G2.
+          05 S3V2      PIC S9(3)V99.
+       01 G3.
+          05 C3        PIC S9(5)V9 COMP-3.
+       01 S4           PIC S9(4) VALUE -123.
+       01 U4           PIC 9(4).
+       01 UP4          PIC 9(4) COMP-3.
+       01 UB4          PIC 9(4) COMP.
+       01 NEG          PIC S9(3)V9 VALUE -45.6.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           MOVE S4 TO X8
+           DISPLAY "[" X8 "]"
+           MOVE 42 TO X8
+           DISPLAY "[" X8 "]"
+           MOVE "  12" TO N5
+           DISPLAY "[" G1 "]"
+           MOVE "-12.5" TO S3V2
+           DISPLAY "[" G2 "] " S3V2
+           MOVE "+7.25" TO S3V2
+           DISPLAY "[" G2 "] " S3V2
+           MOVE "1.2.3" TO S3V2
+           DISPLAY "[" G2 "] " S3V2
+           MOVE "12A" TO N5
+           DISPLAY "[" G1 "]"
+           MOVE "1,234" TO N5
+           DISPLAY "[" G1 "]"
+           MOVE "9876543" TO N5
+           DISPLAY "[" G1 "]"
+           MOVE "-4.5" TO C3
+           DISPLAY "[" G3 "] " C3
+           MOVE SPACES TO X8
+           MOVE X8 TO N5
+           DISPLAY "[" G1 "]"
+           MOVE S4 TO U4
+           DISPLAY "U4 " U4
+           MOVE S4 TO UP4
+           DISPLAY "UP4 " UP4
+           MOVE S4 TO UB4
+           DISPLAY "UB4 " UB4
+           MOVE NEG TO U4 UP4 UB4
+           DISPLAY U4 " " UP4 " " UB4
+           MOVE -5 TO U4
+           DISPLAY "U4 " U4
+           STOP RUN.

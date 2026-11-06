@@ -1,0 +1,56 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. SIZEERR.
+      * ON SIZE ERROR leaves the receiver unchanged; NOT ON SIZE ERROR;
+      * several receivers; division by zero with and without a handler;
+      * truncation without a handler.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 X            PIC 9(3) VALUE 990.
+       01 Y            PIC 9(3) VALUE 5.
+       01 Z            PIC S9(3)V9 COMP-3 VALUE 99.9.
+       01 B            PIC S9(4) COMP VALUE 9990.
+       01 D            PIC 9(3) VALUE 0.
+       01 Q            PIC 9(3) VALUE 111.
+       01 R            PIC 9(3) VALUE 222.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           ADD 20 TO X
+               ON SIZE ERROR DISPLAY "SE1 " X
+               NOT ON SIZE ERROR DISPLAY "OK1 " X
+           END-ADD
+           ADD 20 TO X Y
+               ON SIZE ERROR DISPLAY "SE2 " X " " Y
+           END-ADD
+           ADD 20 TO X
+           DISPLAY "TRUNC " X
+           COMPUTE Z = Z + 900
+               ON SIZE ERROR DISPLAY "SE3 " Z
+           END-COMPUTE
+           COMPUTE Z = Z + 900
+           DISPLAY "TRUNC " Z
+           ADD 20 TO B
+               ON SIZE ERROR DISPLAY "SE4 " B
+           END-ADD
+           ADD 20 TO B
+           DISPLAY "TRUNC " B
+           DIVIDE D INTO Y
+               ON SIZE ERROR DISPLAY "SE5 " Y
+           END-DIVIDE
+           DIVIDE D INTO Y
+           DISPLAY "DIV0 " Y
+           COMPUTE Y = 10 / D
+           DISPLAY "DIV0C " Y
+           DIVIDE 7 BY D GIVING Q REMAINDER R
+               ON SIZE ERROR DISPLAY "SE6 " Q " " R
+           END-DIVIDE
+           MULTIPLY 100 BY Y
+               ON SIZE ERROR DISPLAY "SE7 " Y
+               NOT ON SIZE ERROR DISPLAY "OK7 " Y
+           END-MULTIPLY
+           COMPUTE Y = 999.6
+               ON SIZE ERROR DISPLAY "SE8 " Y
+           END-COMPUTE
+           COMPUTE Y ROUNDED = 999.6
+               ON SIZE ERROR DISPLAY "SE9 " Y
+           END-COMPUTE
+           STOP RUN.

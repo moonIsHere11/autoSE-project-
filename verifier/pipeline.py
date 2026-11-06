@@ -392,7 +392,16 @@ class Pipeline:
                 gate = self._build_gate(pc)
             elif t1 is not None and t1.status == Status.FAIL:
                 gate = TierResult.skipped("gated by T1 FAIL")
-            pc.tiers["T3"] = gate or _stub("T3 contracts not implemented yet (milestone M5)")
+            if gate is not None:
+                pc.tiers["T3"] = gate
+                continue
+            run_t3 = optional("verifier.tiers.t3_contracts", "run_t3")
+            if run_t3 is None:
+                pc.tiers["T3"] = _stub("T3 contracts not implemented")
+                continue
+            pc.tiers["T3"] = TierResult.not_applicable("T3 is per unit (see units)", method="deductive_verification")
+            for para, t3 in run_t3(self, pc).items():
+                pc.unit_tiers.setdefault(para, {})["T3"] = t3
         self.timings["T3"] = time.monotonic() - start
 
     # ------------------------------------------------------------------------------------------

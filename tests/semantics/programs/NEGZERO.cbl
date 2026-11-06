@@ -1,0 +1,43 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. NEGZERO.
+      * Negative zero: which operations create it (MOVE -0, ACCEPT -0,
+      * truncation of a negative result), how it is stored and shown,
+      * and how it compares.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 G1.
+          05 S3        PIC S9(3).
+       01 G2.
+          05 P3        PIC S9(3) COMP-3.
+       01 G3.
+          05 SS        PIC S9(3) SIGN TRAILING SEPARATE.
+       01 G4.
+          05 A3        PIC S9(3).
+       01 X            PIC S9(3).
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           MOVE -0 TO S3
+           DISPLAY S3 " [" G1 "]"
+           MOVE -0 TO P3
+           DISPLAY P3 " [" G2 "]"
+           MOVE -0 TO SS
+           DISPLAY SS " [" G3 "]"
+           COMPUTE S3 = -1000
+           DISPLAY S3 " [" G1 "]"
+           COMPUTE P3 = -2000
+           DISPLAY P3 " [" G2 "]"
+           COMPUTE S3 = -5 * 0
+           DISPLAY S3 " [" G1 "]"
+           ACCEPT A3
+           DISPLAY A3 " [" G4 "]"
+           MOVE A3 TO X
+           MOVE X TO P3
+           DISPLAY P3 " [" G2 "]"
+           IF A3 = 0 DISPLAY "A3 = 0" END-IF
+           IF A3 = X DISPLAY "A3 = X" END-IF
+           IF A3 < 0 DISPLAY "A3 < 0" ELSE DISPLAY "A3 NOT < 0" END-IF
+           ADD 0 TO A3
+           DISPLAY A3 " [" G4 "]"
+           COMPUTE A3 = A3 + 0
+           DISPLAY A3 " [" G4 "]"
+           STOP RUN.

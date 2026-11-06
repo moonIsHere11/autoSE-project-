@@ -1,0 +1,204 @@
+/tmp/esc/Num.java:169: error: cannot find symbol
+      @   ensures (mode == Round.TRUNCATION || mode == Round.MODE_TRUNCATION || mode == Round.PROHIBITED)
+                           ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:169: error: cannot find symbol
+      @   ensures (mode == Round.TRUNCATION || mode == Round.MODE_TRUNCATION || mode == Round.PROHIBITED)
+                                                       ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:169: error: cannot find symbol
+      @   ensures (mode == Round.TRUNCATION || mode == Round.MODE_TRUNCATION || mode == Round.PROHIBITED)
+                                                                                        ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:181: error: package Round does not exist
+            case Round.ROUNDED:
+                      ^
+/tmp/esc/Num.java:182: error: package Round does not exist
+            case Round.NEAREST_AWAY_FROM_ZERO:
+                      ^
+/tmp/esc/Num.java:185: error: package Round does not exist
+            case Round.AWAY_FROM_ZERO:
+                      ^
+/tmp/esc/Num.java:188: error: package Round does not exist
+            case Round.NEAREST_EVEN:
+                      ^
+/tmp/esc/Num.java:191: error: package Round does not exist
+            case Round.NEAREST_TOWARD_ZERO:
+                      ^
+/tmp/esc/Num.java:194: error: package Round does not exist
+            case Round.TOWARD_GREATER:
+                      ^
+/tmp/esc/Num.java:197: error: package Round does not exist
+            case Round.TOWARD_LESSER:
+                      ^
+/tmp/esc/Num.java:273: error: cannot find symbol
+      @   ensures usage != Usage.COMP5 ==> (\result <==> !fits(v, digits));
+                           ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:277: error: cannot find symbol
+        if (usage != Usage.COMP5) {
+                     ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:296: error: cannot find symbol
+      @   ensures usage != Usage.COMP5 ==> fits(\result, digits);
+                           ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:297: error: cannot find symbol
+      @   ensures !signed && usage != Usage.COMP5 ==> \result >= 0;
+                                      ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:298: error: cannot find symbol
+      @   ensures usage != Usage.COMP5 && fits(v, digits) ==> \result == (signed ? v : abs(v));
+                           ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:302: error: cannot find symbol
+        if (usage == Usage.COMP5) {
+                     ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:315: error: cannot find symbol
+      @   ensures \result <==> (signed && (usage == Usage.DISPLAY || usage == Usage.COMP3) && v < 0
+                                                    ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:315: error: cannot find symbol
+      @   ensures \result <==> (signed && (usage == Usage.DISPLAY || usage == Usage.COMP3) && v < 0
+                                                                              ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:320: error: cannot find symbol
+        return signed && (usage == Usage.DISPLAY || usage == Usage.COMP3) && v < 0 && abs(v) % pow10(digits) == 0;
+                                   ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:320: error: cannot find symbol
+        return signed && (usage == Usage.DISPLAY || usage == Usage.COMP3) && v < 0 && abs(v) % pow10(digits) == 0;
+                                                             ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:333: error: cannot find symbol
+      @   ensures usage != Usage.COMP5 ==> fits(\result, digits);
+                           ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:338: error: cannot find symbol
+        return storeValue(r, digits, signed, usage, Pic.binaryBytes(digits));
+                                                    ^
+  symbol:   variable Pic
+  location: class Num
+/tmp/esc/Num.java:350: error: cannot find symbol
+        if (mode == Round.PROHIBITED && prohibitedError(v, vscale, scale)) {
+                    ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:354: error: cannot find symbol
+        return overflows(signed ? r : abs(r), digits, signed, usage, Pic.binaryBytes(digits));
+                                                                     ^
+  symbol:   variable Pic
+  location: class Num
+/tmp/esc/Num.java:421: error: cannot find symbol
+        long q = divide(a, sa, b, sb, qscale, Round.TRUNCATION);
+                                              ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:455: error: cannot find symbol
+      @   ensures usage != Usage.COMP5 ==> fits(\result, digits);
+                           ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:459: error: cannot find symbol
+        return storeValue(rescale(u, sscale, scale), digits, signed, usage, Pic.binaryBytes(digits));
+                                                                            ^
+  symbol:   variable Pic
+  location: class Num
+/tmp/esc/Num.java:474: error: cannot find symbol
+        if (!signed || (usage != Usage.DISPLAY && usage != Usage.COMP3)) {
+                                 ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:474: error: cannot find symbol
+        if (!signed || (usage != Usage.DISPLAY && usage != Usage.COMP3)) {
+                                                           ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:478: error: cannot find symbol
+        boolean neg = (srcBinary && usage == Usage.COMP3) ? w < 0 : (u < 0 || srcNegZero);
+                                             ^
+  symbol:   variable Usage
+  location: class Num
+/tmp/esc/Num.java:488: error: cannot find symbol
+      @   ensures (mode == Round.ROUNDED || mode == Round.MODE_TRUNCATION) ==> \result == Round.TRUNCATION;
+                           ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:488: error: cannot find symbol
+      @   ensures (mode == Round.ROUNDED || mode == Round.MODE_TRUNCATION) ==> \result == Round.TRUNCATION;
+                                                    ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:488: error: cannot find symbol
+      @   ensures (mode == Round.ROUNDED || mode == Round.MODE_TRUNCATION) ==> \result == Round.TRUNCATION;
+                                                                                          ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:489: error: cannot find symbol
+      @   ensures mode == Round.NEAREST_EVEN ==> \result == Round.NEAREST_AWAY_FROM_ZERO;
+                          ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:489: error: cannot find symbol
+      @   ensures mode == Round.NEAREST_EVEN ==> \result == Round.NEAREST_AWAY_FROM_ZERO;
+                                                            ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:490: error: cannot find symbol
+      @   ensures (mode != Round.ROUNDED && mode != Round.MODE_TRUNCATION && mode != Round.NEAREST_EVEN) ==> \result == mode;
+                           ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:490: error: cannot find symbol
+      @   ensures (mode != Round.ROUNDED && mode != Round.MODE_TRUNCATION && mode != Round.NEAREST_EVEN) ==> \result == mode;
+                                                    ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:490: error: cannot find symbol
+      @   ensures (mode != Round.ROUNDED && mode != Round.MODE_TRUNCATION && mode != Round.NEAREST_EVEN) ==> \result == mode;
+                                                                                     ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:494: error: cannot find symbol
+        if (mode == Round.ROUNDED || mode == Round.MODE_TRUNCATION) {
+                    ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:494: error: cannot find symbol
+        if (mode == Round.ROUNDED || mode == Round.MODE_TRUNCATION) {
+                                             ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:495: error: cannot find symbol
+            return Round.TRUNCATION;
+                   ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:497: error: cannot find symbol
+        if (mode == Round.NEAREST_EVEN) {
+                    ^
+  symbol:   variable Round
+  location: class Num
+/tmp/esc/Num.java:498: error: cannot find symbol
+            return Round.NEAREST_AWAY_FROM_ZERO;
+                   ^
+  symbol:   variable Round
+  location: class Num
+Operation not performed because of parse or type errors
+43 errors
+exit=1

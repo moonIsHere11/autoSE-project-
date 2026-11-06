@@ -1,0 +1,53 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. MOVENUM.
+      * MOVE: numeric high-order truncation, decimal alignment,
+      * truncation of excess decimals, between usages.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 G1.
+          05 N3        PIC 9(3).
+       01 G2.
+          05 S3V2      PIC S9(3)V99.
+       01 G3.
+          05 P5        PIC S9(5) COMP-3.
+       01 G4.
+          05 B4        PIC S9(4) COMP.
+       01 G5.
+          05 U2V1      PIC 99V9.
+       01 G6.
+          05 BIG       PIC S9(9)V9(4) VALUE -12345.6789.
+       01 G7.
+          05 SL        PIC S9(3) SIGN LEADING SEPARATE.
+       01 G8.
+          05 P99       PIC 999PP.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           MOVE 12345 TO N3
+           DISPLAY "N3 " N3 " [" G1 "]"
+           MOVE 1.987 TO N3
+           DISPLAY "N3 " N3
+           MOVE 12345.678 TO S3V2
+           DISPLAY "S3V2 " S3V2 " [" G2 "]"
+           MOVE -0.009 TO S3V2
+           DISPLAY "S3V2 " S3V2 " [" G2 "]"
+           MOVE BIG TO S3V2
+           DISPLAY "S3V2 " S3V2 " [" G2 "]"
+           MOVE BIG TO P5
+           DISPLAY "P5 " P5 " [" G3 "]"
+           MOVE BIG TO B4
+           DISPLAY "B4 " B4 " [" G4 "]"
+           MOVE BIG TO U2V1
+           DISPLAY "U2V1 " U2V1 " [" G5 "]"
+           MOVE BIG TO SL
+           DISPLAY "SL " SL " [" G7 "]"
+           MOVE 1234567 TO P99
+           DISPLAY "P99 " P99 " [" G8 "]"
+           MOVE P99 TO BIG
+           DISPLAY "BIG " BIG
+           MOVE 99999 TO B4
+           DISPLAY "B4 " B4 " [" G4 "]"
+           MOVE 123456 TO P5
+           DISPLAY "P5 " P5 " [" G3 "]"
+           MOVE P5 TO N3 S3V2 B4
+           DISPLAY N3 " " S3V2 " " B4
+           STOP RUN.

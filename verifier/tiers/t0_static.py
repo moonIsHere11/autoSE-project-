@@ -99,7 +99,8 @@ def check_data_mapping(si: StaticInput, prog: Program, rp: ResolvedProgram) -> l
             continue
         loc = m.get("location")
         file, line = (loc[0], loc[1]) if loc else (None, None)
-        base = _type_base(str(ttype))
+        # packs may supply their own normaliser (Python `Optional[list[float]]`, Go `[4]int64`)
+        base = rules.get("type_base", _type_base)(str(ttype))
         if item.is_numeric and item.pic is not None:
             p = item.pic
             if base in rules["float_types"]:
@@ -222,10 +223,11 @@ def check_integrity(si: StaticInput, files: set[str]) -> list[Finding]:
     idx = si.index
     own_prefixes = {t.qualified.rsplit(".", 1)[0] for t in idx.types if "." in t.qualified}
     allowed = list(si.rules.get("allowed_import_prefixes", []))
+    sep = si.rules.get("import_separator", ".")  # Java/Python: dotted names; Go: import paths
     for imp, file, line in idx.imports:
         if file not in files:
             continue
-        if any(imp == a or imp.startswith(a + ".") for a in allowed):
+        if any(imp == a or imp.startswith(a + sep) for a in allowed):
             continue
         if any(imp == o or imp.startswith(o + ".") for o in own_prefixes):
             continue

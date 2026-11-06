@@ -1,0 +1,44 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. FALLTHRU.
+      * Control flow: fall-through between paragraphs, PERFORM returns
+      * at the end of the performed paragraph only, PERFORM THRU,
+      * sections, GO TO, EXIT PARAGRAPH, nested PERFORM.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 N            PIC 9(2) VALUE 0.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           DISPLAY "MAIN"
+           PERFORM P-B
+           PERFORM P-A THRU P-B
+           PERFORM SEC-2
+           PERFORM P-EXIT
+           DISPLAY "FALLING".
+       P-A.
+           ADD 1 TO N
+           DISPLAY "A " N.
+       P-B.
+           ADD 1 TO N
+           DISPLAY "B " N
+           IF N > 5
+               GO TO P-END
+           END-IF.
+       P-EXIT.
+           DISPLAY "EXIT-1"
+           IF N > 0
+               EXIT PARAGRAPH
+           END-IF
+           DISPLAY "EXIT-2".
+       SEC-2 SECTION.
+       S2-A.
+           DISPLAY "S2-A " N
+           PERFORM P-A.
+       S2-B.
+           DISPLAY "S2-B".
+       SEC-3 SECTION.
+       P-END.
+           DISPLAY "END " N
+           IF N < 9
+               GO TO P-A
+           END-IF
+           STOP RUN.

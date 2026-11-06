@@ -56,6 +56,15 @@ VERB_PHRASES: dict[str, set[str]] = {
 
 PHRASE_STARTS = frozenset({"NOT", "ON", "SIZE", "AT", "END", "INVALID", "EXCEPTION", "OVERFLOW", "END-OF-PAGE", "EOP"})
 
+# Explicit scope terminators. User-defined names may also start with "END-" (e.g. a condition-name
+# END-OF-FILE), so a prefix test is not enough.
+SCOPE_TERMINATORS = frozenset(
+    """END-ACCEPT END-ADD END-CALL END-CHAIN END-COMPUTE END-DELETE END-DISPLAY END-DIVIDE
+    END-EVALUATE END-EXEC END-IF END-INVOKE END-JSON END-MULTIPLY END-PERFORM END-READ END-RECEIVE
+    END-RETURN END-REWRITE END-SEARCH END-START END-STRING END-SUBTRACT END-UNSTRING END-WRITE
+    END-XML""".split()
+)
+
 _SELECT_CLAUSES = frozenset({"ORGANIZATION", "ACCESS", "FILE", "STATUS", "LINE", "RECORD", "SEQUENTIAL",
                              "RESERVE", "PADDING", "LOCK", "SHARING", "ALTERNATE", "RELATIVE", "INDEXED"})
 
@@ -444,7 +453,7 @@ class _ProcedureParser:
             if t.kind == WORD and t.up in VERBS:
                 out.append(self._statement(stop))
                 continue
-            if t.kind == WORD and t.up.startswith("END-"):
+            if t.kind == WORD and t.up in SCOPE_TERMINATORS:
                 break  # terminator of an enclosing statement
             self.prog.parse_errors.append(f"{t.file}:{t.line}: unexpected {t.text!r} (expected a statement)")
             cur.next()
@@ -478,7 +487,7 @@ class _ProcedureParser:
             assert t is not None
             if t.kind == PERIOD:
                 break
-            if t.kind == WORD and (t.up in VERBS or t.up in extra_stop or t.up.startswith("END-")):
+            if t.kind == WORD and (t.up in VERBS or t.up in extra_stop or t.up in SCOPE_TERMINATORS):
                 break
             if t.kind == WORD and t.up in PHRASE_STARTS and _phrase_at(cur) is not None:
                 break
@@ -495,6 +504,11 @@ class _ProcedureParser:
             self.prog.add_feature("GO TO", verb_tok.line)
         elif verb == "NEXT":
             if cur.at_word("SENTENCE"):
+                header.append(cur.next())
+        elif verb == "EXIT" and cur.at_word("PERFORM"):
+            # EXIT PERFORM [CYCLE]: PERFORM is part of this statement, not a new one
+            header.append(cur.next())
+            if cur.at_word("CYCLE"):
                 header.append(cur.next())
         else:
             header += self._header_until(stop | {"ELSE", "WHEN"})
@@ -529,7 +543,7 @@ class _ProcedureParser:
         while not cur.eof():
             t = cur.peek()
             assert t is not None
-            if t.kind == PERIOD or (t.kind == WORD and (t.up in VERBS or t.up == "THEN" or t.up.startswith("END-"))):
+            if t.kind == PERIOD or (t.kind == WORD and (t.up in VERBS or t.up == "THEN" or t.up in SCOPE_TERMINATORS)):
                 break
             out.append(cur.next())
         return out
@@ -572,7 +586,7 @@ class _ProcedureParser:
                 while not cur.eof():
                     t = cur.peek()
                     assert t is not None
-                    if t.kind == PERIOD or (t.kind == WORD and (t.up in VERBS or t.up == "WHEN" or t.up.startswith("END-"))):
+                    if t.kind == PERIOD or (t.kind == WORD and (t.up in VERBS or t.up == "WHEN" or t.up in SCOPE_TERMINATORS)):
                         break
                     wtoks.append(cur.next())
             body = self._statements(stop | {"WHEN", "END-EVALUATE"})
@@ -599,7 +613,7 @@ class _ProcedureParser:
         while not cur.eof():
             t = cur.peek()
             assert t is not None
-            if t.kind == PERIOD or (t.kind == WORD and (t.up in VERBS or t.up.startswith("END-"))):
+            if t.kind == PERIOD or (t.kind == WORD and (t.up in VERBS or t.up in SCOPE_TERMINATORS)):
                 break
             header.append(cur.next())
         st = self._mk(verb_tok, header)

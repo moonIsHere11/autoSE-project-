@@ -432,6 +432,16 @@ def _go_in_loop(node: Node) -> bool:
     return False
 
 
+def _go_space_repeat(n: Node) -> bool:
+    """`strings.Repeat(" ", k)` (space padding)."""
+    n = unparen(n)
+    if n.type != "call_expression" or ts.text(n.child_by_field_name("function")) != "strings.Repeat":
+        return False
+    args = n.child_by_field_name("arguments")
+    first = args.named_children[0] if args is not None and args.named_children else None
+    return first is not None and ts.text(first) == '" "'
+
+
 def _go_edits(root: Node, src: bytes, methods: set[str]) -> Iterator[Edit]:
     for n in ts.walk(root):
         t = n.type
@@ -449,6 +459,10 @@ def _go_edits(root: Node, src: bytes, methods: set[str]) -> Iterator[Edit]:
                 else:
                     yield Edit(op_node.start_byte, op_node.end_byte, _FLIP[op], "COMPARISON_FLIP", "comparison",
                                f"comparison `{op}` → `{_FLIP[op]}`", ln)
+            if op == "+" and (_go_space_repeat(left) or _go_space_repeat(right)):
+                # idiomatic Go padding: s + strings.Repeat(" ", n)  <->  strings.Repeat(" ", n) + s
+                yield Edit(n.start_byte, n.end_byte, f"{ts.text(right)} + {ts.text(left)}", "PAD_WRONG_SIDE",
+                           "padding", f"`{ts.text(n)}` padded on the other side", ln)
             rlit, llit = _go_lit(right), _go_lit(left)
             if op == "%" and pow10_exp(rlit) is not None:
                 yield Edit(n.start_byte, n.end_byte, f"({ts.text(left)})", "TRUNCATION_REMOVED", "truncation",

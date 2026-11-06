@@ -1,0 +1,182 @@
+[
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0001U          0001234\nA0003ACHARLIE   0000500\nA0005D          0000000\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "",
+"TRANS.TXT": ""
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": ""
+}
+},
+{
+"files": {
+"MASTER.TXT": "",
+"TRANS.TXT": "B0001ANEW ONE   0000099\nB0002U          0000005\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0001U          9999999\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0002U          999999y\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0001U          001000p\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0001D          0000000\nA0001U          0000005\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0001ADUP       0000001\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0001X          0000001\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0001U          0000001\nA0001U          0000002\nA0001U          000000s\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0002B         0000001\nA0001A         0000002\nA0003C         0000003\n",
+"TRANS.TXT": ""
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001A         0000001\nA0001A2        0000002\n",
+"TRANS.TXT": ""
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ALPHA     0010000\nA0002BRAVO     000255p\nA0005ECHO      0000000\n",
+"TRANS.TXT": "A0005U          0000001\nA0002U          0000001\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001NEGZERO   000000p\n",
+"TRANS.TXT": ""
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001NEGZERO   000000p\n",
+"TRANS.TXT": "A0001U          0000000\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001NEGZERO   000000p\n",
+"TRANS.TXT": "A0001U          000000p\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "",
+"TRANS.TXT": "A0009ANEGZ NEW  000000p\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001ZERO      0000000\n",
+"TRANS.TXT": "A0001U          000000p\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001BADBAL    12A4567\n",
+"TRANS.TXT": ""
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001X         0000001\n",
+"TRANS.TXT": "A0001U                 \n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001LONGLINE  0000005XYZ\n",
+"TRANS.TXT": "A0001U          0000001QQ\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001NONL      0000005",
+"TRANS.TXT": "A0001U          0000001"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001SHORT     0000005\nA0002\n",
+"TRANS.TXT": "A0002A          0000001\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "     SPACEKEY  0000005\n",
+"TRANS.TXT": "     U          0000001\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "zzzzzLOWER     0000005\n~~~~~TILDE     0000006\n",
+"TRANS.TXT": "ZZZZZAUPPER     0000007\nzzzzzD          0000000\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "K0001N1        000208q\nK0002N2        0005838\nK0003N3        000624s\nK0004N4        0001676\nK0005N5        0009595\nK0006N6        000248v\nK0007N7        0005433\nK0008N8        000664x\nK0009N9        0001271\nK0010N10       0009190\nK0011N11       000289q\nK0012N12       0005028\nK0013N13       000705s\nK0014N14       0000866\n",
+"TRANS.TXT": "K0000UT0        100000p\nK0002AT2        079054r\nK0004UT4        058108t\nK0006AT6        037162v\nK0008UT8        016216x\nK0010AT10       0047290\nK0012UT12       0256748\nK0014AT14       0466206\nK0016UT16       0675664\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001          9999999\n",
+"TRANS.TXT": "A0001U          0000001\nA0001U          000000q\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "A0001A         999999y\n",
+"TRANS.TXT": "A0001U          000000q\nA0001U          9999999\n"
+}
+},
+{
+"files": {
+"MASTER.TXT": "\n\n",
+"TRANS.TXT": "\n"
+}
+}
+]

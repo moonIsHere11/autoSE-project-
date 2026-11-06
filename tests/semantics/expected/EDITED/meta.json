@@ -1,0 +1,15 @@
+{
+ "gnucobol": "cobc (GnuCOBOL) 3.2.0",
+ "flags": [
+  "-std=default",
+  "-fformat=fixed"
+ ],
+ "stderr": "",
+ "runtime_env": {
+  "COB_LS_FIXED": "false",
+  "COB_LS_VALIDATE": "true",
+  "COB_LS_NULLS": "false",
+  "COB_FILE_PATH": "."
+ },
+ "runtime_error": false
+}

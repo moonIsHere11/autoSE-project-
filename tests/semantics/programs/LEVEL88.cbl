@@ -1,0 +1,49 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. LEVEL88.
+      * 88-level conditions: single values, value lists, THRU ranges,
+      * alphanumeric values, SET ... TO TRUE, subscripted conditions.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 CODE-X       PIC 9(2).
+          88 LOW-CODE  VALUE 0 THRU 9.
+          88 SPECIAL   VALUE 13 42 77.
+          88 HIGH-CODE VALUE 50 THRU 99.
+       01 STATE        PIC X(2) VALUE "NO".
+          88 IS-OK     VALUE "OK" "YS".
+          88 IS-NO     VALUE "NO".
+       01 FLAGS.
+          05 FLAG      PIC X OCCURS 3.
+             88 ON-F   VALUE "Y".
+       01 AMT          PIC S9(3)V9.
+          88 NEG-AMT   VALUE -999.9 THRU -0.1.
+       01 K            PIC 9(2).
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           PERFORM VARYING K FROM 0 BY 13 UNTIL K > 90
+               MOVE K TO CODE-X
+               DISPLAY CODE-X WITH NO ADVANCING
+               IF LOW-CODE DISPLAY " LOW" WITH NO ADVANCING END-IF
+               IF SPECIAL DISPLAY " SPECIAL" WITH NO ADVANCING END-IF
+               IF HIGH-CODE DISPLAY " HIGH" WITH NO ADVANCING END-IF
+               IF NOT LOW-CODE AND NOT HIGH-CODE
+                   DISPLAY " MID" WITH NO ADVANCING
+               END-IF
+               DISPLAY "."
+           END-PERFORM
+           IF IS-NO DISPLAY "STATE NO" END-IF
+           SET IS-OK TO TRUE
+           DISPLAY "STATE " STATE
+           IF IS-OK DISPLAY "STATE OK" END-IF
+           SET LOW-CODE TO TRUE
+           DISPLAY "CODE " CODE-X
+           MOVE "NYN" TO FLAGS
+           PERFORM VARYING K FROM 1 BY 1 UNTIL K > 3
+               IF ON-F (K) DISPLAY "FLAG " K " ON" END-IF
+           END-PERFORM
+           SET ON-F (3) TO TRUE
+           DISPLAY FLAGS
+           MOVE -0.05 TO AMT
+           IF NEG-AMT DISPLAY "NEG" ELSE DISPLAY "NOT NEG " AMT END-IF
+           MOVE -0.1 TO AMT
+           IF NEG-AMT DISPLAY "NEG" ELSE DISPLAY "NOT NEG " AMT END-IF
+           STOP RUN.
