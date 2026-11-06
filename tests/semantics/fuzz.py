@@ -228,14 +228,14 @@ class _Gen:
             self.emit(f"{verb} GIVING {t.name}{rounded}{se}")
             self.show(t)
         else:
-            a = self.item(rng.choice(["num", "num", "alnum"]))
-            self.setv(a)
-            if a.kind == "num":
+            lhs = self.item(rng.choice(["num", "num", "alnum"]))
+            self.setv(lhs)
+            if lhs.kind == "num":
                 b, _ = self.opnd()
             else:
                 b = rng.choice(['"AB"', "SPACES", '"12"', "ZERO", '" "'])
             op = rng.choice(["=", "<", ">", "NOT =", ">=", "<=", "NOT >"])
-            self.emit(f'IF {a.name} {op} {b} DISPLAY "T" ELSE DISPLAY "F" END-IF')
+            self.emit(f'IF {lhs.name} {op} {b} DISPLAY "T" ELSE DISPLAY "F" END-IF')
 
     def program(self, pid: str) -> str:
         for _ in range(self.n):

@@ -26,6 +26,7 @@ import random
 import re
 import shutil
 import time
+import zlib
 from dataclasses import dataclass, field
 from decimal import Decimal
 from pathlib import Path
@@ -182,6 +183,14 @@ def _unit(pl: Pipeline, pc: ProgramCtx, pt: ProgramT2b, para: str) -> tuple[Tier
     ok, msg = _compile_harness(pl, pt, uw, ref, h)
     if not ok:
         return None, TierResult.error(f"generated harness does not compile (verifier bug): {msg[-600:]}", METHOD)
+    # ---- validation gate (b): emitted reference vs the validated COBOL model ---------------------
+    from verifier.tiers.t2_gate import cross_check_unit
+
+    n_gate = min(200, pl.cfg.t2.t1u_fast)
+    gate_b = cross_check_unit(irp, para, h, lambda lines: _replay(pl, pt, uw, h, lines), n_gate,
+                              pl.effective_seed ^ (zlib.crc32(b"gate:" + para.encode()) & 0xFFFF))
+    if gate_b is not None:
+        return None, gate_b
     # ---- T1u ------------------------------------------------------------------------------------
     t1u, t1u_fail = _t1u(pl, pc, pt, uw, h, para, cand_method, loc)
     if t1u_fail is not None:
@@ -355,7 +364,7 @@ def _domain_value(sv_kind: str, slot: Slot, rng: random.Random) -> int:
 def _t1u(pl: Pipeline, pc: ProgramCtx, pt: ProgramT2b, uw: Path, h: Harness, para: str, cand_method: str,
          loc: MethodSym) -> tuple[TierResult, TierResult | None]:
     n = pl.cfg.t2.t1u_fast if pl.req.mode == "fast" else pl.cfg.t2.t1u_full
-    seed = pl.effective_seed ^ (hash(para) & 0xFFFF)
+    seed = pl.effective_seed ^ (zlib.crc32(para.encode()) & 0xFFFF)  # stable across runs (not hash())
     rng = random.Random(seed)
     by_cobol = {s.cobol: s for s in h.slots}
     lines = []
