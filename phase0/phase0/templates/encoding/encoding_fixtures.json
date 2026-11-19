@@ -1,0 +1,26 @@
+{
+ "description": "Canonical value encoding of the execution interface (agreement 4.2, open question in section 10). Owner: Phase 0; reviewer: Phase 2. Checked by phase0/eval/java/EncodingCheck.java (docker test) and by tests/phase0/test_encoding.py against verifier.inputs.encode.",
+ "decimal": [
+  {"case": "signed decimal", "pic": "S9(5)V99", "usage": "DISPLAY", "scale": 2, "unscaled": -12340, "negative_zero": false, "canonical": "-123.40"},
+  {"case": "unsigned integer", "pic": "9(3)", "usage": "DISPLAY", "scale": 0, "unscaled": 7, "negative_zero": false, "canonical": "7"},
+  {"case": "pure fraction", "pic": "V99", "usage": "DISPLAY", "scale": 2, "unscaled": 25, "negative_zero": false, "canonical": "0.25"},
+  {"case": "P scaling", "pic": "9(3)PP", "usage": "DISPLAY", "scale": -2, "unscaled": 123, "negative_zero": false, "canonical": "12300"},
+  {"case": "zero from arithmetic (never negative)", "pic": "S9(3)V9", "usage": "DISPLAY", "scale": 1, "unscaled": 0, "negative_zero": false, "canonical": "0.0"},
+  {"case": "signed zero stored by ACCEPT '-0'", "pic": "S9(3)V9", "usage": "DISPLAY", "scale": 1, "unscaled": 0, "negative_zero": true, "canonical": "-0.0"},
+  {"case": "COMP-3 has the same canonical text as DISPLAY", "pic": "S9(5)V99", "usage": "COMP-3", "scale": 2, "unscaled": -12345, "negative_zero": false, "canonical": "-123.45"},
+  {"case": "COMP-5 wraps at the binary width (ACCEPT 99999)", "pic": "S9(4)", "usage": "COMP-5", "scale": 0, "unscaled": -31073, "negative_zero": false, "canonical": "-31073"}
+ ],
+ "alnum": [
+  {"case": "space padded", "pic": "X(5)", "value": "AB", "length": 5, "canonical": "AB   "},
+  {"case": "right truncated", "pic": "X(3)", "value": "ABCDEF", "length": 3, "canonical": "ABC"},
+  {"case": "latin-1 byte", "pic": "X(2)", "value": "é", "length": 2, "canonical": "é "}
+ ],
+ "keys": [
+  {"case": "elementary", "field_id": "WS-TOTAL", "subscripts": [], "canonical": "WS-TOTAL"},
+  {"case": "OCCURS element", "field_id": "WS-TABLE.WS-AMT", "subscripts": [3], "canonical": "WS-TABLE.WS-AMT(3)"},
+  {"case": "nested OCCURS (outermost first)", "field_id": "GRID.ROW.CELL", "subscripts": [2, 4], "canonical": "GRID.ROW.CELL(2,4)"}
+ ],
+ "group": [
+  {"case": "group = raw record bytes (zoned negative overpunched)", "layout": "05 A PIC 9(3) VALUE 12. 05 B PIC S9(3) VALUE -5.", "bytes_hex": "303132303075", "canonical": "01200u"}
+ ]
+}
