@@ -195,9 +195,13 @@ def e6(ev: Eval, gold_dir: Path | None) -> None:
     kb_units = {b.program.name: {u["unit_id"]: u for u in b.kb("source/units.json")} for b in ev.of("D1", "D2")}
     p0, f0 = score(kb_units, gold, "phase0")
     p1, f1 = score(ev.phase1_units, gold, "phase1")
-    ev.failures += f0 + f1
-    ev.metrics["E6"] = {"status": "scored", "annotators": sorted(gold), "phase0": p0, "phase1": p1,
-                        "agreement": agreement(gold)}
+    ev.failures += f0
+    ev.metrics["E6"] = {"status": "scored", "annotators": sorted(gold), "phase0": p0, "agreement": agreement(gold)}
+    if ev.phase1_units:
+        ev.failures += f1
+        ev.metrics["E6"]["phase1"] = p1
+    if "E7" not in ev.metrics:
+        return
     for k in ("reads", "writes", "performs"):
         ev.metrics["E7"]["table"].append({"metric": f"E6 {k} F1", "phase0": p0["overall"][k]["f1"],
                                           "phase1": p1["overall"][k]["f1"], "higher_is_better": True})
@@ -240,16 +244,20 @@ def e8(ev: Eval) -> None:
     ev.metrics["E8"] = per
 
 
-def run(out: Path, datasets: list[str], carddemo: Path, gold: Path | None = None, run_e2e: bool = False) -> Eval:
+def run(work: Path, out: Path, datasets: list[str], carddemo: Path, gold: Path | None = None, baseline: bool = True,
+        run_e2e: bool = False, only: str | None = None) -> Eval:
+    """`work` holds the per-program workspaces and caches; `out` receives metrics.json, failures.jsonl."""
+    work.mkdir(parents=True, exist_ok=True)
     out.mkdir(parents=True, exist_ok=True)
-    ev = Eval(out, make_toolbox(out / "cache"))
-    programs = select(datasets, carddemo)
-    ev.timed("build", lambda: ev.built.extend(build_program(p, out / "ws", ev.toolbox) for p in programs))
+    ev = Eval(work, make_toolbox(work / "cache"))
+    programs = [p for p in select(datasets, carddemo) if only is None or p.name == only.upper()]
+    ev.timed("build", lambda: ev.built.extend(build_program(p, work / "ws", ev.toolbox) for p in programs))
     ev.timed("E1", lambda: e1(ev))
     ev.timed("E3", lambda: e3(ev))
     ev.timed("E2_E4", lambda: e2_e4(ev))
     ev.timed("E5", lambda: e5(ev))
-    ev.timed("E7", lambda: e7(ev))
+    if baseline:
+        ev.timed("E7", lambda: e7(ev))
     ev.timed("E6", lambda: e6(ev, gold))
     ev.timed("E9", lambda: run_e9(ev, run_e2e))
     ev.timed("F", lambda: ev.metrics.update(F_hazards=hazard_counts(ev.built)))

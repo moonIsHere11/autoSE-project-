@@ -91,3 +91,9 @@ Running log: what was done, and why. Newest entries at the bottom.
   3. MOVE inside a statement the IR cannot lower (an EVALUATE on the undeclared IMS register DIBSTAT in CBPAUP0C) is now scanned on the syntax tree, like arithmetic already was (recovers one G-SIGN).
 - Remaining differences, all explained: G-TRUNCATE -5, G-OVERFLOW -6, G-NUMALPHA -9 are all in CBSTM03A, where the verifier's data-division parser stops at an error (`unexpected '05' in data entry CUST-FIRST-NAME`), so later fields are not resolved and their statements are not scanned (Phase 1's regex parser reads past it); G-GOTO +4 are the four ALTER statements in CBSTM03A (Phase 0 flags ALTER, Phase 1 does not); G-PACKED +11 come from COMP/COMP-3 fields reached through group/REDEFINES expansion (Phase 1 sees only the names written in the statement), minus CBSTM03A/CSUTLDTC data errors; G-FALLTHROUGH -2 is unit naming (`(MAIN)` vs Phase 1's `__START__`) plus the fix above.
 - E8 lines for D3 now count program + copybook lines (coverage), not every file in the repo (data files inflated it to 296k).
+
+## M4: `phase0 eval`
+
+- `phase0 eval --workspace W --out DIR [--gold DIR] [--baseline phase1|none] [--datasets D1,D2,D3] [--carddemo PATH] [--e2e] [--only PROG]`. W holds per-program workspaces and caches; DIR gets `metrics.json`, `failures.jsonl` and `RESULTS.md` (rendered only from those two files). The committed run is `phase0/eval/` (D1-D3, gold dir, e2e on): 78 s wall clock, under the 10-minute budget.
+- D3 in the eval is the whole CardDemo checkout (358 files: also samples, scripts, diagrams), not only `app/`, to test robustness; 64.5% of files fall into a known kind, the rest are markdown/text/data files (`other`).
+- E6 stays "pending" until gold files exist; the scorer (P/R/F1 per program and overall, falls_through_to accuracy, pairwise annotator agreement, and the same scores for Phase 1) is unit-tested on synthetic data.

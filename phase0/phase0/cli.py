@@ -61,6 +61,22 @@ def cmd_query(a: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_eval(a: argparse.Namespace) -> int:
+    from phase0.evaluation.render import render
+    from phase0.evaluation.runner import run
+    from phase0.target import REPO
+
+    out = Path(a.out)
+    gold: Path | None = None
+    if a.gold:
+        gold = Path(a.gold)
+    ev = run(Path(a.workspace), out, a.datasets.split(","), Path(a.carddemo or REPO / "data" / "carddemo"), gold,
+             a.baseline == "phase1", a.e2e, a.only)
+    render(out, out / "RESULTS.md")
+    print(json.dumps({"out": str(out), "seconds": ev.seconds, "failures": len(ev.failures)}))
+    return 0
+
+
 def parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(prog="phase0")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -72,6 +88,16 @@ def parser() -> argparse.ArgumentParser:
     q.add_argument("args", nargs="*")
     q.add_argument("--workspace", required=True)
     q.set_defaults(fn=cmd_query)
+    e = sub.add_parser("eval", help="evaluate Phase 0 against GnuCOBOL, traces, Java and gold (task section 7)")
+    e.add_argument("--workspace", required=True, help="scratch directory for the per-program workspaces")
+    e.add_argument("--out", required=True, help="where metrics.json, failures.jsonl and RESULTS.md go")
+    e.add_argument("--gold", help="directory with <annotator>.json gold files")
+    e.add_argument("--baseline", choices=["phase1", "none"], default="phase1")
+    e.add_argument("--datasets", default="D1,D2,D3")
+    e.add_argument("--carddemo", help="CardDemo checkout (default: data/carddemo)")
+    e.add_argument("--e2e", action="store_true", help="also run integration/e2e_scripted.py (E9)")
+    e.add_argument("--only", help="evaluate one program (repro)")
+    e.set_defaults(fn=cmd_eval)
     return ap
 
 
