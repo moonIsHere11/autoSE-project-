@@ -12,3 +12,4 @@
 - `Makefile`: `lint` also checks `phase0`; `typecheck` also runs mypy in `phase0/`.
 - `integration/e2e_scripted.py`: honours `PHASE0_CMD` from the environment and runs `phase0 build` first; the default is still the stub.
 - Verifier venv: installed `pyyaml` and `types-PyYAML` (imported by Phase 1, the Phase 2 adapter and `integration/`, but missing from the venv).
+5. **Verifier bug: paragraph `end_line` before a SECTION header.** In `verifier/cobol/parser.py`, `_ProcedureParser.parse` sets `para = None` on a SECTION header without first setting `para.end_line = self._prev_line()`, so the last paragraph before every SECTION keeps `end_line == line` (FALLTHRU.cbl: P-EXIT 26-26 instead of 26-31). Any span-based localisation in the verifier is off for those paragraphs. Phase 0 computes paragraph ends from tokens and does not depend on the fix. Suggested one-line fix: set `para.end_line = self._prev_line()` before `para = None` in the SECTION branch.
