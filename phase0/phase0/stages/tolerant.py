@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -35,6 +36,7 @@ class TolerantProgram:
     fields: list[Field_] = field(default_factory=list)
     calls: list[str] = field(default_factory=list)
     covered: set[tuple[str, int]] = field(default_factory=set)
+    structure: set[tuple[str, int]] = field(default_factory=set)
 
 
 def analyse_file(source_root: Path, rel: str, multi: bool) -> list[TolerantProgram]:
@@ -56,7 +58,35 @@ def analyse_file(source_root: Path, rel: str, multi: bool) -> list[TolerantProgr
         tp.calls = sorted({c for u in tp.units for c in u.calls})
         for ln in expanded:
             tp.covered.add((ln.file, ln.no))
+        tp.structure = structure_lines(expanded)
+        for f in fields:
+            if f["name"] == "FILLER":
+                sp = f["span"]
+                tp.structure |= {(sp["file"], n) for n in range(sp["start_line"], sp["end_line"] + 1)}
         out.append(tp)
+    return out
+
+
+DIVISION = re.compile(r"^\s*(IDENTIFICATION|ID|ENVIRONMENT|DATA|PROCEDURE)\s+DIVISION\b", re.I)
+HEADER = re.compile(r"\b(DIVISION|SECTION)\s*\.", re.I)
+ENTRY_START = re.compile(r"^\s*(FD|SD|88|66)\s", re.I)
+
+
+def structure_lines(lines: list[Any]) -> set[tuple[str, int]]:
+    """Lines the tolerant analyser reads but records no fact for: identification and environment
+    text, division/section headers, FD/SD entries and 88/66 entries (to their period)."""
+    out: set[tuple[str, int]] = set()
+    division = "IDENTIFICATION"
+    open_entry = False
+    for ln in lines:
+        m = DIVISION.match(ln.text)
+        if m:
+            division = m.group(1).upper()
+        if division in ("IDENTIFICATION", "ID", "ENVIRONMENT") or HEADER.search(ln.text):
+            out.add((ln.file, ln.no))
+        if division == "DATA" and (open_entry or ENTRY_START.match(ln.text)):
+            out.add((ln.file, ln.no))
+            open_entry = not ln.text.rstrip().endswith(".")
     return out
 
 

@@ -23,6 +23,8 @@ from verifier.cobol.lexer import PERIOD, Token
 
 COPY_LINE = re.compile(r"^\s*(COPY|REPLACE)\b|\bCOPY\s+[A-Z0-9'\"]", re.I)
 DIRECTIVE = re.compile(r"^\s*(>>|\$|\*>\s*>>)", re.I)
+COMMENT_ENTRY = re.compile(r"^\s*(AUTHOR|INSTALLATION|DATE-WRITTEN|DATE-COMPILED|SECURITY|REMARKS)\b", re.I)
+REPLACING_PAIR = re.compile(r"==.*==\s+BY\s+==", re.I)
 HEADER_WORDS = frozenset({"DIVISION", "SECTION", "DECLARATIVES"})
 Key = tuple[str, int]
 
@@ -116,26 +118,36 @@ def is_blank(text: str, fmt: str | None) -> bool:
     return not text[6:72].strip() and (len(text) <= 6 or text[6] in " \t")
 
 
-def classify_line(lf: LineFacts, key: Key, text: str, fmt: str | None) -> tuple[str, str | None]:
+def classify_line(lf: LineFacts, key: Key, text: str, fmt: str | None, status: str) -> tuple[str, str | None]:
     """'blank' | 'comment' | 'attributed' | 'unattributed' and the reason for the last."""
     if is_blank(text, fmt):
         return "blank", None
     if is_comment(text, fmt):
         return "comment", None
-    region = lf.tokens.get(key)
-    if region is None:
-        if COPY_LINE.search(text):
-            return "attributed", None
-        if DIRECTIVE.search(text):
-            return "unattributed", "compiler directive (consumed by cobc -E)"
-        return "unattributed", "text dropped by cobc -E (no tokens)"
     if key in lf.units or key in lf.data or key in lf.headers:
         return "attributed", None
+    if COPY_LINE.search(text) or REPLACING_PAIR.search(text) or COMMENT_ENTRY.search(text):
+        return "attributed", None
+    region = lf.tokens.get(key)
+    if region is None:
+        return "unattributed", no_token_reason(text, status)
     if region == "data":
-        return "unattributed", "data division text outside any parsed entry"
+        return "unattributed", "data division text the strict parser did not describe (see parse_errors)"
     if region == "proc":
         return "unattributed", "procedure text outside any paragraph (parse error or DECLARATIVES)"
+    if region == "tolerant":
+        return "unattributed", "tolerant analyser: outside any unit or data entry"
     return "unattributed", f"{region} text"
+
+
+def no_token_reason(text: str, status: str) -> str:
+    if DIRECTIVE.search(text):
+        return "compiler directive (consumed by cobc -E)"
+    if status == "not-parsed":
+        return "copybook not included by any parsed program"
+    if status == "tolerant":
+        return "tolerant analyser dropped the line (continuation or debugging line)"
+    return "text dropped by cobc -E (no tokens)"
 
 
 def file_coverage(entry: InventoryEntry, f: TextFile, lf: LineFacts, program: str, status: ParseStatus,
@@ -144,7 +156,7 @@ def file_coverage(entry: InventoryEntry, f: TextFile, lf: LineFacts, program: st
     counts = {"blank": 0, "comment": 0, "attributed": 0}
     missing: list[UnattributedLine] = []
     for n, text in enumerate(f.text.splitlines(), start=1):
-        kind, reason = classify_line(lf, (f.path, n), text, entry.format)
+        kind, reason = classify_line(lf, (f.path, n), text, entry.format, status)
         if kind == "unattributed":
             missing.append(UnattributedLine(file=f.path, line=n, reason=reason or "unknown"))
         else:

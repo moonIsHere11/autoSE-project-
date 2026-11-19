@@ -179,6 +179,7 @@ def add_tolerant(lf: LineFacts, tolerant: list[TolerantProgram]) -> None:
         for key in tp.covered:
             lf.tokens.setdefault(key, "tolerant")
             lf.owners[key[0]].add(tp.program)
+        lf.headers |= tp.structure
         for u in tp.units:
             lf.units |= span_lines(u.span.file, u.span.start_line, u.span.end_line)
         for fl in tp.fields:
