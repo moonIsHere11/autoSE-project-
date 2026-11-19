@@ -74,3 +74,12 @@ def test_corpus_programs_classified() -> None:
     for p in sorted(REPO.glob("corpus/*/cobol/*.cbl")) + sorted(REPO.glob("tests/semantics/programs/*.cbl")):
         raw = p.read_bytes()
         assert classify(raw.decode("latin-1"), raw)[0] == "program", p
+
+
+def test_prose_and_sql_declares_are_not_procedure_copybooks() -> None:
+    md = "# Title\n\nIf you MOVE the files, PERFORM the steps below.\nDisplay the result.\n"
+    assert classify(md, md.encode())[0] == "other"
+    dcl = "      ******************\n           EXEC SQL DECLARE CARDDEMO.T TABLE\n           ( A CHAR(2) NOT NULL )\n           END-EXEC.\n"
+    assert classify(dcl, dcl.encode()) == ("copybook", "sql")
+    proc = "       9998-PRIMING-QUERY.\n           MOVE 1 TO WS-X\n           PERFORM 9999-EXIT.\n"
+    assert classify(proc, proc.encode()) == ("copybook", "procedure")

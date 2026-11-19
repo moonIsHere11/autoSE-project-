@@ -26,7 +26,9 @@ CICS_PGM = re.compile(r"\b(?:LINK|XCTL)\s+PROGRAM\s*\(\s*(?:'([^']+)'|\"([^\"]+)
 PROGRAM_NAME = re.compile(r"\bPROGRAM-ID\s*\.?\s*(?:'([^']+)'|\"([^\"]+)\"|([A-Z0-9][A-Z0-9-]*))", re.I)
 BMS = re.compile(r"\bDFHMSD\b|\bDFHMDF\b|\bDFHMDI\b")
 JCL_CARD = re.compile(r"^//([A-Z0-9#@$]*)\s+(JOB|EXEC|DD|PROC|PEND|SET|INCLUDE|JCLLIB)\b(.*)$", re.I)
-COBOL_VERBS = re.compile(r"\b(MOVE|PERFORM|COMPUTE|DISPLAY|IF|EVALUATE|ADD|SUBTRACT)\b", re.I)
+COBOL_VERBS = re.compile(r"^\s*(MOVE|PERFORM|COMPUTE|DISPLAY|IF|EVALUATE|ADD|SUBTRACT|EXEC|ELSE|END-IF|CALL|SET|GO)\b", re.I)
+PARAGRAPH_HEADER = re.compile(r"^\s{0,4}[A-Z0-9][A-Z0-9-]*\.\s*$", re.I)
+SQL_DECLARE = re.compile(r"\bEXEC\s+SQL\s+DECLARE\b", re.I)
 
 
 @dataclass
@@ -85,14 +87,22 @@ def classify(text: str, raw: bytes) -> tuple[FileKind, str | None]:
         return "jcl", "job"
     if BMS.search(text):
         return "other", "bms"
-    code = "\n".join(code_lines(text, detect_format(text)))
+    code_rows = [ln for ln in code_lines(text, detect_format(text)) if ln.strip()]
+    code = "\n".join(code_rows)
     if PROGRAM_ID.search(code) and PROCEDURE.search(code):
         return "program", None
-    levels = sum(1 for ln in code.splitlines() if LEVEL_LINE.match(ln))
-    if levels:
+    if SQL_DECLARE.search(code):
+        return "copybook", "sql"
+    if not code_rows:
+        return "other", None
+    levels = sum(1 for ln in code_rows if LEVEL_LINE.match(ln))
+    if levels * 2 >= len(code_rows):
         return "copybook", "data"
-    if COBOL_VERBS.search(code) and code.strip().endswith("."):
+    statements = sum(1 for ln in code_rows if COBOL_VERBS.match(ln) or PARAGRAPH_HEADER.match(ln))
+    if statements * 3 >= len(code_rows) and any(PARAGRAPH_HEADER.match(ln) for ln in code_rows):
         return "copybook", "procedure"
+    if levels and levels * 4 >= len(code_rows):
+        return "copybook", "data"
     return "other", None
 
 
