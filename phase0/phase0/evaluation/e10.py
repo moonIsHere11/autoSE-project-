@@ -118,7 +118,10 @@ def variant(b: Built, kind: str, work: Path, toolbox: Toolbox) -> tuple[bool | N
     if kind == "free":
         for u in got["units"] + want["units"]:
             u["span"].pop("file", None)
-    return got == want, ""
+    inv = other.kb("source/inventory.json")["files"][0]
+    return got == want, (f"transformed program: {len(got['units'])} units vs {len(want['units'])}; inventory "
+                         f"{inv['kind']}/{inv['subkind']}, format {inv['format']}, parse status {inv['parse_status']}: "
+                         f"{(inv['parse_reason'] or '')[:160]}")
 
 
 def e10(built: list[Built], work: Path, toolbox: Toolbox) -> tuple[dict[str, Any], list[dict[str, Any]]]:

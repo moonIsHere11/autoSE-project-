@@ -123,6 +123,14 @@ def violations(failures: list[dict[str, Any]]) -> list[str]:
     return [f"- `{json.dumps(f, sort_keys=True)}`" for f in own]
 
 
+def e10_failures(failures: list[dict[str, Any]]) -> list[str]:
+    rows = [f"- {f['transformation']} {f['program']}: {f['detail']}" for f in failures if f.get("metric") == "E10"]
+    if not rows:
+        return []
+    return ["", "### Metamorphic failures (E10)", "", *rows, "",
+            "A format-detection failure is the verifier's `detect_format`, which Phase 0 shares (TEAM_NOTES item 7)."]
+
+
 def hazard_table(m: dict[str, Any]) -> list[str]:
     d3 = m.get("F_hazards", {}).get("D3")
     if not d3:
@@ -173,7 +181,7 @@ def render(out: Path, target: Path) -> None:
              "## 1. Headlines", ""]
     lines += [f"- {h}" for h in headlines(m)]
     lines += ["", "## 2. Phase 0 vs Phase 1's tolerant analyser (E7)", "", *e7_table(m),
-              "", "## 3. Soundness violations (E4, E5)", "", *violations(failures),
+              "", "## 3. Soundness violations (E4, E5)", "", *violations(failures), *e10_failures(failures),
               "", "## 4. CardDemo (D3) coverage", "", *carddemo(m),
               "", "### Hazard sites on CardDemo (stage F)", "", *hazard_table(m),
               "", "Differences are explained in `phase0/notes.md` (section \"Stage F hazard counts\").",

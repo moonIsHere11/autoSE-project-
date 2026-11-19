@@ -262,6 +262,18 @@
    }
   }
  },
+ "E10": {
+  "free": {
+   "fail": 1,
+   "pass": 37,
+   "skipped": 0
+  },
+  "rename": {
+   "fail": 0,
+   "pass": 34,
+   "skipped": 4
+  }
+ },
  "E2": {
   "java_methods": {
    "common": 101,
@@ -579,13 +591,15 @@
    "deterministic": true,
    "lines": 2133,
    "llm_tokens": 0,
-   "seconds_cold": 2.61,
-   "seconds_per_kloc_cold": 1.223,
-   "seconds_warm": 0.16,
+   "seconds_cold": 3.71,
+   "seconds_per_kloc_cold": 1.74,
+   "seconds_warm": 0.28,
    "stage_seconds": {
-    "A_inventory": 0.012,
-    "A_read": 0.001,
-    "B_F_source": 2.513,
+    "A_inventory": 0.018,
+    "A_read": 0.002,
+    "B_F_source": 3.535,
+    "G_summaries": 0.0,
+    "report": 0.02,
     "tool_versions": 0.0
    }
   },
@@ -594,13 +608,15 @@
    "deterministic": true,
    "lines": 1123,
    "llm_tokens": 0,
-   "seconds_cold": 4.55,
-   "seconds_per_kloc_cold": 4.052,
-   "seconds_warm": 0.16,
+   "seconds_cold": 6.05,
+   "seconds_per_kloc_cold": 5.386,
+   "seconds_warm": 0.33,
    "stage_seconds": {
-    "A_inventory": 0.005,
-    "A_read": 0.002,
-    "B_F_source": 4.409,
+    "A_inventory": 0.011,
+    "A_read": 0.003,
+    "B_F_source": 5.811,
+    "G_summaries": 0.0,
+    "report": 0.019,
     "tool_versions": 0.0
    }
   },
@@ -609,13 +625,15 @@
    "deterministic": true,
    "lines": 39670,
    "llm_tokens": 0,
-   "seconds_cold": 2.33,
-   "seconds_per_kloc_cold": 0.059,
-   "seconds_warm": 2.24,
+   "seconds_cold": 3.85,
+   "seconds_per_kloc_cold": 0.097,
+   "seconds_warm": 4.72,
    "stage_seconds": {
-    "A_inventory": 0.44,
-    "A_read": 0.023,
-    "B_F_source": 1.361,
+    "A_inventory": 0.493,
+    "A_read": 0.036,
+    "B_F_source": 2.546,
+    "G_summaries": 0.0,
+    "report": 0.214,
     "tool_versions": 0.0
    }
   }
@@ -732,15 +750,16 @@
   }
  },
  "eval_seconds": {
-  "E1": 0.0,
-  "E2_E4": 40.12,
-  "E3": 3.21,
-  "E5": 1.37,
-  "E6": 0.0,
-  "E7": 6.32,
+  "E1": 0.01,
+  "E10": 19.13,
+  "E2_E4": 35.84,
+  "E3": 4.51,
+  "E5": 1.93,
+  "E6": 0.01,
+  "E7": 11.24,
   "E8": 0.0,
-  "E9": 10.61,
-  "F": 3.74,
-  "build": 12.41
+  "E9": 19.06,
+  "F": 6.5,
+  "build": 19.48
  }
 }
