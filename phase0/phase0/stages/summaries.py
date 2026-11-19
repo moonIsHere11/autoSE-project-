@@ -27,9 +27,9 @@ from phase0 import jsonio
 from phase0.schema import Field_, FileCrud, Unit
 from phase0.workspace import ContractError
 
-PROMPT_VERSION = "g1"
-PROVIDERS = {"ollama": "http://localhost:11434/v1", "groq": "https://api.groq.com/openai/v1"}
-NAME = re.compile(r"\b[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+\b|\b[A-Z][A-Z0-9]{2,}\b")
+PROMPT_VERSION = "g2"
+PROVIDERS = {"ollama": "http://localhost:11434", "groq": "https://api.groq.com/openai/v1"}
+NAME = re.compile(r"\b[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\b|\b[A-Z][A-Z0-9]{2,}\b")
 SYSTEM = (
     "You summarise one COBOL paragraph for a migration engineer. Write 1 to 3 plain sentences about what the "
     "paragraph computes and in which order. Mention data items and paragraphs ONLY by the exact names listed under "
@@ -60,7 +60,11 @@ class SummaryConfig:
         return cfg
 
     def url(self) -> str:
-        return (self.base_url or PROVIDERS[self.provider]).rstrip("/") + "/chat/completions"
+        """Ollama: native /api/chat (it can switch off a model's thinking); others: OpenAI-compatible."""
+        base = (self.base_url or PROVIDERS[self.provider]).rstrip("/")
+        if self.provider == "ollama":
+            return base + "/api/chat"
+        return base + "/chat/completions"
 
 
 @dataclass
@@ -91,9 +95,11 @@ def unsupported_entities(summary: str, allowed: set[str], universe: set[str]) ->
     """Names in the summary that look like COBOL names of this program but are not in the unit's facts."""
     out: list[str] = []
     for tok in NAME.findall(summary):
-        if tok in allowed:
+        if tok.upper() in allowed:
+            if tok != tok.upper():
+                out.append(tok)  # a COBOL name in the wrong case is not the name of a fact
             continue
-        if "-" in tok or tok in universe:
+        if ("-" in tok and tok.upper() == tok) or tok.upper() in universe:
             out.append(tok)
     return sorted(set(out))
 
@@ -114,9 +120,24 @@ class Client:
             if not self.key:
                 raise ContractError("phase0.summaries.provider groq needs GROQ_API_KEY")
 
+    def body(self, user: str) -> dict[str, Any]:
+        messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]
+        if self.cfg.provider == "ollama":
+            # think=false: reasoning models (qwen3.5) otherwise spend the whole budget on hidden thinking
+            return {"model": self.cfg.model, "messages": messages, "stream": False, "think": False,
+                    "options": {"temperature": 0, "seed": 7, "num_predict": 300}}
+        return {"model": self.cfg.model, "temperature": 0, "seed": 7, "max_tokens": 300, "messages": messages}
+
+    def parse(self, data: dict[str, Any]) -> tuple[str, int, int]:
+        if self.cfg.provider == "ollama":
+            return (clean(str(data["message"].get("content") or "")), int(data.get("prompt_eval_count", 0)),
+                    int(data.get("eval_count", 0)))
+        usage = data.get("usage") or {}
+        return (clean(str(data["choices"][0]["message"]["content"] or "")), int(usage.get("prompt_tokens", 0)),
+                int(usage.get("completion_tokens", 0)))
+
     def chat(self, user: str) -> tuple[str, int, int]:
-        body = {"model": self.cfg.model, "temperature": 0, "seed": 7, "max_tokens": 200,
-                "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]}
+        body = self.body(user)
         headers = {"Content-Type": "application/json", "User-Agent": "phase0-kb/0.1"}
         if self.key:
             headers["Authorization"] = f"Bearer {self.key}"
@@ -126,9 +147,7 @@ class Client:
                 data = json.loads(resp.read())
         except urllib.error.URLError as exc:
             raise ContractError(f"summaries: cannot reach {self.cfg.url()} ({exc}); is `ollama serve` running?") from exc
-        text = str(data["choices"][0]["message"]["content"] or "")
-        usage = data.get("usage") or {}
-        return clean(text), int(usage.get("prompt_tokens", 0)), int(usage.get("completion_tokens", 0))
+        return self.parse(data)
 
 
 def clean(text: str) -> str:
@@ -171,5 +190,6 @@ def cached_chat(client: Client, cache: Path, user: str, report: SummaryReport) -
     text, tin, tout = client.chat(user)
     report.tokens_in += tin
     report.tokens_out += tout
-    jsonio.write(path, {"model": client.cfg.model, "text": text, "tokens_in": tin, "tokens_out": tout})
+    if text:  # an empty answer is a failed call, not a result: never cache it
+        jsonio.write(path, {"model": client.cfg.model, "text": text, "tokens_in": tin, "tokens_out": tout})
     return text

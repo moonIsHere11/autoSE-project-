@@ -32,3 +32,9 @@ def test_disabled_stage_never_calls_out() -> None:
                        SummaryConfig())
     assert report.generated == 0 and UNIT.summary is None
     assert clean("<think>long</think>  A   b ") == "A b"
+
+
+def test_misspelled_case_of_a_fact_is_flagged() -> None:
+    allowed = allowed_names(UNIT, {}, FILES)
+    assert unsupported_entities("It updates WS-Fee and runs ROUND-FEE.", allowed, set()) == ["WS-Fee"]
+    assert unsupported_entities("A well-known follow-up step.", allowed, set()) == []
