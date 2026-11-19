@@ -68,3 +68,9 @@ Running log: what was done, and why. Newest entries at the bottom.
 - First E3 run: 33 mismatches, all scorer issues, fixed in the scorer (the KB was right in every case): (1) the listing's TYPE is the item's class, so numeric-edited items are `NUMERIC` there while datadiv/the contract treat them as character storage; compare the KB `category` instead (27 items); (2) the corpus manifests use `kind: binary` for COMP items (4); (3) `PACKED-DECIMAL` is `COMP-3` (1); (4) GnuCOBOL DISPLAYs the P positions of `PP9(2)`, so digit counts are not observable for P pictures (1, excluded with that reason).
 - Result D1+D2: every attribute 100% (listing: 710 items aligned, 0 KB-only, 0 listing-only; probe: 650 offsets and byte lengths, 388 numeric sign/digits/scale; manifests: 44 declared numeric types, 8 lengths).
 - Speed: tool versions were read twice per build (two docker runs); cached per process. D1+D2 build (38 programs x 2 builds) 33 s -> 7.5 s.
+
+## In progress: O2 / O3 (E2, E4) — not yet run end to end
+
+- `evaluation/o2.py`: traced builds via `verifier.cobol.gnucobol.build_all`, runs on check cases + `verifier.inputs.strategies` inputs (seed 20261119), `parse_trace`.
+- `evaluation/e2_e4_control.py`: a paragraph/section entry is explained by a static edge from the unit of the preceding traced statement, by section -> first paragraph, or by re-entering a target of a PERFORM executed earlier (loops: the trace shows the PERFORM statement once). Spans: trace `Paragraph:` line must equal span start. O3: camelCase(paragraph) vs Java methods, and manifest units.
+- The runner wiring for E2/E4 (`e2_e4` in runner.py) was being applied when the session stopped; the edit to runner.py did not land (a cwd mistake), so `runner.py` does not call E2/E4 yet.
