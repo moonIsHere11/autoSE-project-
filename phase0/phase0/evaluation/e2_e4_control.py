@@ -84,6 +84,7 @@ class ControlTally:
 
 def check_run(kb: ControlKb, run: list[TraceEvent], tally: ControlTally, program: str, repro: str) -> None:
     performed: set[str] = set()
+    performers: list[str] = []  # units that executed an out-of-line PERFORM, most recent last
     prev: TraceEvent | None = None
     current: str | None = None
     for ev in run:
@@ -92,12 +93,16 @@ def check_run(kb: ControlKb, run: list[TraceEvent], tally: ControlTally, program
             unit = kb.paragraph_at(ev.file, ev.line)
             if unit is not None:
                 tally.statements_in_span += 1
-            if ev.name.startswith("PERFORM") and unit is not None:
-                performed |= kb.perform_sites.get((unit, ev.line), set())
+            targets = kb.perform_sites.get((unit or "", ev.line), set())
+            if ev.name.startswith("PERFORM") and unit is not None and targets:
+                performed |= targets
+                if unit in performers:
+                    performers.remove(unit)
+                performers.append(unit)
         if ev.kind in ("paragraph", "section"):
             tally.entered.add(ev.name)
             check_span(kb, ev, tally, program, repro)
-            check_entry(kb, ev, prev, current, performed, tally, program, repro)
+            check_entry(kb, ev, prev, current, performed, performers, tally, program, repro)
             if ev.kind == "paragraph":
                 current = ev.name
         if ev.kind != "entry" or prev is None:
@@ -125,7 +130,11 @@ def source_unit(kb: ControlKb, prev: TraceEvent | None, current: str | None) -> 
 
 
 def check_entry(kb: ControlKb, ev: TraceEvent, prev: TraceEvent | None, current: str | None, performed: set[str],
-                tally: ControlTally, program: str, repro: str) -> None:
+                performers: list[str], tally: ControlTally, program: str, repro: str) -> None:
+    """Explained by: an edge from the unit of the preceding statement; an edge from a unit that
+    executed a PERFORM (the trace does not show returns, so a performer that resumes and then falls
+    through or jumps looks like a transition from the performed paragraph); or re-entry of a
+    PERFORM target (loops)."""
     tally.transitions += 1
     if prev is None or prev.kind == "entry":
         return  # program start
@@ -136,6 +145,11 @@ def check_entry(kb: ControlKb, ev: TraceEvent, prev: TraceEvent | None, current:
     src = source_unit(kb, prev, current)
     if src is not None:
         edge = kb.explains(src, ev.name)
+        if edge is not None:
+            tally.exercised.add(edge)
+            return
+    for caller in reversed(performers):
+        edge = kb.explains(caller, ev.name)
         if edge is not None:
             tally.exercised.add(edge)
             return

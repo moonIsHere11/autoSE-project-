@@ -12,6 +12,7 @@ from typing import Any
 
 from phase0 import jsonio
 from phase0.evaluation.datasets import Built, Program, build_program, d1, d2, d3
+from phase0.evaluation.e2_e4_run import ControlEval, e2_metrics, e4_metrics, evaluate_program
 from phase0.evaluation.e3_data import Tally, score_listing, score_manifest, score_probe
 from phase0.evaluation.o1 import CompileJob, probe_items, probe_source, run_o1
 from phase0.toolbox import Toolbox, make_toolbox
@@ -125,6 +126,16 @@ def e3(ev: Eval) -> None:
     }
 
 
+# ---- E2 unit inventory and E4 control-flow soundness -------------------------------------------
+def e2_e4(ev: Eval) -> None:
+    ce = ControlEval()
+    for b in ev.of("D1", "D2"):
+        evaluate_program(ce, b, ev.toolbox, ev.out)
+    ev.failures += ce.tally.violations + ce.errors
+    ev.metrics["E2"] = e2_metrics(ce)
+    ev.metrics["E4"] = e4_metrics(ce)
+
+
 # ---- E8 determinism and cost --------------------------------------------------------------------
 def e8(ev: Eval) -> None:
     per: dict[str, Any] = {}
@@ -160,6 +171,7 @@ def run(out: Path, datasets: list[str], carddemo: Path) -> Eval:
     ev.timed("build", lambda: ev.built.extend(build_program(p, out / "ws", ev.toolbox) for p in programs))
     ev.timed("E1", lambda: e1(ev))
     ev.timed("E3", lambda: e3(ev))
+    ev.timed("E2_E4", lambda: e2_e4(ev))
     ev.timed("E8", lambda: e8(ev))
     ev.metrics["eval_seconds"] = ev.seconds
     jsonio.write(out / "metrics.json", ev.metrics)
