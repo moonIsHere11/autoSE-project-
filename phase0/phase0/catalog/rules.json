@@ -1,0 +1,315 @@
+[
+ {
+  "rule_id": "R-MOVE-NUMERIC",
+  "cobol_construct": "MOVE (numeric to numeric)",
+  "required_pattern": "Align on the decimal point, drop excess decimals toward zero, keep only the receiver's digits (high-order truncation), drop the sign for an unsigned receiver, never store negative zero.",
+  "example_cobol": "01 A PIC S9(5)V99 VALUE -12345.67.\n01 B PIC 9(3)V9.\nMOVE A TO B.   *> B = 345.6 (sign dropped)",
+  "example_target": "b.move(a);   // cobolrt CobolDecimal; or: long u = Math.abs(aU / 10) % 10_000;",
+  "gap_ids": [
+   "G-TRUNCATE",
+   "G-SIGN",
+   "G-PACKED"
+  ],
+  "source": "docs/spikes/S6.md section 3; tests/semantics/programs/MOVENUM.cbl"
+ },
+ {
+  "rule_id": "R-MOVE-ALPHA",
+  "cobol_construct": "MOVE (alphanumeric)",
+  "required_pattern": "Copy left to right, pad the receiver with spaces or truncate on the right (JUSTIFIED RIGHT: truncate/pad on the left); reference-modified receivers change only their substring.",
+  "example_cobol": "01 X PIC X(5).\nMOVE 'ABCDEFG' TO X.   *> 'ABCDE'",
+  "example_target": "x.move(\"ABCDEFG\");   // cobolrt PicX keeps exactly 5 bytes",
+  "gap_ids": [
+   "G-TRUNCATE",
+   "G-REFMOD"
+  ],
+  "source": "tests/semantics/programs/MOVEALN.cbl, REFMOD.cbl"
+ },
+ {
+  "rule_id": "R-MOVE-MIXED",
+  "cobol_construct": "MOVE (numeric <-> alphanumeric)",
+  "required_pattern": "Numeric to alphanumeric: the unsigned digit string of the sending PIC (no decimal point), left-justified, space padded. Alphanumeric to numeric: treat the characters as an unsigned integer DISPLAY value of the same length, then store with the receiver's rules.",
+  "example_cobol": "01 N PIC S9(3) VALUE -12.\n01 X PIC X(5).\nMOVE N TO X.   *> '012  '",
+  "example_target": "x.move(n);   // cobolrt PicX.move(CobolDecimal): unsigned digits, no point, space padded",
+  "gap_ids": [
+   "G-NUMALPHA"
+  ],
+  "source": "tests/semantics/programs/MOVEMIX.cbl with tests/semantics/expected/MOVEMIX"
+ },
+ {
+  "rule_id": "R-MOVE-GROUP",
+  "cobol_construct": "MOVE (group)",
+  "required_pattern": "Copy the raw bytes of the sending item into the receiving group (space padded / truncated), without converting subordinate fields; every elementary field of the receiver is written.",
+  "example_cobol": "01 G1. 05 A PIC 9(3). 05 B PIC X(2).\n01 G2 PIC X(5).\nMOVE G1 TO G2.",
+  "example_target": "System.arraycopy(g1Bytes, 0, g2Bytes, 0, 5);   // raw record bytes (encode subfields with cobolrt Codec)",
+  "gap_ids": [
+   "G-GROUPMOVE"
+  ],
+  "source": "docs/spikes/S6.md section 4"
+ },
+ {
+  "rule_id": "R-MOVE-EDITED",
+  "cobol_construct": "MOVE (numeric-edited receiver)",
+  "required_pattern": "Format the value with the receiver's editing symbols (zero suppression, insertion, floating sign) into exactly the edited length.",
+  "example_cobol": "01 E PIC ZZ9.99-.\nMOVE -1.5 TO E.   *> '  1.50-'",
+  "example_target": "// no runtime support yet: implement the PIC editing symbols by hand and test against GnuCOBOL",
+  "gap_ids": [
+   "G-EDITED"
+  ],
+  "source": "tests/semantics/programs/EDITED.cbl"
+ },
+ {
+  "rule_id": "R-DISPLAY",
+  "cobol_construct": "DISPLAY",
+  "required_pattern": "Concatenate the operands with no separator and end with '\\n' (no newline with NO ADVANCING). Numerics print all PIC digits zero-padded, '.' for V, a leading '+'/'-' for signed items (trailing for SIGN TRAILING SEPARATE); X(n) prints exactly n bytes; groups print their raw bytes. Write ISO-8859-1 bytes.",
+  "example_cobol": "01 T PIC S9(3)V99 VALUE -1.5.\nDISPLAY 'T=' T.   *> T=-001.50",
+  "example_target": "Display.print(System.out, \"T=\", t);",
+  "gap_ids": [
+   "G-NUMALPHA",
+   "G-SIGN"
+  ],
+  "source": "docs/spikes/S6.md section 2; tests/semantics/programs/DISPSGN.cbl"
+ },
+ {
+  "rule_id": "R-ACCEPT",
+  "cobol_construct": "ACCEPT",
+  "required_pattern": "Read one line per ACCEPT from stdin (ISO-8859-1). Numeric DISPLAY: window of byte-length characters, de-edit, align, truncate; COMP/COMP-3: whole line; invalid text gives zero; at EOF leave the field unchanged.",
+  "example_cobol": "01 A PIC 9(3)V99.\nACCEPT A.   *> input '123.45' stores 123.40",
+  "example_target": "String line = in.readLine(); if (line != null) a.accept(line);",
+  "gap_ids": [
+   "G-ACCEPT"
+  ],
+  "source": "docs/spikes/S6.md section 1"
+ },
+ {
+  "rule_id": "R-COMPUTE",
+  "cobol_construct": "COMPUTE",
+  "required_pattern": "Evaluate the expression exactly (no intermediate rounding, decimal arithmetic), then store once into each receiver with ROUNDED/truncation and ON SIZE ERROR rules; division by zero is a size error.",
+  "example_cobol": "COMPUTE NET ROUNDED = GROSS * RATE / 100\n    ON SIZE ERROR MOVE 'Y' TO ERR-FLAG\nEND-COMPUTE.",
+  "example_target": "if (net.compute(gross.dec().multiply(rate.dec()).divide(Dec.of(100)), Round.ROUNDED, SizeError.ON)) { errFlag.move(\"Y\"); }",
+  "gap_ids": [
+   "G-TRUNCATE",
+   "G-OVERFLOW",
+   "G-ROUNDING",
+   "G-DIVZERO"
+  ],
+  "source": "docs/spikes/S6.md section 3; tests/semantics/programs/PRECISN.cbl"
+ },
+ {
+  "rule_id": "R-ARITH",
+  "cobol_construct": "ADD / SUBTRACT / MULTIPLY / DIVIDE",
+  "required_pattern": "ADD A TO B: B = B + A; ADD A B GIVING C: C = A + B; SUBTRACT A FROM B: B = B - A; MULTIPLY A BY B: B = A * B; DIVIDE A INTO B: B = B / A; DIVIDE A BY B GIVING C [REMAINDER R]. Each receiver is stored with its own truncation/ROUNDED rules; REMAINDER uses the truncated quotient; division by zero leaves receivers unchanged.",
+  "example_cobol": "DIVIDE 7 INTO A GIVING Q REMAINDER R.",
+  "example_target": "boolean err = CobolDecimal.divideRemainder(a.dec(), Dec.of(7), q, r, Round.TRUNCATION, SizeError.NONE);   // DIVIDE 7 INTO A: (dividend A, divisor 7)",
+  "gap_ids": [
+   "G-TRUNCATE",
+   "G-OVERFLOW",
+   "G-ROUNDING",
+   "G-DIVZERO"
+  ],
+  "source": "corpus/README.md 'Arithmetic'; tests/semantics/programs/DIVREM.cbl"
+ },
+ {
+  "rule_id": "R-ROUNDED",
+  "cobol_construct": "ROUNDED",
+  "required_pattern": "Round the exact result half away from zero at the store; ADD/SUBTRACT ROUNDED into COMP-3 truncates under GnuCOBOL 3.2.",
+  "example_cobol": "COMPUTE R ROUNDED = 2.45 * 1.   *> R PIC 9V9 = 2.5",
+  "example_target": "r.compute(x, Round.ROUNDED, SizeError.NONE);   // x is an exact Dec",
+  "gap_ids": [
+   "G-ROUNDING"
+  ],
+  "source": "docs/spikes/S6.md section 3; docs/RUNTIME_API.md"
+ },
+ {
+  "rule_id": "R-SIZE-ERROR",
+  "cobol_construct": "ON SIZE ERROR",
+  "required_pattern": "If the result does not fit (or a division by zero happens), leave the receiver unchanged and run the SIZE ERROR branch; otherwise store and run NOT ON SIZE ERROR.",
+  "example_cobol": "ADD 1 TO CNT ON SIZE ERROR DISPLAY 'FULL' END-ADD.",
+  "example_target": "if (cnt.add(1L, Round.TRUNCATION, SizeError.ON)) { Display.print(System.out, \"FULL\"); }",
+  "gap_ids": [
+   "G-OVERFLOW",
+   "G-DIVZERO"
+  ],
+  "source": "tests/semantics/programs/SIZEERR.cbl"
+ },
+ {
+  "rule_id": "R-IF",
+  "cobol_construct": "IF (incl. 88-level conditions, class tests)",
+  "required_pattern": "Numeric comparisons compare values; alphanumeric comparisons pad the shorter operand with spaces and compare bytes; an 88-level name tests its parent against every listed value and THRU range; NUMERIC/ALPHABETIC class tests inspect the bytes.",
+  "example_cobol": "05 STATUS-CODE PIC X.\n   88 IS-ACTIVE VALUE 'A' 'R'.\nIF IS-ACTIVE PERFORM P1 END-IF.",
+  "example_target": "if (statusCode.equals(\"A\") || statusCode.equals(\"R\")) { p1(); }",
+  "gap_ids": [
+   "G-CONDNAME",
+   "G-COMPARE"
+  ],
+  "source": "tests/semantics/programs/LEVEL88.cbl, COMPARE.cbl, CLASSSGN.cbl"
+ },
+ {
+  "rule_id": "R-SET-88",
+  "cobol_construct": "SET condition-name TO TRUE",
+  "required_pattern": "Move the first value listed in the 88-level's VALUE clause into its parent, with the parent's MOVE rules.",
+  "example_cobol": "SET IS-ACTIVE TO TRUE.",
+  "example_target": "statusCode.move(\"A\");",
+  "gap_ids": [
+   "G-CONDNAME"
+  ],
+  "source": "tests/semantics/programs/LEVEL88.cbl"
+ },
+ {
+  "rule_id": "R-EVALUATE",
+  "cobol_construct": "EVALUATE",
+  "required_pattern": "Test the WHEN clauses in order and run only the first that matches (no fall-through between WHENs); WHEN OTHER is the default; ALSO compares several subjects positionally; THRU ranges are inclusive; EVALUATE TRUE evaluates conditions.",
+  "example_cobol": "EVALUATE TRUE\n  WHEN AMT > 1000 MOVE 'H' TO BAND\n  WHEN AMT > 100  MOVE 'M' TO BAND\n  WHEN OTHER      MOVE 'L' TO BAND\nEND-EVALUATE.",
+  "example_target": "if (amt.compareTo(\"1000\") > 0) band.move(\"H\"); else if (amt.compareTo(\"100\") > 0) band.move(\"M\"); else band.move(\"L\");",
+  "gap_ids": [
+   "G-COMPARE"
+  ],
+  "source": "tests/semantics/programs/EVALUATE.cbl"
+ },
+ {
+  "rule_id": "R-PERFORM",
+  "cobol_construct": "PERFORM paragraph",
+  "required_pattern": "Call the paragraph's parameterless instance method; it returns when execution reaches the end of the paragraph (not at its fall-through).",
+  "example_cobol": "PERFORM CALC-FEE.",
+  "example_target": "calcFee();",
+  "gap_ids": [
+   "G-STORAGE"
+  ],
+  "source": "corpus/README.md 'Java translation rules'"
+ },
+ {
+  "rule_id": "R-PERFORM-THRU",
+  "cobol_construct": "PERFORM ... THRU",
+  "required_pattern": "Run every paragraph from the first to the last in source order, then return; GO TO inside the range that targets the last paragraph's EXIT ends the range.",
+  "example_cobol": "PERFORM P1 THRU P3.",
+  "example_target": "p1(); p2(); p3();   // or one method for the whole range when GO TO is involved",
+  "gap_ids": [
+   "G-FALLTHROUGH",
+   "G-GOTO"
+  ],
+  "source": "tests/semantics/programs/FALLTHRU.cbl"
+ },
+ {
+  "rule_id": "R-PERFORM-TIMES",
+  "cobol_construct": "PERFORM ... TIMES",
+  "required_pattern": "Evaluate the count once at entry; run the body that many times (zero or negative: never).",
+  "example_cobol": "PERFORM P1 N TIMES.",
+  "example_target": "for (long k = n.unscaled(), i = 0; i < k; i++) p1();   // n is an integer PIC",
+  "gap_ids": [
+   "G-LOOP"
+  ],
+  "source": "tests/semantics/programs/TIMES.cbl"
+ },
+ {
+  "rule_id": "R-PERFORM-UNTIL",
+  "cobol_construct": "PERFORM ... UNTIL",
+  "required_pattern": "Test before each iteration (WITH TEST AFTER: after); stop when the condition is true.",
+  "example_cobol": "PERFORM READ-NEXT UNTIL EOF-FLAG = 'Y'.",
+  "example_target": "while (!eofFlag.equals(\"Y\")) readNext();",
+  "gap_ids": [
+   "G-LOOP"
+  ],
+  "source": "tests/semantics/programs/VARYING.cbl"
+ },
+ {
+  "rule_id": "R-PERFORM-VARYING",
+  "cobol_construct": "PERFORM ... VARYING",
+  "required_pattern": "Store FROM into the control field (with its PIC rules), test UNTIL, run the body, add BY (stored with truncation), repeat; AFTER varies the inner item for each outer value; the control field keeps its final value.",
+  "example_cobol": "PERFORM VARYING I FROM 1 BY 1 UNTIL I > 3 ADD 1 TO N END-PERFORM.   *> I = 4 afterwards",
+  "example_target": "for (i.move(1L); i.compareTo(\"3\") <= 0; i.add(1L, Round.TRUNCATION, SizeError.NONE)) n.add(1L, Round.TRUNCATION, SizeError.NONE);",
+  "gap_ids": [
+   "G-LOOP",
+   "G-TRUNCATE"
+  ],
+  "source": "tests/semantics/programs/VARYING.cbl with tests/semantics/expected/VARYING (I=+004)"
+ },
+ {
+  "rule_id": "R-GOTO",
+  "cobol_construct": "GO TO",
+  "required_pattern": "Translate the region reachable by GO TO as one unit using a dispatch loop over paragraph labels; never as a method call that returns.",
+  "example_cobol": "P1. IF X = 0 GO TO P3. ...\nP2. ...\nP3. EXIT.",
+  "example_target": "int next = P1; loop: while (true) { switch (next) { case P1: if (x == 0) { next = P3; continue loop; } /* falls */ case P2: ...; case P3: break loop; } }",
+  "gap_ids": [
+   "G-GOTO",
+   "G-FALLTHROUGH"
+  ],
+  "source": "Pan et al., ICSE 2024 (control-flow translation bugs)"
+ },
+ {
+  "rule_id": "R-STOP-RUN",
+  "cobol_construct": "STOP RUN / GOBACK / EXIT PROGRAM",
+  "required_pattern": "Flush stdout and end the program with System.exit(RETURN-CODE); GOBACK in the main program is STOP RUN.",
+  "example_cobol": "MOVE 4 TO RETURN-CODE. STOP RUN.",
+  "example_target": "System.out.flush(); System.exit(returnCode);",
+  "gap_ids": [
+   "G-RETCODE",
+   "G-FALLTHROUGH"
+  ],
+  "source": "corpus/README.md 'Java translation rules'"
+ },
+ {
+  "rule_id": "R-INITIALIZE",
+  "cobol_construct": "INITIALIZE",
+  "required_pattern": "Set every elementary numeric item under the operand to zero and every alphanumeric one to spaces (FILLER and REDEFINES are skipped); VALUE clauses are not re-applied unless WITH ... VALUE is given.",
+  "example_cobol": "INITIALIZE WS-REC.",
+  "example_target": "wsRecAmt.move(0L); wsRecName.move(\"\");",
+  "gap_ids": [
+   "G-STORAGE"
+  ],
+  "source": "tests/semantics/programs/INITLZ.cbl"
+ },
+ {
+  "rule_id": "R-OCCURS",
+  "cobol_construct": "OCCURS / subscripts",
+  "required_pattern": "Fixed-size array of the OCCURS count; subscript s maps to index s-1; nested OCCURS map to nested arrays.",
+  "example_cobol": "05 CELL PIC 9(2) OCCURS 4.\nMOVE 7 TO CELL (I).",
+  "example_target": "cell[(int) i.unscaled() - 1].move(7L);",
+  "gap_ids": [
+   "G-OCCURS"
+  ],
+  "source": "tests/semantics/programs/OCCURS.cbl"
+ },
+ {
+  "rule_id": "R-REDEFINES",
+  "cobol_construct": "REDEFINES",
+  "required_pattern": "Keep one byte buffer for the redefined storage; read and write each view through its encoding so a write via one view is visible through the other.",
+  "example_cobol": "01 D PIC 9(8).\n01 D-PARTS REDEFINES D. 05 YYYY PIC 9(4). 05 MMDD PIC 9(4).",
+  "example_target": "byte[] d = new byte[8];   // both views decode/encode the same bytes with cobolrt Codec",
+  "gap_ids": [
+   "G-GROUPMOVE"
+  ],
+  "source": "tests/semantics/programs/REDEF.cbl"
+ },
+ {
+  "rule_id": "R-OPEN-CLOSE",
+  "cobol_construct": "OPEN / CLOSE (sequential files)",
+  "required_pattern": "Open exactly the file named in ASSIGN relative to the working directory (INPUT: read, OUTPUT: truncate, EXTEND: append); set FILE STATUS after each operation; CLOSE flushes.",
+  "example_cobol": "SELECT IN-FILE ASSIGN TO 'IN.DAT' ORGANIZATION LINE SEQUENTIAL FILE STATUS IS FS.\nOPEN INPUT IN-FILE.",
+  "example_target": "in = new BufferedInputStream(new FileInputStream(\"IN.DAT\")); fs.move(\"00\");",
+  "gap_ids": [
+   "G-FILE"
+  ],
+  "source": "docs/spikes/S6.md sections 5-6"
+ },
+ {
+  "rule_id": "R-READ-SEQ",
+  "cobol_construct": "READ (sequential)",
+  "required_pattern": "LINE SEQUENTIAL: read up to '\\n', pad with spaces to the record length, split lines longer than the record; fixed SEQUENTIAL: read exactly the record length. At end: status 10 and the AT END branch; the record area is unchanged.",
+  "example_cobol": "READ IN-FILE AT END MOVE 'Y' TO EOF-FLAG END-READ.",
+  "example_target": "byte[] line = readLineBytes(in); if (line == null) { fs.move(\"10\"); eofFlag.move(\"Y\"); } else { inRec.move(line); }   // pad/split per G-FILE",
+  "gap_ids": [
+   "G-FILE"
+  ],
+  "source": "docs/spikes/S6.md section 5"
+ },
+ {
+  "rule_id": "R-WRITE-SEQ",
+  "cobol_construct": "WRITE (sequential)",
+  "required_pattern": "LINE SEQUENTIAL: write the record bytes with trailing spaces trimmed, then '\\n'; fixed SEQUENTIAL: write the encoded record bytes with no delimiter.",
+  "example_cobol": "WRITE OUT-REC.",
+  "example_target": "out.write(rtrim(outRec.bytes())); out.write('\\n');",
+  "gap_ids": [
+   "G-FILE"
+  ],
+  "source": "docs/spikes/S6.md sections 4-5"
+ }
+]

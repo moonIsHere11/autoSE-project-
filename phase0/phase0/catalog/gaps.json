@@ -1,0 +1,182 @@
+[
+ {
+  "gap_id": "G-TRUNCATE",
+  "topic": "decimal truncation (high-order digits and excess decimals)",
+  "cobol_behavior": "A numeric store (MOVE, COMPUTE, ADD, ...) into a PIC keeps only the PIC's digits: high-order integer digits beyond the PIC are dropped (12345.6 into S9(3)V9 gives 345.6) and decimals beyond the scale are truncated toward zero unless ROUNDED is given (-0.04 into S9(3)V9 gives 0.0). Alphanumeric MOVE into a shorter X(n) keeps the leftmost n characters.",
+  "target_default": "Java long/BigDecimal keep every digit; BigDecimal.setScale needs an explicit RoundingMode; String assignment keeps the full length.",
+  "required_handling": "After every store, reduce the scaled integer to the PIC: drop excess decimals toward zero (or round when ROUNDED), then keep value mod 10^digits with the sign rules of G-SIGN. Use cobolrt CobolDecimal.move/compute, or Num.truncDigits on scaled longs. Alphanumerics: cut to n characters, pad with spaces.",
+  "rule_ids": ["R-MOVE-NUMERIC", "R-MOVE-ALPHA", "R-COMPUTE", "R-ARITH"],
+  "source": "docs/spikes/S6.md section 3 (high-order truncation, truncation toward zero); corpus/README.md 'Arithmetic'; tests/semantics/programs/MOVENUM.cbl, MOVEALN.cbl"
+ },
+ {
+  "gap_id": "G-OVERFLOW",
+  "topic": "size error / overflow without ON SIZE ERROR",
+  "cobol_behavior": "An arithmetic result too large for the receiving PIC is silently truncated to the PIC when no ON SIZE ERROR phrase is present. With ON SIZE ERROR the receiving field is left unchanged and the SIZE ERROR branch runs; NOT ON SIZE ERROR runs otherwise.",
+  "target_default": "Java long arithmetic wraps at 2^63 or keeps the full value; nothing compares against the PIC capacity and nothing leaves the target unchanged.",
+  "required_handling": "Compute the exact result, test whether it fits the PIC digits (Num.fits); without the phrase store the truncated value (G-TRUNCATE); with the phrase leave the target unchanged and execute the handler. cobolrt add/subtract/multiply/divide/compute return true on size error.",
+  "rule_ids": ["R-SIZE-ERROR", "R-COMPUTE", "R-ARITH"],
+  "source": "corpus/README.md 'Arithmetic' (ON SIZE ERROR leaves target unchanged); docs/RUNTIME_API.md 'Semantics'; tests/semantics/programs/SIZEERR.cbl"
+ },
+ {
+  "gap_id": "G-ROUNDING",
+  "topic": "ROUNDED rounding mode",
+  "cobol_behavior": "ROUNDED (default mode) rounds half away from zero: 2.45 -> 2.5, -2.45 -> -2.5. Without ROUNDED the excess decimals are truncated toward zero. Measured quirk: GnuCOBOL 3.2 ADD/SUBTRACT ROUNDED into a COMP-3 receiver truncates instead of rounding. COMPUTE intermediates are exact; only the final store rounds.",
+  "target_default": "BigDecimal defaults to HALF_EVEN when a mode is given and throws without one; integer division in Java truncates toward zero; Math.round rounds half up toward positive infinity (-2.5 -> -2).",
+  "required_handling": "Round the exact result once, at the store, half away from zero (RoundingMode.HALF_UP applied to the magnitude); use Round.ROUNDED / Round.TRUNCATION with cobolrt. Never round intermediates.",
+  "rule_ids": ["R-COMPUTE", "R-ARITH", "R-ROUNDED"],
+  "source": "docs/spikes/S6.md section 3; docs/RUNTIME_API.md 'Semantics' (COMP-3 ADD/SUBTRACT quirk); tests/semantics/programs/ROUNDING.cbl, PRECISN.cbl"
+ },
+ {
+  "gap_id": "G-SIGN",
+  "topic": "sign handling (unsigned store, negative zero, DISPLAY sign)",
+  "cobol_behavior": "Storing a negative value into an unsigned PIC keeps the magnitude (MOVE -5 to 9(3) gives 005). Arithmetic and MOVE never produce negative zero (-5 * 0 gives +000.0), but ACCEPT of '-0' into a signed DISPLAY field stores a negative-zero overpunch whose bytes differ from +0. Signed DISPLAY items always print a leading '+' or '-'; SIGN TRAILING SEPARATE prints the sign after the digits.",
+  "target_default": "Java keeps the sign of every value; -0 does not exist for long; String.valueOf prints no '+'.",
+  "required_handling": "Take the absolute value when the receiver is unsigned; normalise zero results to +0; format DISPLAY with the explicit sign position of the PIC (cobolrt Display.print).",
+  "rule_ids": ["R-MOVE-NUMERIC", "R-DISPLAY"],
+  "source": "docs/spikes/S6.md sections 1-3; corpus/README.md 'DISPLAY' and 'Arithmetic'; tests/semantics/programs/NEGZERO.cbl, DISPSGN.cbl, CLASSSGN.cbl"
+ },
+ {
+  "gap_id": "G-STORAGE",
+  "topic": "WORKING-STORAGE lifetime and initial values",
+  "cobol_behavior": "WORKING-STORAGE items are static: they are initialised once from VALUE clauses (numeric items without VALUE start at zero and alphanumerics at spaces under -std=default, defaultbyte init) and keep their values across PERFORMs and paragraphs. A paragraph communicates only through these shared fields; there are no locals or parameters.",
+  "target_default": "Java method locals are re-created on each call; uninitialised object fields are 0/null, not spaces.",
+  "required_handling": "Map every WORKING-STORAGE item to an instance field of the program class, initialised exactly like the VALUE clause (spaces for X(n) without VALUE, zero for numerics); paragraphs become parameterless instance methods that read and write those fields.",
+  "rule_ids": ["R-PERFORM", "R-INITIALIZE"],
+  "source": "docs/spikes/S6.md section 8 (defaultbyte: init); corpus/README.md 'Java translation rules'; tests/semantics/programs/INITLZ.cbl"
+ },
+ {
+  "gap_id": "G-NUMALPHA",
+  "topic": "numeric/alphanumeric conversion and DISPLAY formatting",
+  "cobol_behavior": "MOVE numeric -> alphanumeric copies the unsigned digit string of the PIC width (decimal point not inserted) left-justified; MOVE alphanumeric -> numeric de-edits the characters as digits. DISPLAY of a numeric prints all PIC digits zero-padded, inserts '.' for V, and the sign per G-SIGN; COMP-5 prints as many digits as the binary capacity. Comparisons of a numeric DISPLAY item with an alphanumeric literal are character comparisons.",
+  "target_default": "Java string conversion drops leading zeros, prints no decimal point padding, and never pads to a width.",
+  "required_handling": "Format numerics to the exact PIC width (zero-padded, decimal point for V, sign per PIC) and keep alphanumerics at exactly n characters, space padded; use cobolrt Display/PicX.",
+  "rule_ids": ["R-DISPLAY", "R-MOVE-MIXED", "R-ACCEPT"],
+  "source": "docs/spikes/S6.md section 2 (DISPLAY formats); corpus/README.md 'DISPLAY'; tests/semantics/programs/MOVEMIX.cbl, DISPSGN.cbl, COMPARE.cbl"
+ },
+ {
+  "gap_id": "G-PACKED",
+  "topic": "COMP / COMP-3 / COMP-5 storage",
+  "cobol_behavior": "COMP-3 stores two digits per byte with a sign nibble (C, D, F); COMP is big-endian binary truncated to the PIC digits (binary-truncate: yes); COMP-5 is native little-endian binary that is NOT truncated to the PIC and wraps at the binary width (99999 into S9(4) COMP-5 gives -31073). Values behave like DISPLAY numerics of the same PIC except for COMP-5.",
+  "target_default": "Java has no packed type; int/long wrap at 32/64 bits regardless of the PIC.",
+  "required_handling": "Hold the value as a scaled long with the PIC's digits; truncate to the PIC for DISPLAY/COMP/COMP-3 and wrap at the byte width for COMP-5. Byte layout matters only when the item is written to a file or overlaid by REDEFINES/group moves (cobolrt Codec).",
+  "rule_ids": ["R-MOVE-NUMERIC"],
+  "source": "docs/spikes/S6.md sections 1, 2, 4; tests/semantics/programs/BINTRUNC.cbl"
+ },
+ {
+  "gap_id": "G-GROUPMOVE",
+  "topic": "group MOVE and REDEFINES (byte overlays)",
+  "cobol_behavior": "A MOVE to or from a group item is an alphanumeric move of the raw bytes of the whole record: subordinate numeric fields are not converted, so zoned/packed bytes are copied as they are, and a shorter source is space padded. REDEFINES makes two descriptions share the same bytes, so writing one changes the other.",
+  "target_default": "Java objects have no shared byte layout; copying a record object field by field converts values instead of copying bytes.",
+  "required_handling": "Model the group (and every REDEFINES of it) as one byte buffer of the record length and encode/decode subordinate fields with cobolrt Codec, or copy byte-for-byte when moving the group. Every field overlaid by the target bytes is written.",
+  "rule_ids": ["R-MOVE-GROUP", "R-REDEFINES"],
+  "source": "docs/spikes/S6.md section 4 (record encodings); tests/semantics/programs/REDEF.cbl, MOVEALN.cbl"
+ },
+ {
+  "gap_id": "G-GOTO",
+  "topic": "GO TO / ALTER (unstructured control flow)",
+  "cobol_behavior": "GO TO transfers control to a paragraph without returning; inside a PERFORM range, control returns to the PERFORMer only when execution reaches the end of the range's last paragraph. ALTER changes the target of a GO TO at run time.",
+  "target_default": "Java has no goto; a method call returns to its caller.",
+  "required_handling": "Translate the whole region that GO TO can reach as one unit, e.g. a state machine (`int next = ...; while (true) switch (next) {...}`) or loops/breaks derived from the control-flow edges in the KB call graph. ALTER is out of scope (unsupported).",
+  "rule_ids": ["R-GOTO"],
+  "source": "Pan et al., 'Lost in Translation' (ICSE 2024), control-flow bug class; agreement.md section 10 risks"
+ },
+ {
+  "gap_id": "G-FALLTHROUGH",
+  "topic": "paragraph fall-through and PERFORM THRU ranges",
+  "cobol_behavior": "Without a PERFORM, a GO TO or STOP RUN, control falls from the end of one paragraph into the next one in source order. PERFORM A THRU B runs every paragraph from A to B in source order and returns after B's last statement; a PERFORM of a single paragraph returns at its end even though that paragraph falls through when entered sequentially.",
+  "target_default": "A Java method returns at its closing brace; nothing calls the next method.",
+  "required_handling": "Where the KB marks `falls_through_to`, the caller (or the main program body) must call the next paragraph's method explicitly; translate a PERFORM THRU range as one unit (or call each method of the range in order).",
+  "rule_ids": ["R-PERFORM-THRU", "R-STOP-RUN"],
+  "source": "corpus/README.md 'Java translation rules' (fall-through); tests/semantics/programs/FALLTHRU.cbl; agreement.md section 10 risks"
+ },
+ {
+  "gap_id": "G-DIVZERO",
+  "topic": "division by zero",
+  "cobol_behavior": "DIVIDE (or COMPUTE with /) by zero without ON SIZE ERROR leaves the receiving field unchanged and execution continues; with ON SIZE ERROR the handler runs and the target is unchanged.",
+  "target_default": "Java integer division throws ArithmeticException; BigDecimal.divide throws too.",
+  "required_handling": "Test the divisor before dividing; when it is zero skip the store (and run the SIZE ERROR branch if present).",
+  "rule_ids": ["R-ARITH", "R-SIZE-ERROR"],
+  "source": "corpus/README.md 'Arithmetic' (DIVIDE by zero leaves the target unchanged); tests/semantics/programs/DIVREM.cbl, SIZEERR.cbl"
+ },
+ {
+  "gap_id": "G-ACCEPT",
+  "topic": "ACCEPT from stdin parsing and EOF",
+  "cobol_behavior": "Each ACCEPT consumes one line. Numeric DISPLAY receivers take only the first byte-length characters of the line, then de-edit (sign, digits, one '.'), align and truncate: '123.45' into 9(3)V99 gives 123.40. COMP/COMP-3 receivers de-edit the whole line. Invalid text gives zero. At EOF the field keeps its value and the program continues.",
+  "target_default": "Integer.parseInt / new BigDecimal throw on invalid text and read the whole line; readLine returns null at EOF.",
+  "required_handling": "Use cobolrt CobolDecimal.accept(line) / PicX.accept(line) (or reproduce the window, de-edit and truncation rules); on EOF leave the field unchanged.",
+  "rule_ids": ["R-ACCEPT"],
+  "source": "docs/spikes/S6.md section 1; corpus/README.md 'ACCEPT'; tests/semantics/programs/ACCEPTP.cbl"
+ },
+ {
+  "gap_id": "G-COMPARE",
+  "topic": "alphanumeric comparison and figurative constants",
+  "cobol_behavior": "Alphanumeric operands of different lengths are compared after padding the shorter with spaces ('AB' = 'AB   '); the collating sequence is the byte order (ASCII/ISO-8859-1 here). SPACES, ZERO, LOW-VALUES and HIGH-VALUES stand for as many characters as needed. A numeric DISPLAY field holding spaces compares as described in tests/semantics/expected/COMPARE.",
+  "target_default": "String.equals and compareTo treat different lengths as different and compare UTF-16 code units.",
+  "required_handling": "Pad to the longer length with spaces before comparing (cobolrt Alnum.compare), compare bytes as unsigned values.",
+  "rule_ids": ["R-IF", "R-EVALUATE"],
+  "source": "tests/semantics/programs/COMPARE.cbl with tests/semantics/expected/COMPARE"
+ },
+ {
+  "gap_id": "G-LOOP",
+  "topic": "PERFORM VARYING / UNTIL / TIMES loop semantics",
+  "cobol_behavior": "PERFORM UNTIL tests the condition BEFORE each iteration unless WITH TEST AFTER; VARYING leaves the control item at the first value that satisfied the UNTIL condition (VARYING I FROM 1 BY 1 UNTIL I > 3 ends with I = 4); the control item is stored with its PIC truncation each increment, so a narrow PIC can wrap and loop forever. PERFORM n TIMES evaluates n once at loop entry.",
+  "target_default": "A Java for loop's variable is usually a local int and its final value is lost; increments do not truncate.",
+  "required_handling": "Use the COBOL field itself as the loop variable, apply the store (with truncation) for FROM and BY, and test the UNTIL condition before (or after, with TEST AFTER) each iteration exactly as written.",
+  "rule_ids": ["R-PERFORM-VARYING", "R-PERFORM-UNTIL", "R-PERFORM-TIMES"],
+  "source": "tests/semantics/programs/VARYING.cbl, TIMES.cbl with tests/semantics/expected/"
+ },
+ {
+  "gap_id": "G-OCCURS",
+  "topic": "OCCURS tables and subscripts",
+  "cobol_behavior": "Subscripts are 1-based; elements are laid out contiguously in the record (a group OCCURS displays as the raw bytes of all elements). Subscript bounds checking depends on compile flags (-debug / -fec=bound-subscript), which the harness does not set, so out-of-range behaviour is undefined for translation purposes.",
+  "target_default": "Java arrays are 0-based and throw ArrayIndexOutOfBoundsException.",
+  "required_handling": "Index with (subscript - 1); keep elements as fixed-size arrays of the declared OCCURS count; bounds violations are out of scope (the KB flags OCCURS DEPENDING ON).",
+  "rule_ids": ["R-OCCURS"],
+  "source": "tests/semantics/programs/OCCURS.cbl with tests/semantics/expected/OCCURS"
+ },
+ {
+  "gap_id": "G-CONDNAME",
+  "topic": "88-level condition names",
+  "cobol_behavior": "An 88-level name is a test on its parent's current value against a list of values or ranges (VALUE 'A' 'B', VALUE 1 THRU 5); SET cond TO TRUE moves the first listed value into the parent.",
+  "target_default": "Java has no condition names; a boolean field would not track the parent's value.",
+  "required_handling": "Translate each 88-level to a method (or inline expression) testing the parent field against every listed value/range; SET ... TO TRUE stores the first value with the parent's MOVE rules.",
+  "rule_ids": ["R-IF", "R-SET-88"],
+  "source": "tests/semantics/programs/LEVEL88.cbl with tests/semantics/expected/LEVEL88"
+ },
+ {
+  "gap_id": "G-FILE",
+  "topic": "sequential file I/O (LINE SEQUENTIAL and fixed SEQUENTIAL)",
+  "cobol_behavior": "LINE SEQUENTIAL WRITE trims trailing spaces and appends '\\n'; READ pads short lines with spaces and SPLITS a line longer than the record into several records (status 06 then 00); a final line without '\\n' is read normally, then status 10 (AT END). Fixed SEQUENTIAL records are concatenated with no delimiter in their storage encodings. FILE STATUS codes are set on every operation.",
+  "target_default": "BufferedReader.readLine returns whole lines without padding; writers keep trailing spaces.",
+  "required_handling": "Read and write bytes in ISO-8859-1, pad/split/trim exactly as above, encode fixed records with cobolrt Codec, set the FILE STATUS item after each operation, and run AT END / NOT AT END branches.",
+  "rule_ids": ["R-READ-SEQ", "R-WRITE-SEQ", "R-OPEN-CLOSE"],
+  "source": "docs/spikes/S6.md sections 4-6; corpus/README.md 'Files'; tests/semantics/programs/FILESTAT.cbl"
+ },
+ {
+  "gap_id": "G-EDITED",
+  "topic": "numeric-edited pictures",
+  "cobol_behavior": "Moving a number to an edited PIC (Z, *, comma, period, +, -, CR, DB, $, B, 0, /) produces a formatted character string: leading-zero suppression, floating signs and insertion characters follow the PIC symbol rules.",
+  "target_default": "String.format/DecimalFormat use locale rules and different suppression/sign conventions.",
+  "required_handling": "Implement the PIC editing rules symbol by symbol (or use the runtime when it supports the picture); test with values that hit suppression and sign positions.",
+  "rule_ids": ["R-MOVE-EDITED"],
+  "source": "tests/semantics/programs/EDITED.cbl with tests/semantics/expected/EDITED"
+ },
+ {
+  "gap_id": "G-REFMOD",
+  "topic": "reference modification",
+  "cobol_behavior": "X(start:length) addresses a substring with a 1-based start; without length it runs to the end of the item; a MOVE into a reference-modified target pads/truncates within that substring only.",
+  "target_default": "String.substring is 0-based with an exclusive end index; strings are immutable.",
+  "required_handling": "Convert to 0-based [start-1, start-1+length) on a mutable byte/char array of the item.",
+  "rule_ids": ["R-MOVE-ALPHA"],
+  "source": "tests/semantics/programs/REFMOD.cbl with tests/semantics/expected/REFMOD"
+ },
+ {
+  "gap_id": "G-RETCODE",
+  "topic": "RETURN-CODE and program termination",
+  "cobol_behavior": "STOP RUN ends the run unit with the current value of the special register RETURN-CODE as exit status (0 by default); GOBACK in the main program behaves like STOP RUN; EXIT PROGRAM in a called program returns to the caller. Errors are often signalled only by setting RETURN-CODE.",
+  "target_default": "Java main returns exit status 0 unless System.exit is called; exceptions exit with 1.",
+  "required_handling": "Keep RETURN-CODE as a field and call System.exit(returnCode) at STOP RUN / main-program GOBACK; flush stdout first.",
+  "rule_ids": ["R-STOP-RUN"],
+  "source": "corpus/README.md 'Java translation rules' (System.exit(returnCode))"
+ }
+]
