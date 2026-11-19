@@ -219,6 +219,22 @@ class Coverage(Model):
     rejected_files: list[dict[str, str]]
 
 
+class RejectedSummary(Model):
+    unit_id: str
+    unsupported_entities: list[str]
+    summary: str
+
+
+class Summaries(Model):
+    """kb/source/summaries.json, written only when stage G is enabled (E11)."""
+
+    schema_version: str = SCHEMA_VERSION
+    model: str
+    generated: int
+    accepted: int
+    rejected: list[RejectedSummary]
+
+
 class ExtractorInfo(Model):
     name: str
     version: str

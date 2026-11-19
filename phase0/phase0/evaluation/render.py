@@ -66,6 +66,10 @@ def headlines(m: dict[str, Any]) -> list[str]:
     for ds, e8 in sorted(m["E8"].items()):
         out.append(f"**E8 ({ds})** deterministic: {YES[bool(e8['deterministic'])]}; {e8['builds']} builds, "
                    f"{e8['lines']} lines, {e8['seconds_per_kloc_cold']} s per 1,000 lines (cold); LLM tokens {e8['llm_tokens']}.")
+    if "E11" in m:
+        e11 = m["E11"]
+        out.append(f"**E11** {e11['model']}: {e11['summaries']} summaries, {pct(e11['unsupported_entity_share'])} named an "
+                   f"entity outside the unit's facts and were rejected; {e11['llm_tokens_first_build']} tokens.")
     e9 = m["E9"]
     checks = {"KB files schema-valid": e9["kb_files_valid"], "JSON Schemas current": e9["exported_json_schemas_current"],
               "gap ids closed": e9["gap_ids_closed"], "runtime byte-identical": e9["runtime_byte_identical"]}

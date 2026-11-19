@@ -16,6 +16,7 @@ from phase0.schema import (
     Inventory,
     KbManifest,
     Rule,
+    Summaries,
     Toolchain,
     Unit,
 )
@@ -27,6 +28,7 @@ OBJECTS: dict[str, type[BaseModel]] = {
     "data_flow": DataFlow,
     "coverage": Coverage,
     "toolchain": Toolchain,
+    "summaries": Summaries,
 }
 LISTS: dict[str, type[BaseModel]] = {
     "units": Unit,

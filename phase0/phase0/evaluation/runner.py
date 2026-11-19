@@ -216,6 +216,27 @@ def run_e9(ev: Eval, run_e2e: bool) -> None:
     ev.failures += failures
 
 
+# ---- E11 summary grounding (stage G) ---------------------------------------------------------------
+def e11(ev: Eval, model: str) -> None:
+    generated = accepted = 0
+    for b in ev.of("D1"):
+        path = b.ws / "kb" / "source" / "summaries.json"
+        if not path.exists():
+            continue
+        s = json.loads(path.read_text("utf-8"))
+        generated += s["generated"]
+        accepted += s["accepted"]
+        ev.failures += [{"metric": "E11", "program": b.program.name, **r} for r in s["rejected"]]
+    tokens = 0
+    for b in ev.of("D1"):
+        last = b.ws / ".phase0-cache" / "last_build.json"
+        if last.exists():
+            tokens += int(json.loads(last.read_text("utf-8")).get("llm_tokens", 0))
+    ev.metrics["E11"] = {"model": model, "summaries": generated, "accepted": accepted,
+                         "unsupported_entity_share": round((generated - accepted) / max(generated, 1), 4),
+                         "llm_tokens_first_build": tokens}
+
+
 # ---- E8 determinism and cost --------------------------------------------------------------------
 def e8(ev: Eval) -> None:
     per: dict[str, Any] = {}
@@ -245,13 +266,15 @@ def e8(ev: Eval) -> None:
 
 
 def run(work: Path, out: Path, datasets: list[str], carddemo: Path, gold: Path | None = None, baseline: bool = True,
-        run_e2e: bool = False, only: str | None = None) -> Eval:
+        run_e2e: bool = False, only: str | None = None, summaries: str | None = None) -> Eval:
     """`work` holds the per-program workspaces and caches; `out` receives metrics.json, failures.jsonl."""
     work.mkdir(parents=True, exist_ok=True)
     out.mkdir(parents=True, exist_ok=True)
     ev = Eval(work, make_toolbox(work / "cache"))
     programs = [p for p in select(datasets, carddemo) if only is None or p.name == only.upper()]
-    ev.timed("build", lambda: ev.built.extend(build_program(p, work / "ws", ev.toolbox) for p in programs))
+    ev.timed("build", lambda: ev.built.extend(build_program(p, work / "ws", ev.toolbox, summaries) for p in programs))
+    if summaries is not None:
+        ev.timed("E11", lambda: e11(ev, summaries))
     ev.timed("E1", lambda: e1(ev))
     ev.timed("E3", lambda: e3(ev))
     ev.timed("E2_E4", lambda: e2_e4(ev))

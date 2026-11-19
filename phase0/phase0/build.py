@@ -23,12 +23,15 @@ from phase0.schema import (
     Gap,
     Inventory,
     KbManifest,
+    RejectedSummary,
     Rule,
+    Summaries,
     Toolchain,
     Unit,
 )
 from phase0.stages.inventory import build_inventory, read_tree
 from phase0.stages.source_kb import build_source_kb, call_graph, coverage_doc, data_flow, summary
+from phase0.stages.summaries import SummaryConfig, summarise
 from phase0.target import (
     copy_driver_template,
     copy_encoding_fixtures,
@@ -114,7 +117,13 @@ def build(ws: Workspace, toolbox: Toolbox) -> BuildResult:
     files = timer.run("A_read", lambda: read_tree(ws.source))
     inventory = timer.run("A_inventory", lambda: build_inventory(files))
     skb = timer.run("B_F_source", lambda: build_source_kb(toolbox, ws.source, inventory, files))
+    scfg = SummaryConfig.from_config(ws.config.phase0)
+    sreport = timer.run("G_summaries", lambda: summarise(skb.units, skb.fields, skb.files, ws.source, ws.cache, scfg))
     src = staging / "source"
+    if scfg.enabled:
+        jsonio.write_model(src / "summaries.json", Summaries(model=sreport.model, generated=sreport.generated,
+                                                              accepted=sreport.accepted,
+                                                              rejected=[RejectedSummary(**r) for r in sreport.rejected]))
     jsonio.write_model(src / "inventory.json", Inventory(files=inventory))
     jsonio.write_model(src / "units.json", skb.units)
     jsonio.write_model(src / "data_dictionary.json", skb.fields)
@@ -147,7 +156,12 @@ def build(ws: Workspace, toolbox: Toolbox) -> BuildResult:
     if ws.kb.exists():
         shutil.rmtree(ws.kb)
     staging.rename(ws.kb)
+    if sreport.tokens_in or sreport.tokens_out:
+        ws.emit("llm_usage", {"model": sreport.model, "tokens_in": sreport.tokens_in, "tokens_out": sreport.tokens_out,
+                              "stage": "G_summaries"})
     ws.emit("kb_built", {"kb_version": manifest.kb_version, "timings_s": timer.timings})
     lines = sum(e.lines for e in inventory)
-    jsonio.write(ws.cache / "last_build.json", {"kb_version": manifest.kb_version, "timings_s": timer.timings, "lines": lines})
+    jsonio.write(ws.cache / "last_build.json", {"kb_version": manifest.kb_version, "timings_s": timer.timings, "lines": lines,
+                                                "llm_tokens": sreport.tokens_in + sreport.tokens_out,
+                                                "llm_cache_hits": sreport.cache_hits})
     return BuildResult(manifest.kb_version, timer.timings, lines)

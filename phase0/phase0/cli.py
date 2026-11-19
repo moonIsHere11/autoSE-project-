@@ -80,7 +80,7 @@ def cmd_eval(a: argparse.Namespace) -> int:
     if a.gold:
         gold = Path(a.gold)
     ev = run(Path(a.workspace), out, a.datasets.split(","), Path(a.carddemo or REPO / "data" / "carddemo"), gold,
-             a.baseline == "phase1", a.e2e, a.only)
+             a.baseline == "phase1", a.e2e, a.only, a.summaries)
     render(out, out / "RESULTS.md")
     print(json.dumps({"out": str(out), "seconds": ev.seconds, "failures": len(ev.failures)}))
     return 0
@@ -122,6 +122,7 @@ def parser() -> argparse.ArgumentParser:
     e.add_argument("--carddemo", help="CardDemo checkout (default: data/carddemo)")
     e.add_argument("--e2e", action="store_true", help="also run integration/e2e_scripted.py (E9)")
     e.add_argument("--only", help="evaluate one program (repro)")
+    e.add_argument("--summaries", help="enable stage G on D1 and score E11, e.g. ollama:qwen2.5:3b or groq:<model>")
     e.set_defaults(fn=cmd_eval)
     return ap
 

@@ -80,7 +80,7 @@ def d3(root: Path) -> list[Program]:
     return [Program("D3", "CARDDEMO", [root], "")]
 
 
-def make_workspace(p: Program, base: Path) -> Path:
+def make_workspace(p: Program, base: Path, summaries: str | None = None) -> Path:
     ws = base / p.dataset / p.name
     if ws.exists():
         shutil.rmtree(ws)
@@ -93,11 +93,15 @@ def make_workspace(p: Program, base: Path) -> Path:
     (ws / "config.yaml").write_text(
         f"run: {{id: EVAL}}\nsource: {{entry: source/{p.entry}, dialect: default}}\n"
         "target: {language: java, version: '21'}\n", "utf-8")
+    if summaries is not None and p.dataset == "D1":
+        provider, model = summaries.split(":", 1)
+        with (ws / "config.yaml").open("a", encoding="utf-8") as fh:
+            fh.write(f"phase0: {{summaries: {{enabled: true, provider: {provider}, model: '{model}'}}}}\n")
     return ws
 
 
-def build_program(p: Program, base: Path, toolbox: Toolbox) -> Built:
-    ws_dir = make_workspace(p, base)
+def build_program(p: Program, base: Path, toolbox: Toolbox, summaries: str | None = None) -> Built:
+    ws_dir = make_workspace(p, base, summaries)
     ws = Workspace(ws_dir)
     tb = Toolbox(toolbox.config, toolbox.runner, ws.cache, toolbox.versions())
     t0 = time.perf_counter()
