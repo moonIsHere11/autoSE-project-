@@ -36,6 +36,7 @@ class Built:
     seconds_again: float
     timings: dict[str, float]
     lines: int
+    llm_tokens: int = 0  # first (cold-cache) build; the second build reads the summary cache
 
     def kb(self, rel: str) -> Any:
         return json.loads((self.ws / "kb" / rel).read_text("utf-8"))
@@ -107,7 +108,8 @@ def build_program(p: Program, base: Path, toolbox: Toolbox, summaries: str | Non
     t0 = time.perf_counter()
     first = build(ws, tb)
     t1 = time.perf_counter()
+    tokens = int(json.loads((ws.cache / "last_build.json").read_text("utf-8")).get("llm_tokens", 0))
     second = build(ws, tb)
     t2 = time.perf_counter()
     return Built(p, ws_dir, first.kb_version, second.kb_version, round(t1 - t0, 3), round(t2 - t1, 3),
-                 first.timings, first.lines)
+                 first.timings, first.lines, tokens)

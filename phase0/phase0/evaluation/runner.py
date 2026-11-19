@@ -228,11 +228,7 @@ def e11(ev: Eval, model: str) -> None:
         generated += s["generated"]
         accepted += s["accepted"]
         ev.failures += [{"metric": "E11", "program": b.program.name, **r} for r in s["rejected"]]
-    tokens = 0
-    for b in ev.of("D1"):
-        last = b.ws / ".phase0-cache" / "last_build.json"
-        if last.exists():
-            tokens += int(json.loads(last.read_text("utf-8")).get("llm_tokens", 0))
+    tokens = sum(b.llm_tokens for b in ev.of("D1"))
     ev.metrics["E11"] = {"model": model, "summaries": generated, "accepted": accepted,
                          "unsupported_entity_share": round((generated - accepted) / max(generated, 1), 4),
                          "llm_tokens_first_build": tokens}
@@ -264,7 +260,7 @@ def e8(ev: Eval) -> None:
             "seconds_warm": round(sum(b.seconds_again for b in bs), 2),
             "seconds_per_kloc_cold": round(1000 * cold / max(lines, 1), 3),
             "stage_seconds": {k: round(v, 3) for k, v in sorted(stages.items())},
-            "llm_tokens": 0,
+            "llm_tokens": sum(b.llm_tokens for b in bs),
         }
         for b in bs:
             if b.kb_version != b.kb_version_again:
