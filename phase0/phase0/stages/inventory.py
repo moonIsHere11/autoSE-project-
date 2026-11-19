@@ -12,9 +12,8 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from verifier.cobol.preprocess import detect_format
-
 from phase0.schema import FileKind, InventoryEntry
+from verifier.cobol.preprocess import detect_format
 
 LEVEL_LINE = re.compile(r"^\s*(0?[1-9]|[1-4][0-9]|66|77|88)\s+[A-Z0-9][A-Z0-9-]*\b", re.I)
 PROGRAM_ID = re.compile(r"\bPROGRAM-ID\b", re.I)
