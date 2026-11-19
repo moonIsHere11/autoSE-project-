@@ -1,0 +1,10 @@
+# Type-check settings for Phase 0 (run from phase0/: `mypy`). Lint uses the repository's ruff config.
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["phase0"]
+mypy_path = ".."
+
+[[tool.mypy.overrides]]
+module = ["phase1.*"]
+ignore_missing_imports = true
