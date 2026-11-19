@@ -46,7 +46,7 @@ class ControlKb:
         paras = [u for u in self.units.values() if u["kind"] == "paragraph" and u.get("section") == section]
         if not paras:
             return None
-        return min(paras, key=lambda u: u["span"]["start_line"])["unit_id"]
+        return str(min(paras, key=lambda u: u["span"]["start_line"])["unit_id"])
 
     def explains(self, src: str, dst: str) -> tuple[str, str, str] | None:
         """A static edge src -> dst (a section counts through its first paragraph)."""
