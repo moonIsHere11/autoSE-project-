@@ -10,13 +10,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from verifier.cobol.preprocess import detect_format
-
 from phase0 import jsonio
 from phase0.evaluation.datasets import Built, Program, build_program, d1, d2, d3
 from phase0.evaluation.e3_data import Tally, score_listing, score_manifest, score_probe
 from phase0.evaluation.o1 import CompileJob, probe_items, probe_source, run_o1
 from phase0.toolbox import Toolbox, make_toolbox
+from verifier.cobol.preprocess import detect_format
 
 
 @dataclass
@@ -133,10 +132,10 @@ def e8(ev: Eval) -> None:
         bs = ev.of(ds)
         lines = sum(b.lines for b in bs)
         cold = sum(b.seconds for b in bs)
-        stages: Counter[str] = Counter()
+        stages: dict[str, float] = {}
         for b in bs:
             for k, v in b.timings.items():
-                stages[k] += v
+                stages[k] = stages.get(k, 0.0) + v
         per[ds] = {
             "deterministic": all(b.kb_version == b.kb_version_again for b in bs),
             "builds": len(bs),

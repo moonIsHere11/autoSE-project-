@@ -18,9 +18,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from verifier.sandbox.docker_runner import Mount
-
 from phase0.toolbox import Toolbox
+from verifier.sandbox.docker_runner import Mount
 
 ROW = re.compile(r"^(\d{5}|     ) (\S[\w -]*?)\s{2,}(\d\d|  )\s{3}(\S.*)$")
 PROBE_PREFIX = "PHASE0-"
