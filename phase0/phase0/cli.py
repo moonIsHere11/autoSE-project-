@@ -77,6 +77,19 @@ def cmd_eval(a: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_report(a: argparse.Namespace) -> int:
+    from phase0.report import stale_docs, write_docs
+
+    ws = Workspace(Path(a.workspace))
+    stale = stale_docs(ws.kb, ws.source)
+    if stale:
+        raise ContractError("kb/docs differs from the facts (kb built by another Phase 0 version?): "
+                            + ", ".join(stale[:10]) + "; rebuild with `phase0 build`")
+    docs = write_docs(ws.kb, ws.source)
+    print(json.dumps({"docs": sorted(docs), "root": str(ws.kb / "docs")}))
+    return 0
+
+
 def parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(prog="phase0")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -88,6 +101,9 @@ def parser() -> argparse.ArgumentParser:
     q.add_argument("args", nargs="*")
     q.add_argument("--workspace", required=True)
     q.set_defaults(fn=cmd_query)
+    r = sub.add_parser("report", help="check and list the generated views and decision records under kb/docs")
+    r.add_argument("--workspace", required=True)
+    r.set_defaults(fn=cmd_report)
     e = sub.add_parser("eval", help="evaluate Phase 0 against GnuCOBOL, traces, Java and gold (task section 7)")
     e.add_argument("--workspace", required=True, help="scratch directory for the per-program workspaces")
     e.add_argument("--out", required=True, help="where metrics.json, failures.jsonl and RESULTS.md go")

@@ -12,6 +12,7 @@ from typing import TypeVar
 from pydantic import BaseModel, ValidationError
 
 from phase0 import __version__, jsonio
+from phase0.report import write_docs
 from phase0.schema import (
     SCHEMA_VERSION,
     CallGraph,
@@ -127,6 +128,7 @@ def build(ws: Workspace, toolbox: Toolbox) -> BuildResult:
     copy_runtime(tc.language, staging / "target" / "runtime")
     copy_driver_template(tc.language, staging / "target" / "driver_template")
     copy_encoding_fixtures(staging / "target" / "encoding_fixtures.json")
+    timer.run("report", lambda: write_docs(staging, ws.source))
     versions = timer.run("tool_versions", toolbox.versions)
     extractors = [ExtractorInfo(name="phase0", version=__version__)]
     extractors += [ExtractorInfo(name=k, version=v) for k, v in sorted(versions.items())]
