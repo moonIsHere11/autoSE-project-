@@ -1,0 +1,88 @@
+{
+ "$defs": {
+  "Edge": {
+   "additionalProperties": false,
+   "properties": {
+    "detail": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Detail"
+    },
+    "dst": {
+     "title": "Dst",
+     "type": "string"
+    },
+    "file": {
+     "title": "File",
+     "type": "string"
+    },
+    "kind": {
+     "enum": [
+      "perform",
+      "perform-thru",
+      "goto",
+      "fallthrough",
+      "call",
+      "exit"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "line": {
+     "title": "Line",
+     "type": "integer"
+    },
+    "resolution": {
+     "enum": [
+      "static",
+      "resolved-by-constant",
+      "unresolved"
+     ],
+     "title": "Resolution",
+     "type": "string"
+    },
+    "src": {
+     "title": "Src",
+     "type": "string"
+    }
+   },
+   "required": [
+    "src",
+    "dst",
+    "kind",
+    "line",
+    "file",
+    "resolution"
+   ],
+   "title": "Edge",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "edges": {
+   "items": {
+    "$ref": "#/$defs/Edge"
+   },
+   "title": "Edges",
+   "type": "array"
+  },
+  "schema_version": {
+   "default": "1.1",
+   "title": "Schema Version",
+   "type": "string"
+  }
+ },
+ "required": [
+  "edges"
+ ],
+ "title": "CallGraph",
+ "type": "object"
+}

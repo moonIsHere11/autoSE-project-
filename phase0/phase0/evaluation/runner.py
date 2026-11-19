@@ -16,7 +16,9 @@ from phase0.evaluation.e2_e4_run import ControlEval, e2_metrics, e4_metrics, eva
 from phase0.evaluation.e3_data import Tally, score_listing, score_manifest, score_probe
 from phase0.evaluation.e5_run import check_program, kb_units
 from phase0.evaluation.e5_run import metrics as e5_metrics
+from phase0.evaluation.e6_gold import agreement, load_gold, score
 from phase0.evaluation.e7_run import run_baseline
+from phase0.evaluation.e9 import e9
 from phase0.evaluation.o1 import CompileJob, O1Outcome, probe_items, probe_source, run_o1
 from phase0.evaluation.o4 import E5Tally
 from phase0.toolbox import Toolbox, make_toolbox
@@ -33,6 +35,7 @@ class Eval:
     seconds: dict[str, float] = field(default_factory=dict)
     control: ControlEval = field(default_factory=ControlEval)  # O2 runs, reused by E7
     o1: O1Outcome = field(default_factory=O1Outcome)  # O1 runs, reused by E7
+    phase1_units: dict[str, dict[str, dict[str, Any]]] = field(default_factory=dict)  # E7 baseline, reused by E6
 
     def timed(self, name: str, fn: Callable[[], None]) -> None:
         start = time.perf_counter()
@@ -156,6 +159,7 @@ def e5(ev: Eval) -> None:
 def e7(ev: Eval) -> None:
     res = run_baseline(ev.of("D1", "D2"), ev.toolbox, ev.control, ev.o1, ev.out)
     ev.failures += res.pop("failures")
+    ev.phase1_units = res.pop("units")
     ev.metrics["E7"] = {"phase1": res, "table": comparison(ev.metrics, res)}
 
 
@@ -177,6 +181,34 @@ def comparison(m: dict[str, Any], p1: dict[str, Any]) -> list[dict[str, Any]]:
         ("E5 read violations", m["E5"]["read_violations"], p1["E5"]["read_violations"], False),
     ]
     return [{"metric": a, "phase0": b, "phase1": c, "higher_is_better": d} for a, b, c, d in rows]
+
+
+# ---- E6 gold annotations ----------------------------------------------------------------------------
+def e6(ev: Eval, gold_dir: Path | None) -> None:
+    gold = {}
+    if gold_dir is not None and gold_dir.is_dir():
+        gold = load_gold(gold_dir)
+    if not gold:
+        ev.metrics["E6"] = {"status": "pending: no gold annotations yet (phase0/eval/gold/<initials>.json)"}
+        return
+    kb_units = {b.program.name: {u["unit_id"]: u for u in b.kb("source/units.json")} for b in ev.of("D1", "D2")}
+    p0, f0 = score(kb_units, gold, "phase0")
+    p1, f1 = score(ev.phase1_units, gold, "phase1")
+    ev.failures += f0 + f1
+    ev.metrics["E6"] = {"status": "scored", "annotators": sorted(gold), "phase0": p0, "phase1": p1,
+                        "agreement": agreement(gold)}
+    for k in ("reads", "writes", "performs"):
+        ev.metrics["E7"]["table"].append({"metric": f"E6 {k} F1", "phase0": p0["overall"][k]["f1"],
+                                          "phase1": p1["overall"][k]["f1"], "higher_is_better": True})
+    ev.metrics["E7"]["table"].append({"metric": "E6 falls_through_to accuracy", "phase0": p0["falls_through_to_accuracy"],
+                                      "phase1": p1["falls_through_to_accuracy"], "higher_is_better": True})
+
+
+# ---- E9 contract and integration ----------------------------------------------------------------
+def run_e9(ev: Eval, run_e2e: bool) -> None:
+    metrics, failures = e9(ev.built, run_e2e)
+    ev.metrics["E9"] = metrics
+    ev.failures += failures
 
 
 # ---- E8 determinism and cost --------------------------------------------------------------------
@@ -207,7 +239,7 @@ def e8(ev: Eval) -> None:
     ev.metrics["E8"] = per
 
 
-def run(out: Path, datasets: list[str], carddemo: Path) -> Eval:
+def run(out: Path, datasets: list[str], carddemo: Path, gold: Path | None = None, run_e2e: bool = False) -> Eval:
     out.mkdir(parents=True, exist_ok=True)
     ev = Eval(out, make_toolbox(out / "cache"))
     programs = select(datasets, carddemo)
@@ -217,6 +249,8 @@ def run(out: Path, datasets: list[str], carddemo: Path) -> Eval:
     ev.timed("E2_E4", lambda: e2_e4(ev))
     ev.timed("E5", lambda: e5(ev))
     ev.timed("E7", lambda: e7(ev))
+    ev.timed("E6", lambda: e6(ev, gold))
+    ev.timed("E9", lambda: run_e9(ev, run_e2e))
     ev.timed("E8", lambda: e8(ev))
     ev.metrics["eval_seconds"] = ev.seconds
     jsonio.write(out / "metrics.json", ev.metrics)

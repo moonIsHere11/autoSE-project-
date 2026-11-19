@@ -1,0 +1,60 @@
+{
+ "additionalProperties": false,
+ "properties": {
+  "build_cmd": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Build Cmd",
+   "type": "array"
+  },
+  "file_ext": {
+   "title": "File Ext",
+   "type": "string"
+  },
+  "language": {
+   "title": "Language",
+   "type": "string"
+  },
+  "lint_cmd": {
+   "anyOf": [
+    {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "title": "Lint Cmd"
+  },
+  "runtime_dir": {
+   "title": "Runtime Dir",
+   "type": "string"
+  },
+  "test_cmd": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Test Cmd",
+   "type": "array"
+  },
+  "version": {
+   "title": "Version",
+   "type": "string"
+  }
+ },
+ "required": [
+  "language",
+  "version",
+  "file_ext",
+  "build_cmd",
+  "test_cmd",
+  "lint_cmd",
+  "runtime_dir"
+ ],
+ "title": "Toolchain",
+ "type": "object"
+}

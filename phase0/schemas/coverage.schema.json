@@ -1,0 +1,152 @@
+{
+ "$defs": {
+  "ProgramCoverage": {
+   "additionalProperties": false,
+   "properties": {
+    "facts_by_extractor": {
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "title": "Facts By Extractor",
+     "type": "object"
+    },
+    "file": {
+     "title": "File",
+     "type": "string"
+    },
+    "lines_attributed": {
+     "title": "Lines Attributed",
+     "type": "integer"
+    },
+    "lines_blank": {
+     "title": "Lines Blank",
+     "type": "integer"
+    },
+    "lines_comment": {
+     "title": "Lines Comment",
+     "type": "integer"
+    },
+    "lines_total": {
+     "title": "Lines Total",
+     "type": "integer"
+    },
+    "parse_errors": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Parse Errors",
+     "type": "array"
+    },
+    "parse_status": {
+     "enum": [
+      "strict",
+      "tolerant",
+      "failed",
+      "not-parsed"
+     ],
+     "title": "Parse Status",
+     "type": "string"
+    },
+    "program": {
+     "title": "Program",
+     "type": "string"
+    },
+    "unattributed": {
+     "items": {
+      "$ref": "#/$defs/UnattributedLine"
+     },
+     "title": "Unattributed",
+     "type": "array"
+    },
+    "unresolved_calls": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Unresolved Calls",
+     "type": "array"
+    },
+    "unsupported": {
+     "additionalProperties": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array"
+     },
+     "title": "Unsupported",
+     "type": "object"
+    }
+   },
+   "required": [
+    "program",
+    "file",
+    "parse_status",
+    "lines_total",
+    "lines_attributed",
+    "lines_comment",
+    "lines_blank",
+    "unattributed",
+    "unsupported",
+    "unresolved_calls",
+    "parse_errors",
+    "facts_by_extractor"
+   ],
+   "title": "ProgramCoverage",
+   "type": "object"
+  },
+  "UnattributedLine": {
+   "additionalProperties": false,
+   "properties": {
+    "file": {
+     "title": "File",
+     "type": "string"
+    },
+    "line": {
+     "title": "Line",
+     "type": "integer"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    }
+   },
+   "required": [
+    "file",
+    "line",
+    "reason"
+   ],
+   "title": "UnattributedLine",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "programs": {
+   "items": {
+    "$ref": "#/$defs/ProgramCoverage"
+   },
+   "title": "Programs",
+   "type": "array"
+  },
+  "rejected_files": {
+   "items": {
+    "additionalProperties": {
+     "type": "string"
+    },
+    "type": "object"
+   },
+   "title": "Rejected Files",
+   "type": "array"
+  },
+  "schema_version": {
+   "default": "1.1",
+   "title": "Schema Version",
+   "type": "string"
+  }
+ },
+ "required": [
+  "programs",
+  "rejected_files"
+ ],
+ "title": "Coverage",
+ "type": "object"
+}

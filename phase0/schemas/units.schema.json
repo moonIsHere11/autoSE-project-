@@ -1,0 +1,281 @@
+{
+ "$defs": {
+  "Hazard": {
+   "additionalProperties": false,
+   "properties": {
+    "detail": {
+     "title": "Detail",
+     "type": "string"
+    },
+    "fields": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Fields",
+     "type": "array"
+    },
+    "gap_id": {
+     "title": "Gap Id",
+     "type": "string"
+    },
+    "line": {
+     "title": "Line",
+     "type": "integer"
+    },
+    "severity": {
+     "default": "medium",
+     "enum": [
+      "high",
+      "medium",
+      "low"
+     ],
+     "title": "Severity",
+     "type": "string"
+    }
+   },
+   "required": [
+    "gap_id",
+    "line",
+    "detail"
+   ],
+   "title": "Hazard",
+   "type": "object"
+  },
+  "Provenance": {
+   "additionalProperties": false,
+   "properties": {
+    "confidence": {
+     "maximum": 1.0,
+     "minimum": 0.0,
+     "title": "Confidence",
+     "type": "number"
+    },
+    "end_line": {
+     "title": "End Line",
+     "type": "integer"
+    },
+    "extractor": {
+     "enum": [
+      "strict",
+      "tolerant",
+      "cobc",
+      "pattern",
+      "catalog",
+      "config"
+     ],
+     "title": "Extractor",
+     "type": "string"
+    },
+    "file": {
+     "title": "File",
+     "type": "string"
+    },
+    "start_line": {
+     "title": "Start Line",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "file",
+    "start_line",
+    "end_line",
+    "extractor",
+    "confidence"
+   ],
+   "title": "Provenance",
+   "type": "object"
+  },
+  "SourceSpan": {
+   "additionalProperties": false,
+   "properties": {
+    "end_line": {
+     "title": "End Line",
+     "type": "integer"
+    },
+    "file": {
+     "title": "File",
+     "type": "string"
+    },
+    "start_line": {
+     "title": "Start Line",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "file",
+    "start_line",
+    "end_line"
+   ],
+   "title": "SourceSpan",
+   "type": "object"
+  },
+  "Unit": {
+   "additionalProperties": false,
+   "properties": {
+    "calls": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Calls",
+     "type": "array"
+    },
+    "exits": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Exits",
+     "type": "array"
+    },
+    "falls_through_to": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Falls Through To"
+    },
+    "goes_to": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Goes To",
+     "type": "array"
+    },
+    "hazards": {
+     "items": {
+      "$ref": "#/$defs/Hazard"
+     },
+     "title": "Hazards",
+     "type": "array"
+    },
+    "kind": {
+     "enum": [
+      "program",
+      "section",
+      "paragraph"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "perform_thru": {
+     "items": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "string"
+       }
+      ],
+      "type": "array"
+     },
+     "title": "Perform Thru",
+     "type": "array"
+    },
+    "performs": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Performs",
+     "type": "array"
+    },
+    "program": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Program"
+    },
+    "provenance": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/Provenance"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "reads": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Reads",
+     "type": "array"
+    },
+    "section": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Section"
+    },
+    "span": {
+     "$ref": "#/$defs/SourceSpan"
+    },
+    "summary": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Summary"
+    },
+    "unit_id": {
+     "title": "Unit Id",
+     "type": "string"
+    },
+    "unsupported": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Unsupported",
+     "type": "array"
+    },
+    "writes": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Writes",
+     "type": "array"
+    }
+   },
+   "required": [
+    "unit_id",
+    "kind",
+    "span",
+    "reads",
+    "writes",
+    "performs",
+    "calls",
+    "falls_through_to",
+    "summary"
+   ],
+   "title": "Unit",
+   "type": "object"
+  }
+ },
+ "items": {
+  "$ref": "#/$defs/Unit"
+ },
+ "type": "array"
+}

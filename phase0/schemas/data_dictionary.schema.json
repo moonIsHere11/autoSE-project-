@@ -1,0 +1,338 @@
+{
+ "$defs": {
+  "ConditionName": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "values": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Values",
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "values"
+   ],
+   "title": "ConditionName",
+   "type": "object"
+  },
+  "Field_": {
+   "additionalProperties": false,
+   "description": "`Field` in the contract (renamed in Python only, to avoid shadowing pydantic.Field).",
+   "properties": {
+    "byte_length": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Byte Length"
+    },
+    "category": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Category"
+    },
+    "condition_names": {
+     "items": {
+      "$ref": "#/$defs/ConditionName"
+     },
+     "title": "Condition Names",
+     "type": "array"
+    },
+    "field_id": {
+     "title": "Field Id",
+     "type": "string"
+    },
+    "initial_value": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Initial Value"
+    },
+    "level": {
+     "title": "Level",
+     "type": "integer"
+    },
+    "name": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Name"
+    },
+    "occurs": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Occurs"
+    },
+    "occurs_depending_on": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Occurs Depending On"
+    },
+    "offset": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Offset"
+    },
+    "parent": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Parent"
+    },
+    "pic": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Pic"
+    },
+    "program": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Program"
+    },
+    "provenance": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/Provenance"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "redefines": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Redefines"
+    },
+    "section": {
+     "anyOf": [
+      {
+       "enum": [
+        "working-storage",
+        "local-storage",
+        "linkage",
+        "file"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Section"
+    },
+    "semantic_type": {
+     "$ref": "#/$defs/SemanticType"
+    },
+    "usage": {
+     "title": "Usage",
+     "type": "string"
+    }
+   },
+   "required": [
+    "field_id",
+    "level",
+    "parent",
+    "pic",
+    "usage",
+    "semantic_type",
+    "occurs",
+    "initial_value"
+   ],
+   "title": "Field_",
+   "type": "object"
+  },
+  "Provenance": {
+   "additionalProperties": false,
+   "properties": {
+    "confidence": {
+     "maximum": 1.0,
+     "minimum": 0.0,
+     "title": "Confidence",
+     "type": "number"
+    },
+    "end_line": {
+     "title": "End Line",
+     "type": "integer"
+    },
+    "extractor": {
+     "enum": [
+      "strict",
+      "tolerant",
+      "cobc",
+      "pattern",
+      "catalog",
+      "config"
+     ],
+     "title": "Extractor",
+     "type": "string"
+    },
+    "file": {
+     "title": "File",
+     "type": "string"
+    },
+    "start_line": {
+     "title": "Start Line",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "file",
+    "start_line",
+    "end_line",
+    "extractor",
+    "confidence"
+   ],
+   "title": "Provenance",
+   "type": "object"
+  },
+  "SemanticType": {
+   "additionalProperties": false,
+   "properties": {
+    "digits": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Digits"
+    },
+    "kind": {
+     "enum": [
+      "decimal",
+      "alphanumeric",
+      "group"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "length": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Length"
+    },
+    "scale": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Scale"
+    },
+    "signed": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Signed"
+    }
+   },
+   "required": [
+    "kind",
+    "digits",
+    "scale",
+    "signed",
+    "length"
+   ],
+   "title": "SemanticType",
+   "type": "object"
+  }
+ },
+ "items": {
+  "$ref": "#/$defs/Field_"
+ },
+ "type": "array"
+}

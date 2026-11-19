@@ -42,10 +42,12 @@ def run_baseline(built: list[Built], toolbox: Toolbox, control: ControlEval, o1:
     types = Tally()
     flow = E5Tally()
     failures: list[dict[str, Any]] = []
+    units: dict[str, dict[str, dict[str, Any]]] = {}
     for b in built:
         key = f"{b.program.dataset}/{b.program.name}"
         index = baseline.analyse(b)
         us = baseline.units(index)
+        units[b.program.name] = baseline.unit_facts(us)
         evaluate_facts(ce, b, baseline.control_kb(us), toolbox, out, key, control.traces.get(key))
         score_types(types, key, baseline.fields(index), o1)
         check_program(b, toolbox, baseline.unit_facts(us), "phase1", flow)
@@ -53,4 +55,4 @@ def run_baseline(built: list[Built], toolbox: Toolbox, control: ControlEval, o1:
     failures += [dict(f, source="phase1") for f in types.failures if f["attribute"] not in LAYOUT]
     failures += flow.write_violations + flow.read_violations
     return {"E2": e2_metrics(ce), "E3": types.rates(), "E4": e4_metrics(ce), "E5": e5_metrics(flow),
-            "failures": failures}
+            "failures": failures, "units": units}

@@ -1,0 +1,61 @@
+{
+ "$defs": {
+  "Rule": {
+   "additionalProperties": false,
+   "properties": {
+    "cobol_construct": {
+     "title": "Cobol Construct",
+     "type": "string"
+    },
+    "example_cobol": {
+     "title": "Example Cobol",
+     "type": "string"
+    },
+    "example_target": {
+     "title": "Example Target",
+     "type": "string"
+    },
+    "gap_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Gap Ids",
+     "type": "array"
+    },
+    "required_pattern": {
+     "title": "Required Pattern",
+     "type": "string"
+    },
+    "rule_id": {
+     "title": "Rule Id",
+     "type": "string"
+    },
+    "source": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source"
+    }
+   },
+   "required": [
+    "rule_id",
+    "cobol_construct",
+    "required_pattern",
+    "example_cobol",
+    "example_target"
+   ],
+   "title": "Rule",
+   "type": "object"
+  }
+ },
+ "items": {
+  "$ref": "#/$defs/Rule"
+ },
+ "type": "array"
+}

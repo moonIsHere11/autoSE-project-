@@ -5,21 +5,10 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from phase0.evaluation.e9 import referenced_gap_ids
 from phase0.target import load_gaps, load_rules
 
 REPO = Path(__file__).resolve().parents[2]
-GAP_ID = re.compile(r"\bG-[A-Z]+\b")
-REFERENCING = ["phase1/phase1", "phase2/phase2_adapter", "integration"]
-
-
-def referenced_gap_ids() -> set[str]:
-    ids: set[str] = set()
-    for d in REFERENCING:
-        for p in (REPO / d).rglob("*.py"):
-            for line in p.read_text("utf-8").splitlines():
-                if '"G-' in line or "'G-" in line:
-                    ids |= set(GAP_ID.findall(line))
-    return ids
 
 
 def test_every_referenced_gap_exists() -> None:

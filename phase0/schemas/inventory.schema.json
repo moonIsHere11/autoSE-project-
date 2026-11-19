@@ -1,0 +1,141 @@
+{
+ "$defs": {
+  "InventoryEntry": {
+   "additionalProperties": false,
+   "properties": {
+    "calls": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Calls",
+     "type": "array"
+    },
+    "copybooks": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Copybooks",
+     "type": "array"
+    },
+    "format": {
+     "anyOf": [
+      {
+       "enum": [
+        "fixed",
+        "free"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Format"
+    },
+    "jcl_steps": {
+     "items": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object"
+     },
+     "title": "Jcl Steps",
+     "type": "array"
+    },
+    "kind": {
+     "enum": [
+      "program",
+      "copybook",
+      "jcl",
+      "other"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "lines": {
+     "title": "Lines",
+     "type": "integer"
+    },
+    "parse_reason": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Parse Reason"
+    },
+    "parse_status": {
+     "default": "not-parsed",
+     "enum": [
+      "strict",
+      "tolerant",
+      "failed",
+      "not-parsed"
+     ],
+     "title": "Parse Status",
+     "type": "string"
+    },
+    "path": {
+     "title": "Path",
+     "type": "string"
+    },
+    "programs": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Programs",
+     "type": "array"
+    },
+    "sha256": {
+     "title": "Sha256",
+     "type": "string"
+    },
+    "subkind": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Subkind"
+    }
+   },
+   "required": [
+    "path",
+    "kind",
+    "lines",
+    "sha256"
+   ],
+   "title": "InventoryEntry",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "files": {
+   "items": {
+    "$ref": "#/$defs/InventoryEntry"
+   },
+   "title": "Files",
+   "type": "array"
+  },
+  "schema_version": {
+   "default": "1.1",
+   "title": "Schema Version",
+   "type": "string"
+  }
+ },
+ "required": [
+  "files"
+ ],
+ "title": "Inventory",
+ "type": "object"
+}
