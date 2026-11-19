@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from verifier.config import VerifierConfig
@@ -16,9 +16,15 @@ class Toolbox:
     config: VerifierConfig
     runner: DockerRunner
     cache_dir: Path
+    _versions: dict[str, str] = field(default_factory=dict)
 
     def versions(self) -> dict[str, str]:
         """Tool versions recorded in the manifest; stable across runs (no image digest timestamps)."""
+        if not self._versions:
+            self._versions = self.read_versions()
+        return self._versions
+
+    def read_versions(self) -> dict[str, str]:
         res = self.runner.run(["cat", "/opt/toolchain/versions.json"], mounts=[], timeout_s=60)
         out: dict[str, str] = {"image": self.config.image}
         if res.ok:
