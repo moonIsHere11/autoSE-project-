@@ -7,6 +7,10 @@ from pathlib import Path
 from typing import Any
 
 
+PASS = {True: "pass", False: "FAIL"}
+YES = {True: "yes", False: "NO"}
+
+
 def pct(x: float) -> str:
     return f"{100 * x:.1f}%"
 
@@ -59,14 +63,14 @@ def headlines(m: dict[str, Any]) -> list[str]:
                    f"{len(m['E7']['table']) - len(worse)} of {len(m['E7']['table'])} rows" +
                    (f"; worse on: {', '.join(worse)} (explained below)." if worse else "."))
     for ds, e8 in sorted(m["E8"].items()):
-        out.append(f"**E8 ({ds})** deterministic: {'yes' if e8['deterministic'] else 'NO'}; {e8['builds']} builds, "
+        out.append(f"**E8 ({ds})** deterministic: {YES[bool(e8['deterministic'])]}; {e8['builds']} builds, "
                    f"{e8['lines']} lines, {e8['seconds_per_kloc_cold']} s per 1,000 lines (cold); LLM tokens {e8['llm_tokens']}.")
     e9 = m["E9"]
     checks = {"KB files schema-valid": e9["kb_files_valid"], "JSON Schemas current": e9["exported_json_schemas_current"],
               "gap ids closed": e9["gap_ids_closed"], "runtime byte-identical": e9["runtime_byte_identical"]}
     if "e2e_scripted" in e9:
         checks["e2e_scripted with real Phase 0"] = e9["e2e_scripted"]["pass"]
-    out.append("**E9** " + "; ".join(f"{k}: {'pass' if v else 'FAIL'}" for k, v in checks.items()) + ".")
+    out.append("**E9** " + "; ".join(f"{k}: {PASS[bool(v)]}" for k, v in checks.items()) + ".")
     return out
 
 
