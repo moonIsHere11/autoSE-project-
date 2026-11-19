@@ -8,8 +8,9 @@ from __future__ import annotations
 
 from phase0.schema import Hazard, Severity
 from verifier.cobol import ir as I
-from verifier.cobol.analysis import written_names
+from verifier.cobol.analysis import parse_ident, written_names
 from verifier.cobol.datadiv import DataItem
+from verifier.cobol.lexer import NUM
 from verifier.cobol.syntax import Program, Statement
 
 ARITH_VERBS = ("ADD", "SUBTRACT", "MULTIPLY", "DIVIDE", "COMPUTE")
@@ -49,22 +50,22 @@ class HazardScanner:
     def move(self, s: I.Move) -> None:
         for dst in s.dsts:
             tf = dst.item
-            if isinstance(s.src, I.Lit):
-                self.literal_move(s, s.src, tf)
+            if isinstance(s.src, I.Lit) and s.src.scale == 0:
+                self.literal_move(s.loc.line, s.src.text, len(s.src.digits), tf)
             elif isinstance(s.src, I.Ref):
-                self.field_move(s, s.src.item, tf)
+                self.field_move(s.loc.line, s.src.item, tf, source_length(s.src))
 
-    def literal_move(self, s: I.Move, lit: I.Lit, tf: DataItem) -> None:
-        if kind_of(tf) != "decimal" or lit.scale != 0:
+    def literal_move(self, line: int, text: str, digits: int, tf: DataItem) -> None:
+        if kind_of(tf) != "decimal":
             return
-        if len(lit.digits) > int_digits(tf):
-            self.add("G-TRUNCATE", "high", s.loc.line,
-                     f"literal {lit.text} has more integer digits than {tf.name} PIC {pic(tf)}: high-order digits are dropped",
+        if digits > int_digits(tf):
+            self.add("G-TRUNCATE", "high", line,
+                     f"literal {text} has more integer digits than {tf.name} PIC {pic(tf)}: high-order digits are dropped",
                      [tf.name])
 
-    def field_move(self, s: I.Move, sf: DataItem, tf: DataItem) -> None:
+    def field_move(self, line: int, sf: DataItem, tf: DataItem, src_length: int | None) -> None:
+        """`src_length` is the sending length; None when a reference modification makes it variable."""
         sk, tk = kind_of(sf), kind_of(tf)
-        line = s.loc.line
         names = [sf.name, tf.name]
         if sk == "group" and tk == "group":
             self.add("G-GROUPMOVE", "medium", line, f"group MOVE {sf.name} -> {tf.name} copies raw bytes, not field by field", names)
@@ -85,10 +86,10 @@ class HazardScanner:
             self.add("G-NUMALPHA", "medium", line,
                      f"MOVE between numeric {num} and alphanumeric field: implicit conversion/padding rules apply", names)
         elif sk == "alphanumeric" and tk == "alphanumeric":
-            assert sf.pic is not None and tf.pic is not None
-            if sf.pic.length > tf.pic.length:
+            assert tf.pic is not None
+            if src_length is not None and src_length > tf.pic.length:
                 self.add("G-TRUNCATE", "medium", line,
-                         f"MOVE {sf.name} (X({sf.pic.length})) -> {tf.name} (X({tf.pic.length})): right-truncated", names)
+                         f"MOVE {sf.name} (X({src_length})) -> {tf.name} (X({tf.pic.length})): right-truncated", names)
 
     # ---- arithmetic --------------------------------------------------------------------------
     def arith(self, verb: str, line: int, targets: list[tuple[DataItem, bool]], sized: bool) -> None:
@@ -125,8 +126,48 @@ class HazardScanner:
             targets = [(s.quotient.ref.item, s.quotient.rounded), (s.remainder.item, False)]
             self.arith("DIVIDE", s.loc.line, targets, s.handler)
 
+    def syntax_move(self, prog: Program, st: Statement) -> None:
+        """MOVE inside a statement the IR could not lower (e.g. an EVALUATE on an undeclared register)."""
+        toks = st.tokens
+        ups = [t.up for t in toks]
+        if "TO" not in ups or len(toks) < 4:
+            return
+        k = ups.index("TO")
+        targets: list[DataItem] = []
+        j = k + 1
+        while j < len(toks):
+            ident = parse_ident(toks, j)
+            if ident is None:
+                j += 1
+                continue
+            item = prog.resolve(ident.name, ident.qualifiers)
+            if item is not None:
+                targets.append(item)
+            j = ident.end
+        src_tok = toks[1]
+        if src_tok.kind == NUM and k == 2 and "." not in src_tok.text:
+            for tf in targets:
+                self.literal_move(st.line, src_tok.text, len(src_tok.text.lstrip("+-")), tf)
+            return
+        ident = parse_ident(toks, 1)
+        sf = None
+        if ident is not None and ident.end == k:
+            sf = prog.resolve(ident.name, ident.qualifiers)
+        if sf is None or ident is None:
+            return
+        length: int | None = sf.unit_size
+        if sf.pic is not None:
+            length = sf.pic.length
+        if ident.refmod:
+            length = None
+        for tf in targets:
+            self.field_move(st.line, sf, tf, length)
+
     def syntax_stmt(self, prog: Program, st: Statement) -> None:
-        """Arithmetic inside a statement the IR could not lower (e.g. COMPUTE with FUNCTION)."""
+        """MOVE and arithmetic inside a statement the IR could not lower (e.g. COMPUTE with FUNCTION)."""
+        if st.verb == "MOVE":
+            self.syntax_move(prog, st)
+            return
         if st.verb not in ARITH_VERBS:
             return
         ups = {t.up for t in st.tokens} | {b.kind.upper() for b in st.branches}
@@ -136,6 +177,25 @@ class HazardScanner:
             for item in prog.find_items(name):
                 targets.append((item, "ROUNDED" in ups))
         self.arith(st.verb, st.line, targets, sized)
+
+
+def source_length(ref: I.Ref) -> int | None:
+    """Sending length of a MOVE source: the PIC length, a literal reference-modification length, or
+    None when the reference modification has a variable length (truncation then is not certain)."""
+    item = ref.item
+    full = item.unit_size
+    if item.pic is not None:
+        full = item.pic.length
+    if ref.refmod is None:
+        return full
+    start, length = ref.refmod
+    if length is None:
+        if isinstance(start, I.Lit):
+            return full - start.value + 1
+        return None
+    if isinstance(length, I.Lit):
+        return length.value
+    return None
 
 
 def paragraph_hazards(prog: Program, body: list[I.Stmt], syntax: dict[tuple[str, int, str], Statement]) -> list[Hazard]:

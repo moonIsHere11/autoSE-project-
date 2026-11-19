@@ -76,9 +76,15 @@ def exit_kind(st: Statement) -> str | None:
 
 
 def always_leaves(st: Statement) -> bool:
+    """True when every path through `st` leaves the paragraph: STOP RUN / GOBACK / EXIT PROGRAM, an
+    unconditional GO TO, or an IF with ELSE / an EVALUATE with WHEN OTHER whose every branch ends so."""
     if exit_kind(st) is not None:
         return True
-    return st.verb == "GO" and not any(t.is_word("DEPENDING") for t in st.tokens)
+    if st.verb == "GO":
+        return not any(t.is_word("DEPENDING") for t in st.tokens)
+    kinds = {b.kind for b in st.branches}
+    complete = (st.verb == "IF" and "else" in kinds) or (st.verb == "EVALUATE" and "other" in kinds)
+    return complete and all(b.body and always_leaves(b.body[-1]) for b in st.branches)
 
 
 def string_literal_moves(prog: Program) -> dict[str, set[str]]:

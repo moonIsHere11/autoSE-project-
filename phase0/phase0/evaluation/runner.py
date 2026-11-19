@@ -19,6 +19,7 @@ from phase0.evaluation.e5_run import metrics as e5_metrics
 from phase0.evaluation.e6_gold import agreement, load_gold, score
 from phase0.evaluation.e7_run import run_baseline
 from phase0.evaluation.e9 import e9
+from phase0.evaluation.hazard_counts import hazard_counts
 from phase0.evaluation.o1 import CompileJob, O1Outcome, probe_items, probe_source, run_o1
 from phase0.evaluation.o4 import E5Tally
 from phase0.toolbox import Toolbox, make_toolbox
@@ -216,7 +217,7 @@ def e8(ev: Eval) -> None:
     per: dict[str, Any] = {}
     for ds in sorted({b.program.dataset for b in ev.built}):
         bs = ev.of(ds)
-        lines = sum(b.lines for b in bs)
+        lines = sum(p["lines_total"] for b in bs for p in b.kb("source/coverage.json")["programs"])
         cold = sum(b.seconds for b in bs)
         stages: dict[str, float] = {}
         for b in bs:
@@ -251,6 +252,7 @@ def run(out: Path, datasets: list[str], carddemo: Path, gold: Path | None = None
     ev.timed("E7", lambda: e7(ev))
     ev.timed("E6", lambda: e6(ev, gold))
     ev.timed("E9", lambda: run_e9(ev, run_e2e))
+    ev.timed("F", lambda: ev.metrics.update(F_hazards=hazard_counts(ev.built)))
     ev.timed("E8", lambda: e8(ev))
     ev.metrics["eval_seconds"] = ev.seconds
     jsonio.write(out / "metrics.json", ev.metrics)

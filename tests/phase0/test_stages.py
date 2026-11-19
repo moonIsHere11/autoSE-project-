@@ -121,3 +121,42 @@ def test_control_flow_edges() -> None:
 def test_paragraph_spans_end_before_section_headers() -> None:
     f = facts(CONTROL)
     assert (unit(f, "P3").span.start_line, unit(f, "P3").span.end_line) == (21, 22)
+
+
+BRANCHES = HEAD + """       01 K             PIC 9.
+       01 LONG-X        PIC X(25).
+       01 SHORT-X       PIC X(9).
+       01 LEN           PIC 99.
+       PROCEDURE DIVISION.
+       BOTH-LEAVE.
+           IF K = 1
+               GO TO DONE
+           ELSE
+               GO TO OTHER-P
+           END-IF.
+       OTHER-P.
+           EVALUATE K
+               WHEN 1 GO TO DONE
+               WHEN OTHER STOP RUN
+           END-EVALUATE.
+       ONE-LEAVES.
+           IF K = 1 GO TO DONE END-IF.
+       REFMOD.
+           MOVE LONG-X (1:LEN) TO SHORT-X
+           MOVE LONG-X (1:5) TO SHORT-X
+           MOVE LONG-X TO SHORT-X.
+       DONE.
+           STOP RUN.
+"""
+
+
+def test_branches_that_all_leave_stop_fall_through() -> None:
+    f = facts(BRANCHES)
+    assert unit(f, "BOTH-LEAVE").falls_through_to is None
+    assert unit(f, "OTHER-P").falls_through_to is None
+    assert unit(f, "ONE-LEAVES").falls_through_to == "REFMOD"
+
+
+def test_variable_reference_modification_is_not_a_certain_truncation() -> None:
+    details = [h.detail for h in unit(facts(BRANCHES), "REFMOD").hazards if h.gap_id == "G-TRUNCATE"]
+    assert details == ["MOVE LONG-X (X(25)) -> SHORT-X (X(9)): right-truncated"]
