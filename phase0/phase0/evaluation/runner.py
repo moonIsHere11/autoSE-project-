@@ -14,7 +14,10 @@ from phase0 import jsonio
 from phase0.evaluation.datasets import Built, Program, build_program, d1, d2, d3
 from phase0.evaluation.e2_e4_run import ControlEval, e2_metrics, e4_metrics, evaluate_program
 from phase0.evaluation.e3_data import Tally, score_listing, score_manifest, score_probe
+from phase0.evaluation.e5_run import check_program, kb_units
+from phase0.evaluation.e5_run import metrics as e5_metrics
 from phase0.evaluation.o1 import CompileJob, probe_items, probe_source, run_o1
+from phase0.evaluation.o4 import E5Tally
 from phase0.toolbox import Toolbox, make_toolbox
 from verifier.cobol.preprocess import detect_format
 
@@ -136,6 +139,15 @@ def e2_e4(ev: Eval) -> None:
     ev.metrics["E4"] = e4_metrics(ce)
 
 
+# ---- E5 data-flow soundness (model-based) -------------------------------------------------------
+def e5(ev: Eval) -> None:
+    tally = E5Tally()
+    for b in ev.of("D1", "D2"):
+        check_program(b, ev.toolbox, kb_units(b), "phase0", tally)
+    ev.failures += tally.write_violations + tally.read_violations
+    ev.metrics["E5"] = e5_metrics(tally)
+
+
 # ---- E8 determinism and cost --------------------------------------------------------------------
 def e8(ev: Eval) -> None:
     per: dict[str, Any] = {}
@@ -172,6 +184,7 @@ def run(out: Path, datasets: list[str], carddemo: Path) -> Eval:
     ev.timed("E1", lambda: e1(ev))
     ev.timed("E3", lambda: e3(ev))
     ev.timed("E2_E4", lambda: e2_e4(ev))
+    ev.timed("E5", lambda: e5(ev))
     ev.timed("E8", lambda: e8(ev))
     ev.metrics["eval_seconds"] = ev.seconds
     jsonio.write(out / "metrics.json", ev.metrics)
