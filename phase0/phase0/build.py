@@ -14,6 +14,9 @@ from pydantic import BaseModel, ValidationError
 from phase0 import __version__, jsonio
 from phase0.schema import (
     SCHEMA_VERSION,
+    CallGraph,
+    Coverage,
+    DataFlow,
     ExtractorInfo,
     Field_,
     Gap,
@@ -24,6 +27,7 @@ from phase0.schema import (
     Unit,
 )
 from phase0.stages.inventory import build_inventory, read_tree
+from phase0.stages.source_kb import build_source_kb, call_graph, coverage_doc, data_flow, summary
 from phase0.target import (
     copy_driver_template,
     copy_encoding_fixtures,
@@ -47,6 +51,9 @@ LIST_FILES: dict[str, type[BaseModel]] = {
 OBJECT_FILES: dict[str, type[BaseModel]] = {
     "manifest.json": KbManifest,
     "source/inventory.json": Inventory,
+    "source/call_graph.json": CallGraph,
+    "source/data_flow.json": DataFlow,
+    "source/coverage.json": Coverage,
     "target/toolchain.json": Toolchain,
 }
 
@@ -105,9 +112,14 @@ def build(ws: Workspace, toolbox: Toolbox) -> BuildResult:
         shutil.rmtree(staging)
     files = timer.run("A_read", lambda: read_tree(ws.source))
     inventory = timer.run("A_inventory", lambda: build_inventory(files))
-    jsonio.write_model(staging / "source" / "inventory.json", Inventory(files=inventory))
-    jsonio.write_model(staging / "source" / "units.json", [])
-    jsonio.write_model(staging / "source" / "data_dictionary.json", [])
+    skb = timer.run("B_F_source", lambda: build_source_kb(toolbox, ws.source, inventory, files))
+    src = staging / "source"
+    jsonio.write_model(src / "inventory.json", Inventory(files=inventory))
+    jsonio.write_model(src / "units.json", skb.units)
+    jsonio.write_model(src / "data_dictionary.json", skb.fields)
+    jsonio.write_model(src / "call_graph.json", call_graph(skb))
+    jsonio.write_model(src / "data_flow.json", data_flow(skb))
+    jsonio.write_model(src / "coverage.json", coverage_doc(skb))
     tc = toolchain(ws.config)
     jsonio.write_model(staging / "target" / "toolchain.json", tc)
     jsonio.write_model(staging / "target" / "semantic_gaps.json", load_gaps())
@@ -124,6 +136,7 @@ def build(ws: Workspace, toolbox: Toolbox) -> BuildResult:
         source_hash=jsonio.tree_hash(ws.source),
         target=tc,
         extractors=extractors,
+        coverage_summary=summary(skb, inventory),
     )
     jsonio.write_model(staging / "manifest.json", manifest)
     problems = validate_kb(staging)

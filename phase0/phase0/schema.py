@@ -15,6 +15,10 @@ SCHEMA_VERSION = "1.1"
 Extractor = Literal["strict", "tolerant", "cobc", "pattern", "catalog", "config"]
 ParseStatus = Literal["strict", "tolerant", "failed", "not-parsed"]
 FileKind = Literal["program", "copybook", "jcl", "other"]
+Severity = Literal["high", "medium", "low"]
+FieldSection = Literal["working-storage", "local-storage", "linkage", "file"]
+EdgeKind = Literal["perform", "perform-thru", "goto", "fallthrough", "call", "exit"]
+Resolution = Literal["static", "resolved-by-constant", "unresolved"]
 
 
 class Model(BaseModel):
@@ -72,7 +76,7 @@ class Hazard(Model):
     line: int
     detail: str
     fields: list[str] = Field(default_factory=list)
-    severity: Literal["high", "medium", "low"] = "medium"
+    severity: Severity = "medium"
 
 
 class Unit(Model):
@@ -129,17 +133,17 @@ class Field_(Model):
     redefines: str | None = None
     occurs_depending_on: str | None = None
     condition_names: list[ConditionName] = Field(default_factory=list)
-    section: Literal["working-storage", "local-storage", "linkage", "file"] | None = None
+    section: FieldSection | None = None
     provenance: Provenance | None = None
 
 
 class Edge(Model):
     src: str
     dst: str
-    kind: Literal["perform", "perform-thru", "goto", "fallthrough", "call", "exit"]
+    kind: EdgeKind
     line: int
     file: str
-    resolution: Literal["static", "resolved-by-constant", "unresolved"]
+    resolution: Resolution
     detail: str | None = None
 
 
