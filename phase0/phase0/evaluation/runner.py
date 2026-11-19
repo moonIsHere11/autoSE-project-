@@ -16,7 +16,8 @@ from phase0.evaluation.e2_e4_run import ControlEval, e2_metrics, e4_metrics, eva
 from phase0.evaluation.e3_data import Tally, score_listing, score_manifest, score_probe
 from phase0.evaluation.e5_run import check_program, kb_units
 from phase0.evaluation.e5_run import metrics as e5_metrics
-from phase0.evaluation.o1 import CompileJob, probe_items, probe_source, run_o1
+from phase0.evaluation.e7_run import run_baseline
+from phase0.evaluation.o1 import CompileJob, O1Outcome, probe_items, probe_source, run_o1
 from phase0.evaluation.o4 import E5Tally
 from phase0.toolbox import Toolbox, make_toolbox
 from verifier.cobol.preprocess import detect_format
@@ -30,6 +31,8 @@ class Eval:
     metrics: dict[str, Any] = field(default_factory=dict)
     failures: list[dict[str, Any]] = field(default_factory=list)
     seconds: dict[str, float] = field(default_factory=dict)
+    control: ControlEval = field(default_factory=ControlEval)  # O2 runs, reused by E7
+    o1: O1Outcome = field(default_factory=O1Outcome)  # O1 runs, reused by E7
 
     def timed(self, name: str, fn: Callable[[], None]) -> None:
         start = time.perf_counter()
@@ -102,6 +105,7 @@ def e3(ev: Eval) -> None:
         jobs.append(CompileJob(f"{b.program.dataset}/{b.program.name}", rel,
                                ev.toolbox.config.cobol.flags(detect_format(text)), probe_source(text, items), items))
     o1 = run_o1(ev.toolbox, ev.out / "ws", jobs, [])
+    ev.o1 = o1
     for b in targets:
         key = f"{b.program.dataset}/{b.program.name}"
         fields = b.kb("source/data_dictionary.json")
@@ -131,7 +135,7 @@ def e3(ev: Eval) -> None:
 
 # ---- E2 unit inventory and E4 control-flow soundness -------------------------------------------
 def e2_e4(ev: Eval) -> None:
-    ce = ControlEval()
+    ce = ev.control
     for b in ev.of("D1", "D2"):
         evaluate_program(ce, b, ev.toolbox, ev.out)
     ev.failures += ce.tally.violations + ce.errors
@@ -146,6 +150,33 @@ def e5(ev: Eval) -> None:
         check_program(b, ev.toolbox, kb_units(b), "phase0", tally)
     ev.failures += tally.write_violations + tally.read_violations
     ev.metrics["E5"] = e5_metrics(tally)
+
+
+# ---- E7 baseline: Phase 1's tolerant analyser ------------------------------------------------------
+def e7(ev: Eval) -> None:
+    res = run_baseline(ev.of("D1", "D2"), ev.toolbox, ev.control, ev.o1, ev.out)
+    ev.failures += res.pop("failures")
+    ev.metrics["E7"] = {"phase1": res, "table": comparison(ev.metrics, res)}
+
+
+def comparison(m: dict[str, Any], p1: dict[str, Any]) -> list[dict[str, Any]]:
+    """Side-by-side rows: (metric, Phase 0, Phase 1, better is higher)."""
+    rows = [
+        ("E2 traced units found", m["E2"]["traced_unit_recall"], p1["E2"]["traced_unit_recall"], True),
+        ("E2 span start = trace", m["E2"]["span_start_exact"], p1["E2"]["span_start_exact"], True),
+        ("E2 Java methods precision", m["E2"]["java_methods"]["precision"], p1["E2"]["java_methods"]["precision"], True),
+        ("E2 Java methods recall", m["E2"]["java_methods"]["recall"], p1["E2"]["java_methods"]["recall"], True),
+    ]
+    for attr in ("signed(probe)", "digits(probe)", "scale(probe)", "offset(probe)", "byte_length(probe)"):
+        rows.append((f"E3 {attr}", m["E3"]["attributes"][attr]["rate"], p1["E3"].get(attr, {}).get("rate", 0.0), True))
+    rows += [
+        ("E4 soundness violations", m["E4"]["soundness_violations"], p1["E4"]["soundness_violations"], False),
+        ("E4 static edges exercised", m["E4"]["static_edges_exercised_share"], p1["E4"]["static_edges_exercised_share"],
+         True),
+        ("E5 write violations", m["E5"]["write_violations"], p1["E5"]["write_violations"], False),
+        ("E5 read violations", m["E5"]["read_violations"], p1["E5"]["read_violations"], False),
+    ]
+    return [{"metric": a, "phase0": b, "phase1": c, "higher_is_better": d} for a, b, c, d in rows]
 
 
 # ---- E8 determinism and cost --------------------------------------------------------------------
@@ -185,6 +216,7 @@ def run(out: Path, datasets: list[str], carddemo: Path) -> Eval:
     ev.timed("E3", lambda: e3(ev))
     ev.timed("E2_E4", lambda: e2_e4(ev))
     ev.timed("E5", lambda: e5(ev))
+    ev.timed("E7", lambda: e7(ev))
     ev.timed("E8", lambda: e8(ev))
     ev.metrics["eval_seconds"] = ev.seconds
     jsonio.write(out / "metrics.json", ev.metrics)

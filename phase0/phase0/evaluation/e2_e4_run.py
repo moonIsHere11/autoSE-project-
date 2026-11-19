@@ -16,7 +16,7 @@ from phase0.evaluation.e2_e4_control import (
     manifest_units,
     ratio,
 )
-from phase0.evaluation.o2 import trace_program
+from phase0.evaluation.o2 import Traces, trace_program
 from phase0.toolbox import Toolbox
 
 
@@ -55,6 +55,7 @@ class ControlEval:
     java: Inventory = field(default_factory=Inventory)
     manifest: Inventory = field(default_factory=Inventory)
     errors: list[dict[str, Any]] = field(default_factory=list)
+    traces: dict[str, Traces] = field(default_factory=dict)
 
 
 def control_kb(b: Built) -> ControlKb:
@@ -64,6 +65,12 @@ def control_kb(b: Built) -> ControlKb:
 def evaluate_program(ce: ControlEval, b: Built, toolbox: Toolbox, out: Path) -> ControlKb:
     key = f"{b.program.dataset}/{b.program.name}"
     kb = control_kb(b)
+    return evaluate_facts(ce, b, kb, toolbox, out, key)
+
+
+def evaluate_facts(ce: ControlEval, b: Built, kb: ControlKb, toolbox: Toolbox, out: Path, key: str,
+                   traces: Traces | None = None) -> ControlKb:
+    """Score one analyser's control facts; `traces` reuses an earlier O2 run of the same program."""
     repro = f"phase0/bin/phase0 eval --workspace {out} --only {b.program.name}"
     paras = {u for u, x in kb.units.items() if x["kind"] == "paragraph"}
     ce.paragraphs += len(paras)
@@ -71,7 +78,9 @@ def evaluate_program(ce: ControlEval, b: Built, toolbox: Toolbox, out: Path) -> 
         ce.java.add(key, {camel(p) for p in paras}, java_methods(b.program.java_dir) - {"main"})
     if b.program.manifest is not None:
         ce.manifest.add(key, paras, manifest_units(b.program.manifest))
-    traces = trace_program(toolbox, b.ws / "source", b.program.entry, b.program.cases)
+    if traces is None:
+        traces = trace_program(toolbox, b.ws / "source", b.program.entry, b.program.cases)
+    ce.traces[key] = traces
     if traces.error is not None:
         ce.errors.append({"metric": "E4", "program": key, "kind": "trace failed", "detail": traces.error, "repro": repro})
         return kb
