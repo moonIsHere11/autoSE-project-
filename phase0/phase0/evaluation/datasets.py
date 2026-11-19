@@ -96,8 +96,12 @@ def make_workspace(p: Program, base: Path, summaries: str | None = None) -> Path
         "target: {language: java, version: '21'}\n", "utf-8")
     if summaries is not None and p.dataset == "D1":
         provider, model = summaries.split(":", 1)
+        limit = "0"
+        if "@" in model:
+            model, limit = model.rsplit("@", 1)
         with (ws / "config.yaml").open("a", encoding="utf-8") as fh:
-            fh.write(f"phase0: {{summaries: {{enabled: true, provider: {provider}, model: '{model}'}}}}\n")
+            fh.write(f"phase0: {{summaries: {{enabled: true, provider: {provider}, model: '{model}', "
+                     f"max_units: {limit}}}}}\n")
     return ws
 
 

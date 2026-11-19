@@ -76,6 +76,7 @@ class SummaryReport:
     tokens_in: int = 0
     tokens_out: int = 0
     cache_hits: int = 0
+    failed: list[dict[str, str]] = field(default_factory=list)
 
 
 def allowed_names(u: Unit, fields: dict[str, Field_], files: list[FileCrud]) -> set[str]:
@@ -111,6 +112,10 @@ def prompt(u: Unit, source: str, allowed: set[str]) -> str:
             f"{json.dumps(facts, sort_keys=True)}\n\nSOURCE:\n{source}")
 
 
+class LlmError(RuntimeError):
+    """One failed LLM call (after a retry): that unit gets no summary; the build goes on."""
+
+
 class Client:
     def __init__(self, cfg: SummaryConfig) -> None:
         self.cfg = cfg
@@ -142,12 +147,16 @@ class Client:
         if self.key:
             headers["Authorization"] = f"Bearer {self.key}"
         req = urllib.request.Request(self.cfg.url(), data=json.dumps(body).encode(), headers=headers)
-        try:
-            with urllib.request.urlopen(req, timeout=300) as resp:
-                data = json.loads(resp.read())
-        except urllib.error.URLError as exc:
-            raise ContractError(f"summaries: cannot reach {self.cfg.url()} ({exc}); is `ollama serve` running?") from exc
-        return self.parse(data)
+        last = ""
+        for _attempt in range(2):
+            try:
+                with urllib.request.urlopen(req, timeout=300) as resp:
+                    return self.parse(json.loads(resp.read()))
+            except urllib.error.HTTPError as exc:
+                last = f"HTTP {exc.code}"
+            except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+                last = f"{type(exc).__name__}: {exc}"
+        raise LlmError(f"{self.cfg.url()}: {last}")
 
 
 def clean(text: str) -> str:
@@ -170,7 +179,11 @@ def summarise(units: list[Unit], fields: list[Field_], files: list[FileCrud], so
     for u in targets:
         lines = (source / u.span.file).read_text("latin-1").splitlines()[u.span.start_line - 1 : u.span.end_line]
         allowed = allowed_names(u, by_id, files)
-        text = cached_chat(client, cache, prompt(u, "\n".join(lines), allowed), report)
+        try:
+            text = cached_chat(client, cache, prompt(u, "\n".join(lines), allowed), report)
+        except LlmError as exc:
+            report.failed.append({"unit_id": u.unit_id, "error": str(exc)[:200]})
+            continue
         report.generated += 1
         bad = unsupported_entities(text, allowed, universe)
         if bad or not text:

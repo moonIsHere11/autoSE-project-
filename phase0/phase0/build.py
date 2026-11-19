@@ -156,6 +156,8 @@ def build(ws: Workspace, toolbox: Toolbox) -> BuildResult:
     if ws.kb.exists():
         shutil.rmtree(ws.kb)
     staging.rename(ws.kb)
+    if sreport.failed:
+        ws.emit("llm_failures", {"model": sreport.model, "units": sreport.failed})
     if sreport.tokens_in or sreport.tokens_out:
         ws.emit("llm_usage", {"model": sreport.model, "tokens_in": sreport.tokens_in, "tokens_out": sreport.tokens_out,
                               "stage": "G_summaries"})
