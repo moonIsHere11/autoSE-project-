@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from phase0 import jsonio
 from phase0.report import Facts, documents, records
 from phase0.schema import CallGraph, DataFlow
+
+from phase0 import jsonio
 from tests.phase0.helpers import facts
 
 SRC = """       IDENTIFICATION DIVISION.
