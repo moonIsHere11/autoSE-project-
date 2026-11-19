@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-
 PASS = {True: "pass", False: "FAIL"}
 YES = {True: "yes", False: "NO"}
 
