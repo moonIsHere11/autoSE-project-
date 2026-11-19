@@ -19,6 +19,7 @@ from phase0.evaluation.e5_run import metrics as e5_metrics
 from phase0.evaluation.e6_gold import agreement, load_gold, score
 from phase0.evaluation.e7_run import run_baseline
 from phase0.evaluation.e9 import e9
+from phase0.evaluation.e10 import e10
 from phase0.evaluation.hazard_counts import hazard_counts
 from phase0.evaluation.o1 import CompileJob, O1Outcome, probe_items, probe_source, run_o1
 from phase0.evaluation.o4 import E5Tally
@@ -237,6 +238,13 @@ def e11(ev: Eval, model: str) -> None:
                          "llm_tokens_first_build": tokens}
 
 
+# ---- E10 metamorphic robustness -------------------------------------------------------------------
+def run_e10(ev: Eval) -> None:
+    metrics, failures = e10(ev.of("D1", "D2"), ev.out, ev.toolbox)
+    ev.metrics["E10"] = metrics
+    ev.failures += failures
+
+
 # ---- E8 determinism and cost --------------------------------------------------------------------
 def e8(ev: Eval) -> None:
     per: dict[str, Any] = {}
@@ -283,6 +291,7 @@ def run(work: Path, out: Path, datasets: list[str], carddemo: Path, gold: Path |
         ev.timed("E7", lambda: e7(ev))
     ev.timed("E6", lambda: e6(ev, gold))
     ev.timed("E9", lambda: run_e9(ev, run_e2e))
+    ev.timed("E10", lambda: run_e10(ev))
     ev.timed("F", lambda: ev.metrics.update(F_hazards=hazard_counts(ev.built)))
     ev.timed("E8", lambda: e8(ev))
     ev.metrics["eval_seconds"] = ev.seconds

@@ -66,6 +66,10 @@ def headlines(m: dict[str, Any]) -> list[str]:
     for ds, e8 in sorted(m["E8"].items()):
         out.append(f"**E8 ({ds})** deterministic: {YES[bool(e8['deterministic'])]}; {e8['builds']} builds, "
                    f"{e8['lines']} lines, {e8['seconds_per_kloc_cold']} s per 1,000 lines (cold); LLM tokens {e8['llm_tokens']}.")
+    if "E10" in m:
+        r, f = m["E10"]["rename"], m["E10"]["free"]
+        out.append(f"**E10** consistent renaming: {r['pass']} isomorphic, {r['fail']} not, {r['skipped']} skipped; "
+                   f"fixed -> free format: {f['pass']} identical, {f['fail']} not (see failures.jsonl, E10).")
     if "E11" in m:
         e11 = m["E11"]
         out.append(f"**E11** {e11['model']}: {e11['summaries']} summaries, {pct(e11['unsupported_entity_share'])} named an "

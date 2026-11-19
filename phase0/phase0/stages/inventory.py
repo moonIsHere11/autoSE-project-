@@ -16,6 +16,7 @@ from phase0.schema import FileKind, InventoryEntry
 from verifier.cobol.preprocess import detect_format
 
 LEVEL_LINE = re.compile(r"^\s*(0?[1-9]|[1-4][0-9]|66|77|88)\s+[A-Z0-9][A-Z0-9-]*\b", re.I)
+OTHER_FORMAT = {"fixed": "free", "free": "fixed"}
 PROGRAM_ID = re.compile(r"\bPROGRAM-ID\b", re.I)
 PROCEDURE = re.compile(r"\bPROCEDURE\s+DIVISION\b", re.I)
 COPY_STMT = re.compile(r"\bCOPY\s+(?:'([^']+)'|\"([^\"]+)\"|([A-Z0-9][A-Z0-9-]*))", re.I)
@@ -87,10 +88,16 @@ def classify(text: str, raw: bytes) -> tuple[FileKind, str | None]:
         return "jcl", "job"
     if BMS.search(text):
         return "other", "bms"
-    code_rows = [ln for ln in code_lines(text, detect_format(text)) if ln.strip()]
+    detected = detect_format(text)
+    code_rows = [ln for ln in code_lines(text, detected) if ln.strip()]
     code = "\n".join(code_rows)
     if PROGRAM_ID.search(code) and PROCEDURE.search(code):
         return "program", None
+    # the format heuristic can misread free-format text with deep indentation (TEAM_NOTES item 7):
+    # a program is still a program, and goes to the tolerant fallback if cobc then rejects it
+    other = "\n".join(code_lines(text, OTHER_FORMAT[detected]))
+    if PROGRAM_ID.search(other) and PROCEDURE.search(other):
+        return "program", "format-ambiguous"
     if SQL_DECLARE.search(code):
         return "copybook", "sql"
     if not code_rows:
