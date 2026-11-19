@@ -1,0 +1,466 @@
+{
+ "schema": "phase0-gold-1",
+ "guide": "phase0/eval/gold/ANNOTATION_GUIDE.md",
+ "annotator": "",
+ "programs": {
+  "PAYROLL": {
+   "source": "corpus/payroll/cobol/PAYROLL.cbl",
+   "paragraphs": {
+    "MAIN-PARA": {
+     "header_line": 174,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-EMPLOYEE": {
+     "header_line": 190,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "PROCESS-EMPLOYEE": {
+     "header_line": 197,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "VALIDATE-EMPLOYEE": {
+     "header_line": 216,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "CALC-GROSS": {
+     "header_line": 251,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "SPLIT-HOURS": {
+     "header_line": 264,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "CALC-HOURLY": {
+     "header_line": 271,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "CALC-COMMISSION": {
+     "header_line": 279,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "CALC-DEDUCTIONS": {
+     "header_line": 288,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "ACCUMULATE": {
+     "header_line": 311,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "WRITE-PAYSLIP": {
+     "header_line": 320,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "WRITE-PAY-RECORD": {
+     "header_line": 337,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "WRITE-DEPT-SUMMARY": {
+     "header_line": 349,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "SHOW-TOTALS": {
+     "header_line": 366,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    }
+   }
+  },
+  "INVENTORY": {
+   "source": "corpus/inventory/cobol/INVENTORY.cbl",
+   "paragraphs": {
+    "MAIN-PARA": {
+     "header_line": 59,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-STOCK": {
+     "header_line": 78,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "VALIDATE-RECORD": {
+     "header_line": 83,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "VALUE-ITEM": {
+     "header_line": 95,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "REJECT-ITEM": {
+     "header_line": 124,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "WRITE-VALUE": {
+     "header_line": 128,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "SET-RETURN": {
+     "header_line": 141,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "SHOW-TOTALS": {
+     "header_line": 152,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    }
+   }
+  },
+  "ACCTPOST": {
+   "source": "corpus/acctpost/cobol/ACCTPOST.cbl",
+   "paragraphs": {
+    "MAIN-PARA": {
+     "header_line": 85,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "OPEN-ACCOUNTS": {
+     "header_line": 110,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-TRANS": {
+     "header_line": 116,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "POST-TRANS": {
+     "header_line": 133,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "WRITE-TXN-LINE": {
+     "header_line": 171,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "WRITE-ACCOUNTS": {
+     "header_line": 179,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    }
+   }
+  },
+  "MERGE2": {
+   "source": "corpus/merge2/cobol/MERGE2.cbl",
+   "paragraphs": {
+    "MAIN-PARA": {
+     "header_line": 63,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "MERGE-LOOP": {
+     "header_line": 69,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "FINISH": {
+     "header_line": 83,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-MASTER": {
+     "header_line": 95,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-MASTER-EXIT": {
+     "header_line": 116,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-TRANS": {
+     "header_line": 118,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-TRANS-EXIT": {
+     "header_line": 136,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "COPY-MASTER": {
+     "header_line": 138,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "APPLY-TRANS": {
+     "header_line": 146,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "APPLY-ERROR": {
+     "header_line": 169,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "APPLY-TRANS-EXIT": {
+     "header_line": 172,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "ADD-NEW": {
+     "header_line": 174,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "ADD-NEW-EXIT": {
+     "header_line": 187,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    }
+   }
+  },
+  "LOANCALC": {
+   "source": "corpus/loancalc/cobol/LOANCALC.cbl",
+   "paragraphs": {
+    "MAIN-PARA": {
+     "header_line": 39,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "READ-REQUEST": {
+     "header_line": 59,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "AMORTIZE": {
+     "header_line": 68,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "SHOW-LOAN": {
+     "header_line": 101,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    }
+   }
+  },
+  "FALLTHRU": {
+   "source": "tests/semantics/programs/FALLTHRU.cbl",
+   "paragraphs": {
+    "MAIN-PARA": {
+     "header_line": 10,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "P-A": {
+     "header_line": 17,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "P-B": {
+     "header_line": 20,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "P-EXIT": {
+     "header_line": 26,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "S2-A": {
+     "header_line": 33,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "S2-B": {
+     "header_line": 36,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    },
+    "P-END": {
+     "header_line": 39,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    }
+   }
+  },
+  "REDEF": {
+   "source": "tests/semantics/programs/REDEF.cbl",
+   "paragraphs": {
+    "MAIN-PARA": {
+     "header_line": 22,
+     "reads": [],
+     "writes": [],
+     "performs": [],
+     "falls_through_to": null,
+     "goes_to": []
+    }
+   }
+  }
+ }
+}
