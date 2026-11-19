@@ -58,7 +58,6 @@ class Gap(Model):
     required_handling: str
     rule_ids: list[str]
     source: str | None = None
-    referenced_by: list[str] = Field(default_factory=list)
 
 
 # ---- source side -------------------------------------------------------------------------------
