@@ -11,8 +11,11 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 W = Path(sys.argv[1]).resolve()
 subprocess.run([sys.executable, str(REPO / "integration" / "demo_workspace.py"), str(W), "divrem", "--llm"], check=True)
-os.environ.update(PHASE0_CMD=f"python3 {REPO}/integration/phase0_stub.py", PHASE2_CMD=str(REPO / "phase2/bin/phase2"),
-                  GROQ_API_KEY="unused")
+# PHASE0_CMD from the environment selects the real Phase 0 (it rebuilds the KB over the demo's stub files)
+if os.environ.get("PHASE0_CMD"):
+    subprocess.run(os.environ["PHASE0_CMD"].split() + ["build", "--workspace", str(W)], check=True)
+os.environ.setdefault("PHASE0_CMD", f"{sys.executable} {REPO}/integration/phase0_stub.py")
+os.environ.update(PHASE2_CMD=str(REPO / "phase2/bin/phase2"), GROQ_API_KEY="unused")
 sys.path.insert(0, str(REPO / "phase1"))
 from phase1 import agent  # noqa: E402
 from phase1.workspace import Workspace  # noqa: E402
