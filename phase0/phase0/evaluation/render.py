@@ -59,9 +59,11 @@ def headlines(m: dict[str, Any]) -> list[str]:
         out.append(f"**E6** {e6['status']}.")
     if "E7" in m:
         worse = [r["metric"] for r in m["E7"]["table"] if worse_than_baseline(r)]
+        tail = "."
+        if worse:
+            tail = f"; worse on: {', '.join(worse)} (explained below the table)."
         out.append(f"**E7** Phase 0 is at least as good as Phase 1's tolerant analyser on "
-                   f"{len(m['E7']['table']) - len(worse)} of {len(m['E7']['table'])} rows" +
-                   (f"; worse on: {', '.join(worse)} (explained below)." if worse else "."))
+                   f"{len(m['E7']['table']) - len(worse)} of {len(m['E7']['table'])} rows{tail}")
     for ds, e8 in sorted(m["E8"].items()):
         out.append(f"**E8 ({ds})** deterministic: {YES[bool(e8['deterministic'])]}; {e8['builds']} builds, "
                    f"{e8['lines']} lines, {e8['seconds_per_kloc_cold']} s per 1,000 lines (cold); LLM tokens {e8['llm_tokens']}.")
