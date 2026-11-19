@@ -17,6 +17,7 @@ from verifier.cobol.lexer import LexError, Token, tokenize
 from verifier.cobol.parser import ParseError, parse_source, split_programs
 from verifier.cobol.preprocess import Preprocessed, preprocess_all
 from verifier.cobol.syntax import Program
+from verifier.config import CobolConfig
 
 
 @dataclass
@@ -44,9 +45,28 @@ def program_files(inventory: list[InventoryEntry]) -> list[str]:
     return [e.path for e in inventory if e.kind == "program"]
 
 
+def copybook_dir_names(inventory: list[InventoryEntry]) -> list[str]:
+    """Names of directories holding copybooks (by content), beyond the verifier's defaults."""
+    names: set[str] = set()
+    for e in inventory:
+        parent = Path(e.path).parent
+        if e.kind == "copybook" and parent.name:
+            names.add(parent.name)
+    return sorted(names)
+
+
+def cobol_config(toolbox: Toolbox, inventory: list[InventoryEntry]) -> CobolConfig:
+    """The verifier's CobolConfig with copybook directories appended AFTER its own: a program the
+    verifier can preprocess resolves every COPY exactly as before (earlier -I wins); a program
+    whose copybooks live elsewhere (CardDemo `cpy-bms/`) now preprocesses too."""
+    cfg = toolbox.config.cobol
+    extra = [d for d in copybook_dir_names(inventory) if d not in cfg.copy_dirs]
+    return cfg.model_copy(update={"copy_dirs": [*cfg.copy_dirs, *extra]})
+
+
 def parse_programs(toolbox: Toolbox, source: Path, inventory: list[InventoryEntry]) -> ParseResult:
     files = program_files(inventory)
-    pre = preprocess_all(toolbox.runner, toolbox.config.cobol, source, files, toolbox.cache_dir)
+    pre = preprocess_all(toolbox.runner, cobol_config(toolbox, inventory), source, files, toolbox.cache_dir)
     out = ParseResult()
     for rel in files:
         p = pre[rel]
