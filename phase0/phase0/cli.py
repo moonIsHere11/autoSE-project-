@@ -40,7 +40,16 @@ def run_query(kb: KnowledgeBase, method: str, args: list[str]) -> object:
         for a in args:
             keys += split_list(a)
         return to_json(getattr(kb, method)(keys))
-    valid = sorted(ONE_ID | LIST_ARG | NO_ARG)
+    if method == "context_packet":
+        from phase0.context import context_packet
+
+        if not args or len(args) > 2:
+            raise QueryError("context_packet takes a unit id and an optional character budget (default 6000)")
+        budget = 6000
+        if len(args) == 2:
+            budget = int(args[1])
+        return context_packet(kb, args[0], budget)
+    valid = sorted(ONE_ID | LIST_ARG | NO_ARG | {"context_packet"})
     raise QueryError(f"unknown method {method!r}. Valid methods: {', '.join(valid)}")
 
 

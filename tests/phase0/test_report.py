@@ -46,3 +46,24 @@ def test_records_come_from_fact_patterns(tmp_path: Path) -> None:
 def test_documents_are_deterministic(tmp_path: Path) -> None:
     assert documents(kb_facts(tmp_path)) == documents(kb_facts(tmp_path))
     assert "flowchart TD" in documents(kb_facts(tmp_path))["views/T.control.md"]
+
+
+def test_context_packet_sections(tmp_path: Path) -> None:
+    from phase0.context import context_packet
+    from phase0.query import KnowledgeBase
+    from phase0.target import load_gaps
+
+    f = facts(SRC)
+    (tmp_path / "source").mkdir()
+    (tmp_path / "source" / "T.cbl").write_text(SRC, "latin-1")
+    kb = tmp_path / "kb"
+    jsonio.write(kb / "manifest.json", {})
+    for u in f.units:
+        u.span.file = "T.cbl"
+    jsonio.write_model(kb / "source" / "units.json", f.units)
+    jsonio.write_model(kb / "source" / "data_dictionary.json", f.fields)
+    jsonio.write_model(kb / "target" / "semantic_gaps.json", load_gaps())
+    pk = context_packet(KnowledgeBase(kb, tmp_path / "source"), "MAIN-PARA", 4000)
+    assert list(pk["sections"])[:3] == ["Unit source", "Fields (type table)", "Semantic hazards to handle (static scan)"]
+    assert "COMPUTE AMT = AMT * 2" in pk["sections"]["Unit source"]
+    assert "R  AMT  PIC S9(5)V99 COMP-3" in pk["sections"]["Fields (type table)"] or "RW AMT" in pk["sections"]["Fields (type table)"]
