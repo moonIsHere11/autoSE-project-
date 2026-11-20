@@ -9,7 +9,8 @@
   sha256(model, prompt), so a rebuild with a warm cache is byte-identical.
 * Entity check (ETF, Maharaj et al. 2024): every COBOL-looking name in the summary must be one of
   the unit's own facts (its id, read/written fields, performed/GO TO/fall-through units, calls,
-  88-levels of its fields). A summary that names anything else is rejected (summary stays null) and
+  88-levels of its fields), a name written in its own source, one of its hazard gap ids or a
+  figurative constant. A summary that names anything else is rejected (summary stays null) and
   reported in `kb/source/summaries.json` (E11).
 """
 
@@ -31,6 +32,8 @@ from phase0.workspace import ContractError
 
 PROMPT_VERSION = "g2"
 OLLAMA_OPTIONS = ("num_ctx", "num_gpu", "num_thread")  # memory only: sampling stays fixed
+FIGURATIVE = frozenset({"HIGH-VALUE", "HIGH-VALUES", "LOW-VALUE", "LOW-VALUES", "ZERO", "ZEROS", "ZEROES", "SPACE",
+                        "SPACES", "QUOTE", "QUOTES", "RETURN-CODE"})
 PROVIDERS = {"ollama": "http://localhost:11434", "groq": "https://api.groq.com/openai/v1"}
 NAME = re.compile(r"\b[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\b|\b[A-Z][A-Z0-9]{2,}\b")
 SYSTEM = (
@@ -106,13 +109,20 @@ def allowed_names(u: Unit, fields: dict[str, Field_], files: list[FileCrud]) -> 
     return {n for n in names if n}
 
 
+def grounded_names(u: Unit, allowed: set[str], source: str) -> set[str]:
+    """What a summary may name: the unit's facts, names written in its own source (files it only
+    OPENs or CLOSEs are not in the CRUD matrix), the gap ids the prompt gives, figurative constants."""
+    code = "\n".join(ln for ln in source.splitlines() if not (len(ln) > 6 and ln[6] in "*/"))
+    return (allowed | {t.upper() for t in NAME.findall(code)} | {h.gap_id for h in u.hazards} | FIGURATIVE)
+
+
 def unsupported_entities(summary: str, allowed: set[str], universe: set[str]) -> list[str]:
     """Names in the summary that look like COBOL names of this program but are not in the unit's facts."""
     out: list[str] = []
     for tok in NAME.findall(summary):
         if tok.upper() in allowed:
-            if tok != tok.upper():
-                out.append(tok)  # a COBOL name in the wrong case is not the name of a fact
+            if tok != tok.upper() and tok != tok.lower():
+                out.append(tok)  # WS-Term is a mangled name; all-lowercase "end-of-file" is prose
             continue
         if ("-" in tok and tok.upper() == tok) or tok.upper() in universe:
             out.append(tok)
@@ -199,7 +209,7 @@ def summarise(units: list[Unit], fields: list[Field_], files: list[FileCrud], so
             report.failed.append({"unit_id": u.unit_id, "error": str(exc)[:200]})
             continue
         report.generated += 1
-        bad = unsupported_entities(text, allowed, universe)
+        bad = unsupported_entities(text, grounded_names(u, allowed, "\n".join(lines)), universe)
         if bad or not text:
             report.rejected.append({"unit_id": u.unit_id, "unsupported_entities": bad, "summary": text})
             continue

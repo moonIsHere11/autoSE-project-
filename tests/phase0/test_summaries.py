@@ -9,6 +9,7 @@ from phase0.stages.summaries import (
     SummaryConfig,
     allowed_names,
     clean,
+    grounded_names,
     summarise,
     unsupported_entities,
 )
@@ -55,3 +56,12 @@ def test_ollama_options_override_memory_but_not_sampling() -> None:
     assert opts["num_gpu"] == -1 and opts["num_ctx"] == 8192 and opts["temperature"] == 0 and opts["seed"] == 7
     with pytest.raises(ContractError):
         SummaryConfig.from_config({"summaries": {"options": {"temperature": 1}}})
+
+
+def test_names_in_the_units_own_source_are_grounded() -> None:
+    src = "       CALC-FEE.\n      * WS-OLD-FEE is gone\n           CLOSE AUDIT-FILE\n           MOVE HIGH-VALUES TO WS-FEE."
+    grounded = grounded_names(UNIT, allowed_names(UNIT, {}, FILES), src)
+    universe = {"AUDIT-FILE", "WS-OLD-FEE"}
+    assert unsupported_entities("CALC-FEE closes AUDIT-FILE and sets WS-FEE to HIGH-VALUES at end-of-file.",
+                                grounded, universe) == []
+    assert unsupported_entities("CALC-FEE clears WS-OLD-FEE.", grounded, universe) == ["WS-OLD-FEE"]
