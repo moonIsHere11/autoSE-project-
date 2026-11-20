@@ -3,6 +3,8 @@
 * Off unless `config.yaml` has `phase0: {summaries: {enabled: true, ...}}`; with it off the build
   never touches the network and `summary` stays null.
 * Any OpenAI-compatible chat endpoint: Ollama locally (default) or Groq (`GROQ_API_KEY`).
+  `options` passes Ollama memory settings (num_gpu, num_ctx, num_thread) over the model's Modelfile,
+  e.g. `num_gpu: -1` when a Modelfile pins more GPU layers than the card holds.
   Temperature 0 and a fixed seed; every answer is cached under `W/.phase0-cache/summaries/` by
   sha256(model, prompt), so a rebuild with a warm cache is byte-identical.
 * Entity check (ETF, Maharaj et al. 2024): every COBOL-looking name in the summary must be one of
@@ -28,6 +30,7 @@ from phase0.schema import Field_, FileCrud, Unit
 from phase0.workspace import ContractError
 
 PROMPT_VERSION = "g2"
+OLLAMA_OPTIONS = ("num_ctx", "num_gpu", "num_thread")  # memory only: sampling stays fixed
 PROVIDERS = {"ollama": "http://localhost:11434", "groq": "https://api.groq.com/openai/v1"}
 NAME = re.compile(r"\b[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\b|\b[A-Z][A-Z0-9]{2,}\b")
 SYSTEM = (
@@ -45,6 +48,7 @@ class SummaryConfig:
     model: str = "qwen2.5:3b"
     base_url: str | None = None
     max_units: int = 0  # 0 = every paragraph
+    options: dict[str, int] = field(default_factory=dict)
 
     @classmethod
     def from_config(cls, phase0: dict[str, object]) -> SummaryConfig:
@@ -55,6 +59,7 @@ class SummaryConfig:
                   model=str(raw.get("model", "qwen2.5:3b")), max_units=int(str(raw.get("max_units", 0))))
         if raw.get("base_url"):
             cfg.base_url = str(raw["base_url"])
+        cfg.options = parse_options(raw.get("options") or {})
         if cfg.provider not in PROVIDERS:
             raise ContractError(f"phase0.summaries.provider must be one of {sorted(PROVIDERS)}")
         return cfg
@@ -65,6 +70,15 @@ class SummaryConfig:
         if self.provider == "ollama":
             return base + "/api/chat"
         return base + "/chat/completions"
+
+
+def parse_options(raw: object) -> dict[str, int]:
+    if not isinstance(raw, dict) or not set(raw) <= set(OLLAMA_OPTIONS):
+        raise ContractError(f"phase0.summaries.options must be a mapping with keys from {list(OLLAMA_OPTIONS)}")
+    try:
+        return {str(k): int(v) for k, v in raw.items()}
+    except (TypeError, ValueError) as exc:
+        raise ContractError(f"phase0.summaries.options values must be integers: {exc}") from exc
 
 
 @dataclass
@@ -130,7 +144,7 @@ class Client:
         if self.cfg.provider == "ollama":
             # think=false: reasoning models (qwen3.5) otherwise spend the whole budget on hidden thinking
             return {"model": self.cfg.model, "messages": messages, "stream": False, "think": False,
-                    "options": {"temperature": 0, "seed": 7, "num_predict": 300}}
+                    "options": {**self.cfg.options, "temperature": 0, "seed": 7, "num_predict": 300}}
         return {"model": self.cfg.model, "temperature": 0, "seed": 7, "max_tokens": 300, "messages": messages}
 
     def parse(self, data: dict[str, Any]) -> tuple[str, int, int]:

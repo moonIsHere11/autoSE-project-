@@ -122,7 +122,7 @@ def parser() -> argparse.ArgumentParser:
     e.add_argument("--carddemo", help="CardDemo checkout (default: data/carddemo)")
     e.add_argument("--e2e", action="store_true", help="also run integration/e2e_scripted.py (E9)")
     e.add_argument("--only", help="evaluate one program (repro)")
-    e.add_argument("--summaries", help="enable stage G on D1 and score E11, e.g. ollama:qwen2.5:3b or groq:<model>; '@N' summarises the first N paragraphs per program")
+    e.add_argument("--summaries", help="enable stage G on D1 and score E11, e.g. ollama:qwen2.5:3b or groq:<model>; '@N' summarises the first N paragraphs per program; ',num_gpu=-1' etc. passes Ollama memory options")
     e.set_defaults(fn=cmd_eval)
     return ap
 
