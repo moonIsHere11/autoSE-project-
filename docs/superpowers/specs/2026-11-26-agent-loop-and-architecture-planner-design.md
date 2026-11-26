@@ -295,6 +295,16 @@ LLM provider with enough quota; it is not required now.
 - Done = fixture + probe runs, no real-estate LLM run yet (7).
 - Nothing is committed: `integration` has your uncommitted reorg, so I leave commits to you.
 
+### Changed during implementation (see the execution ledger for each ruling)
+- Confidence ignores edges to utility programs; utility programs get no `uncertain_program` question.
+- Record copybooks become local/shared types by module count only; a layout every module uses is a shared type.
+- IDF damping is skipped in estates smaller than `band_min`; "isolated" means no links except to utilities.
+- New open question kinds: `undersized_module`, `oversized_module`; a review-wide token cap
+  (`review.total_tokens`, default 500,000); sub-agents spend from the parent's remaining token budget.
+- Repository interface names use all store qualifiers (`TRAN.VALID` -> `TranValidRepository`).
+- Module names must map to distinct packages, and not to the reserved `jobs` / `shared` packages.
+- The planner also depends on numpy and scipy (sparse similarity), next to networkx.
+
 ## 10. Left to the builder
 
 Exact method signatures, file split inside the packages, the TF-IDF tokeniser details, fixture contents,

@@ -9,7 +9,7 @@ bin/planner architecture --workspace W                 # KB from W/kb/ (phase0 b
 bin/planner architecture --workspace W --no-agent      # deterministic draft only, no LLM
 bin/planner architecture --workspace W --fixture F     # KB from a FixtureKb JSON (tests, hand-made estates)
                          [--target java|python|go]     # default: config.yaml target.language, else java
-python3 -m unittest discover -s tests/planner -t .     # tests (no LLM, no Docker; needs networkx)
+python3 -m unittest discover -s tests/planner -t .     # tests (no LLM, no Docker; needs networkx, numpy, scipy)
 ```
 Writes `W/plan/architecture.json` (schema 1.0, `planner/architecture/plan.py`) and `W/plan/architecture.md` (the
 document a human reviews). Prints `{"plan", "modules", "open_questions", "edits"}`. Exit codes: 0 ok, 2 bad input
@@ -53,8 +53,19 @@ planner:
     low_kb_confidence: 0.8         # KB facts below this confidence (tolerant parse) are flagged
     seed: 7
     root_package: app
-    review: {pass_steps: 25, explorer_calls: 5, explorer_steps: 15, max_tokens: null}
+    review: {pass_steps: 25, explorer_calls: 5, explorer_steps: 15, max_tokens: null,   # max_tokens: per pass
+             total_tokens: 500000}     # whole review; when spent, remaining passes are skipped and flagged
 ```
+
+## Open question kinds
+`uncertain_program` (low share of links inside its module), `low_kb_confidence` (tolerant KB facts), `isolated`
+(no links except to utilities), `undersized_module` / `oversized_module` (outside the size band and could not be
+merged/split), `shared_write` (a store written by several modules), `missing_kb_fact`, `review_incomplete`
+(a review pass that failed, ran out of budget, or whose result could not be applied).
+
+## Scale
+Draft time on synthetic estates: about 3.5 s for 1,000 programs and 11 s for 2,000 (similarity uses sparse
+matrices; the size-band merge reads only the small groups' edges). `tests/planner/test_scale.py` guards this.
 
 ## Known limitations
 - **Estate tested on:** only the 13-program fixture and the review probe. On a real estate, plan quality depends

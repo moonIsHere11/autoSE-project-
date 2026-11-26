@@ -50,10 +50,6 @@ def find_utilities(g: nx.Graph, communities: list[set[str]], kb: KnowledgeSource
     return out
 
 
-def _cross(g: nx.Graph, a: set[str], b: set[str]) -> float:
-    return sum(d.get("weight", 0.0) for x, y, d in g.edges(a, data=True) if y in b)
-
-
 def _split(g: nx.Graph, community: set[str], cfg: PlannerConfig) -> list[set[str]]:
     parts, resolution = [community], 1.0
     for _ in range(5):
@@ -71,21 +67,32 @@ def apply_band(g: nx.Graph, communities: list[set[str]], cfg: PlannerConfig) -> 
     out: list[set[str]] = []
     for c in _order(communities):
         out += _split(g, c, cfg) if len(c) > cfg.band_max else [set(c)]
+    groups = dict(enumerate(out))
+    home = {p: gid for gid, members in groups.items() for p in members}
     changed = True
-    while changed:
+    while changed:  # each pass reads only the small groups' own edges
         changed = False
-        for small in sorted((c for c in out if len(c) < cfg.band_min), key=lambda c: (len(c), min(c))):
-            options = [(_cross(g, small, other), other) for other in out
-                       if other is not small and len(other) + len(small) <= cfg.band_max]
-            options = [(w, o) for w, o in options if w > 0]
+        for gid in sorted((k for k, c in groups.items() if len(c) < cfg.band_min),
+                          key=lambda k: (len(groups[k]), min(groups[k]))):
+            small = groups.get(gid)
+            if small is None or len(small) >= cfg.band_min:
+                continue
+            cross: dict[int, float] = {}
+            for p in small:
+                for q, d in g.adj[p].items():
+                    other = home.get(q)
+                    if other is not None and other != gid:
+                        cross[other] = cross.get(other, 0.0) + d.get("weight", 0.0)
+            options = [(w, o) for o, w in cross.items() if w > 0 and len(groups[o]) + len(small) <= cfg.band_max]
             if not options:
                 continue
-            _, target = max(options, key=lambda t: (t[0], -len(t[1]), sorted(t[1])[0] if t[1] else ""))
-            target |= small
-            out = [c for c in out if c is not small]
+            _, target = max(options, key=lambda t: (t[0], -len(groups[t[1]]), min(groups[t[1]])))
+            groups[target] |= small
+            for p in small:
+                home[p] = target
+            del groups[gid]
             changed = True
-            break
-    return _order(out)
+    return _order(groups.values())
 
 
 def cluster(g: nx.Graph, kb: KnowledgeSource, cfg: PlannerConfig) -> Clusters:

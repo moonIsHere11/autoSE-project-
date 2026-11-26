@@ -52,12 +52,20 @@ class Phase0Kb:
                 calls[src_prog].append(e["dst"])
         called = {d for targets in calls.values() for d in targets}
         run_by_jcl = {s.program for s in self._steps if s.program}
+        units_of: dict[str, list[dict]] = {}
+        for u in self._units:
+            units_of.setdefault(u.get("program"), []).append(u)
+        names_of: dict[str, list[str]] = {}
+        for x in fields:
+            if x.get("name"):
+                names_of.setdefault(x.get("program"), []).append(x["name"])
+        self._units_of = units_of
         self._programs = []
         for f, pid in zip(files, ids):
-            units = [u for u in self._units if u.get("program") == pid]
+            units = units_of.get(pid, [])
             confs = [u["provenance"]["confidence"] for u in units if u.get("provenance")]
             names = [u["unit_id"].split(".")[-1] for u in units if u.get("kind") in ("paragraph", "section")]
-            names += [x["name"] for x in fields if x.get("program") == pid and x.get("name")]
+            names += names_of.get(pid, [])
             online = any("cics" in str(s).lower() for u in units for s in u.get("unsupported", []))
             kind = "online" if online else ("subprogram" if pid in called and pid not in run_by_jcl else "batch")
             self._programs.append(Program(
@@ -99,17 +107,23 @@ class Phase0Kb:
 
     def _store_uses(self, crud: list[dict], step_dds: dict, ids: set[str]) -> list[StoreUse]:
         uses: list[StoreUse] = []
+        seen: set[StoreUse] = set()
 
         def add(u: StoreUse) -> None:
-            if u not in uses:
+            if u not in seen:
+                seen.add(u)
                 uses.append(u)
 
+        steps_of: dict[str, list[JobStep]] = {}
+        for s in self._steps:
+            if s.program:
+                steps_of.setdefault(s.program, []).append(s)
         for row in crud:
             prog = row["program"].upper()
             letters = {x for ops in row.get("units", {}).values() for x in ops}
             assign = (row.get("assign") or row["file"]).upper()
-            ds = next((step_dds[(s.job, s.step)].get(assign) for s in self._steps
-                       if s.program == prog and step_dds[(s.job, s.step)].get(assign)), None)
+            ds = next((step_dds[(s.job, s.step)].get(assign) for s in steps_of.get(prog, [])
+                       if step_dds[(s.job, s.step)].get(assign)), None)
             store, kind = (ds, "dataset") if ds else (f"{prog}:{assign}", "private")
             if letters & {"C", "U", "D"}:
                 add(StoreUse(prog, store, kind, "write"))
@@ -136,7 +150,7 @@ class Phase0Kb:
         return list(self._steps)
 
     def units(self, program_id: str) -> list[dict]:
-        return [u for u in self._units if u.get("program") == program_id]
+        return list(self._units_of.get(program_id, []))
 
     def source_root(self) -> Path:
         return (self.ws / "source").resolve()
