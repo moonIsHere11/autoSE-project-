@@ -1,0 +1,101 @@
+[
+ {
+  "unit_id": "TRANLOAD.LOAD-TRAN",
+  "kind": "paragraph",
+  "program": "TRANLOAD",
+  "unsupported": [],
+  "reads": [],
+  "writes": [],
+  "performs": [],
+  "calls": [],
+  "falls_through_to": null,
+  "summary": null,
+  "span": {
+   "file": "TRANLOAD.cbl",
+   "start_line": 1,
+   "end_line": 1
+  },
+  "provenance": {
+   "confidence": 1.0,
+   "extractor": "strict",
+   "file": "TRANLOAD.cbl",
+   "start_line": 1,
+   "end_line": 1
+  }
+ },
+ {
+  "unit_id": "TRANLOAD.WRITE-RPT",
+  "kind": "paragraph",
+  "program": "TRANLOAD",
+  "unsupported": [],
+  "reads": [],
+  "writes": [],
+  "performs": [],
+  "calls": [],
+  "falls_through_to": null,
+  "summary": null,
+  "span": {
+   "file": "TRANLOAD.cbl",
+   "start_line": 1,
+   "end_line": 1
+  },
+  "provenance": {
+   "confidence": 1.0,
+   "extractor": "strict",
+   "file": "TRANLOAD.cbl",
+   "start_line": 1,
+   "end_line": 1
+  }
+ },
+ {
+  "unit_id": "ACCTONL.SHOW-ACCT",
+  "kind": "paragraph",
+  "program": "ACCTONL",
+  "unsupported": [
+   "cics",
+   "sql"
+  ],
+  "reads": [],
+  "writes": [],
+  "performs": [],
+  "calls": [],
+  "falls_through_to": null,
+  "summary": null,
+  "span": {
+   "file": "ACCTONL.cbl",
+   "start_line": 1,
+   "end_line": 1
+  },
+  "provenance": {
+   "confidence": 0.6,
+   "extractor": "tolerant",
+   "file": "ACCTONL.cbl",
+   "start_line": 1,
+   "end_line": 1
+  }
+ },
+ {
+  "unit_id": "DATEUTL.(MAIN)",
+  "kind": "paragraph",
+  "program": "DATEUTL",
+  "unsupported": [],
+  "reads": [],
+  "writes": [],
+  "performs": [],
+  "calls": [],
+  "falls_through_to": null,
+  "summary": null,
+  "span": {
+   "file": "DATEUTL.cbl",
+   "start_line": 1,
+   "end_line": 1
+  },
+  "provenance": {
+   "confidence": 1.0,
+   "extractor": "strict",
+   "file": "DATEUTL.cbl",
+   "start_line": 1,
+   "end_line": 1
+  }
+ }
+]

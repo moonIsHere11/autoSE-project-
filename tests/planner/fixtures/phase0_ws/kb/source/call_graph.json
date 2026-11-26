@@ -1,0 +1,29 @@
+{
+ "schema_version": "1.1",
+ "edges": [
+  {
+   "src": "TRANLOAD.LOAD-TRAN",
+   "dst": "DATEUTL",
+   "kind": "call",
+   "line": 20,
+   "resolution": "static",
+   "file": "TRANLOAD.cbl"
+  },
+  {
+   "src": "TRANLOAD.LOAD-TRAN",
+   "dst": "?WS-PGM",
+   "kind": "call",
+   "line": 21,
+   "resolution": "dynamic",
+   "file": "TRANLOAD.cbl"
+  },
+  {
+   "src": "TRANLOAD.LOAD-TRAN",
+   "dst": "TRANLOAD.WRITE-RPT",
+   "kind": "perform",
+   "line": 22,
+   "resolution": "static",
+   "file": "TRANLOAD.cbl"
+  }
+ ]
+}

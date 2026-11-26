@@ -1,0 +1,22 @@
+[
+ {
+  "field_id": "TRANLOAD.TRAN-REC.TRAN-AMT",
+  "name": "TRAN-AMT",
+  "program": "TRANLOAD"
+ },
+ {
+  "field_id": "TRANLOAD.WS-PGM",
+  "name": "WS-PGM",
+  "program": "TRANLOAD"
+ },
+ {
+  "field_id": "ACCTONL.ACCT-BAL",
+  "name": "ACCT-BAL",
+  "program": "ACCTONL"
+ },
+ {
+  "field_id": "DATEUTL.LK-DATE",
+  "name": "LK-DATE",
+  "program": "DATEUTL"
+ }
+]

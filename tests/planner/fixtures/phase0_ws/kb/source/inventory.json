@@ -1,0 +1,163 @@
+{
+ "schema_version": "1.1",
+ "files": [
+  {
+   "path": "TRANLOAD.cbl",
+   "kind": "program",
+   "subkind": null,
+   "lines": 1,
+   "sha256": "0",
+   "programs": [
+    "TRANLOAD"
+   ],
+   "copybooks": [
+    "ACCTREC",
+    "ERRPROC"
+   ],
+   "calls": [
+    "DATEUTL",
+    "?WS-PGM"
+   ],
+   "jcl_steps": [],
+   "parse_status": "strict"
+  },
+  {
+   "path": "ACCTONL.cbl",
+   "kind": "program",
+   "subkind": null,
+   "lines": 1,
+   "sha256": "0",
+   "programs": [
+    "ACCTONL"
+   ],
+   "copybooks": [
+    "ACCTREC"
+   ],
+   "calls": [],
+   "jcl_steps": [],
+   "parse_status": "strict"
+  },
+  {
+   "path": "DATEUTL.cbl",
+   "kind": "program",
+   "subkind": null,
+   "lines": 1,
+   "sha256": "0",
+   "programs": [
+    "DATEUTL"
+   ],
+   "copybooks": [],
+   "calls": [],
+   "jcl_steps": [],
+   "parse_status": "strict"
+  },
+  {
+   "path": "ACCTREC.cpy",
+   "kind": "copybook",
+   "subkind": "data",
+   "lines": 1,
+   "sha256": "0",
+   "programs": [],
+   "copybooks": [],
+   "calls": [],
+   "jcl_steps": [],
+   "parse_status": "strict"
+  },
+  {
+   "path": "ERRPROC.cpy",
+   "kind": "copybook",
+   "subkind": "procedure",
+   "lines": 1,
+   "sha256": "0",
+   "programs": [],
+   "copybooks": [],
+   "calls": [],
+   "jcl_steps": [],
+   "parse_status": "strict"
+  },
+  {
+   "path": "NIGHTLY.jcl",
+   "kind": "jcl",
+   "subkind": "job",
+   "lines": 1,
+   "sha256": "0",
+   "programs": [],
+   "copybooks": [],
+   "calls": [],
+   "jcl_steps": [
+    {
+     "job": "NIGHTLY",
+     "step": "STEP010",
+     "kind": "exec",
+     "program": "SORT",
+     "line": "2"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP010",
+     "kind": "dd",
+     "dd": "SORTIN",
+     "dsn": "PROD.TRAN.DAILY",
+     "disp": "SHR",
+     "line": "3"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP010",
+     "kind": "dd",
+     "dd": "SORTOUT",
+     "dsn": "&&SORTED",
+     "disp": "NEW,PASS",
+     "line": "4"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP010",
+     "kind": "dd",
+     "dd": "SYSIN",
+     "line": "5"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP020",
+     "kind": "exec",
+     "program": "TRANLOAD",
+     "line": "8"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP020",
+     "kind": "dd",
+     "dd": "TRANIN",
+     "dsn": "&&SORTED",
+     "disp": "OLD,DELETE",
+     "line": "9"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP020",
+     "kind": "dd",
+     "dd": "RPTOUT",
+     "dsn": "PROD.TRAN.RPT(+1)",
+     "disp": "NEW,CATLG",
+     "line": "10"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP030",
+     "kind": "exec",
+     "program": "IKJEFT01",
+     "line": "12"
+    },
+    {
+     "job": "NIGHTLY",
+     "step": "STEP030",
+     "kind": "dd",
+     "dd": "SYSTSIN",
+     "line": "13"
+    }
+   ],
+   "parse_status": "strict"
+  }
+ ]
+}
