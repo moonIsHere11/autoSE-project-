@@ -95,7 +95,7 @@ def open_questions(plan: ArchitecturePlan, kb: KnowledgeSource, g: nx.Graph, cfg
             if m.kind == "isolated":
                 out.append(OpenQuestion("isolated", a.program, "no calls, shared copybooks, shared data or similar "
                                                                 "programs in the KB; placed alone"))
-            elif m.kind == "domain" and a.confidence < cfg.confidence_threshold:
+            elif m.kind == "domain" and a.confidence < cfg.confidence_threshold and a.decided_by == "draft":
                 pull = Counter()
                 for _, other, d in g.edges(a.program, data=True):
                     if other in home and home[other] is not m and home[other].kind != "utility":
