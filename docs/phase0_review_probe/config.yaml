@@ -1,0 +1,3 @@
+run: {id: R-001}
+source: {dir: source, dialect: default}
+target: {language: java, version: "21"}
