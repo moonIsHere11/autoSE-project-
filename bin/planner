@@ -1,0 +1,4 @@
+#!/bin/sh
+# Run the planner CLI from anywhere: bin/planner architecture --workspace W [--no-agent]
+HERE=$(cd "$(dirname "$0")/.." && pwd)
+PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m planner.cli "$@"
