@@ -1,0 +1,588 @@
+{
+ "kb_version": "fixture-estate-1",
+ "source_root": "estate_src",
+ "programs": [
+  {
+   "id": "ACCTVIEW",
+   "file": "ACCTVIEW.cbl",
+   "loc": 6,
+   "kind": "online",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "ACCTREC"
+   ],
+   "calls": [
+    "ERRHNDL"
+   ],
+   "identifiers": [
+    "ACCT-ID",
+    "ACCT-BAL",
+    "ACCT-STATUS",
+    "ACCT-LIMIT",
+    "SHOW-ACCOUNT",
+    "READ-ACCOUNT"
+   ]
+  },
+  {
+   "id": "ACCTUPDT",
+   "file": "ACCTUPDT.cbl",
+   "loc": 6,
+   "kind": "online",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "ACCTREC"
+   ],
+   "calls": [
+    "DATEFMT",
+    "ERRHNDL"
+   ],
+   "identifiers": [
+    "ACCT-ID",
+    "ACCT-BAL",
+    "ACCT-STATUS",
+    "ACCT-LIMIT",
+    "UPDATE-ACCOUNT",
+    "VALIDATE-ACCOUNT"
+   ]
+  },
+  {
+   "id": "ACCTBAT",
+   "file": "ACCTBAT.cbl",
+   "loc": 6,
+   "kind": "batch",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "ACCTREC",
+    "ABENDRTN"
+   ],
+   "calls": [],
+   "identifiers": [
+    "ACCT-ID",
+    "ACCT-BAL",
+    "ACCT-STATUS",
+    "ACCT-LIMIT",
+    "EXTRACT-ACCOUNT",
+    "WRITE-EXTRACT"
+   ]
+  },
+  {
+   "id": "CARDLIST",
+   "file": "CARDLIST.cbl",
+   "loc": 6,
+   "kind": "online",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "CARDREC"
+   ],
+   "calls": [
+    "ERRHNDL"
+   ],
+   "identifiers": [
+    "CARD-NUM",
+    "CARD-EXPIRY",
+    "CARD-STATUS",
+    "CARD-ACCT-ID",
+    "LIST-CARDS",
+    "READ-CARD"
+   ]
+  },
+  {
+   "id": "CARDUPDT",
+   "file": "CARDUPDT.cbl",
+   "loc": 6,
+   "kind": "online",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "CARDREC"
+   ],
+   "calls": [
+    "DATEFMT",
+    "ERRHNDL"
+   ],
+   "identifiers": [
+    "CARD-NUM",
+    "CARD-EXPIRY",
+    "CARD-STATUS",
+    "CARD-ACCT-ID",
+    "UPDATE-CARD",
+    "VALIDATE-CARD"
+   ]
+  },
+  {
+   "id": "CARDACT",
+   "file": "CARDACT.cbl",
+   "loc": 6,
+   "kind": "online",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "CARDREC",
+    "ABENDRTN"
+   ],
+   "calls": [
+    "DATEFMT"
+   ],
+   "identifiers": [
+    "CARD-NUM",
+    "CARD-EXPIRY",
+    "CARD-STATUS",
+    "CARD-ACCT-ID",
+    "ACTIVATE-CARD",
+    "CHECK-CARD"
+   ]
+  },
+  {
+   "id": "TRANVAL",
+   "file": "TRANVAL.cbl",
+   "loc": 6,
+   "kind": "batch",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "TRANREC",
+    "DATECHK"
+   ],
+   "calls": [
+    "DATEFMT"
+   ],
+   "identifiers": [
+    "TRAN-ID",
+    "TRAN-AMT",
+    "TRAN-DATE",
+    "TRAN-TYPE",
+    "VALIDATE-TRAN",
+    "REJECT-TRAN"
+   ]
+  },
+  {
+   "id": "TRANPOST",
+   "file": "TRANPOST.cbl",
+   "loc": 6,
+   "kind": "batch",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "TRANREC",
+    "DATECHK"
+   ],
+   "calls": [
+    "DATEFMT",
+    "ERRHNDL"
+   ],
+   "identifiers": [
+    "TRAN-ID",
+    "TRAN-AMT",
+    "TRAN-DATE",
+    "TRAN-TYPE",
+    "POST-TRAN",
+    "APPLY-TRAN"
+   ]
+  },
+  {
+   "id": "TRANRPT",
+   "file": "TRANRPT.cbl",
+   "loc": 6,
+   "kind": "batch",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "TRANREC"
+   ],
+   "calls": [],
+   "identifiers": [
+    "TRAN-ID",
+    "TRAN-AMT",
+    "TRAN-DATE",
+    "TRAN-TYPE",
+    "PRINT-TRAN",
+    "TOTAL-TRAN"
+   ]
+  },
+  {
+   "id": "DATEFMT",
+   "file": "DATEFMT.cbl",
+   "loc": 6,
+   "kind": "subprogram",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR"
+   ],
+   "calls": [],
+   "identifiers": [
+    "LK-DATE-IN",
+    "LK-DATE-OUT",
+    "FORMAT-DATE",
+    "JULIAN-DAY"
+   ]
+  },
+  {
+   "id": "ERRHNDL",
+   "file": "ERRHNDL.cbl",
+   "loc": 6,
+   "kind": "subprogram",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR"
+   ],
+   "calls": [],
+   "identifiers": [
+    "LK-ERR-CODE",
+    "LK-ERR-MSG",
+    "LOG-ERROR",
+    "ERROR-TEXT"
+   ]
+  },
+  {
+   "id": "CUSTSRCH",
+   "file": "CUSTSRCH.cbl",
+   "loc": 6,
+   "kind": "online",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR",
+    "ACCTREC",
+    "CARDREC"
+   ],
+   "calls": [],
+   "identifiers": [
+    "CUST-NAME",
+    "SEARCH-CUSTOMER",
+    "ACCT-ID",
+    "CARD-NUM"
+   ]
+  },
+  {
+   "id": "ORPHAN",
+   "file": "ORPHAN.cbl",
+   "loc": 6,
+   "kind": "batch",
+   "confidence": 1.0,
+   "copybooks": [
+    "COMMHDR"
+   ],
+   "calls": [],
+   "identifiers": [
+    "WX-PRINTER-QUEUE",
+    "PURGE-SPOOL",
+    "SPOOL-LINES"
+   ]
+  }
+ ],
+ "copybooks": [
+  {
+   "name": "COMMHDR",
+   "kind": "record"
+  },
+  {
+   "name": "ACCTREC",
+   "kind": "record"
+  },
+  {
+   "name": "CARDREC",
+   "kind": "record"
+  },
+  {
+   "name": "TRANREC",
+   "kind": "record"
+  },
+  {
+   "name": "ABENDRTN",
+   "kind": "code"
+  },
+  {
+   "name": "DATECHK",
+   "kind": "code"
+  }
+ ],
+ "store_uses": [
+  {
+   "program": "ACCTVIEW",
+   "store": "ACCOUNT",
+   "store_kind": "table",
+   "mode": "read"
+  },
+  {
+   "program": "ACCTUPDT",
+   "store": "ACCOUNT",
+   "store_kind": "table",
+   "mode": "write"
+  },
+  {
+   "program": "ACCTUPDT",
+   "store": "ACCOUNT",
+   "store_kind": "table",
+   "mode": "read"
+  },
+  {
+   "program": "ACCTBAT",
+   "store": "ACCOUNT",
+   "store_kind": "table",
+   "mode": "read"
+  },
+  {
+   "program": "ACCTBAT",
+   "store": "ACCT.EXTRACT",
+   "store_kind": "dataset",
+   "mode": "write"
+  },
+  {
+   "program": "CARDLIST",
+   "store": "CARD",
+   "store_kind": "table",
+   "mode": "read"
+  },
+  {
+   "program": "CARDUPDT",
+   "store": "CARD",
+   "store_kind": "table",
+   "mode": "write"
+  },
+  {
+   "program": "CARDUPDT",
+   "store": "CARD",
+   "store_kind": "table",
+   "mode": "read"
+  },
+  {
+   "program": "CARDACT",
+   "store": "CARD",
+   "store_kind": "table",
+   "mode": "write"
+  },
+  {
+   "program": "TRANVAL",
+   "store": "TRAN.DAILY",
+   "store_kind": "dataset",
+   "mode": "read"
+  },
+  {
+   "program": "TRANVAL",
+   "store": "TRAN.VALID",
+   "store_kind": "dataset",
+   "mode": "write"
+  },
+  {
+   "program": "TRANPOST",
+   "store": "TRAN.VALID",
+   "store_kind": "dataset",
+   "mode": "read"
+  },
+  {
+   "program": "TRANPOST",
+   "store": "TRANSACT",
+   "store_kind": "table",
+   "mode": "write"
+  },
+  {
+   "program": "TRANPOST",
+   "store": "ACCOUNT",
+   "store_kind": "table",
+   "mode": "write"
+  },
+  {
+   "program": "TRANRPT",
+   "store": "TRANSACT",
+   "store_kind": "table",
+   "mode": "read"
+  },
+  {
+   "program": "TRANRPT",
+   "store": "TRAN.REPORT",
+   "store_kind": "dataset",
+   "mode": "write"
+  },
+  {
+   "program": "CUSTSRCH",
+   "store": "ACCOUNT",
+   "store_kind": "table",
+   "mode": "read"
+  },
+  {
+   "program": "CUSTSRCH",
+   "store": "CARD",
+   "store_kind": "table",
+   "mode": "read"
+  }
+ ],
+ "job_steps": [
+  {
+   "job": "NIGHTLY",
+   "step": "STEP010",
+   "order": 1,
+   "program": "TRANVAL",
+   "reads": [
+    "TRAN.DAILY"
+   ],
+   "writes": [
+    "TRAN.VALID"
+   ]
+  },
+  {
+   "job": "NIGHTLY",
+   "step": "STEP020",
+   "order": 2,
+   "program": "TRANPOST",
+   "reads": [
+    "TRAN.VALID"
+   ],
+   "writes": []
+  },
+  {
+   "job": "NIGHTLY",
+   "step": "STEP030",
+   "order": 3,
+   "program": "TRANRPT",
+   "reads": [],
+   "writes": [
+    "TRAN.REPORT"
+   ]
+  },
+  {
+   "job": "NIGHTLY",
+   "step": "STEP040",
+   "order": 4,
+   "program": "ACCTBAT",
+   "reads": [],
+   "writes": [
+    "ACCT.EXTRACT"
+   ]
+  }
+ ],
+ "units": {
+  "ACCTVIEW": [
+   {
+    "unit_id": "ACCT-BAL",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "ACCT-STATUS",
+    "kind": "paragraph"
+   }
+  ],
+  "ACCTUPDT": [
+   {
+    "unit_id": "ACCT-BAL",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "ACCT-STATUS",
+    "kind": "paragraph"
+   }
+  ],
+  "ACCTBAT": [
+   {
+    "unit_id": "ACCT-BAL",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "ACCT-STATUS",
+    "kind": "paragraph"
+   }
+  ],
+  "CARDLIST": [
+   {
+    "unit_id": "CARD-EXPIRY",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "CARD-STATUS",
+    "kind": "paragraph"
+   }
+  ],
+  "CARDUPDT": [
+   {
+    "unit_id": "CARD-EXPIRY",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "CARD-STATUS",
+    "kind": "paragraph"
+   }
+  ],
+  "CARDACT": [
+   {
+    "unit_id": "CARD-EXPIRY",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "CARD-STATUS",
+    "kind": "paragraph"
+   }
+  ],
+  "TRANVAL": [
+   {
+    "unit_id": "TRAN-AMT",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "TRAN-DATE",
+    "kind": "paragraph"
+   }
+  ],
+  "TRANPOST": [
+   {
+    "unit_id": "TRAN-AMT",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "TRAN-DATE",
+    "kind": "paragraph"
+   }
+  ],
+  "TRANRPT": [
+   {
+    "unit_id": "TRAN-AMT",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "TRAN-DATE",
+    "kind": "paragraph"
+   }
+  ],
+  "DATEFMT": [
+   {
+    "unit_id": "LK-DATE-IN",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "LK-DATE-OUT",
+    "kind": "paragraph"
+   }
+  ],
+  "ERRHNDL": [
+   {
+    "unit_id": "LK-ERR-CODE",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "LK-ERR-MSG",
+    "kind": "paragraph"
+   }
+  ],
+  "CUSTSRCH": [
+   {
+    "unit_id": "CUST-NAME",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "SEARCH-CUSTOMER",
+    "kind": "paragraph"
+   }
+  ],
+  "ORPHAN": [
+   {
+    "unit_id": "WX-PRINTER-QUEUE",
+    "kind": "paragraph"
+   },
+   {
+    "unit_id": "PURGE-SPOOL",
+    "kind": "paragraph"
+   }
+  ]
+ }
+}
