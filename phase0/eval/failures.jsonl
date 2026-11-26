@@ -1,0 +1,181 @@
+{"attribute": "scale(probe)", "field_id": "D14", "kb": 0, "metric": "E3", "oracle": 4, "oracle_name": "GnuCOBOL probe", "program": "D2/DISPSGN", "repro": "", "source": "phase1"}
+{"check": "write", "field": "WS-ACCOUNTS.WS-ACCOUNT.AC-COUNT", "metric": "E5", "program": "D1/ACCTPOST", "source": "phase1", "unit": "OPEN-ACCOUNTS"}
+{"check": "write", "field": "WS-ACCOUNTS.WS-ACCOUNT.AC-COUNT", "metric": "E5", "program": "D1/ACCTPOST", "source": "phase1", "unit": "OPEN-ACCOUNTS"}
+{"check": "write", "field": "WS-ACCOUNTS.WS-ACCOUNT.AC-COUNT", "metric": "E5", "program": "D1/ACCTPOST", "source": "phase1", "unit": "OPEN-ACCOUNTS"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/CHECKDIG", "source": "phase1", "unit": "SCAN-CHARS"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/CHECKDIG", "source": "phase1", "unit": "SCAN-CHARS"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/CHECKDIG", "source": "phase1", "unit": "SCAN-CHARS"}
+{"check": "write", "field": "WS-WEIGHT", "metric": "E5", "program": "D1/CHECKDIG", "source": "phase1", "unit": "WEIGH-DIGITS"}
+{"check": "write", "field": "WS-WEIGHT", "metric": "E5", "program": "D1/CHECKDIG", "source": "phase1", "unit": "WEIGH-DIGITS"}
+{"check": "write", "field": "WS-WEIGHT", "metric": "E5", "program": "D1/CHECKDIG", "source": "phase1", "unit": "WEIGH-DIGITS"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "SUMMARY-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "SUMMARY-PARA"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-NUMBER"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-NUMBER"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-NUMBER"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "LUHN-CHECK"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "LUHN-CHECK"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-EXIT"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-EXIT"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-EXIT"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "READ-NUMBER"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "READ-NUMBER"}
+{"check": "write", "field": "WS-NUM-DIGITS.WS-DIGIT", "metric": "E5", "program": "D1/DIGITS", "source": "phase1", "unit": "READ-NUMBER"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIVREM", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIVREM", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIVREM", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIVREM", "source": "phase1", "unit": "SET-RETURN"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIVREM", "source": "phase1", "unit": "SET-RETURN"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/DIVREM", "source": "phase1", "unit": "SET-RETURN"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/GRADES", "source": "phase1", "unit": "SCORE-STUDENT"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/GRADES", "source": "phase1", "unit": "SCORE-STUDENT"}
+{"check": "write", "field": "WS-I", "metric": "E5", "program": "D1/GRADES", "source": "phase1", "unit": "SCORE-STUDENT"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/INVENTORY", "source": "phase1", "unit": "SET-RETURN"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/INVENTORY", "source": "phase1", "unit": "SET-RETURN"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/INVENTORY", "source": "phase1", "unit": "SET-RETURN"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/LOANCALC", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/LOANCALC", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "WS-MONTH", "metric": "E5", "program": "D1/LOANCALC", "source": "phase1", "unit": "AMORTIZE"}
+{"check": "write", "field": "WS-MONTH", "metric": "E5", "program": "D1/LOANCALC", "source": "phase1", "unit": "AMORTIZE"}
+{"check": "write", "field": "WS-MONTH", "metric": "E5", "program": "D1/LOANCALC", "source": "phase1", "unit": "AMORTIZE"}
+{"check": "write", "field": "WS-PAY-WORK.WS-TIER", "metric": "E5", "program": "D1/PAYROLL", "source": "phase1", "unit": "CALC-GROSS"}
+{"check": "write", "field": "WS-PAY-WORK.WS-TIER", "metric": "E5", "program": "D1/PAYROLL", "source": "phase1", "unit": "CALC-GROSS"}
+{"check": "write", "field": "WS-PAY-WORK.WS-TIER", "metric": "E5", "program": "D1/PAYROLL", "source": "phase1", "unit": "CALC-COMMISSION"}
+{"check": "write", "field": "WS-PAY-WORK.WS-TIER", "metric": "E5", "program": "D1/PAYROLL", "source": "phase1", "unit": "CALC-COMMISSION"}
+{"check": "write", "field": "WS-PAY-WORK.WS-TIER", "metric": "E5", "program": "D1/PAYROLL", "source": "phase1", "unit": "CALC-COMMISSION"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/PAYROLL", "source": "phase1", "unit": "SHOW-TOTALS"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/PAYROLL", "source": "phase1", "unit": "SHOW-TOTALS"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "WS-DIFF-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-EMB-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-LEMB-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-SMALL-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-SUM-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-DIFF-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-EMB-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-LEMB-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-SMALL-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-SUM-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-DIFF-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-EMB-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-LEMB-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-SMALL-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "WS-SUM-RAW", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "CONVERT-ENTRY"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-SUMMARY"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-SUMMARY"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/TEMPCONV", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/TEMPCONV", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D1/TEMPCONV", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "I", "metric": "E5", "program": "D2/BINTRUNC", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "I", "metric": "E5", "program": "D2/BINTRUNC", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "I", "metric": "E5", "program": "D2/BINTRUNC", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D2/DISPSGN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D2/DISPSGN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RETURN-CODE", "metric": "E5", "program": "D2/DISPSGN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/EDITED", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/EDITED", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/EDITED", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/EVALUATE", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/EVALUATE", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/EVALUATE", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-ALT", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-BIN", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-ED", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-PK", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-SS", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-TAB.T-N", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-TAB.T-X", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-ALT", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-BIN", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-ED", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-PK", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-SS", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-TAB.T-N", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-TAB.T-X", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-ALT", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-BIN", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-ED", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-PK", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-SS", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-TAB.T-N", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.R-TAB.T-X", "metric": "E5", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/LEVEL88", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/LEVEL88", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "K", "metric": "E5", "program": "D2/LEVEL88", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GA", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GB", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GN", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GA", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GB", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GN", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GA", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GB", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "GRP.GN", "metric": "E5", "program": "D2/MOVEALN", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "AREA2.HALF1", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RAW", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.PARTS.P3", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.TXT", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "AREA2.HALF1", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RAW", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.PARTS.P3", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.TXT", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "AREA2.HALF1", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "RAW", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.PARTS.P3", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "REC.TXT", "metric": "E5", "program": "D2/REDEF", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "I", "metric": "E5", "program": "D2/VARYING", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "J", "metric": "E5", "program": "D2/VARYING", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "I", "metric": "E5", "program": "D2/VARYING", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "J", "metric": "E5", "program": "D2/VARYING", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "I", "metric": "E5", "program": "D2/VARYING", "source": "phase1", "unit": "MAIN-PARA"}
+{"check": "write", "field": "J", "metric": "E5", "program": "D2/VARYING", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["WS-Q", "WS-SUM", "WS-EVEN-COUNT", "WS-MAX-DIGIT"], "check": "read", "metric": "E5", "perturbed": "WS-NUM", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-NUMBER"}
+{"changed": ["WS-Q", "WS-REM", "WS-SUM", "WS-EVEN-COUNT", "WS-MAX-DIGIT"], "check": "read", "metric": "E5", "perturbed": "WS-NUM", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-NUMBER"}
+{"changed": ["WS-REM", "WS-SUM", "WS-EVEN-COUNT", "WS-MAX-DIGIT"], "check": "read", "metric": "E5", "perturbed": "WS-NUM", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-NUMBER"}
+{"changed": ["WS-REM", "WS-REV"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "REVERSE-NUMBER"}
+{"changed": ["WS-REM", "WS-LUHN-SUM"], "check": "read", "metric": "E5", "perturbed": "WS-NUM", "program": "D1/DIGITS", "source": "phase1", "unit": "LUHN-CHECK"}
+{"changed": ["WS-SEVENTH", "WS-SEVENTH-T"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "CLASSIFY"}
+{"changed": ["stdout", "WS-GRAND"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-EXIT"}
+{"changed": ["stdout", "WS-GRAND"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-EXIT"}
+{"changed": ["stdout", "WS-GRAND"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "PROCESS-EXIT"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "SHOW-NUMBER"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "SHOW-NUMBER"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-NUM-DIGITS.WS-DIGIT", "program": "D1/DIGITS", "source": "phase1", "unit": "SHOW-NUMBER"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-TS", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-LS", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-TAG", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-LEMB", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-LS", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-LEMB", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-TAG", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-TS", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-LEMB", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-TAG", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-LS", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "WS-ECHO.WS-E-TS", "program": "D1/SIGNFMT", "source": "phase1", "unit": "SHOW-ENTRY"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-SS", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-TAB.T-X", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-NUM", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-ED", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-NAME", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-BIN", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-PK", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-SS", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-BIN", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-ED", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-NUM", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-PK", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-NAME", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-TAB.T-X", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-NUM", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-SS", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-BIN", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-TAB.T-N", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-NAME", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-PK", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-ED", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"changed": ["stdout"], "check": "read", "metric": "E5", "perturbed": "REC.R-TAB.T-X", "program": "D2/INITLZ", "source": "phase1", "unit": "MAIN-PARA"}
+{"detail": "transformed program: 14 units vs 15; inventory program/format-ambiguous, format fixed, parse status tolerant: cobc -E: PAYROLL.cbl:1: error: invalid indicator 'F' at column 7", "metric": "E10", "program": "PAYROLL", "repro": "compare /tmp/claude-1000/-home-aytidava-Courses-AutoSE-CourseProject/c68e3c67-db2f-46cc-b541-89241d79e6b2/scratchpad/evalws/e10ws/free/D1/PAYROLL/kb with /tmp/claude-1000/-home-aytidava-Courses-AutoSE-CourseProject/c68e3c67-db2f-46cc-b541-89241d79e6b2/scratchpad/evalws/ws/D1/PAYROLL/kb", "transformation": "free"}

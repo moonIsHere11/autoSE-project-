@@ -1,0 +1,67 @@
+{
+ "$defs": {
+  "RejectedSummary": {
+   "additionalProperties": false,
+   "properties": {
+    "summary": {
+     "title": "Summary",
+     "type": "string"
+    },
+    "unit_id": {
+     "title": "Unit Id",
+     "type": "string"
+    },
+    "unsupported_entities": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Unsupported Entities",
+     "type": "array"
+    }
+   },
+   "required": [
+    "unit_id",
+    "unsupported_entities",
+    "summary"
+   ],
+   "title": "RejectedSummary",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "description": "kb/source/summaries.json, written only when stage G is enabled (E11).",
+ "properties": {
+  "accepted": {
+   "title": "Accepted",
+   "type": "integer"
+  },
+  "generated": {
+   "title": "Generated",
+   "type": "integer"
+  },
+  "model": {
+   "title": "Model",
+   "type": "string"
+  },
+  "rejected": {
+   "items": {
+    "$ref": "#/$defs/RejectedSummary"
+   },
+   "title": "Rejected",
+   "type": "array"
+  },
+  "schema_version": {
+   "default": "1.1",
+   "title": "Schema Version",
+   "type": "string"
+  }
+ },
+ "required": [
+  "model",
+  "generated",
+  "accepted",
+  "rejected"
+ ],
+ "title": "Summaries",
+ "type": "object"
+}

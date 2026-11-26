@@ -1,0 +1,171 @@
+{
+ "$defs": {
+  "CoverageSummary": {
+   "additionalProperties": false,
+   "properties": {
+    "failed": {
+     "title": "Failed",
+     "type": "integer"
+    },
+    "files": {
+     "title": "Files",
+     "type": "integer"
+    },
+    "lines_total": {
+     "title": "Lines Total",
+     "type": "integer"
+    },
+    "lines_unattributed": {
+     "title": "Lines Unattributed",
+     "type": "integer"
+    },
+    "parsed_strict": {
+     "title": "Parsed Strict",
+     "type": "integer"
+    },
+    "parsed_tolerant": {
+     "title": "Parsed Tolerant",
+     "type": "integer"
+    },
+    "programs": {
+     "title": "Programs",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "files",
+    "programs",
+    "parsed_strict",
+    "parsed_tolerant",
+    "failed",
+    "lines_total",
+    "lines_unattributed"
+   ],
+   "title": "CoverageSummary",
+   "type": "object"
+  },
+  "ExtractorInfo": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "version": {
+     "title": "Version",
+     "type": "string"
+    }
+   },
+   "required": [
+    "name",
+    "version"
+   ],
+   "title": "ExtractorInfo",
+   "type": "object"
+  },
+  "Toolchain": {
+   "additionalProperties": false,
+   "properties": {
+    "build_cmd": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Build Cmd",
+     "type": "array"
+    },
+    "file_ext": {
+     "title": "File Ext",
+     "type": "string"
+    },
+    "language": {
+     "title": "Language",
+     "type": "string"
+    },
+    "lint_cmd": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Lint Cmd"
+    },
+    "runtime_dir": {
+     "title": "Runtime Dir",
+     "type": "string"
+    },
+    "test_cmd": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Test Cmd",
+     "type": "array"
+    },
+    "version": {
+     "title": "Version",
+     "type": "string"
+    }
+   },
+   "required": [
+    "language",
+    "version",
+    "file_ext",
+    "build_cmd",
+    "test_cmd",
+    "lint_cmd",
+    "runtime_dir"
+   ],
+   "title": "Toolchain",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "coverage_summary": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/CoverageSummary"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null
+  },
+  "extractors": {
+   "items": {
+    "$ref": "#/$defs/ExtractorInfo"
+   },
+   "title": "Extractors",
+   "type": "array"
+  },
+  "kb_version": {
+   "title": "Kb Version",
+   "type": "string"
+  },
+  "schema_version": {
+   "title": "Schema Version",
+   "type": "string"
+  },
+  "source_hash": {
+   "title": "Source Hash",
+   "type": "string"
+  },
+  "target": {
+   "$ref": "#/$defs/Toolchain"
+  }
+ },
+ "required": [
+  "schema_version",
+  "kb_version",
+  "source_hash",
+  "target"
+ ],
+ "title": "KbManifest",
+ "type": "object"
+}

@@ -17,10 +17,11 @@ image:
 	docker build -t $(IMAGE) -f docker/Dockerfile docker
 
 lint:
-	$(PY) -m ruff check verifier tests tools
+	$(PY) -m ruff check verifier tests tools phase0
 
 typecheck:
 	$(PY) -m mypy
+	cd phase0 && $(PY) -m mypy
 
 # fast unit tests (no Docker)
 test:

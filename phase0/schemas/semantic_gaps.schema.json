@@ -1,0 +1,62 @@
+{
+ "$defs": {
+  "Gap": {
+   "additionalProperties": false,
+   "properties": {
+    "cobol_behavior": {
+     "title": "Cobol Behavior",
+     "type": "string"
+    },
+    "gap_id": {
+     "title": "Gap Id",
+     "type": "string"
+    },
+    "required_handling": {
+     "title": "Required Handling",
+     "type": "string"
+    },
+    "rule_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Rule Ids",
+     "type": "array"
+    },
+    "source": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source"
+    },
+    "target_default": {
+     "title": "Target Default",
+     "type": "string"
+    },
+    "topic": {
+     "title": "Topic",
+     "type": "string"
+    }
+   },
+   "required": [
+    "gap_id",
+    "topic",
+    "cobol_behavior",
+    "target_default",
+    "required_handling",
+    "rule_ids"
+   ],
+   "title": "Gap",
+   "type": "object"
+  }
+ },
+ "items": {
+  "$ref": "#/$defs/Gap"
+ },
+ "type": "array"
+}

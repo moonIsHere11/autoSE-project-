@@ -1,0 +1,765 @@
+{
+ "E1": {
+  "D1": {
+   "files": 14,
+   "files_by_kind": {
+    "program/None": 14
+   },
+   "files_classified_share": 1.0,
+   "lines_accounted_share": 1.0,
+   "lines_total": 2133,
+   "lines_unattributed": 0,
+   "lines_unexplained": 0,
+   "programs": {
+    "strict": 14
+   },
+   "unattributed_by_reason": {},
+   "unsupported_constructs": {
+    "COMPUTE: FUNCTION ORD": 1,
+    "GO TO": 1,
+    "INSPECT": 1,
+    "PERFORM THRU": 2,
+    "STRING": 1,
+    "UNSTRING": 1
+   }
+  },
+  "D2": {
+   "files": 24,
+   "files_by_kind": {
+    "program/None": 24
+   },
+   "files_classified_share": 1.0,
+   "lines_accounted_share": 1.0,
+   "lines_total": 1123,
+   "lines_unattributed": 0,
+   "lines_unexplained": 0,
+   "programs": {
+    "strict": 24
+   },
+   "unattributed_by_reason": {},
+   "unsupported_constructs": {
+    "GO TO": 1,
+    "PERFORM THRU": 1
+   }
+  },
+  "D3": {
+   "files": 358,
+   "files_by_kind": {
+    "copybook/data": 57,
+    "copybook/procedure": 3,
+    "copybook/sql": 3,
+    "jcl/job": 30,
+    "jcl/proc": 5,
+    "other/None": 127,
+    "other/binary": 20,
+    "other/bms": 21,
+    "other/empty": 48,
+    "program/None": 44
+   },
+   "files_classified_share": 0.6453,
+   "lines_accounted_share": 0.9871,
+   "lines_total": 39670,
+   "lines_unattributed": 510,
+   "lines_unexplained": 0,
+   "programs": {
+    "strict": 18,
+    "tolerant": 26
+   },
+   "unattributed_by_reason": {
+    "copybook not included by any parsed program": 165,
+    "data division text the strict parser did not describe (see parse_errors)": 253,
+    "text dropped by cobc -E (no tokens)": 11,
+    "tolerant analyser dropped the line (continuation or debugging line)": 8,
+    "tolerant analyser: outside any unit or data entry": 73
+   },
+   "unsupported_constructs": {
+    "ACCEPT FROM DATE": 5,
+    "ACCEPT FROM DAY": 4,
+    "ACCEPT FROM TIME": 1,
+    "ALTER": 1,
+    "CALL": 16,
+    "CLOSE: INDEXED file ACCOUNT-FILE": 3,
+    "CLOSE: INDEXED file ACCOUNT-INPUT": 1,
+    "CLOSE: INDEXED file ACCT-FILE": 1,
+    "CLOSE: INDEXED file ACCTFILE-FILE": 1,
+    "CLOSE: INDEXED file CARD-FILE": 1,
+    "CLOSE: INDEXED file CARD-INPUT": 1,
+    "CLOSE: INDEXED file CARDFILE-FILE": 1,
+    "CLOSE: INDEXED file CUST-FILE": 1,
+    "CLOSE: INDEXED file CUSTFILE-FILE": 1,
+    "CLOSE: INDEXED file CUSTOMER-FILE": 1,
+    "CLOSE: INDEXED file CUSTOMER-INPUT": 1,
+    "CLOSE: INDEXED file DISCGRP-FILE": 1,
+    "CLOSE: INDEXED file EXPORT-INPUT": 1,
+    "CLOSE: INDEXED file EXPORT-OUTPUT": 1,
+    "CLOSE: INDEXED file TCATBAL-FILE": 2,
+    "CLOSE: INDEXED file TRANCATG-FILE": 1,
+    "CLOSE: INDEXED file TRANSACT-FILE": 2,
+    "CLOSE: INDEXED file TRANSACTION-INPUT": 1,
+    "CLOSE: INDEXED file TRANTYPE-FILE": 1,
+    "CLOSE: INDEXED file TRNX-FILE": 1,
+    "CLOSE: INDEXED file XREF-FILE": 5,
+    "CLOSE: INDEXED file XREF-INPUT": 1,
+    "CLOSE: INDEXED file XREFFILE-FILE": 1,
+    "COMPUTE: unknown data name BUMP-TIOT": 1,
+    "COMPUTE: unknown data name WS-M03B-KEY-LN": 1,
+    "ENTRY": 3,
+    "EVALUATE: unknown data name DIBSTAT": 1,
+    "EVALUATE: unknown data name FC-INVALID-DATE": 1,
+    "EVALUATE: unknown data name WS-FL-DD": 1,
+    "EVALUATE: unknown data name WS-M03B-RC": 1,
+    "EXEC": 1,
+    "EXEC DLI": 1,
+    "GO TO": 2,
+    "IF: FUNCTION MOD": 1,
+    "IF: unknown data name DIBSTAT": 1,
+    "IF: unknown data name WS-M03B-RC": 1,
+    "IF: unknown data name WS-SAVE-CARD": 1,
+    "INDEXED file": 11,
+    "INDEXED file ACCOUNT-FILE": 3,
+    "INDEXED file ACCOUNT-INPUT": 1,
+    "INDEXED file ACCT-FILE": 1,
+    "INDEXED file ACCTFILE-FILE": 1,
+    "INDEXED file CARD-FILE": 1,
+    "INDEXED file CARD-INPUT": 1,
+    "INDEXED file CARDFILE-FILE": 1,
+    "INDEXED file CUST-FILE": 1,
+    "INDEXED file CUSTFILE-FILE": 1,
+    "INDEXED file CUSTOMER-FILE": 1,
+    "INDEXED file CUSTOMER-INPUT": 1,
+    "INDEXED file DISCGRP-FILE": 1,
+    "INDEXED file EXPORT-INPUT": 1,
+    "INDEXED file EXPORT-OUTPUT": 1,
+    "INDEXED file TCATBAL-FILE": 2,
+    "INDEXED file TRANCATG-FILE": 1,
+    "INDEXED file TRANSACT-FILE": 2,
+    "INDEXED file TRANSACTION-INPUT": 1,
+    "INDEXED file TRANTYPE-FILE": 1,
+    "INDEXED file TRNX-FILE": 1,
+    "INDEXED file XREF-FILE": 5,
+    "INDEXED file XREF-INPUT": 1,
+    "INDEXED file XREFFILE-FILE": 1,
+    "INITIALIZE: unknown data name STATEMENT-LINES": 1,
+    "INITIALIZE: unknown data name WS-MESSAGE": 1,
+    "INITIALIZE: unknown data name WS-TRNX-TABLE": 1,
+    "LINKAGE SECTION / PROCEDURE DIVISION USING": 8,
+    "MOVE: FUNCTION CURRENT-DATE": 3,
+    "MOVE: LENGTH OF": 1,
+    "MOVE: unknown data name ACCT-CURR-BAL": 1,
+    "MOVE: unknown data name ACCT-ID": 1,
+    "MOVE: unknown data name CR-CNT": 1,
+    "MOVE: unknown data name CUST-ADDR-LINE-1": 1,
+    "MOVE: unknown data name CUST-ADDR-LINE-2": 1,
+    "MOVE: unknown data name CUST-FICO-CREDIT-SCORE": 1,
+    "MOVE: unknown data name HTML-ADDR-LN": 1,
+    "MOVE: unknown data name HTML-BSIC-LN": 1,
+    "MOVE: unknown data name HTML-TRAN-LN": 1,
+    "MOVE: unknown data name MSG-NO": 1,
+    "MOVE: unknown data name OUTPUT-LILLIAN": 1,
+    "MOVE: unknown data name SEVERITY": 1,
+    "MOVE: unknown data name ST-NAME": 1,
+    "MOVE: unknown data name TR-CNT": 1,
+    "MOVE: unknown data name TRNX-AMT": 1,
+    "MOVE: unknown data name TRNX-CARD-NUM": 1,
+    "MOVE: unknown data name TRNX-DESC": 1,
+    "MOVE: unknown data name TRNX-ID": 1,
+    "MOVE: unknown data name TRNX-REST": 1,
+    "MOVE: unknown data name VSTRING-TEXT": 1,
+    "MOVE: unknown data name WS-DATE": 1,
+    "MOVE: unknown data name WS-DATE-TO-TEST": 1,
+    "MOVE: unknown data name WS-FL-DD": 1,
+    "MOVE: unknown data name WS-M03B-DD": 1,
+    "MOVE: unknown data name WS-M03B-FLDT": 1,
+    "MOVE: unknown data name WS-M03B-KEY-LN": 1,
+    "MOVE: unknown data name WS-M03B-RC": 1,
+    "MOVE: unknown data name WS-MESSAGE": 1,
+    "MOVE: unknown data name WS-SEVERITY-N": 1,
+    "MOVE: unknown data name WS-TOTAL-AMT": 1,
+    "MOVE: unknown data name WS-TRN-AMT": 1,
+    "MOVE: unknown data name XREF-ACCT-ID": 1,
+    "MOVE: unknown data name XREF-CUST-ID": 1,
+    "NEXT": 1,
+    "OPEN I-O": 2,
+    "OPEN: INDEXED file ACCOUNT-FILE": 1,
+    "OPEN: INDEXED file ACCOUNT-INPUT": 1,
+    "OPEN: INDEXED file ACCT-FILE": 1,
+    "OPEN: INDEXED file ACCTFILE-FILE": 1,
+    "OPEN: INDEXED file CARD-FILE": 1,
+    "OPEN: INDEXED file CARD-INPUT": 1,
+    "OPEN: INDEXED file CARDFILE-FILE": 1,
+    "OPEN: INDEXED file CUST-FILE": 1,
+    "OPEN: INDEXED file CUSTFILE-FILE": 1,
+    "OPEN: INDEXED file CUSTOMER-FILE": 1,
+    "OPEN: INDEXED file CUSTOMER-INPUT": 1,
+    "OPEN: INDEXED file DISCGRP-FILE": 1,
+    "OPEN: INDEXED file EXPORT-INPUT": 1,
+    "OPEN: INDEXED file EXPORT-OUTPUT": 1,
+    "OPEN: INDEXED file TCATBAL-FILE": 1,
+    "OPEN: INDEXED file TRANCATG-FILE": 1,
+    "OPEN: INDEXED file TRANSACT-FILE": 2,
+    "OPEN: INDEXED file TRANSACTION-INPUT": 1,
+    "OPEN: INDEXED file TRANTYPE-FILE": 1,
+    "OPEN: INDEXED file TRNX-FILE": 1,
+    "OPEN: INDEXED file XREF-FILE": 5,
+    "OPEN: INDEXED file XREF-INPUT": 1,
+    "OPEN: INDEXED file XREFFILE-FILE": 1,
+    "OPEN: RECORD VARYING file VBRC-FILE": 1,
+    "PERFORM THRU": 7,
+    "PERFORM: unknown data name CR-JMP": 1,
+    "PERFORM: unknown data name END-OF-FILE": 1,
+    "READ: INDEXED file ACCOUNT-INPUT": 1,
+    "READ: INDEXED file ACCT-FILE": 1,
+    "READ: INDEXED file ACCTFILE-FILE": 1,
+    "READ: INDEXED file CARD-INPUT": 1,
+    "READ: INDEXED file CARDFILE-FILE": 1,
+    "READ: INDEXED file CUST-FILE": 1,
+    "READ: INDEXED file CUSTFILE-FILE": 1,
+    "READ: INDEXED file CUSTOMER-INPUT": 1,
+    "READ: INDEXED file DISCGRP-FILE": 1,
+    "READ: INDEXED file EXPORT-INPUT": 1,
+    "READ: INDEXED file TCATBAL-FILE": 1,
+    "READ: INDEXED file TRANSACTION-INPUT": 1,
+    "READ: INDEXED file TRNX-FILE": 1,
+    "READ: INDEXED file XREF-FILE": 1,
+    "READ: INDEXED file XREF-INPUT": 1,
+    "READ: INDEXED file XREFFILE-FILE": 1,
+    "READ: INVALID KEY phrase": 4,
+    "REWRITE": 2,
+    "SET (index/pointer/switch forms)": 1,
+    "SET ... TO TRUE on a non-condition-name": 1,
+    "STRING": 3,
+    "USAGE POINTER (TCB-POINT)": 1,
+    "USAGE POINTER (TIOT-POINT)": 1,
+    "WRITE: INDEXED file EXPORT-OUTPUT": 1,
+    "WRITE: INDEXED file TCATBAL-FILE": 1,
+    "WRITE: INDEXED file TRANSACT-FILE": 1,
+    "WRITE: RECORD VARYING file VBRC-FILE": 1,
+    "WRITE: unknown data name HTML-ADDR-LN": 1,
+    "WRITE: unknown data name HTML-BSIC-LN": 1,
+    "WRITE: unknown data name HTML-FIXED-LN": 1,
+    "WRITE: unknown data name HTML-L11": 1,
+    "WRITE: unknown data name HTML-TRAN-LN": 1,
+    "WRITE: unknown data name ST-LINE0": 1,
+    "WRITE: unknown data name ST-LINE1": 1,
+    "WRITE: unknown data name ST-LINE10": 1,
+    "WRITE: unknown data name ST-LINE11": 1,
+    "WRITE: unknown data name ST-LINE12": 1,
+    "WRITE: unknown data name ST-LINE13": 1,
+    "WRITE: unknown data name ST-LINE14": 1,
+    "WRITE: unknown data name ST-LINE14A": 1,
+    "WRITE: unknown data name ST-LINE15": 1,
+    "WRITE: unknown data name ST-LINE2": 1,
+    "WRITE: unknown data name ST-LINE3": 1,
+    "WRITE: unknown data name ST-LINE4": 1,
+    "WRITE: unknown data name ST-LINE5": 1,
+    "WRITE: unknown data name ST-LINE6": 1,
+    "WRITE: unknown data name ST-LINE7": 1,
+    "WRITE: unknown data name ST-LINE8": 1,
+    "WRITE: unknown data name ST-LINE9": 1,
+    "parse errors: DATA DIVISION (WORKING-STORAGE): line 31: unexpected 'of' in data entry VSTRING-CHAR": 1,
+    "parse errors: DATA DIVISION (WORKING-STORAGE): line 7: unexpected '05' in data entry CUST-FIRST-NAME": 1,
+    "program uses indexed files": 11
+   }
+  }
+ },
+ "E10": {
+  "free": {
+   "fail": 1,
+   "pass": 37,
+   "skipped": 0
+  },
+  "rename": {
+   "fail": 0,
+   "pass": 34,
+   "skipped": 4
+  }
+ },
+ "E2": {
+  "java_methods": {
+   "common": 101,
+   "kb": 101,
+   "kb_only": [],
+   "oracle": 104,
+   "oracle_only": [
+    "D1/MERGE2:writeNewRec",
+    "D1/PAYROLL:initializePayWork",
+    "D1/STRMANIP:unstringAllSpace"
+   ],
+   "precision": 1.0,
+   "recall": 0.9712
+  },
+  "manifest_units": {
+   "common": 26,
+   "kb": 26,
+   "kb_only": [],
+   "oracle": 26,
+   "oracle_only": [],
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "paragraphs_executed_share": 1.0,
+  "span_start_checked": 18511,
+  "span_start_exact": 1.0,
+  "statements_inside_a_span": 1.0,
+  "trace_cases": 2097,
+  "traced_programs": 38,
+  "traced_unit_recall": 1.0,
+  "traced_units": 135,
+  "traced_units_missing_from_kb": []
+ },
+ "E3": {
+  "attributes": {
+   "byte_length(listing)": {
+    "compared": 710,
+    "matched": 710,
+    "rate": 1.0
+   },
+   "byte_length(probe)": {
+    "compared": 650,
+    "matched": 650,
+    "rate": 1.0
+   },
+   "category(listing)": {
+    "compared": 710,
+    "matched": 710,
+    "rate": 1.0
+   },
+   "digits(manifest)": {
+    "compared": 48,
+    "matched": 48,
+    "rate": 1.0
+   },
+   "digits(probe)": {
+    "compared": 387,
+    "matched": 387,
+    "rate": 1.0
+   },
+   "kind(manifest)": {
+    "compared": 56,
+    "matched": 56,
+    "rate": 1.0
+   },
+   "length(manifest)": {
+    "compared": 8,
+    "matched": 8,
+    "rate": 1.0
+   },
+   "occurs(listing)": {
+    "compared": 710,
+    "matched": 710,
+    "rate": 1.0
+   },
+   "offset(probe)": {
+    "compared": 650,
+    "matched": 650,
+    "rate": 1.0
+   },
+   "redefines(listing)": {
+    "compared": 710,
+    "matched": 710,
+    "rate": 1.0
+   },
+   "scale(manifest)": {
+    "compared": 48,
+    "matched": 48,
+    "rate": 1.0
+   },
+   "scale(probe)": {
+    "compared": 388,
+    "matched": 388,
+    "rate": 1.0
+   },
+   "signed(manifest)": {
+    "compared": 48,
+    "matched": 48,
+    "rate": 1.0
+   },
+   "signed(probe)": {
+    "compared": 388,
+    "matched": 388,
+    "rate": 1.0
+   },
+   "usage(manifest)": {
+    "compared": 48,
+    "matched": 48,
+    "rate": 1.0
+   }
+  },
+  "field_inventory": {
+   "aligned": 710,
+   "kb_only": 0,
+   "listing_only": 0
+  },
+  "mismatches": 0
+ },
+ "E4": {
+  "soundness_violations": 0,
+  "static_edges": 187,
+  "static_edges_exercised": 107,
+  "static_edges_exercised_share": 0.5722,
+  "transitions_checked": 18511
+ },
+ "E5": {
+  "declared_writes": 1092,
+  "declared_writes_observed": 342,
+  "declared_writes_observed_share": 0.3132,
+  "interpreter_runs": 1817,
+  "label": "model-based (O4 shares the front end with Phase 0)",
+  "paragraphs": 134,
+  "read_checks": 1415,
+  "read_violations": 0,
+  "refused_runs": {
+   "CobolRuntimeError": 71,
+   "InterpUnsupported": 43
+  },
+  "write_checks": 288,
+  "write_violations": 0
+ },
+ "E6": {
+  "status": "pending: no gold annotations yet (phase0/eval/gold/<initials>.json)"
+ },
+ "E7": {
+  "phase1": {
+   "E2": {
+    "java_methods": {
+     "common": 101,
+     "kb": 101,
+     "kb_only": [],
+     "oracle": 104,
+     "oracle_only": [
+      "D1/MERGE2:writeNewRec",
+      "D1/PAYROLL:initializePayWork",
+      "D1/STRMANIP:unstringAllSpace"
+     ],
+     "precision": 1.0,
+     "recall": 0.9712
+    },
+    "manifest_units": {
+     "common": 26,
+     "kb": 26,
+     "kb_only": [],
+     "oracle": 26,
+     "oracle_only": [],
+     "precision": 1.0,
+     "recall": 1.0
+    },
+    "paragraphs_executed_share": 1.0,
+    "span_start_checked": 18511,
+    "span_start_exact": 1.0,
+    "statements_inside_a_span": 1.0,
+    "trace_cases": 2097,
+    "traced_programs": 38,
+    "traced_unit_recall": 1.0,
+    "traced_units": 135,
+    "traced_units_missing_from_kb": []
+   },
+   "E3": {
+    "byte_length(probe)": {
+     "compared": 650,
+     "matched": 0,
+     "rate": 0.0
+    },
+    "digits(probe)": {
+     "compared": 387,
+     "matched": 387,
+     "rate": 1.0
+    },
+    "offset(probe)": {
+     "compared": 650,
+     "matched": 0,
+     "rate": 0.0
+    },
+    "scale(probe)": {
+     "compared": 388,
+     "matched": 387,
+     "rate": 0.9974
+    },
+    "signed(probe)": {
+     "compared": 388,
+     "matched": 388,
+     "rate": 1.0
+    }
+   },
+   "E4": {
+    "soundness_violations": 0,
+    "static_edges": 186,
+    "static_edges_exercised": 107,
+    "static_edges_exercised_share": 0.5753,
+    "transitions_checked": 18511
+   },
+   "E5": {
+    "declared_writes": 932,
+    "declared_writes_observed": 295,
+    "declared_writes_observed_share": 0.3165,
+    "interpreter_runs": 1880,
+    "label": "model-based (O4 shares the front end with Phase 0)",
+    "paragraphs": 134,
+    "read_checks": 1478,
+    "read_violations": 46,
+    "refused_runs": {
+     "CobolRuntimeError": 72,
+     "InterpUnsupported": 43
+    },
+    "write_checks": 287,
+    "write_violations": 133
+   }
+  },
+  "table": [
+   {
+    "higher_is_better": true,
+    "metric": "E2 traced units found",
+    "phase0": 1.0,
+    "phase1": 1.0
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E2 span start = trace",
+    "phase0": 1.0,
+    "phase1": 1.0
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E2 Java methods precision",
+    "phase0": 1.0,
+    "phase1": 1.0
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E2 Java methods recall",
+    "phase0": 0.9712,
+    "phase1": 0.9712
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E3 signed(probe)",
+    "phase0": 1.0,
+    "phase1": 1.0
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E3 digits(probe)",
+    "phase0": 1.0,
+    "phase1": 1.0
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E3 scale(probe)",
+    "phase0": 1.0,
+    "phase1": 0.9974
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E3 offset(probe)",
+    "phase0": 1.0,
+    "phase1": 0.0
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E3 byte_length(probe)",
+    "phase0": 1.0,
+    "phase1": 0.0
+   },
+   {
+    "higher_is_better": false,
+    "metric": "E4 soundness violations",
+    "phase0": 0,
+    "phase1": 0
+   },
+   {
+    "higher_is_better": true,
+    "metric": "E4 static edges exercised",
+    "phase0": 0.5722,
+    "phase1": 0.5753
+   },
+   {
+    "higher_is_better": false,
+    "metric": "E5 write violations",
+    "phase0": 0,
+    "phase1": 133
+   },
+   {
+    "higher_is_better": false,
+    "metric": "E5 read violations",
+    "phase0": 0,
+    "phase1": 46
+   }
+  ]
+ },
+ "E8": {
+  "D1": {
+   "builds": 14,
+   "deterministic": true,
+   "lines": 2133,
+   "llm_tokens": 0,
+   "seconds_cold": 3.71,
+   "seconds_per_kloc_cold": 1.74,
+   "seconds_warm": 0.28,
+   "stage_seconds": {
+    "A_inventory": 0.018,
+    "A_read": 0.002,
+    "B_F_source": 3.535,
+    "G_summaries": 0.0,
+    "report": 0.02,
+    "tool_versions": 0.0
+   }
+  },
+  "D2": {
+   "builds": 24,
+   "deterministic": true,
+   "lines": 1123,
+   "llm_tokens": 0,
+   "seconds_cold": 6.05,
+   "seconds_per_kloc_cold": 5.386,
+   "seconds_warm": 0.33,
+   "stage_seconds": {
+    "A_inventory": 0.011,
+    "A_read": 0.003,
+    "B_F_source": 5.811,
+    "G_summaries": 0.0,
+    "report": 0.019,
+    "tool_versions": 0.0
+   }
+  },
+  "D3": {
+   "builds": 1,
+   "deterministic": true,
+   "lines": 39670,
+   "llm_tokens": 0,
+   "seconds_cold": 3.85,
+   "seconds_per_kloc_cold": 0.097,
+   "seconds_warm": 4.72,
+   "stage_seconds": {
+    "A_inventory": 0.493,
+    "A_read": 0.036,
+    "B_F_source": 2.546,
+    "G_summaries": 0.0,
+    "report": 0.214,
+    "tool_versions": 0.0
+   }
+  }
+ },
+ "E9": {
+  "e2e_scripted": {
+   "exit_code": 0,
+   "pass": true,
+   "verdicts": [
+    "red",
+    "green"
+   ]
+  },
+  "exported_json_schemas_current": true,
+  "gap_ids_closed": true,
+  "gap_ids_missing": [],
+  "gap_ids_referenced": [
+   "G-DIVZERO",
+   "G-FALLTHROUGH",
+   "G-GOTO",
+   "G-GROUPMOVE",
+   "G-NUMALPHA",
+   "G-OVERFLOW",
+   "G-PACKED",
+   "G-ROUNDING",
+   "G-SIGN",
+   "G-TRUNCATE"
+  ],
+  "kb_files_valid": true,
+  "runtime_byte_identical": true,
+  "workspaces_checked": 39
+ },
+ "F_hazards": {
+  "D1": {
+   "phase0": {
+    "G-DIVZERO": 8,
+    "G-FALLTHROUGH": 71,
+    "G-GOTO": 5,
+    "G-NUMALPHA": 21,
+    "G-OVERFLOW": 132,
+    "G-PACKED": 28,
+    "G-ROUNDING": 24,
+    "G-SIGN": 5,
+    "G-TRUNCATE": 72
+   },
+   "phase1_now": {
+    "G-DIVZERO": 8,
+    "G-FALLTHROUGH": 71,
+    "G-GOTO": 5,
+    "G-NUMALPHA": 13,
+    "G-OVERFLOW": 135,
+    "G-PACKED": 16,
+    "G-ROUNDING": 25,
+    "G-SIGN": 5,
+    "G-TRUNCATE": 75
+   }
+  },
+  "D2": {
+   "phase0": {
+    "G-DIVZERO": 3,
+    "G-FALLTHROUGH": 6,
+    "G-GOTO": 2,
+    "G-GROUPMOVE": 1,
+    "G-NUMALPHA": 4,
+    "G-OVERFLOW": 53,
+    "G-PACKED": 14,
+    "G-ROUNDING": 17,
+    "G-SIGN": 8,
+    "G-TRUNCATE": 50
+   },
+   "phase1_now": {
+    "G-DIVZERO": 3,
+    "G-FALLTHROUGH": 6,
+    "G-GOTO": 2,
+    "G-NUMALPHA": 3,
+    "G-OVERFLOW": 56,
+    "G-PACKED": 13,
+    "G-ROUNDING": 19,
+    "G-SIGN": 8,
+    "G-TRUNCATE": 51
+   }
+  },
+  "D3": {
+   "mid_report": {
+    "G-GOTO": 86,
+    "G-GROUPMOVE": 152,
+    "G-NUMALPHA": 138,
+    "G-OVERFLOW": 168,
+    "G-SIGN": 63,
+    "G-TRUNCATE": 180
+   },
+   "phase0": {
+    "G-DIVZERO": 1,
+    "G-FALLTHROUGH": 772,
+    "G-GOTO": 90,
+    "G-GROUPMOVE": 152,
+    "G-NUMALPHA": 130,
+    "G-OVERFLOW": 162,
+    "G-PACKED": 350,
+    "G-SIGN": 63,
+    "G-TRUNCATE": 175
+   },
+   "phase1_now": {
+    "G-DIVZERO": 1,
+    "G-FALLTHROUGH": 774,
+    "G-GOTO": 86,
+    "G-GROUPMOVE": 152,
+    "G-NUMALPHA": 138,
+    "G-OVERFLOW": 168,
+    "G-PACKED": 339,
+    "G-SIGN": 63,
+    "G-TRUNCATE": 180
+   }
+  }
+ },
+ "eval_seconds": {
+  "E1": 0.01,
+  "E10": 19.13,
+  "E2_E4": 35.84,
+  "E3": 4.51,
+  "E5": 1.93,
+  "E6": 0.01,
+  "E7": 11.24,
+  "E8": 0.0,
+  "E9": 19.06,
+  "F": 6.5,
+  "build": 19.48
+ }
+}

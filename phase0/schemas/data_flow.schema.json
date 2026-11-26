@@ -1,0 +1,115 @@
+{
+ "$defs": {
+  "FieldFlow": {
+   "additionalProperties": false,
+   "properties": {
+    "field_id": {
+     "title": "Field Id",
+     "type": "string"
+    },
+    "readers": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Readers",
+     "type": "array"
+    },
+    "writers": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Writers",
+     "type": "array"
+    }
+   },
+   "required": [
+    "field_id",
+    "writers",
+    "readers"
+   ],
+   "title": "FieldFlow",
+   "type": "object"
+  },
+  "FileCrud": {
+   "additionalProperties": false,
+   "properties": {
+    "assign": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Assign"
+    },
+    "file": {
+     "title": "File",
+     "type": "string"
+    },
+    "organization": {
+     "title": "Organization",
+     "type": "string"
+    },
+    "program": {
+     "title": "Program",
+     "type": "string"
+    },
+    "units": {
+     "additionalProperties": {
+      "items": {
+       "enum": [
+        "C",
+        "R",
+        "U",
+        "D"
+       ],
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "title": "Units",
+     "type": "object"
+    }
+   },
+   "required": [
+    "program",
+    "file",
+    "organization",
+    "assign",
+    "units"
+   ],
+   "title": "FileCrud",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "fields": {
+   "items": {
+    "$ref": "#/$defs/FieldFlow"
+   },
+   "title": "Fields",
+   "type": "array"
+  },
+  "files": {
+   "items": {
+    "$ref": "#/$defs/FileCrud"
+   },
+   "title": "Files",
+   "type": "array"
+  },
+  "schema_version": {
+   "default": "1.1",
+   "title": "Schema Version",
+   "type": "string"
+  }
+ },
+ "required": [
+  "fields",
+  "files"
+ ],
+ "title": "DataFlow",
+ "type": "object"
+}

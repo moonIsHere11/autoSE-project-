@@ -20,3 +20,4 @@ corpus/**/bin/
 docs/spikes/s2/build/
 docs/spikes/s2/out/e2_checkBug.json
 docs/spikes/s2/out/e2_checkBugTrunc.json
+data/
