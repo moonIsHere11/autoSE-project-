@@ -27,6 +27,11 @@ def idf(n: int, users: int) -> float:
     return math.log(n / users) if users else 0.0
 
 
+def damp(n: int, users: int, cfg: PlannerConfig) -> float:
+    """IDF, except in an estate smaller than one module, where 'used by everyone' says nothing."""
+    return 1.0 if n < cfg.band_min else idf(n, users)
+
+
 class _Edges:
     """(pair, kind, item) -> weight, counted once however often a fact repeats."""
 
@@ -56,7 +61,7 @@ def build_graph(kb: KnowledgeSource, cfg: PlannerConfig) -> nx.Graph:
         for c in p.copybooks:
             copy_users[c].add(p.id)
     for copybook, users in copy_users.items():
-        weight = w.copybook * idf(n, len(users))
+        weight = w.copybook * damp(n, len(users), cfg)
         for a, b in combinations(sorted(users), 2):
             edges.add(a, b, "copybook", copybook, weight)
 
@@ -67,7 +72,7 @@ def build_graph(kb: KnowledgeSource, cfg: PlannerConfig) -> nx.Graph:
             continue
         (writers if u.mode == "write" else readers)[u.store].add(u.program)
     for store in sorted(set(readers) | set(writers)):
-        factor = idf(n, len(readers[store] | writers[store]))
+        factor = damp(n, len(readers[store] | writers[store]), cfg)
         for wr in sorted(writers[store]):
             for rd in sorted(readers[store]):
                 edges.add(wr, rd, "write_read", store, w.write_read * factor)

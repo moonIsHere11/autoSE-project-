@@ -91,10 +91,17 @@ def open_questions(plan: ArchitecturePlan, kb: KnowledgeSource, g: nx.Graph, cfg
     out = []
     home = {a.program: m for m in plan.modules for a in m.programs}
     for m in plan.modules:
+        if m.kind == "domain" and len(m.programs) < cfg.band_min:
+            out.append(OpenQuestion("undersized_module", m.id, f"{len(m.programs)} program(s), below the band of "
+                                                               f"{cfg.band_min}; nothing to merge with in the KB"))
+        if m.kind == "domain" and len(m.programs) > cfg.band_max:
+            out.append(OpenQuestion("oversized_module", m.id, f"{len(m.programs)} programs, above the band of "
+                                                              f"{cfg.band_max}; it did not split cleanly"))
         for a in m.programs:
             if m.kind == "isolated":
                 out.append(OpenQuestion("isolated", a.program, "no calls, shared copybooks, shared data or similar "
-                                                                "programs in the KB; placed alone"))
+                                                                "programs in the KB apart from shared utilities; "
+                                                                "placed alone"))
             elif m.kind == "domain" and a.confidence < cfg.confidence_threshold and a.decided_by == "draft":
                 pull = Counter()
                 for _, other, d in g.edges(a.program, data=True):

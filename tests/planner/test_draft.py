@@ -42,7 +42,8 @@ class DraftTests(unittest.TestCase):
         tran = self.mod("TRANVAL")
         self.assertIn("TRANREC", tran.local_types)
         shared = {t.copybook: t for t in self.plan.shared_types}
-        self.assertNotIn("COMMHDR", shared)
+        # a layout every program uses is still a type the translators need: shared by all modules
+        self.assertEqual(sorted(shared["COMMHDR"].used_by), sorted(m.id for m in self.plan.modules))
         self.assertFalse(any("COMMHDR" in m.local_types for m in self.plan.modules))
         card_shared = self.mod("CUSTSRCH") is not self.mod("CARDLIST")
         self.assertEqual("CARDREC" in shared, card_shared)
@@ -114,6 +115,48 @@ class DraftTests(unittest.TestCase):
 
     def test_deterministic(self):
         self.assertEqual(make_draft(self.kb, PlannerConfig())[0], self.plan)
+
+    def test_two_program_estate_sharing_data_is_one_flagged_module(self):
+        def edit(doc):
+            ids = ("ACCTVIEW", "ACCTUPDT")
+            doc["programs"] = [p for p in doc["programs"] if p["id"] in ids]
+            doc["store_uses"] = [u for u in doc["store_uses"] if u["program"] in ids]
+            doc["job_steps"] = []
+        plan, _ = make_draft(fixture_variant(edit), PlannerConfig())
+        self.assertEqual(len(plan.modules), 1)
+        self.assertEqual(plan.modules[0].kind, "domain")
+        kinds = [q.kind for q in plan.open_questions]
+        self.assertIn("undersized_module", kinds)
+        self.assertNotIn("isolated", kinds)
+
+    def test_unmergeable_undersized_module_flagged(self):
+        def edit(doc):
+            doc["programs"] += [{"id": "PAIRA", "file": "none/PAIRA.cbl", "loc": 1, "kind": "batch", "confidence": 1.0,
+                                 "copybooks": ["COMMHDR"], "calls": ["PAIRB"], "identifiers": []},
+                                {"id": "PAIRB", "file": "none/PAIRB.cbl", "loc": 1, "kind": "subprogram", "confidence": 1.0,
+                                 "copybooks": ["COMMHDR"], "calls": [], "identifiers": []}]
+        plan, _ = make_draft(fixture_variant(edit), PlannerConfig())
+        m = plan.module_of("PAIRA")
+        self.assertEqual(len(m.programs), 2)
+        self.assertIn(("undersized_module", m.id), [(q.kind, q.subject) for q in plan.open_questions])
+
+    def test_utility_only_programs_are_isolated_not_domain_singletons(self):
+        def edit(doc):
+            doc["programs"] += [{"id": f"XUSE{i}", "file": f"none/XUSE{i}.cbl", "loc": 1, "kind": "batch", "confidence": 1.0,
+                                 "copybooks": ["COMMHDR"], "calls": ["DATEFMT"], "identifiers": []} for i in range(3)]
+        plan, _ = make_draft(fixture_variant(edit), PlannerConfig())
+        m = plan.module_of("XUSE0")
+        self.assertEqual(m.kind, "isolated")
+        q = next(q for q in plan.open_questions if q.kind == "isolated" and q.subject == "XUSE0")
+        self.assertIn("utilit", q.detail)  # it does call a utility; the question must not claim "no calls"
+
+    def test_oversized_module_flagged(self):
+        from planner.architecture.draft import open_questions
+        card = self.mod("CARDLIST")
+        self.assertEqual(len(card.programs), 4)
+        qs = open_questions(self.plan, self.kb, self.g, PlannerConfig(band_max=3))
+        self.assertIn(("oversized_module", card.id), [(q.kind, q.subject) for q in qs])
+        self.assertNotIn("oversized_module", [q.kind for q in self.plan.open_questions])  # default band: fits
 
     def test_tiny_estates(self):
         def keep(ids):

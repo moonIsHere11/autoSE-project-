@@ -91,7 +91,8 @@ def apply_band(g: nx.Graph, communities: list[set[str]], cfg: PlannerConfig) -> 
 def cluster(g: nx.Graph, kb: KnowledgeSource, cfg: PlannerConfig) -> Clusters:
     draft = louvain(g, cfg.seed)
     utils = find_utilities(g, draft, kb, cfg)
-    isolated = {p for p in g.nodes if g.degree(p) == 0} - utils
+    others = g.subgraph(set(g.nodes) - utils)
+    isolated = {p for p in others.nodes if others.degree(p) == 0}  # no links except to utilities
     rest = g.subgraph(set(g.nodes) - utils - isolated)
     domain = apply_band(g, louvain(rest, cfg.seed), cfg) if rest.number_of_nodes() else []
     if not utils:

@@ -6,7 +6,6 @@ import re
 from collections import Counter, defaultdict
 
 from ..kb import KnowledgeSource
-from .graph import idf
 from .plan import Job, Module, SharedCode, SharedType, Store
 
 
@@ -17,7 +16,6 @@ def pascal(name: str) -> str:
 def assign_roles(kb: KnowledgeSource, modules: list[Module]) -> tuple[list[SharedType], list[SharedCode], list[Store], list[Job]]:
     home = {a.program: m for m in modules for a in m.programs}
     programs = [p for p in kb.programs() if p.id in home]
-    n = len(kb.programs())
     kinds = {name: cb.kind for name, cb in kb.copybooks().items()}
     for m in modules:
         m.local_types, m.owned_stores, m.depends_on = [], [], []
@@ -41,7 +39,7 @@ def assign_roles(kb: KnowledgeSource, modules: list[Module]) -> tuple[list[Share
             else:
                 where = mods[0]
             shared_code.append(SharedCode(copybook, where, sorted(progs)))
-        elif idf(n, len(progs)) > 0:
+        else:  # a record layout: local to one module, shared type when several modules use it
             if len(mods) == 1:
                 next(m for m in modules if m.id == mods[0]).local_types.append(copybook)
             else:
