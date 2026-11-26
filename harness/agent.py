@@ -125,7 +125,12 @@ class Agent:
 
         def handler(**kwargs):
             kwargs = {k: v for k, v in kwargs.items() if k in declared}  # drop stray arguments
-            child_spec = (spec or self.spec).copy(name=(spec.name if spec else f"{self.spec.name}/{name}"))
+            child_spec = (spec or self.spec).copy(name=f"{self.spec.name}/{spec.name if spec else name}")
+            if spec is None:
+                child_spec.policy.deny.add(name)  # a copy of this agent must not call itself
+            if self.spec.max_tokens is not None:  # the child spends from what this agent has left
+                left = max(0, self.spec.max_tokens - self._usage["tokens_in"] - self._usage["tokens_out"])
+                child_spec.max_tokens = left if child_spec.max_tokens is None else min(child_spec.max_tokens, left)
             child = Agent(self.llm, self.registry, child_spec, events=self.events, log=self.log, approve=self.approve)
             result = child.run(make_message(**kwargs))
             self._usage["tokens_in"] += result.usage["tokens_in"]
@@ -216,13 +221,23 @@ class Agent:
                     msgs.append({"role": "user", "content": MALFORMED})
                     continue
                 return self._stop(f"llm_error: {e}", None, steps, msgs, state)
+            except Exception as e:  # noqa: BLE001 - timeouts, resets, bad JSON from an adapter: stop, never crash
+                return self._stop(f"llm_error: {type(e).__name__}: {e}", None, steps, msgs, state)
             self._usage["tokens_in"] += usage.get("prompt_tokens") or 0
             self._usage["tokens_out"] += usage.get("completion_tokens") or 0
             self._emit("llm_usage", model=getattr(self.llm, "model", "?"),
                        tokens_in=usage.get("prompt_tokens"), tokens_out=usage.get("completion_tokens"))
             for hook in self._hooks["after_model"]:
                 hook(msg, state)
-            calls = msg.get("tool_calls") or []
+            raw_calls = msg.get("tool_calls") or []
+            calls = [c for c in raw_calls if isinstance(c, dict) and c.get("id")
+                     and isinstance(c.get("function"), dict) and c["function"].get("name")]
+            if raw_calls and not calls:  # tool calls with no usable structure: same as malformed JSON
+                if malformed < spec.max_malformed:
+                    malformed += 1
+                    msgs.append({"role": "user", "content": MALFORMED})
+                    continue
+                return self._stop("llm_error: malformed tool calls", None, steps, msgs, state)
             entry: dict = {"role": "assistant", "content": msg.get("content") or ""}
             if calls:
                 entry["tool_calls"] = calls

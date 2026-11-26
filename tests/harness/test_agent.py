@@ -115,6 +115,16 @@ class AgentTests(unittest.TestCase):
         r = self.agent([LLMError("bad json", recoverable=True), LLMError("rate limit")]).run("go")
         self.assertTrue(r.stop_reason.startswith("llm_error: rate limit"))
 
+    def test_any_llm_exception_stops_cleanly(self):
+        r = self.agent([TimeoutError("read timed out")]).run("go")
+        self.assertEqual(r.stop_reason, "llm_error: TimeoutError: read timed out")
+
+    def test_malformed_tool_call_structure_is_not_a_crash(self):
+        bad = {"role": "assistant", "content": "", "tool_calls": [{"id": "x"}]}  # no "function"
+        r = self.agent([bad, call("ping", {}, 1)], max_steps=2).run("go")
+        self.assertEqual(self.hits, ["ping"])
+        self.assertEqual(r.stop_reason, "max_steps")
+
     def test_allow_deny_tools_and_budget_setters(self):
         a = self.agent([call("ping", {}, 1)], policy=ToolPolicy(allow={"ping"}))
         self.assertEqual(a.offered_tools(), ["ping"])
@@ -192,6 +202,24 @@ class SubAgentTests(unittest.TestCase):
                          call("finish", {"name": "n"}, 3)], usage={"prompt_tokens": 10, "completion_tokens": 5},
                         max_tokens=30)  # parent's own call is 15 tokens; only the child's 15 reach the budget
         self.assertEqual(p.run("plan").stop_reason, "max_tokens")
+
+    def test_child_budget_is_parents_remaining_tokens(self):
+        p = self.parent([call("explore", {"question": "q"}, 1)] + [call("ping", {}, i) for i in range(2, 9)],
+                        usage={"prompt_tokens": 10, "completion_tokens": 10}, max_tokens=50,
+                        child_spec=AgentSpec("explorer", prompt(), result_schema=ANSWER))
+        r = p.run("plan")
+        # parent call 20 tokens; the child may spend only the remaining 30 (2 calls), not a fresh 50
+        self.assertEqual(r.usage["tokens_in"] + r.usage["tokens_out"], 60)
+        self.assertEqual(r.stop_reason, "max_tokens")
+
+    def test_default_child_cannot_call_itself(self):
+        self.llm = ScriptedLLM([call("explore", {"question": "q"}, 1), call("finish", {"name": "x"}, 2),
+                                call("finish", {"name": "done"}, 3)])
+        parent = Agent(self.llm, self.reg, AgentSpec("planner", prompt(), result_schema=RESULT))
+        self.reg.replace(parent.as_tool("explore", "self", ASK, lambda question: question))  # spec=None: copy of parent
+        r = parent.run("plan")
+        self.assertNotIn("explore", self.llm.offered[1])  # the child is not offered itself
+        self.assertEqual(r.output, {"name": "done"})
 
     def test_subagent_failure_text(self):
         child = AgentSpec("explorer", prompt(), result_schema=ANSWER, max_steps=1)

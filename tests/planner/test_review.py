@@ -112,6 +112,29 @@ class ReviewTests(unittest.TestCase):
         self.assertTrue(all("llm_error" in q.detail for q in incomplete))
         self.assertTrue([q for q in out.open_questions if q.kind == "uncertain_program"])  # still visible to the reviewer
 
+    def test_non_llmerror_failure_keeps_plan(self):
+        class Timeouts:
+            model = "flaky"
+
+            def chat(self, msgs, tools):
+                raise TimeoutError("read timed out")
+
+        out = review(self.plan, self.g, self.kb, Timeouts(), self.cfg, log=lambda *a: None)
+        self.assertEqual(sorted(out.program_ids()), sorted(self.plan.program_ids()))
+        details = [q.detail for q in out.open_questions if q.kind == "review_incomplete"]
+        self.assertTrue(details and all("TimeoutError" in d for d in details))
+
+    def test_review_wide_token_budget(self):
+        from dataclasses import replace
+        cfg = replace(self.cfg, review=replace(self.cfg.review, total_tokens=4))
+        self.llm = RoutedLLM({f"Review module {self.card}": [call("module_overview", {}, i) for i in range(5)]})
+        out = review(self.plan, self.g, self.kb, self.llm, cfg, log=lambda *a: None)
+        self.assertEqual(len(self.llm.tasks), 1)  # 2 calls x 2 tokens spend it all; no later pass starts
+        incomplete = {q.subject: q.detail for q in out.open_questions if q.kind == "review_incomplete"}
+        self.assertEqual(incomplete[self.card], "max_tokens")
+        self.assertIn("token budget", incomplete["global"])
+        self.assertIn("token budget", incomplete[self.acct])
+
     def test_review_does_not_mutate_input(self):
         import copy
         before = copy.deepcopy(self.plan)

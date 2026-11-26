@@ -20,6 +20,7 @@ class ReviewBudget:
     explorer_calls: int = 5       # explore_program calls per pass
     explorer_steps: int = 15      # model calls per explorer run
     max_tokens: int | None = None  # per pass, sub-agents included
+    total_tokens: int | None = 500_000  # whole review; when spent, remaining passes are skipped (review_incomplete)
 
 
 @dataclass(frozen=True)

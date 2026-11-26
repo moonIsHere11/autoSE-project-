@@ -52,17 +52,25 @@ def review(plan: ArchitecturePlan, g: nx.Graph, kb: KnowledgeSource, llm, cfg: P
                               ToolPolicy(allow_tags={"read"}), max_steps=budget.explorer_steps,
                               result_schema=EXPLORER_RESULT)
     incomplete: list[OpenQuestion] = []
+    spent = [0]
+
+    def left() -> int | None:
+        return None if budget.total_tokens is None else budget.total_tokens - spent[0]
 
     def run_pass(name: str, message: str, schema: dict) -> tuple[str, dict | None]:
+        if left() is not None and left() <= 0:
+            return f"skipped: review token budget ({budget.total_tokens}) exhausted", None
+        caps = [x for x in (budget.max_tokens, left()) if x is not None]
         spec = AgentSpec(name, _prompt(("role", role), ("rules", prompts.RULES)),
                          ToolPolicy(allow_tags={"read", "plan_edit", "agent"},
                                     limits={"explore_program": budget.explorer_calls}),
-                         max_steps=budget.pass_steps, max_tokens=budget.max_tokens, result_schema=schema)
+                         max_steps=budget.pass_steps, max_tokens=min(caps) if caps else None, result_schema=schema)
         agent = Agent(llm, reg, spec, events=events, log=log)
         reg.replace(agent.as_tool("explore_program", "Ask a read-only helper one question about one program.",
                                   obj(["program_id", "question"], program_id=S, question=S),
                                   prompts.explorer_message, spec=explorer_spec))
         result = agent.run(message)
+        spent[0] += result.usage["tokens_in"] + result.usage["tokens_out"]
         return result.stop_reason, result.output
 
     flagged = sorted({editor.plan.module_of(q.subject).id for q in editor.plan.open_questions
