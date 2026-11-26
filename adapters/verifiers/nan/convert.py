@@ -8,7 +8,7 @@ REQUIRED_TIERS = {"tested": [0, 1], "bounded": [0, 1, 2], "proven": [0, 1, 2, 3]
 UNTIL_TIERS = {"build": [0], "lint": [0], "differential": [0, 1], "verification": [0, 1, 2, 3]}
 STATUS = {"PASS": "pass", "FAIL": "fail", "ERROR": "error", "TIMEOUT": "error",
           "SKIPPED": "skipped", "NOT_APPLICABLE": "skipped"}
-# verifier "likely cause" labels -> KB semantic-gap ids (shared with Phase 1's hazard scanner)
+# verifier "likely cause" labels -> semantic-gap ids carried in findings' kb_refs (agreement 4.4)
 CAUSE_TO_GAP = {"SIGN_LOST": ["G-SIGN"], "NEGATIVE_ZERO": ["G-SIGN"],
                 "MISSING_HIGH_ORDER_TRUNCATION": ["G-TRUNCATE", "G-OVERFLOW"],
                 "ROUNDING_MISSING": ["G-ROUNDING"], "ROUNDING_MODE": ["G-ROUNDING"],

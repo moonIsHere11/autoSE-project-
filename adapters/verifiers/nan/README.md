@@ -1,17 +1,17 @@
-# Phase 2 · Checker (adapter over the formal verifier in `verifier/`)
+# Nan verifier adapter (`NanVerifier`)
 
 ## How to call me
 ```
-make venv                                      # once: ~/.venvs/cobol-verifier (pydantic 2, tree-sitter)
-make image                                     # once: pinned toolchain image (GnuCOBOL, JBMC, OpenJML)
-phase2/bin/phase2 check --workspace W --submission S-0001 [--until build|lint|differential|verification]
-python3 integration/demo_workspace.py /tmp/ws divrem [--bug]   # sample workspace + submission (corpus program)
+make venv && make image && python3 -m tools.build_runtimes   # once: venv, toolchain image, cobolrt jar
+adapters/verifiers/nan/bin/phase2 check --workspace W --submission S-0001 [--until build|lint|differential|verification]
+python3 integration/demo_workspace.py /tmp/ws divrem [--bug]  # sample workspace + submission (corpus program)
 ```
-`phase2/bin/phase2` re-execs under the verifier venv (`VERIFIER_PY` overrides). Exit codes: 0 ran (red is fine), 2 bad input, 3 internal.
+`bin/phase2` re-execs under the verifier venv (`VERIFIER_PY` overrides). Exit codes: 0 ran (red is fine), 2 bad input, 3 internal.
+In the harness this is `adapters.verifiers.nan:NanVerifier`.
 
 ## What the adapter does (`phase2_adapter/`)
-1. Reads `submissions/<sid>/submission.json`; **KB version mismatch -> `error` / `infra_error`** (agreement 7).
-2. Compares the project's runtime dir with `kb/target/runtime` byte for byte; any diff -> blocker `build_error` (agreement 5).
+1. Reads `submissions/<sid>/submission.json`.
+2. Optional (`target.runtime_dir` + `target.runtime_ref` in config.yaml): the project's runtime copy must equal the reference byte for byte, else blocker `build_error` (agreement 5).
 3. Gives the verifier a copy of the project **without** the runtime dir (the verifier mounts its own verified `cobolrt` jar).
 4. Calls `verifier.api.verify(cobol=dirname(source.entry), target=<copy>, lang=java, units=..., tiers=..., previous_report=<last report>)`.
    `gate.required_tier` -> tiers: tested = T0+T1, bounded = +T2, proven = +T3 (`full` mode). `--until` caps the tiers.
@@ -30,12 +30,12 @@ python3 integration/demo_workspace.py /tmp/ws divrem [--bug]   # sample workspac
 | T1 counterexample (<=3 per unit, from `feedback/*.json`) | `behavior_mismatch` + `counterexample` + `reproduce` |
 | T2/T3 FAIL | `verification_failed`; ERROR/TIMEOUT -> `infra_error`/`timeout` warning |
 | unit not accepted (e.g. paragraph coverage < 0.8) or tier below required | blocker `verification_unknown` |
-| classifier cause (SIGN_LOST, ROUNDING_MISSING, ...) | `kb_refs` gap ids (`G-SIGN`, `G-ROUNDING`, `G-TRUNCATE`...) shared with Phase 1's hazard scanner |
+| classifier cause (SIGN_LOST, ROUNDING_MISSING, ...) | `kb_refs` gap ids (`G-SIGN`, `G-ROUNDING`, `G-TRUNCATE`...) |
 | verifier infra failure (docker, tool crash) | verdict `error` (free retry) |
 
 ## Deviations from agreement.md (to agree with the team)
 - **Execution interface (4.2) is not used.** The verifier runs the *whole program* (stdin/stdout/files) against GnuCOBOL, so `driver_cmd` is ignored and no unit driver is needed. Unit evidence is per paragraph inside that run.
 - **Unit ids:** verifier uses `PROGRAM::PARAGRAPH`; the adapter accepts `PARAGRAPH` (single program), `PROG.PARA`, `PROG::PARA` or a bare program id (= all its paragraphs).
-- **Granularity:** because T1 executes the whole program, Phase 1 now submits whole programs (`phase1.granularity: program`, default) instead of single paragraphs; a half-translated program cannot pass differential testing.
-- **Runtime library:** the verifier owns `cobolrt` (`runtimes/java`); Phase 0's `kb/target/runtime` should be a copy of it.
-- **Conventions** (class `PascalCase(PROGRAM-ID)`, method `camelCase(paragraph)`, field `camelCase`) are in Phase 1's system prompt (`CHECKER_JAVA`).
+- **Granularity:** because T1 executes the whole program, the harness submits whole programs (one task per program); a half-translated program cannot pass differential testing.
+- **Runtime library:** the verifier owns `cobolrt` (`runtimes/java`); the agent does not copy it into the project.
+- **Conventions** (class `PascalCase(PROGRAM-ID)`, method `camelCase(paragraph)`, field `camelCase`) are in the translator prompt (`extras/cobol_java/prompts.py`).

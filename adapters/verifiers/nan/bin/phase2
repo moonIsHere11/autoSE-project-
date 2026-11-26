@@ -1,0 +1,6 @@
+#!/bin/sh
+# `phase2 check --workspace W --submission S` backed by Nan's verifier. Re-execs under the cobol-verifier venv
+# (pydantic 2, tree-sitter); VERIFIER_PY overrides the interpreter.
+HERE=$(cd "$(dirname "$0")/../../../.." && pwd)
+PY=${VERIFIER_PY:-$HOME/.venvs/cobol-verifier/bin/python}
+PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}" exec "$PY" -m adapters.verifiers.nan.cli "$@"
