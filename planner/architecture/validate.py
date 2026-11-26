@@ -6,6 +6,7 @@ from collections import Counter
 
 from ..kb import KnowledgeSource
 from .plan import ArchitecturePlan
+from .render import RESERVED_PACKAGES, package_name
 
 REF_KINDS = ("program", "copybook", "store", "job", "src")
 
@@ -51,6 +52,14 @@ def validate_plan(plan: ArchitecturePlan, kb: KnowledgeSource) -> list[str]:
         errors.append(f"module id {dup} is used twice")
     for dup in sorted({x for x in names if names.count(x) > 1}):
         errors.append(f"module name {dup} is used twice")
+    packages: dict[str, list[str]] = {}
+    for m in plan.modules:
+        packages.setdefault(package_name(m.name), []).append(m.id)
+    for pkg, owners in sorted(packages.items()):
+        if len(owners) > 1:
+            errors.append(f"modules {', '.join(owners)} would share the package {pkg}")
+        if pkg in RESERVED_PACKAGES:
+            errors.append(f"module {owners[0]} uses the reserved package name {pkg} (jobs layer / shared types)")
     for m in plan.modules:
         if not m.programs:
             errors.append(f"module {m.id} has no programs")

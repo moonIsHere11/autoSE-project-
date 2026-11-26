@@ -6,6 +6,7 @@ import re
 
 from .plan import ArchitecturePlan
 
+RESERVED_PACKAGES = {"jobs", "shared"}  # used by the jobs layer and shared types
 TARGETS = {"java": "src/main/java/{root}/{pkg}/", "python": "{root}/{pkg}/", "go": "internal/{pkg}/"}
 
 

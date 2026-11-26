@@ -14,6 +14,7 @@ from .config import PlannerConfig
 from .features import add_similarity, comment_lines, program_tokens, similarity
 from .graph import Evidence, build_graph
 from .plan import ArchitecturePlan, Assignment, Module, OpenQuestion
+from .render import RESERVED_PACKAGES, package_name
 from .roles import assign_roles
 
 
@@ -55,7 +56,9 @@ def module_names(groups: list[tuple[str, set[str]]], tokens: dict[str, Counter])
         else:
             base = top
         name, i = base, 2
-        while name in names:
+        if package_name(name) in RESERVED_PACKAGES:
+            name = base = f"{base}-module"
+        while package_name(name) in {package_name(n) for n in names}:
             name, i = f"{base}-{i}", i + 1
         names.append(name)
     return names

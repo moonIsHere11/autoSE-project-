@@ -82,6 +82,33 @@ class EditTests(unittest.TestCase):
                                               evidence=["program:TRANVAL"]).startswith("ok"))
         self.assertEqual(self.ed.plan.module_of("TRANVAL").name, "transactions")
 
+    def test_rename_rejects_package_collisions(self):
+        tran = self.mid("TRANVAL")
+        card = self.ed.plan.module_of("CARDLIST")
+        self.ed.rename_module(card.id, "Card Mgmt", reason="r", evidence=["program:CARDLIST"])
+        out = self.ed.rename_module(tran, "card-mgmt", reason="r", evidence=["program:TRANVAL"])
+        self.assertTrue(out.startswith("ERROR"), out)  # same package: card_mgmt
+        for reserved in ("jobs", "Shared"):
+            self.assertTrue(self.ed.rename_module(tran, reserved, reason="r", evidence=["program:TRANVAL"])
+                            .startswith("ERROR"), reserved)
+
+    def test_validator_rejects_package_collisions(self):
+        plan = copy.deepcopy(self.ed.plan)
+        plan.modules[0].name, plan.modules[1].name = "Card Mgmt", "card-mgmt"
+        plan.modules[2].name = "jobs"
+        errors = validate_plan(plan, self.kb)
+        self.assertTrue(any("card_mgmt" in e for e in errors), errors)
+        self.assertTrue(any("jobs" in e for e in errors), errors)
+
+    def test_draft_names_avoid_reserved_packages(self):
+        from collections import Counter
+
+        from planner.architecture.draft import module_names
+        names = module_names([("domain", {"A"}), ("domain", {"B"})],
+                             {"A": Counter({"JOBS": 3}), "B": Counter({"SHARED": 2})})
+        self.assertNotIn("jobs", names)
+        self.assertNotIn("shared", names)
+
     def test_set_purpose(self):
         self.assertTrue(self.ed.set_module_purpose(self.mid("TRANVAL"), "Validate, post and report transactions",
                                                    reason="r", evidence=["job:NIGHTLY"]).startswith("ok"))
