@@ -16,26 +16,7 @@ from harness.registry import S, ToolRegistry, load_adapter, obj
 from harness.runner import Runner
 from harness.types import Candidate, Verdict
 from harness.workspace import Workspace
-
-
-def call(name, args, i=0):
-    return {"role": "assistant", "content": "", "tool_calls": [
-        {"id": f"c{i}", "type": "function", "function": {"name": name, "arguments": json.dumps(args)}}]}
-
-
-class ScriptedLLM:
-    model = "scripted"
-
-    def __init__(self, steps):
-        self.steps, self.i, self.seen = list(steps), 0, []
-
-    def chat(self, msgs, tools):
-        self.seen.append(msgs[-1])
-        step = self.steps[self.i]
-        self.i += 1
-        if isinstance(step, Exception):
-            raise step
-        return (step(msgs) if callable(step) else step), {}
+from tests.harness.helpers import ScriptedLLM, call
 
 
 class RegistryTests(unittest.TestCase):
