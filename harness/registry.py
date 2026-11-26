@@ -34,6 +34,7 @@ class Tool:
     description: str
     parameters: dict
     handler: Callable[..., Any]
+    tags: frozenset[str] = frozenset()  # e.g. read, write, exec, plan_edit: what privileges are expressed over
 
     def schema(self) -> dict:
         return {"type": "function", "function": {"name": self.name, "description": self.description,
@@ -51,12 +52,25 @@ class ToolRegistry:
         self._tools[tool.name] = tool
         return tool
 
-    def tool(self, name: str, description: str, parameters: dict | None = None):
-        """Decorator: @registry.tool('read_file', 'Read a file', obj(['path'], path=S))"""
+    def tool(self, name: str, description: str, parameters: dict | None = None, tags=()):
+        """Decorator: @registry.tool('read_file', 'Read a file', obj(['path'], path=S), tags=('read',))"""
         def deco(fn):
-            self.add(Tool(name, description, parameters or obj(), fn))
+            self.add(Tool(name, description, parameters or obj(), fn, frozenset(tags)))
             return fn
         return deco
+
+    def get(self, name: str) -> Tool | None:
+        return self._tools.get(name)
+
+    def remove(self, name: str) -> None:
+        del self._tools[name]  # KeyError for an unknown tool: removing what was never there is a caller bug
+
+    def replace(self, tool: Tool) -> None:
+        """Add or overwrite (keeps the original position when the name exists)."""
+        self._tools[tool.name] = tool
+
+    def tools(self) -> list[Tool]:
+        return list(self._tools.values())
 
     def names(self) -> list[str]:
         return list(self._tools)
