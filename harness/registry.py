@@ -83,7 +83,10 @@ class ToolRegistry:
         if tool is None:
             return f"ERROR: unknown tool {name!r}. Available: {', '.join(self._tools)}"
         accepted = inspect.signature(tool.handler).parameters
-        clean = {k: v for k, v in (args or {}).items() if k in accepted}  # small models add stray arguments
+        if any(p.kind is inspect.Parameter.VAR_KEYWORD for p in accepted.values()):
+            clean = dict(args or {})  # **kwargs handlers (e.g. sub-agents) take every argument
+        else:
+            clean = {k: v for k, v in (args or {}).items() if k in accepted}  # small models add stray arguments
         try:
             return clip(str(tool.handler(**clean)), self.max_out)
         except TypeError as e:

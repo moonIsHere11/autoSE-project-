@@ -147,5 +147,59 @@ class AgentTests(unittest.TestCase):
         self.assertEqual((s.name, s.prompt.names(), s.policy.allow), ("a", ["role"], {"x"}))
 
 
+ANSWER = {"type": "object", "required": ["answer"], "properties": {"answer": {"type": "string"}}}
+ASK = obj(["question"], question=S)
+
+
+class SubAgentTests(unittest.TestCase):
+    def setUp(self):
+        self.reg = ToolRegistry()
+        self.reg.tool("ping", "p", obj(), tags=("read",))(lambda: "pong")
+
+    def parent(self, steps, usage=None, child_spec=None, **spec_kw):
+        self.llm = ScriptedLLM(steps, usage)
+        parent = Agent(self.llm, self.reg, AgentSpec("planner", prompt(), result_schema=RESULT, **spec_kw))
+        child = child_spec or AgentSpec("explorer", prompt("explore"), result_schema=ANSWER,
+                                        policy=ToolPolicy(allow_tags={"read"}))
+        tool = parent.as_tool("explore", "ask the explorer", ASK, lambda question: f"Q: {question}", spec=child)
+        self.reg.replace(tool)
+        return parent
+
+    def test_subagent_tool_returns_child_output(self):
+        p = self.parent([call("explore", {"question": "who writes CARD?"}, 1),
+                         call("finish", {"answer": "CARDUPDT"}, 2),
+                         call("finish", {"name": "card"}, 3)])
+        r = p.run("plan")
+        self.assertEqual(r.output, {"name": "card"})
+        self.assertEqual(self.llm.seen[1]["content"], "Q: who writes CARD?")    # the child's task message
+        self.assertEqual(json.loads(self.llm.seen[2]["content"]), {"answer": "CARDUPDT"})  # back in the parent
+        self.assertEqual(self.llm.offered[1], ["ping", "finish"])  # child: read tools only, not `explore`
+        self.assertEqual(self.reg.get("explore").tags, frozenset({"agent"}))
+
+    def test_subagent_ignores_stray_arguments(self):
+        p = self.parent([call("explore", {"question": "q", "junk": 1}, 1), call("finish", {"answer": "a"}, 2),
+                         call("finish", {"name": "n"}, 3)])
+        p.run("plan")
+        self.assertEqual(self.llm.seen[1]["content"], "Q: q")
+
+    def test_subagent_usage_rolls_up(self):
+        p = self.parent([call("explore", {"question": "q"}, 1), call("finish", {"answer": "a"}, 2),
+                         call("finish", {"name": "n"}, 3)], usage={"prompt_tokens": 10, "completion_tokens": 5})
+        self.assertEqual(p.run("plan").usage, {"tokens_in": 30, "tokens_out": 15})
+
+    def test_subagent_usage_counts_against_parent_budget(self):
+        p = self.parent([call("explore", {"question": "q"}, 1), call("finish", {"answer": "a"}, 2),
+                         call("finish", {"name": "n"}, 3)], usage={"prompt_tokens": 10, "completion_tokens": 5},
+                        max_tokens=30)  # parent's own call is 15 tokens; only the child's 15 reach the budget
+        self.assertEqual(p.run("plan").stop_reason, "max_tokens")
+
+    def test_subagent_failure_text(self):
+        child = AgentSpec("explorer", prompt(), result_schema=ANSWER, max_steps=1)
+        p = self.parent([call("explore", {"question": "q"}, 1), call("ping", {}, 2),
+                         call("finish", {"name": "n"}, 3)], child_spec=child)
+        p.run("plan")
+        self.assertEqual(self.llm.seen[2]["content"], "sub-agent stopped: max_steps")
+
+
 if __name__ == "__main__":
     unittest.main()

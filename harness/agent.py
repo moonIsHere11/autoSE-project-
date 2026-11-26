@@ -17,7 +17,7 @@ from __future__ import annotations
 import copy as _copy
 import json
 from dataclasses import dataclass, field, replace
-from typing import Any, Callable
+from typing import Any, Callable, Iterable
 
 from .context import ContextManager
 from .events import EventLog
@@ -115,6 +115,25 @@ class Agent:
 
     def expect_result(self, schema: dict) -> None:
         self.spec.result_schema = schema
+
+    def as_tool(self, name: str, description: str, parameters: dict, make_message: Callable[..., str], *,
+                spec: AgentSpec | None = None, tags: Iterable[str] = ("agent",)) -> Tool:
+        """Expose a sub-agent as a tool. Each call runs a fresh child Agent (own messages and step budget,
+        same LLM/registry/events/approval) and returns its structured output as JSON. The child's tokens
+        count towards this agent's usage and max_tokens."""
+        declared = set(parameters.get("properties", {}))
+
+        def handler(**kwargs):
+            kwargs = {k: v for k, v in kwargs.items() if k in declared}  # drop stray arguments
+            child_spec = (spec or self.spec).copy(name=(spec.name if spec else f"{self.spec.name}/{name}"))
+            child = Agent(self.llm, self.registry, child_spec, events=self.events, log=self.log, approve=self.approve)
+            result = child.run(make_message(**kwargs))
+            self._usage["tokens_in"] += result.usage["tokens_in"]
+            self._usage["tokens_out"] += result.usage["tokens_out"]
+            if result.output is not None:
+                return json.dumps(result.output)
+            return f"sub-agent stopped: {result.stop_reason}"
+        return Tool(name, description, parameters, handler, frozenset(tags))
 
     # ---- tools ----
     def _finish_tool(self) -> Tool | None:
